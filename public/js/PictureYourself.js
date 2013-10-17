@@ -1,7 +1,7 @@
 app = angular.module('PictureYourselfApp', ['ngResource'])
 
 FileUploadCtrl.$inject = ['$scope']
-function FileUploadCtrl(scope) {Ω
+function FileUploadCtrl(scope) {
     //============== DRAG & DROP =============
     // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
     var dropbox = document.getElementById("dropbox")
