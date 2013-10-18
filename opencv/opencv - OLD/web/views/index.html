@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+.layer2{
+	z-index: 2;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color
+	}
+.layer1{
+	z-index: 1;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+#zoomIn{
+	margin-top:500px;
+}
+	</style>
+<title>Untitled Document</title>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/overlay.js"></script>
+<body>
+	<div style="position: relative;">
+        <canvas id='canvas' class='layer2' width="500" height="500"></canvas>
+        
+        <canvas id='canvasInner' class='layer1' width="500" height="500"></canvas>
+    </div>
+        <img src="img/student.jpg" id='image' style="display:none;" />
+    <img src="img/overlay.png" id='overlay' style="display:none;" />
+
+
+	<button id="zoomIn">Zoom In</button>
+    <button id="zoomOut">Zoom Out</button>
+</body>
+</html>

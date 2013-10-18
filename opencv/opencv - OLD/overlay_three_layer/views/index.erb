@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Untitled Document</title>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+
+<script src='js/kineticJS.js'></script><!-- JS for handling Canvas -->
+
+<script src='js/raphael-min.js'></script>
+<script src="js/overlay.js"></script>
+
+<style>
+#paper {
+    box-shadow:0 2px 4px rgba(0, 0, 0, 0.5);
+    cursor:crosshair;
+    height:334px;
+    margin:1em;
+    width:334px;
+	position:absolute;
+	z-index:1;
+}
+#image{
+	z-index:0;
+	position:absolute;
+	height:334px;
+    margin:1em;
+    width:334px;
+#coord_form{
+	z-index:0;
+	position:absolute;
+	height:334px;
+    padding-top:344px;
+    width:334px;
+}
+</style>
+
+<body>
+	
+	<div id="container"></div>
+	<!-- <button id='resize'>Resize</button> -->
+	<div id="paper"></div>
+	<div id='image'></div>
+	<p/>
+	<p/>
+	<p/>
+	<div id='coord_form'>
+		<form action='/launch'>
+			<input type='text' id='x' name='x'>
+			<input type='text' id='y' name='y'>
+			<input type='text' id='width' name='width'>
+			<input type='text' id='height' name='height'>
+			<input type='submit'>
+			</form>
+	</di>
+</body>
+</html>
