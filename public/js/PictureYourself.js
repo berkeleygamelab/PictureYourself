@@ -1,6 +1,19 @@
-var UploadController = function ($scope, fileReader) {
+app.factory('Upload', function($resource,$http){
+	return {
+		image: function(data){
+			return $resource('/fileupload',{},{post:{method:'POST', params:{data:data}}}).post();
+			//$http.post('/fileupload',{data:data});
+		}
+	}
+})
+
+var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
      console.log(fileReader)
     $scope.getFile = function () {
+		var x = 0;
+		var y = 0;
+		var width = 0;
+		var height = 0;
         $scope.progress = 0;
         fileReader.readAsDataUrl($scope.file, $scope)
                       .then(function(result) {
@@ -57,6 +70,8 @@ var UploadController = function ($scope, fileReader) {
 						down = true;
 						selection.setX(stage.getMousePosition().x);
 						selection.setY(stage.getMousePosition().y);
+						x = selection.getX();
+						y = selection.getY();
 					})
 					
 					stage.on('mouseup', function(){
@@ -68,16 +83,36 @@ var UploadController = function ($scope, fileReader) {
 
 						selection.setWidth(stage.getMousePosition().x - selection.getX());
 						selection.setHeight(stage.getMousePosition().y - selection.getY());
+
+						width = selection.getWidth();
+						height = selection.getHeight();
 						layer.draw();
 					})
 
 					}); //end of then
- 
-					
+ 	
+	
+	$scope.upload = function(){
+		console.log($scope.file)
+		var data = new FormData();
+		var xhr = new XMLHttpRequest();
+		
+		data.append('file',$scope.file,$scope.file.name);
+		xhr.open('POST','/fileupload');
+		xhr.send(data);
+		$timeout(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/grabcut?filename=test.jpg&coords='+x+'+'+y+'+'+width+'+'+height)
+			xhr.send();
+			// $http.post('/grabcut', {filename:'test.jpg',coord:'10 10 100 200'});
+		},2000);
+		
+	}				
     $scope.$on("fileProgress", function(e, progress) {
         $scope.progress = progress.loaded / progress.total;
     });
- 
+
+
 }; //$scope.getFile
 } //UploadController
 
@@ -106,6 +141,5 @@ function LayoutCtrl($scope){
 }
 
 function IndexCtrl($scope){
-	
 	
 }

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
 
@@ -19,9 +20,17 @@ get '/' do
   erb :index
 end
 
+get '/test' do
+  puts 'WORKED!'
+  return 
+end
+
 post '/fileupload' do
-    File.open('uploads/'+ params[:uploadedFile][:filename], 'w') do |f|
-        f.write(params[:uploadedFile][:tempfile].read)
+    File.open('uploads/'+ params[:file][:filename], 'w') do |f|
+        f.write(params[:file][:tempfile].read)
     end
-    return "The file was successfully uploaded!"
+end
+
+post '/grabcut' do
+  system('./test3 ' + params[:filename] + ' ' + params[:coords])
 end
