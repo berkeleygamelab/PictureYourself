@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>currentDocument</key>
+	<string>Dropbox/School/NM190/PictureYourself/public/js/PictureYourself.js</string>
+	<key>documents</key>
+	<array>
+		<dict>
+			<key>filename</key>
+			<string>picture_yourself.rb</string>
+			<key>lastUsed</key>
+			<date>2013-10-23T02:48:07Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>public/js/PictureYourself.js</string>
+			<key>lastUsed</key>
+			<date>2013-10-23T02:48:07Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>public/js/upload.js</string>
+		</dict>
+	</array>
+	<key>fileHierarchyDrawerWidth</key>
+	<integer>200</integer>
+	<key>metaData</key>
+	<dict>
+		<key>Dropbox/School/NM190/PictureYourself/picture_yourself.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>38</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>3</integer>
+		</dict>
+		<key>Dropbox/School/NM190/PictureYourself/public/js/PictureYourself.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>57</integer>
+				<key>line</key>
+				<integer>105</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>87</integer>
+		</dict>
+	</dict>
+	<key>openDocuments</key>
+	<array>
+		<string>Dropbox/School/NM190/PictureYourself/picture_yourself.rb</string>
+		<string>Dropbox/School/NM190/PictureYourself/public/js/PictureYourself.js</string>
+	</array>
+	<key>showFileHierarchyDrawer</key>
+	<true/>
+	<key>windowFrame</key>
+	<string>{{712, 88}, {424, 690}}</string>
+</dict>
+</plist>

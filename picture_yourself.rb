@@ -20,9 +20,10 @@ get '/' do
   erb :index
 end
 
-get '/test' do
-  puts 'WORKED!'
-  return 
+get '/sticker' do
+  system('cp grabcut_img_alpha.png ~/Dropbox/School/NM190/PictureYourself/public/img')
+  @file = '/img/grabcut_img_alpha.png'
+  erb :sticker
 end
 
 post '/fileupload' do
@@ -32,5 +33,8 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
-  system('./test3 ' + params[:filename] + ' ' + params[:coords])
+  puts ''
+  puts params[:filename]
+  puts params[:coords]
+  system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords])
 end
