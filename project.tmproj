@@ -3,69 +3,154 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Dropbox/School/NM190/PictureYourself/public/js/PictureYourself.js</string>
+	<string>public/js/upload.js</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>picture_yourself.rb</string>
 			<key>lastUsed</key>
-			<date>2013-10-23T02:48:07Z</date>
+			<date>2013-11-06T21:27:30Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>public/js/PictureYourself.js</string>
 			<key>lastUsed</key>
-			<date>2013-10-23T02:48:07Z</date>
+			<date>2013-11-06T21:29:25Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>public/js/upload.js</string>
+			<key>lastUsed</key>
+			<date>2013-11-06T21:29:54Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>public/js/upload.js</string>
+			<string>views/index.erb</string>
+			<key>lastUsed</key>
+			<date>2013-11-06T21:27:31Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>views/layout.erb</string>
+			<key>lastUsed</key>
+			<date>2013-11-06T21:29:54Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>views/sticker.erb</string>
+			<key>lastUsed</key>
+			<date>2013-11-06T21:27:29Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>public/js/webcam.js</string>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>Dropbox/School/NM190/PictureYourself/picture_yourself.rb</key>
+		<key>picture_yourself.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>44</integer>
+				<key>line</key>
+				<integer>19</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>public/js/PictureYourself.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>38</integer>
+				<integer>227</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>3</integer>
+			<integer>194</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>45</integer>
+				<key>line</key>
+				<integer>227</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>227</integer>
+			</dict>
 		</dict>
-		<key>Dropbox/School/NM190/PictureYourself/public/js/PictureYourself.js</key>
+		<key>public/js/upload.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>57</integer>
+				<integer>19</integer>
 				<key>line</key>
-				<integer>105</integer>
+				<integer>9</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>87</integer>
+			<integer>0</integer>
+		</dict>
+		<key>views/index.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>13</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>views/sticker.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>3</integer>
+				<key>line</key>
+				<integer>7</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>Dropbox/School/NM190/PictureYourself/picture_yourself.rb</string>
-		<string>Dropbox/School/NM190/PictureYourself/public/js/PictureYourself.js</string>
+		<string>public/js/PictureYourself.js</string>
+		<string>picture_yourself.rb</string>
+		<string>views/index.erb</string>
+		<string>views/sticker.erb</string>
+		<string>public/js/upload.js</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{712, 88}, {424, 690}}</string>
+	<string>{{640, 88}, {640, 690}}</string>
 </dict>
 </plist>
