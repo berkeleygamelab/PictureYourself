@@ -1,5 +1,11 @@
 //CHANGE!!!!!!
 //Hardcoded redirect in upload button
+//add UID to uploaded/saved file when user is not yet registered
+//Global variables for IP and port
+var port = '9393';
+var ip = '127.0.0.1';
+var pyuseridtag = 'pyuserid' //cookie for GUID
+var pyuseridlife = 1;
 
 app.factory('Upload', function($resource,$http){
 	return {
@@ -11,7 +17,7 @@ app.factory('Upload', function($resource,$http){
 })
 
 var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
-    
+    $scope.pyuserid = getCookie(pyuseridtag);
     $scope.getFile = function () {
 		var x = 0;
 		var y = 0;
@@ -49,26 +55,26 @@ var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
 						})
 						var originalPoint = {x: selection.getX(), y: selection.getY()};
 				
-				      	var layer = new Kinetic.Layer();
+				    var layer = new Kinetic.Layer();
 						var down = false;
 						
-				      	imageObj.onload = function() {
-				        	var yoda = new Kinetic.Image({
-				          		x: 0,
-				          		y: 0,
-				          		image: imageObj,
-				          		width: imageObj.width,
-				          		height: imageObj.height
-				        	});
+		      	imageObj.onload = function() {
+		        	var yoda = new Kinetic.Image({
+		          		x: 0,
+		          		y: 0,
+		          		image: imageObj,
+		          		width: imageObj.width,
+		          		height: imageObj.height
+		        	});
 
-				       	 // add the shape to the layer
-					        layer.add(yoda);
+		       	 // add the shape to the layer
+			        layer.add(yoda);
 							layer.add(background);
 							layer.add(selection);
 
-				       	 // add the layer to the stage
-				       	 stage.add(layer);
-				      	}; // end of imageObj.onload
+			       	 // add the layer to the stage
+			       	 stage.add(layer);
+			      	}; // end of imageObj.onload
 					
 					stage.on('mousedown',function(){
 						down = true;
@@ -106,12 +112,13 @@ var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
 		$timeout(function(){
 			var xhr = new XMLHttpRequest();
 			console.log($scope.file.name);
-			xhr.open('POST', '/grabcut?filename='+$scope.file.name+'&coords='+x+'+'+y+'+'+width+'+'+height)
+			console.log('here it is', $scope.pyuserid);
+			xhr.open('POST', '/grabcut?filename='+$scope.file.name+'&coords='+x+'+'+y+'+'+width+'+'+height+'&pyuserid='+$scope.pyuserid);			
 			xhr.send();
 			// $http.post('/grabcut', {filename:'test.jpg',coord:'10 10 100 200'});
 		},1000)
 		$timeout(function(){
-			window.location.href = 'http://localhost:1111/sticker';
+			window.location.href = 'http://'+ip+':'+port+'/sticker'; //pass filename to make access dynamic
 		},2000);
 		
 	}				
@@ -141,7 +148,17 @@ app.directive("ngFileSelect",function(){
   
 })
 
-
+function LoginCtrl($scope){
+	//create proper login methods etc...
+	$scope.username = 'username';
+	$scope.login = function(){	
+		console.log($scope.username);
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST','/loggedin?username='+$scope.username);
+		xhr.send();
+		window.location.href = 'http://'+ip+':'+port+'/loggedin?username='+$scope.username;
+		}				
+}
 
 function LayoutCtrl($scope){
 	
@@ -186,8 +203,57 @@ function StickerCtrl($scope){
 		layer.add(backgroundImg);
 		layer.add(floater);
 		stage.add(layer);
-	}
-		
-
-	
+	}	
 }
+
+function UIDCtrl($scope){
+	//create proper login methods etc...
+
+	var pyuserid=getCookie(pyuseridtag);
+	console.log(pyuserid);
+	checkCookie(pyuserid);
+
+	function GUID() {
+		var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
+		return v.toString(16);
+		});
+		return guid;
+	}
+}
+
+function setCookie(c_name,value,exdays) {
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	document.cookie=c_name + "=" + c_value;
+	console.log('set cookie');
+}
+
+function getCookie(c_name) {
+	var c_value = document.cookie;
+	var c_start = c_value.indexOf(" " + c_name + "=");
+	if (c_start == -1)
+	  c_start = c_value.indexOf(c_name + "=");
+	if (c_start == -1)
+	  c_value = null;
+	else {
+	  c_start = c_value.indexOf("=", c_start) + 1;
+	  var c_end = c_value.indexOf(";", c_start);
+	  if (c_end == -1)
+			c_end = c_value.length;
+		c_value = unescape(c_value.substring(c_start,c_end));
+	}
+	return c_value;
+	}
+
+	function checkCookie(pyuserid){
+	  if (pyuserid!=null && pyuserid!="")
+	  	console.log('creating pyuserid'); 
+		else  {
+			var randomID = GUID();
+	  	// check if value GUID is already registered on server	  	
+	    setCookie(pyuseridtag,randomID,pyuseridlife);	 	   
+	    console.log(getCookie(pyuseridtag)); 
+	  }
+	}
