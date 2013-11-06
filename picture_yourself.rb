@@ -17,6 +17,8 @@ end
 
 
 get '/' do
+  test = PictureYourself.create(File.open('')))
+  test.picture = Base64()
   erb :index
 end
 
