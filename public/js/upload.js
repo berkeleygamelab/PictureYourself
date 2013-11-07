@@ -51,7 +51,6 @@
         };
     };
  
-    module.factory("fileReader",
-                   ["$q", "$log", fileReader]);
+    module.factory("fileReader",["$q", "$log", fileReader]);
  
 }(angular.module("PictureYourselfApp")));

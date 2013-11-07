@@ -1,0 +1,15 @@
+<div ng-controller='StickerCtrl'>
+	<img src="<%=@file%>" id='picture' style="display:none">
+	<div id='container'></div>
+<<<<<<< HEAD
+	
+	<button id='show' ng-click='addHat()'>Add Hat</button>
+	<div stye='border:line'>
+		<ul>
+			<li ng-repeat='image in images'>
+				<img ng-src="{{image.src}}">
+		</li>
+	</div>
+=======
+>>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
+</div>

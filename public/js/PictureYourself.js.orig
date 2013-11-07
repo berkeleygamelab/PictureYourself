@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 //CHANGE!!!!!!
 //Hardcoded redirect in upload button
 //add UID to uploaded/saved file when user is not yet registered
@@ -6,6 +8,7 @@ var port = '9393';
 var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
+>>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
 
 app.factory('Upload', function($resource,$http){
 	return {
@@ -17,7 +20,7 @@ app.factory('Upload', function($resource,$http){
 })
 
 var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
-    $scope.pyuserid = getCookie(pyuseridtag);
+<<<<<<< HEAD
     
 	$scope.send_snapshot = function(){
 		//$scope.test = $('#snapshot').attr('src');
@@ -126,6 +129,9 @@ var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
 	});
 };
 	
+=======
+    $scope.pyuserid = getCookie(pyuseridtag);
+>>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
     $scope.getFile = function () {
 		var x = 0;
 		var y = 0;
@@ -192,6 +198,7 @@ var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
 							x = selection.getX();
 							y = selection.getY();
 						})
+<<<<<<< HEAD
 						
 						stage.on('mouseup', function(){
 							down = false;
@@ -207,8 +214,21 @@ var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
 							height = selection.getHeight();
 							layer.draw();
 						})
+=======
+						var originalPoint = {x: selection.getX(), y: selection.getY()};
+				
+				    var layer = new Kinetic.Layer();
+						var down = false;
+						
+		      	imageObj.onload = function() {
+		        	var yoda = new Kinetic.Image({
+		          		x: 0,
+		          		y: 0,
+		          		image: imageObj,
+		          		width: imageObj.width,
+		          		height: imageObj.height
+		        	});
 
-						}); //end of then
 		       	 // add the shape to the layer
 			        layer.add(yoda);
 							layer.add(background);
@@ -240,8 +260,9 @@ var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
 						height = selection.getHeight();
 						layer.draw();
 					})
+>>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
 
-					}); //end of then
+						}); //end of then
  	
 	
 	$scope.upload = function(){
@@ -366,6 +387,7 @@ function StickerCtrl($scope){
         // add the shape to the layer
 		hat.hide();
 		stage.add(layer);
+<<<<<<< HEAD
 
         // add button event bindings
         document.getElementById('show').addEventListener('click', function() {
@@ -378,6 +400,16 @@ function StickerCtrl($scope){
 			layer.draw();
 		}
 
+	}
+	
+	var addHat = function(){
+		hat.show()
+	};
+		
+$scope.images = [imageObj,hatObj,background];
+	
+}
+=======
 	}	
 }
 
@@ -395,14 +427,7 @@ function UIDCtrl($scope){
 		});
 		return guid;
 	}
-	
-	var addHat = function(){
-		hat.show()
-	};
-		
-$scope.images = [imageObj,hatObj,background];
-	
-}}
+}
 
 function setCookie(c_name,value,exdays) {
 	var exdate=new Date();
@@ -439,3 +464,4 @@ function getCookie(c_name) {
 	    console.log(getCookie(pyuseridtag)); 
 	  }
 	}
+>>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
