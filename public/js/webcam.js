@@ -27,7 +27,12 @@ function getUserMedia(){
 
 	    // constraints
 		{
-			video: true
+			video:{
+			mandatory:{
+					minWidth: 1280,
+	      			minHeight: 720
+				}
+			}
 		},
 
 	    // successCallback

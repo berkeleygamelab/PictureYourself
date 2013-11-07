@@ -15,10 +15,23 @@ class PictureYourself
   
 end
 
+DataMapper.finalize.auto_upgrade!
+
+post '/webcam_test' do
+    File.open('uploads/'+ params[:name] + '.png', 'w') do |f|
+        f.write(params[:data].read)
+    end
+    picture = PictureYourself.new
+    picture.name = params[:name]
+    picture.save
+end
+
+get '/webcam_test/:name' do
+  @file = '/uploads/' + params[:name] + '.png'
+  erb :webcam_test
+endx
 
 get '/' do
-  test = PictureYourself.create(File.open('')))
-  test.picture = Base64()
   erb :index
 end
 
