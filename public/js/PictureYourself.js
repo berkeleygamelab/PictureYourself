@@ -155,8 +155,15 @@ function StickerCtrl($scope){
 	var img = angular.element("#picture").attr('src');
 	var background = new Image();
   	var imageObj = new Image();
+	var hatObj = new Image();
+  	
+	$scope.background = background;
+	$scope.imageObj = imageObj;
+	$scope.hatObj = hatObj;
 	imageObj.src = img;
 	background.src = 'img/background.jpg'
+	hatObj.src = 'img/hat.png'
+	
 	
 	var stage = new Kinetic.Stage({
     container: 'container',
@@ -166,6 +173,7 @@ function StickerCtrl($scope){
 
     var layer = new Kinetic.Layer();
 
+	
   	imageObj.onload = function() {
     	var floater = new Kinetic.Image({
       		x: 0,
@@ -180,14 +188,43 @@ function StickerCtrl($scope){
 			y:0,
 			image: background,
 			width: background.width,
-			height: background.hidth,
+			height: background.hidth
+		})
+		var hat = new Kinetic.Image({
+			x:0,
+			y:0,
+			image: hatObj,
+			width: hatObj.width,
+			height: hatObj.hidth,
+			draggable:true
 		})
 		
 		layer.add(backgroundImg);
 		layer.add(floater);
-		stage.add(layer);
-	}
-		
+		layer.add(hat);
 
+
+        // add the shape to the layer
+		hat.hide();
+		stage.add(layer);
+
+        // add button event bindings
+        document.getElementById('show').addEventListener('click', function() {
+		hat.show();
+        layer.draw();
+        }, false);
+
+		var addHat = function(){
+			hat.show();
+			layer.draw();
+		}
+
+	}
+	
+	var addHat = function(){
+		hat.show()
+	};
+		
+$scope.images = [imageObj,hatObj,background];
 	
 }
