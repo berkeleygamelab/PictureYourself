@@ -8,29 +8,6 @@ var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
 
-app.factory('Upload', function($resource,$http){
-	return {
-		image: function(data){
-			return $resource('/fileupload',{},{post:{method:'POST', params:{data:data}}}).post();
-			//$http.post('/fileupload',{data:data});
-		}
-	}
-})
-
-function UIDCtrl($scope, fileReader, $http, $timeout){
-	//create proper login methods etc...
-
-	var pyuserid=getCookie(pyuseridtag);
-	console.log(pyuserid);
-	checkCookie(pyuserid);
-
-	function GUID() {
-		var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
-		return v.toString(16);
-		});
-		return guid;
-	}
 	
 	
 
@@ -69,10 +46,36 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 	    console.log(getCookie(pyuseridtag));
 	  }
 	}
+
+app.factory('Upload', function($resource,$http){
+	return {
+		image: function(data){
+			return $resource('/fileupload',{},{post:{method:'POST', params:{data:data}}}).post();
+			//$http.post('/fileupload',{data:data});
+		}
+	}
+})
+
+function UIDCtrl($scope, fileReader, $http, $timeout){
+	//create proper login methods etc...
+
+	var pyuserid=getCookie(pyuseridtag);
+	console.log(pyuserid);
+	checkCookie(pyuserid);
+
+	function GUID() {
+		var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
+		return v.toString(16);
+		});
+		return guid;
+	}
+
 // } //UIDCtrl end
 
 
 // var UploadController = function ($scope, fileReader, $http, $timeout) {
+	var button = document.querySelector('#button');
     $scope.pyuserid = getCookie(pyuseridtag);
     var x = 0;
 	var y = 0;
@@ -85,9 +88,7 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		var filename = $scope.pyuserid + "/1.png";
 		formData.append("filename",filename);
 		formData.append('coords',x + ' ' + y + ' ' + width + ' ' + height);
-		// formData.append('y',y);
-		// formData.append('width',width);
-		// formData.append('height',height);
+		formData.append('pyuserid', $scope.pyuserid)
 		console.log('got this far');
 		var xhr2 = new XMLHttpRequest();
 		xhr2.open('POST','/grabcut');
@@ -118,6 +119,9 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		},1000);
 	}
 	
+	$('img').bind('load',function(){
+		console.log()
+	})
 
 	var kinetic = function(result) {
         $scope.imageSrc = result;
@@ -170,30 +174,30 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
       	}; // end of imageObj.onload
 	
 		stage.on('mousedown',function(){
-		down = true;
-		selection.setX(stage.getMousePosition().x);
-		selection.setY(stage.getMousePosition().y);
-		x = selection.getX();
-		y = selection.getY();
-	})
+			down = true;
+			selection.setX(stage.getMousePosition().x);
+			selection.setY(stage.getMousePosition().y);
+			x = selection.getX();
+			y = selection.getY();
+		});
 	
 		stage.on('mouseup', function(){
 		down = false;
 	})
 
 		stage.on('mousemove', function(){
-		if (!down) return;
+			if (!down) return;
 
-		selection.setWidth(stage.getMousePosition().x - selection.getX());
-		selection.setHeight(stage.getMousePosition().y - selection.getY());
+			selection.setWidth(stage.getMousePosition().x - selection.getX());
+			selection.setHeight(stage.getMousePosition().y - selection.getY());
 
-		width = selection.getWidth();
-		height = selection.getHeight();
-		layer.draw();
+			width = selection.getWidth();
+			height = selection.getHeight();
+			layer.draw();
 		});
 	}
 
-};
+};//End of new UIDCtrl
 
 
 //} //UploadController

@@ -22,8 +22,8 @@ get '/' do
 end
 
 get '/sticker' do
-  system('cp grabcut_img_alpha.png ~/Dropbox/School/NM190/PictureYourself/public/img')
-  @file = '/img/grabcut_img_alpha.png'
+  #system('cp grabcut_img_alpha.png ~/Dropbox/School/NM190/PictureYourself/public/img')
+  @file = 'processed//grabcut_img_alpha.png'
   erb :sticker
 end
 
@@ -40,8 +40,5 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
-  puts ''
-  puts params[:filename]
-  puts params[:coords]
-  system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords])
+  system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
 end
