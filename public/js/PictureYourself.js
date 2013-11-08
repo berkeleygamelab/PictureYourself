@@ -102,6 +102,7 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.upload_webcam = function(){
+		console.log('here')
 		var formData = new FormData();
 		// c1 - change var name = cookie_value to correct val
 		var name = $scope.pyuserid
@@ -122,6 +123,7 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 	
 	
 	$('img').bind('load',function(){
+		console.log('img change');
 		kinetic($('img').attr('src'))
 	})
 

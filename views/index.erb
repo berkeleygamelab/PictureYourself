@@ -1,5 +1,5 @@
 'Picture Yourself'
-<div ng-controller="UIDCtrl"></div> <!-- UIDCtrl -->
+<div ng-controller="UIDCtrl"> <!-- UIDCtrl -->
 	<!-- <div ng-controller='UploadController'> -->
 
 	<form id='pic-upload'>
@@ -34,17 +34,19 @@
 	        <!--<input type="file" ng-file-select="onFileSelect($files)" > -->
 
 		<div id="container" style='float: right; width:640; height:480;'></div>
+		<input type="button" onclick="getUserMedia()" value = "Snapshot!" style='display:block'>
+		<input type="button" id = "button" value = "Capture" style='display:block'>
+		<button ng-click='upload_webcam()' style='display:block'>Cut</button>
 
 	</form>
-	<input type="button" onclick="getUserMedia()" value = "Snapshot!" style='display:block'>
-	<input type="button" id = "button" value = "Capture" style='display:block'>
-	<button ng-click='upload_webcam()' style='display:block'>Cut</button>
+
 	<div ng-hide='true'>
 		<img src="" id='snapshot' style="float: left;">
 	</div>
 	   <!-- END OF CLICK FILE UPLOAD -->
 
-  	<!--</div> --> <!-- UploadController -->
+  </div>
+<!--</div> --> <!-- UploadController -->
 
 
 
