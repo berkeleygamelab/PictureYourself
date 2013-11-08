@@ -1,0 +1,50 @@
+<<<<<<< HEAD
+
+<div ng-controller='UploadController'>
+
+<form id='pic-upload'>
+		<div>
+			<video autoplay></video>
+
+			<br>
+			<canvas style="display:none;" width = "1240px" height = "720px"></canvas>
+		</div>
+
+		<div>
+			<script>
+				hasGetUserMedia()
+			</script>
+			<br/>
+
+			<input type="button" onclick="getUserMedia()" value = "Snapshot!">
+			<input type="button" id = "button" value = "Capture">
+		</div>
+		
+			<img src="" id='snapshot'>
+			
+			<button ng-click='upload_webcam()'>Webcam upload</button>
+	</form>
+	
+	
+	<!-- START OF CLICK FILE UPLOAD
+	
+        <input type="file" ng-file-select="onFileSelect($files)" >
+
+	<div id="container"></div>
+	
+	<button ng-click='upload()'>Cut</button>
+    END OF CLICK FILE UPLOAD -->
+   </div>
+=======
+'Picture Yourself'
+<div ng-controller="UIDCtrl"></div>
+<div ng-controller='UploadController'>
+	<form id='pic-upload'>
+		<input type="file" ng-file-select="onFileSelect($files)" >
+
+		<div id="container"></div>
+		
+		<button ng-click='upload()'>Cut</button>
+</div>
+>>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
+

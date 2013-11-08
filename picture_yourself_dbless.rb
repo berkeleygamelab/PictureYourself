@@ -1,21 +1,5 @@
 require 'sinatra'
 require 'base64'
-require 'data_mapper'
-require 'dm-timestamps'
-
-# DEV
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/PictureYourself.db")
-
-class PictureYourself
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :name, Text#, required:true
-  property :picture, Text
-  
-end
-
-DataMapper.finalize.auto_upgrade!
 
 get '/' do
   erb :index

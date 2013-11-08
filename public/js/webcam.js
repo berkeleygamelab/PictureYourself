@@ -27,7 +27,12 @@ function getUserMedia(){
 
 	    // constraints
 		{
-			video: true
+			video:{
+			mandatory:{
+					maxWidth: 640,
+	      			maxHeight: 480
+				}
+			}
 		},
 
 	    // successCallback
@@ -50,7 +55,8 @@ function getUserMedia(){
 	function snapshot() {
 		//if(localMediaStream){
 			ctx.drawImage(video, 0, 0);
-			document.querySelector('img').src = canvas.toDataURL('image/webp');
+			document.querySelector('img').src = canvas.toDataURL('image/png');
+			kinetic($('#snapshot').attr('src'));
 		//}
     }
 

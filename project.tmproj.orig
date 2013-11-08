@@ -10,13 +10,21 @@
 			<key>filename</key>
 			<string>picture_yourself.rb</string>
 			<key>lastUsed</key>
+<<<<<<< HEAD
+			<date>2013-11-07T03:50:14Z</date>
+=======
 			<date>2013-11-08T21:01:24Z</date>
+>>>>>>> webcam
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>public/js/PictureYourself.js</string>
 			<key>lastUsed</key>
+<<<<<<< HEAD
+			<date>2013-11-07T03:50:14Z</date>
+=======
 			<date>2013-11-08T21:22:19Z</date>
+>>>>>>> webcam
 			<key>selected</key>
 			<true/>
 		</dict>
@@ -24,19 +32,31 @@
 			<key>filename</key>
 			<string>public/js/upload.js</string>
 			<key>lastUsed</key>
+<<<<<<< HEAD
+			<date>2013-11-06T23:26:43Z</date>
+=======
 			<date>2013-11-08T21:22:19Z</date>
+>>>>>>> webcam
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>views/index.erb</string>
 			<key>lastUsed</key>
+<<<<<<< HEAD
+			<date>2013-11-07T03:36:19Z</date>
+=======
 			<date>2013-11-08T21:22:05Z</date>
+>>>>>>> webcam
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>views/layout.erb</string>
 			<key>lastUsed</key>
+<<<<<<< HEAD
+			<date>2013-11-06T21:29:54Z</date>
+=======
 			<date>2013-11-08T21:17:25Z</date>
+>>>>>>> webcam
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -48,7 +68,17 @@
 			<key>filename</key>
 			<string>public/js/webcam.js</string>
 			<key>lastUsed</key>
+<<<<<<< HEAD
+			<date>2013-11-06T23:37:14Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>views/webcam_test.erb</string>
+			<key>lastUsed</key>
+			<date>2013-11-07T03:36:32Z</date>
+=======
 			<date>2013-11-08T21:05:04Z</date>
+>>>>>>> webcam
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -60,14 +90,24 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
+<<<<<<< HEAD
+				<integer>32</integer>
+				<key>line</key>
+				<integer>24</integer>
+=======
 				<integer>18</integer>
 				<key>line</key>
 				<integer>41</integer>
+>>>>>>> webcam
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
+<<<<<<< HEAD
+			<integer>12</integer>
+=======
 			<integer>8</integer>
+>>>>>>> webcam
 		</dict>
 		<key>public/js/PictureYourself.js</key>
 		<dict>
@@ -76,11 +116,17 @@
 				<key>column</key>
 				<integer>39</integer>
 				<key>line</key>
+<<<<<<< HEAD
+				<integer>0</integer>
+=======
 				<integer>156</integer>
+>>>>>>> webcam
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
+<<<<<<< HEAD
+=======
 			<integer>150</integer>
 		</dict>
 		<key>public/js/upload.js</key>
@@ -95,6 +141,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
+>>>>>>> webcam
 			<integer>0</integer>
 		</dict>
 		<key>public/js/webcam.js</key>
@@ -102,14 +149,22 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
+<<<<<<< HEAD
+				<integer>20</integer>
+=======
 				<integer>17</integer>
+>>>>>>> webcam
 				<key>line</key>
 				<integer>31</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
+<<<<<<< HEAD
+			<integer>16</integer>
+=======
 			<integer>23</integer>
+>>>>>>> webcam
 		</dict>
 		<key>views/index.erb</key>
 		<dict>
@@ -125,14 +180,24 @@
 			<key>firstVisibleLine</key>
 			<integer>15</integer>
 		</dict>
+<<<<<<< HEAD
+		<key>views/webcam_test.erb</key>
+=======
 		<key>views/layout.erb</key>
+>>>>>>> webcam
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
+<<<<<<< HEAD
+				<integer>37</integer>
+				<key>line</key>
+				<integer>0</integer>
+=======
 				<integer>63</integer>
 				<key>line</key>
 				<integer>8</integer>
+>>>>>>> webcam
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -146,13 +211,20 @@
 		<string>views/webcam_test.erb</string>
 		<string>views/index.erb</string>
 		<string>public/js/PictureYourself.js</string>
+<<<<<<< HEAD
+=======
 		<string>views/layout.erb</string>
 		<string>public/js/upload.js</string>
+>>>>>>> webcam
 		<string>public/js/webcam.js</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
+<<<<<<< HEAD
+	<string>{{203, 88}, {1067, 690}}</string>
+=======
 	<string>{{216, 88}, {1064, 690}}</string>
+>>>>>>> webcam
 </dict>
 </plist>
