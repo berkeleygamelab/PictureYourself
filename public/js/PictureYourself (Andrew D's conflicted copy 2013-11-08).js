@@ -114,16 +114,14 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		xhr.send(formData);
 	
 		$timeout(function(){
-			$scope.cut();
-			//kinetic($('#snapshot').attr('src'));
+			kinetic($('#snapshot').attr('src'));
 			// window.location.href = 'http://localhost:1234/webcam_test/'+ name;
 		},1000);
 	}
 	
-	
 	$('img').bind('load',function(){
-		kinetic($('img').attr('src'))
-	})
+		console.log('changed')
+	});
 
 	var kinetic = function(result) {
         $scope.imageSrc = result;

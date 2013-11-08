@@ -5,34 +5,24 @@ get '/' do
   erb :index
 end
 
-get '/login' do
-  erb :login
-end
-
 get '/sticker' do
-  system('cp grabcut_img_alpha.png public/img')
-  @file = '/img/grabcut_img_alpha.png'
+  #system('cp grabcut_img_alpha.png ~/Dropbox/School/NM190/PictureYourself/public/img')
+  @file = 'processed//grabcut_img_alpha.png'
   erb :sticker
 end
 
 post '/fileupload' do
-    File.open('uploads/'+ params[:file][:filename], 'w') do |f|
-        f.write(params[:file][:tempfile].read)
+    data = params[:data].split(',')[1]
+    dirname = 'uploads/'+params[:name]
+    unless File.directory?(dirname)
+      Dir.mkdir(dirname)
+    end
+    
+    File.open(dirname+'/1.png', 'wb') do |f|
+        f.write(Base64.decode64(data))
     end
 end
 
 post '/grabcut' do
-  #done dynamically pass userid, opencv_trans saves to processed/userid.png
-  puts ''
-  puts params[:pyuserid]
-  puts params[:filename]
-  puts params[:coords]
-  system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords])
+  system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
 end
-
-get '/loggedin' do
-  @username = params[:username]  
-  puts 'username:' + params[:username]  
-  erb :index
-end
-
