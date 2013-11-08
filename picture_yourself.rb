@@ -17,20 +17,6 @@ end
 
 DataMapper.finalize.auto_upgrade!
 
-post '/webcam_test' do
-    File.open('uploads/'+ params[:name] + '.png', 'w') do |f|
-        f.write(params[:data].read)
-    end
-    picture = PictureYourself.new
-    picture.name = params[:name]
-    picture.save
-end
-
-get '/webcam_test/:name' do
-  @file = '/uploads/' + params[:name] + '.png'
-  erb :webcam_test
-endx
-
 get '/' do
   erb :index
 end
@@ -42,8 +28,14 @@ get '/sticker' do
 end
 
 post '/fileupload' do
-    File.open('uploads/'+ params[:file][:filename], 'w') do |f|
-        f.write(params[:file][:tempfile].read)
+    data = params[:data].split(',')[1]
+    dirname = 'uploads/'+params[:name]
+    unless File.directory?(dirname)
+      Dir.mkdir(dirname)
+    end
+    
+    File.open(dirname+'/1.png', 'wb') do |f|
+        f.write(Base64.decode64(data))
     end
 end
 

@@ -29,8 +29,8 @@ function getUserMedia(){
 		{
 			video:{
 			mandatory:{
-					minWidth: 1280,
-	      			minHeight: 720
+					minWidth: 640,
+	      			minHeight: 320
 				}
 			}
 		},
@@ -55,7 +55,7 @@ function getUserMedia(){
 	function snapshot() {
 		//if(localMediaStream){
 			ctx.drawImage(video, 0, 0);
-			document.querySelector('img').src = canvas.toDataURL('image/webp');
+			document.querySelector('img').src = canvas.toDataURL('image/png');
 		//}
     }
 
