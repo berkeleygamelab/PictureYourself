@@ -42,3 +42,7 @@ end
 post '/grabcut' do
   system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
 end
+
+get '/selfie' do
+  erb :selfie
+end

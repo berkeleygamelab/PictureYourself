@@ -1,0 +1,20 @@
+/*
+Template Name: MyFolio
+File: 2 Column Right CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+#content{
+	display:block;
+	float:left;
+	width:640px;
+	}
+
+#column{
+	display:block;
+	float:right;
+	width:278px;
+	padding:10px 0 10px 10px;
+	}

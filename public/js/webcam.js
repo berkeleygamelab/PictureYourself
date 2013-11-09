@@ -29,8 +29,8 @@ function getUserMedia(){
 		{
 			video:{
 			mandatory:{
-					minWidth: 640,
-	      			minHeight: 320
+					maxWidth: 640,
+	      			maxHeight: 480
 				}
 			}
 		},

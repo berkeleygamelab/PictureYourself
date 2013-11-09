@@ -93,12 +93,19 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		var xhr2 = new XMLHttpRequest();
 		xhr2.open('POST','/grabcut');
 		xhr2.send(formData);
-		
+		$timeout(function(){
+			$scope.selfie();
+		},1000);
 	}
 	
 	$scope.send_snapshot = function(){
 		//$scope.test = $('#snapshot').attr('src');
 		kinetic($('#snapshot').attr('src'));
+	}
+
+	$scope.selfie = function() { 
+		console.log("redirecting");
+		window.location = '/selfie';	
 	}
 
 	$scope.upload_webcam = function(){
@@ -109,18 +116,20 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		formData.append("data",$('#snapshot').attr('src'));
 		console.log($('#snapshot').attr('src'));
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/fileupload')
+		xhr.open('POST', '/fileupload');
 		//xhr.open('POST', '/grabcut?filename=imgtest.jpg'+'&coords=0+0+100+100'//+x+'+'+y+'+'+width+'+'+height)
 		xhr.send(formData);
 	
 		$timeout(function(){
-			kinetic($('#snapshot').attr('src'));
+			$scope.cut();
+			//kinetic($('#snapshot').attr('src'));
 			// window.location.href = 'http://localhost:1234/webcam_test/'+ name;
 		},1000);
 	}
 	
+	
 	$('img').bind('load',function(){
-		console.log()
+		kinetic($('img').attr('src'))
 	})
 
 	var kinetic = function(result) {
