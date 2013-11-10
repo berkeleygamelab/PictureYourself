@@ -1,50 +1,59 @@
-<<<<<<< HEAD
-
-<div ng-controller='UploadController'>
-
-<form id='pic-upload'>
-		<div>
-			<video autoplay></video>
-
-			<br>
-			<canvas style="display:none;" width = "1240px" height = "720px"></canvas>
-		</div>
-
-		<div>
-			<script>
-				hasGetUserMedia()
-			</script>
-			<br/>
-
-			<input type="button" onclick="getUserMedia()" value = "Snapshot!">
-			<input type="button" id = "button" value = "Capture">
-		</div>
-		
-			<img src="" id='snapshot'>
-			
-			<button ng-click='upload_webcam()'>Webcam upload</button>
-	</form>
-	
-	
-	<!-- START OF CLICK FILE UPLOAD
-	
-        <input type="file" ng-file-select="onFileSelect($files)" >
-
-	<div id="container"></div>
-	
-	<button ng-click='upload()'>Cut</button>
-    END OF CLICK FILE UPLOAD -->
-   </div>
-=======
 'Picture Yourself'
-<div ng-controller="UIDCtrl"></div>
-<div ng-controller='UploadController'>
-	<form id='pic-upload'>
-		<input type="file" ng-file-select="onFileSelect($files)" >
+<<<<<<< HEAD
+<div ng-controller="UIDCtrl"> <!-- UIDCtrl -->
+=======
+<div ng-controller="SnapshotCtrl"> <!-- UIDCtrl -->
 
-		<div id="container"></div>
-		
-		<button ng-click='upload()'>Cut</button>
+>>>>>>> 286820d4f81ed794b5c5e73ebe746255f46415c2
+	<!-- <div ng-controller='UploadController'> -->
+
+	<form id='pic-upload'>
+			
+			<div style="float:left;width:640;height:480;">
+				<video autoplay></video>
+				<br>
+				<canvas style="display:none;" width = "640px" height = "480px"></canvas>
+			</div>
+
+			<div>			
+				<script>
+					hasGetUserMedia()
+				</script>
+
+			</div>
+
+				<!-- <button ng-click='upload_webcam()'>Webcam upload</button> -->
+
+	
+				<!-- START OF CLICK FILE UPLOAD -->
+	
+	      <!--<input type="file" ng-file-select="onFileSelect($files)" > -->
+
+		<div id="container" style='float: right; width:640; height:480;'></div>
+		<input type="button" onclick="getUserMedia()" value = "Snapshot!" style='display:block'>
+		<input type="button" id = "button" value = "Capture" style='display:block'>
+		<button ng-click='upload_webcam()' style='display:block'>Cut</button>
+
+	</form>
+<<<<<<< HEAD
+=======
+	<input type="button" class="clicker" onclick="getUserMedia()" value = "Snapshot!" style='display:inline'>
+	<input type="button" class="clicker" id = "button" value = "Capture" style='display:inline'>
+	<button ng-click='upload_webcam()' class="clicker" style='display:inline'>Cut</button>
+>>>>>>> 286820d4f81ed794b5c5e73ebe746255f46415c2
+
+	<div ng-hide='true'>
+		<img src="" id='snapshot' style="float: left;">
+	</div>
+	   <!-- END OF CLICK FILE UPLOAD -->
+
+<<<<<<< HEAD
+  </div>
+<!--</div> --> <!-- UploadController -->
+
+=======
+  	<!--</div> --> <!-- UploadController -->
 </div>
->>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
+>>>>>>> 286820d4f81ed794b5c5e73ebe746255f46415c2
+
 

@@ -28,17 +28,27 @@ get '/sticker' do
 end
 
 post '/fileupload' do
+  puts 'fileupload'
+  puts params[:name]
     data = params[:data].split(',')[1]
     dirname = 'uploads/'+params[:name]
     unless File.directory?(dirname)
+      puts 'make dir'
       Dir.mkdir(dirname)
     end
     
     File.open(dirname+'/1.png', 'wb') do |f|
+      puts "write"
         f.write(Base64.decode64(data))
     end
 end
 
 post '/grabcut' do
+  puts 'grabcut'
+  puts params[:filename]
   system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+end
+
+get '/selfie' do
+  erb :selfie
 end
