@@ -10,7 +10,7 @@ class PictureYourself
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, Text#, required:true
+  property :name, Text
   property :picture, Text
   
 end
@@ -22,21 +22,17 @@ get '/' do
 end
 
 get '/sticker' do
-  #system('cp grabcut_img_alpha.png ~/Dropbox/School/NM190/PictureYourself/public/img')
   @file = 'processed//grabcut_img_alpha.png'
   erb :sticker
 end
 
 post '/fileupload' do
-  puts 'fileupload'
-  puts params[:name]
     data = params[:data].split(',')[1]
     dirname = 'uploads/'+params[:name]
     unless File.directory?(dirname)
-      puts 'make dir'
       Dir.mkdir(dirname)
     end
-    
+    # fix - fix to have dynamic png numbers - or naming
     File.open(dirname+'/1.png', 'wb') do |f|
       puts "write"
         f.write(Base64.decode64(data))
@@ -44,8 +40,6 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
-  puts 'grabcut'
-  puts params[:filename]
   system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
 end
 
