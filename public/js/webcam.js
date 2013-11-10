@@ -56,7 +56,6 @@ function getUserMedia(){
 		//if(localMediaStream){
 			ctx.drawImage(video, 0, 0);
 			document.querySelector('img').src = canvas.toDataURL('image/png');
-			kinetic($('#snapshot').attr('src'));
 		//}
     }
 

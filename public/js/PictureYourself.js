@@ -1,6 +1,3 @@
-//ToDo:
-// 	c1 : put in filename for saving file
-		
 //add UID to uploaded/saved file when user is not yet registered
 //Global variables for IP and port
 var port = '9393';
@@ -9,129 +6,122 @@ var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
 
 	
-	
+function setCookie(c_name,value,exdays) {
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	document.cookie=c_name + "=" + c_value;
+	console.log('set cookie');
+}
 
-	function setCookie(c_name,value,exdays) {
-		var exdate=new Date();
-		exdate.setDate(exdate.getDate() + exdays);
-		var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-		document.cookie=c_name + "=" + c_value;
-		console.log('set cookie');
+function getCookie(c_name) {
+	var c_value = document.cookie;
+	var c_start = c_value.indexOf(" " + c_name + "=");
+	if (c_start == -1)
+	  c_start = c_value.indexOf(c_name + "=");
+	if (c_start == -1)
+	  c_value = null;
+	else {
+	  c_start = c_value.indexOf("=", c_start) + 1;
+	  var c_end = c_value.indexOf(";", c_start);
+	  if (c_end == -1)
+			c_end = c_value.length;
+		c_value = unescape(c_value.substring(c_start,c_end));
 	}
+	return c_value;
+}
 
-	function getCookie(c_name) {
-		var c_value = document.cookie;
-		var c_start = c_value.indexOf(" " + c_name + "=");
-		if (c_start == -1)
-		  c_start = c_value.indexOf(c_name + "=");
-		if (c_start == -1)
-		  c_value = null;
-		else {
-		  c_start = c_value.indexOf("=", c_start) + 1;
-		  var c_end = c_value.indexOf(";", c_start);
-		  if (c_end == -1)
-				c_end = c_value.length;
-			c_value = unescape(c_value.substring(c_start,c_end));
-		}
-		return c_value;
-	}
+function checkCookie(pyuserid){
+  if (pyuserid!=null && pyuserid!="")
+  	console.log('creating pyuserid'); 
+	else  {
+		var randomID = GUID();
+  	// check if value GUID is already registered on server	  	
+    setCookie(pyuseridtag,randomID,pyuseridlife);	 	   
+    console.log(getCookie(pyuseridtag));
+  }
+}
 
-	function checkCookie(pyuserid){
-	  if (pyuserid!=null && pyuserid!="")
-	  	console.log('creating pyuserid'); 
-		else  {
-			var randomID = GUID();
-	  	// check if value GUID is already registered on server	  	
-	    setCookie(pyuseridtag,randomID,pyuseridlife);	 	   
-	    console.log(getCookie(pyuseridtag));
-	  }
-	}
-
-app.factory('Upload', function($resource,$http){
-	return {
-		image: function(data){
-			return $resource('/fileupload',{},{post:{method:'POST', params:{data:data}}}).post();
-			//$http.post('/fileupload',{data:data});
-		}
-	}
-})
-
-function UIDCtrl($scope, fileReader, $http, $timeout){
-	//create proper login methods etc...
-
-	var pyuserid=getCookie(pyuseridtag);
-	console.log(pyuserid);
-	checkCookie(pyuserid);
-
-	function GUID() {
-		var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+function GUID() {
+	var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
 		return v.toString(16);
-		});
-		return guid;
-	}
-
-// } //UIDCtrl end
+	});
+	return guid;
+}
 
 
-// var UploadController = function ($scope, fileReader, $http, $timeout) {
+function SnapshotCtrl($scope, fileReader, $http, $timeout){
+	//create proper login methods etc...
+
+	var pyuserid = getCookie(pyuseridtag);
+	//console.log(pyuserid);   // Dev
+	checkCookie(pyuserid);
+
 	var button = document.querySelector('#button');
-    $scope.pyuserid = getCookie(pyuseridtag);
-    var x = 0;
+    $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
+    
+	// variables for cut creation
+	var x = 0;
 	var y = 0;
 	var width = 0;
 	var height = 0;
 	
+	//Call grabcut with coordinates
+	// fix - Make it so users can drag from bottom right
+	
 	$scope.cut = function(){
-		console.log('cut was called')
+		//console.log('cut was called');  // Dev
 		var formData = new FormData();
 		var filename = $scope.pyuserid + "/1.png";
 		formData.append("filename",filename);
 		formData.append('coords',x + ' ' + y + ' ' + width + ' ' + height);
 		formData.append('pyuserid', $scope.pyuserid)
-		console.log('got this far');
+		//console.log('got this far');  // Dev
 		var xhr2 = new XMLHttpRequest();
 		xhr2.open('POST','/grabcut');
 		xhr2.send(formData);
+		// fix - Need to implement code that fires on success
 		$timeout(function(){
 			$scope.selfie();
 		},1000);
 	}
 	
 	$scope.send_snapshot = function(){
-		//$scope.test = $('#snapshot').attr('src');
 		kinetic($('#snapshot').attr('src'));
 	}
 
+	// fix - Does this need to be a function?
 	$scope.selfie = function() { 
-		console.log("redirecting");
+		//console.log("redirecting"); // Dev
 		window.location = '/selfie';	
 	}
 
 	$scope.upload_webcam = function(){
 		var formData = new FormData();
-		// c1 - change var name = cookie_value to correct val
 		var name = $scope.pyuserid
 		formData.append("name",name);
 		formData.append("data",$('#snapshot').attr('src'));
-		console.log($('#snapshot').attr('src'));
+		// console.log($('#snapshot').attr('src')); // Dev
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/fileupload');
-		//xhr.open('POST', '/grabcut?filename=imgtest.jpg'+'&coords=0+0+100+100'//+x+'+'+y+'+'+width+'+'+height)
 		xhr.send(formData);
 	
+		// fix - impliment to happen with successful call instead of timeout
 		$timeout(function(){
 			$scope.cut();
-			//kinetic($('#snapshot').attr('src'));
-			// window.location.href = 'http://localhost:1234/webcam_test/'+ name;
 		},1000);
 	}
 	
-	
+	// Looks for when img changes then recreates canvas for rect selection
+	// fix - need to look up img by id instead
 	$('img').bind('load',function(){
 		kinetic($('img').attr('src'))
 	})
 
+	// Creates the kineticJS environment
+	// Should be called by the change of img
+	
 	var kinetic = function(result) {
         $scope.imageSrc = result;
       	var imageObj = new Image();
@@ -194,7 +184,7 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		down = false;
 	})
 
-		stage.on('mousemove', function(){
+	    stage.on('mousemove', function(){
 			if (!down) return;
 
 			selection.setWidth(stage.getMousePosition().x - selection.getX());
@@ -206,10 +196,8 @@ function UIDCtrl($scope, fileReader, $http, $timeout){
 		});
 	}
 
-};//End of new UIDCtrl
+};//End of new SnapshotCtrl
 
-
-//} //UploadController
 
 app.directive("ngFileSelect",function(){
 
