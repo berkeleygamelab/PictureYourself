@@ -3,6 +3,8 @@ require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
 
+require_relative 'py_apis'
+
 # DEV
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/PictureYourself.db")
 
@@ -14,6 +16,15 @@ class PictureYourself
   property :picture, Text
   
 end
+
+class Stickers
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :name, Text
+  property :filename, Text
+  property :category, Test
+end 
 
 DataMapper.finalize.auto_upgrade!
 
