@@ -6,6 +6,8 @@ require 'dm-timestamps'
 # DEV
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/PictureYourself.db")
 
+require_relative 'apis'
+
 class PictureYourself
   include DataMapper::Resource
 
