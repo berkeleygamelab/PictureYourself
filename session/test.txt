@@ -1,0 +1,1 @@
+{"leftArr"=>"705px", "topArr"=>"173.328125px", "srcArr"=>"images/toolbox/PinCU.png", "rotArr"=>"matrix(0.16269519059245843, 0.9866763780278129, -0.9866763780278129, 0.16269519059245843, 0, 0)", "background"=>"url(http://127.0.0.1:8283/images/Rec2.jpg)"}

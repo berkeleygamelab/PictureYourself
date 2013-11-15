@@ -46,3 +46,50 @@ end
 get '/selfie' do
   erb :selfie
 end
+
+post '/session' do
+  puts "CLOSED"
+  #sticker src, left & top (location) are properly passed
+  #rotation information is also passed, but as a matrix transformation (i think)
+  #can be extended to additional sticker data, as long as that information is accessible from the html
+  puts params
+  # left = params[:leftArr].split(',')
+  # top = params[:topArr].split(',')
+  # src = params[:srcArr].split(',')
+  # rot = params[:rotArr].split(',')
+  dirname = 'session/'
+  unless File.directory?(dirname)
+    Dir.mkdir(dirname)
+  end
+  # fix - fix to have dynamic txt numbers - or naming
+  File.open(dirname+'/test.txt', 'wb') do |f|
+    puts "write"
+      f.write(params)
+  end
+end
+
+#write email behaviour (save image, attach to email)
+post '/email' do
+  puts "EMAIL"
+
+  puts params
+
+  data = params[:data].split(',')[1]
+    dirname = 'email/'
+    unless File.directory?(dirname)
+      Dir.mkdir(dirname)
+    end
+    # fix - fix to have dynamic png numbers - or naming
+    File.open(dirname+'/1.png', 'wb') do |f|
+      puts "write"
+        f.write(Base64.decode64(data))
+    end
+end
+
+
+post 'send_email' do
+
+end
+
+
+

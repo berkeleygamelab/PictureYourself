@@ -92,15 +92,20 @@
     
 
     <div id="done_email" style="display:none; height: 800 px;">
-      <div id="selfie@"></div>
+      <div id="selfie@">
+      	
+      </div>
       <div id="done">
         <h4>Your selfie@ has been created!</h4>
       </div>
       
       <div id="email">
         <p>Please enter your email so that we can send you a copy! </p>
-        <input type="text" name="email" value="selfie@py.io">
-        <input type="button" value="Send" onclick='reset()'>
+        <form action="/send_email">
+  			E-mail: <input type="email" name="email">
+  			<input type="submit" value = "Send">
+
+		</form>
       </div>
 
 
