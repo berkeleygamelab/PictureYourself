@@ -231,11 +231,6 @@ function reset() {
 
 
 
-
-
-
-
-
 function escapeHTML(s) {
     return s.split('&').join('&amp;').split('<').join('&lt;').split('"').join('&quot;');
 }
