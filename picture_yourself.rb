@@ -4,18 +4,9 @@ require 'data_mapper'
 require 'dm-timestamps'
 
 # DEV
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/PictureYourself.db")
 
 require_relative 'apis'
-
-class PictureYourself
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :name, Text
-  property :picture, Text
-  
-end
+require_relative 'db'
 
 DataMapper.finalize.auto_upgrade!
 
@@ -47,4 +38,8 @@ end
 
 get '/selfie' do
   erb :selfie
+end
+
+get '/scenario' do
+  erb :scenario
 end
