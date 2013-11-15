@@ -1,0 +1,124 @@
+<html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
+<head profile="http://gmpg.org/xfn/11">
+  <title>Picture Yourself in College</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="styles/diagram_layout.css" type="text/css">
+  <link rel="stylesheet" href="styles/jquery.ui.rotatable.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+</head>
+<body id="top">
+  <div class="wrapper col1">
+    <div id="topbar">
+      <h1 class="mainTitle">Picture Yourself in College</h1>
+    </div>
+  </div>
+
+  <div class="wrapper col2">
+
+    <div id="homepage">
+      <div id="head">
+        <div class="instructions">
+          <h3>Select a background for your selfie</h3>
+          
+
+        </div>
+        <div class="outline_options">
+          
+          <br/>
+          <table border="0" style="padding:10px; margin: 0 auto;">
+            <tr>
+              <td><img src="images/Rec1.jpg" onclick="makeLayoutPage(1)"/></td>
+              <td><img src="images/Rec2.jpg" onclick="makeLayoutPage(2)"/></td>
+              <td><img src="images/Rec3.jpg" onclick="makeLayoutPage(3)"/></td>
+            </tr>
+            <tr>
+              <td><img src="images/Rec4.jpg" onclick="makeLayoutPage(4)"/></td>
+              <td><img src="images/Rec5.jpg" onclick="makeLayoutPage(5)"/></td>
+              <td><img src="images/Rec6.jpg" onclick="makeLayoutPage(6)"/></td>
+            </tr>
+            <tr>
+              <td><img src="images/Rec7.jpg" onclick="makeLayoutPage(7)"/></td>
+              <td><img src="images/Rec8.jpg" onclick="makeLayoutPage(8)"/></td>
+              <td><img src="images/Rec9.jpg" onclick="makeLayoutPage(9)"/></td>
+            </tr>
+          </table>
+
+          <br class="clear" />
+        </div>
+      </div>
+    </div>
+
+    <div id="layout_edit" style="display:none; height: 683px;">
+      <div id="edit_body">
+        <div id="toolbox">
+        </div>
+        <div id="edit">
+          <div id="diagram">
+            <!--
+            <div class="toolboxImage ui-draggable ui-draggable-dragging drop" style="left: 200px; top: 209.11px; position: absolute;">
+              <div class="selfie"><img title="Selfie" id="selfie" src="./images/toolbox/selfie.png"></div>
+            <div class="ui-rotatable-handle ui-draggable"></div>
+            <div class="delete"></div>
+            <div class="clone"></div> -->
+            
+          </div>
+          <!-- <div id="selfie" style="left: 400px; top:300px; position: relative; draggable: true;">
+              <img title="Selfie" id="selfie" src="./images/toolbox/selfie.png">
+            </div> -->
+        </div>
+      </div>
+
+      <div class="col3">
+        
+        <button onclick="location.reload();">Choose a different background</button>
+        <button onclick="doneDeal();">Done!</button>
+        <button onclick="reset();">Start all over</button>
+        
+      </div>
+      
+
+        
+    </div>
+    
+    <div id="checklist_view" class="hide">
+      <div id='tabNav'>
+      </div>
+      <div id="allToDos"></div> 
+    </div> 
+    <div id="checkboxToDoList"></div>
+    <div id="tabsToDoList"></div>
+    
+
+    <div id="done_email" style="display:none; height: 800 px;">
+      <div id="selfie@"></div>
+      <div id="done">
+        <h4>Your selfie@ has been created!</h4>
+      </div>
+      
+      <div id="email">
+        <p>Please enter your email so that we can send you a copy! </p>
+        <input type="text" name="email" value="selfie@py.io">
+        <input type="button" value="Send">
+      </div>
+
+
+    </div>
+  </div>
+
+  </div>
+
+
+</div>
+
+<script type="text/javascript" src="js/FileSaver.min.js"></script>
+<script type="text/javascript" src="js/diagram.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-ui.min.js"></script>
+<script src="js/jquery/jquery.ui.rotatable.js"></script>
+<script src="js/jquery/jquery.custom.resizeable.js"></script>
+<script src='js/jquery/jquery.simplemodal.1.4.4.min.js' type='text/javascript'></script>
+
+</body>
+</html>
