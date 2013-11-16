@@ -7,6 +7,22 @@
   <link rel="stylesheet" href="/css/diagram_layout.css" type="text/css">
   <link rel="stylesheet" href="/css/jquery.ui.rotatable.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script type="text/javascript">
+      function doSomething() {
+        var width = $(window).width();
+        var height = $( window ).height();
+        if (width < 1000) {
+          alert("Your browser window is too small for this app. Please maximize it.");
+        }
+      };
+
+      var resizeTimer;
+      $(window).resize(function() {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(doSomething, 2000);
+      });
+
+  </script>
 </head>
 <body id="top">
   <div class="wrapper col1">
