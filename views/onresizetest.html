@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+			function doSomething() {
+				var width = $(window).width();
+				var height = $( window ).height();
+				if (width < 800) {
+					alert("Your browser window is too small for this app. Please maximize it.");
+				}
+			};
+
+			var resizeTimer;
+			$(window).resize(function() {
+			    clearTimeout(resizeTimer);
+			    resizeTimer = setTimeout(doSomething, 2000);
+			});
+
+		</script>
+
+	</head>
+
+
+
+</html>
