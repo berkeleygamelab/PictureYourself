@@ -2,6 +2,7 @@ require 'sinatra'
 require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
+require 'json'
 
 # DEV
 
@@ -42,4 +43,12 @@ end
 
 get '/scenario' do
   erb :scenario
+end
+
+get '/seed' do
+  file = open('public/images/stickers/filenames.txt','r').read
+  file = file.split("\n")
+  file.each do |filename|
+    Sticker.create(name:filename,source:'images/stickers/'+filename)
+  end
 end

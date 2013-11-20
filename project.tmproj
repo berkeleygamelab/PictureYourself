@@ -3,20 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>apis.rb</string>
+	<string>public/js/scenario.js</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>picture_yourself.rb</string>
 			<key>lastUsed</key>
-			<date>2013-11-12T02:42:33Z</date>
+			<date>2013-11-16T01:11:24Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>public/js/PictureYourself.js</string>
 			<key>lastUsed</key>
-			<date>2013-11-12T02:42:12Z</date>
+			<date>2013-11-16T01:09:42Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -28,21 +28,19 @@
 			<key>filename</key>
 			<string>views/index.erb</string>
 			<key>lastUsed</key>
-			<date>2013-11-12T02:42:11Z</date>
+			<date>2013-11-16T01:09:42Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>apis.rb</string>
 			<key>lastUsed</key>
-			<date>2013-11-12T02:42:33Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2013-11-16T01:09:39Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>views/layout.erb</string>
 			<key>lastUsed</key>
-			<date>2013-11-10T00:47:30Z</date>
+			<date>2013-11-16T01:11:28Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -56,6 +54,26 @@
 			<key>lastUsed</key>
 			<date>2013-11-10T00:47:29Z</date>
 		</dict>
+		<dict>
+			<key>filename</key>
+			<string>public/js/scenario.js</string>
+			<key>lastUsed</key>
+			<date>2013-11-16T01:14:14Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>views/scenario.erb</string>
+			<key>lastUsed</key>
+			<date>2013-11-16T01:14:14Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>db.rb</string>
+			<key>lastUsed</key>
+			<date>2013-11-15T23:49:23Z</date>
+		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
@@ -66,9 +84,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>23</integer>
 				<key>line</key>
-				<integer>1</integer>
+				<integer>12</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -80,23 +98,37 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>41</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>51</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>18</integer>
 		</dict>
 		<key>public/js/PictureYourself.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>55</integer>
 				<key>line</key>
 				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>135</integer>
+		</dict>
+		<key>public/js/scenario.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>34</integer>
+				<key>line</key>
+				<integer>17</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -117,13 +149,44 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>views/layout.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>41</integer>
+				<key>line</key>
+				<integer>14</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>views/scenario.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>2</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>apis.rb</string>
+		<string>picture_yourself.rb</string>
 		<string>views/index.erb</string>
 		<string>public/js/PictureYourself.js</string>
-		<string>picture_yourself.rb</string>
+		<string>views/scenario.erb</string>
+		<string>public/js/scenario.js</string>
+		<string>apis.rb</string>
+		<string>views/layout.erb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

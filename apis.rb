@@ -3,7 +3,12 @@ get '/sticker_files/:category' do
   
 end
 
-get '/user/test_user' do
+get '/test/stickers' do
+  images  = []
   
+  Sticker.all.each do |sticker|
+    images << sticker.source
+  end
   
+  return images.to_json
 end
