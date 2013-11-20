@@ -12,7 +12,7 @@ class PictureYourself
   property :id, Serial
   property :name, Text
   property :picture, Text
-  
+
 end
 
 DataMapper.finalize.auto_upgrade!

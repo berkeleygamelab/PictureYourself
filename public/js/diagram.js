@@ -173,7 +173,7 @@ function createTabContent() {
     }
     tabs += '</ul>';
     var topNav = document.getElementById("tabNav");
-  
+
     for (var i = 0; i < navigationTabsContent.length; i++) {
         tabs += "<div id='tabs-"+i+"'>";
         var checklist = navigationTabsContent[i];
@@ -181,7 +181,7 @@ function createTabContent() {
             tabs += '<input type="checkbox">' + checklist[j] + '</input><br/>';
         }
         tabs += "</div>";
-        
+
 
     }
     topNav.innerHTML = tabs;
@@ -212,7 +212,7 @@ function showTabContent(index) {
          tabLink.style.removeProperty('color');
          tabLink.style.removeProperty('background-color');
      }
- }		
+ }
 }
 
 function showChecklist(ev) {
@@ -256,8 +256,8 @@ function saveCopy() {
 }
 
 function doneDeal() {
-    // document.getElementById("homepage").style.display = "none"; 
-    // document.getElementById("topbar").style.display = "none"; 
+    // document.getElementById("homepage").style.display = "none";
+    // document.getElementById("topbar").style.display = "none";
     document.getElementById("layout_edit").style.display = "none";
     document.getElementById("done_email").style.display = "block";
     // createEditableLayout(layout_number);
@@ -292,8 +292,8 @@ function addSelfie(){
 
 function makeLayoutPage(layout_number){
     layoutNumber = layout_number;
-    document.getElementById("homepage").style.display = "none"; 
-    document.getElementById("topbar").style.display = "none"; 
+    document.getElementById("homepage").style.display = "none";
+    document.getElementById("topbar").style.display = "none";
     document.getElementById("layout_edit").style.display = "block";
     createEditableLayout(layout_number);
     var useruid = getCookie('pyuserid');
@@ -389,7 +389,7 @@ function init() {
 
     $('#workspaceMenu').hide();
     $('#checklistMenu').show();
-    
+
     if ( visible ) {
         $('#edit_body').slideUp('fast',function(){
             $('#edit_body').addClass('hide')
@@ -430,7 +430,7 @@ function clickClone(){
         'left': event.clientX + 30,
         'top': event.clientY
       });
-	  
+
       clonedElement.appendTo($('#edit'));
       clickDroppedItem();
       clickDelete();
@@ -483,16 +483,16 @@ function applyRotation() {
 
 $(window).on('beforeunload', function(){
 
-  var leftArr = []; //don't forget to clear array so that things aren't added more than once when beforeunload is called multiple times 
+  var leftArr = []; //don't forget to clear array so that things aren't added more than once when beforeunload is called multiple times
   var topArr = [];
   var srcArr = [];
   var rotArr = [];
 
-  $.each($('#edit .toolboxImage'), function(index, value){ 
+  $.each($('#edit .toolboxImage'), function(index, value){
     leftArr.push($(value).css('left'));
   })
 
-  $.each($('#edit .toolboxImage'), function(index, value){ 
+  $.each($('#edit .toolboxImage'), function(index, value){
     topArr.push($(value).css('top'));
   })
 
@@ -500,12 +500,12 @@ $(window).on('beforeunload', function(){
     rotArr.push($(value).css('-webkit-transform'));
   })
 
-  $.each($('#edit .toolboxImage .itemImage'), function(index, value){ 
+  $.each($('#edit .toolboxImage .itemImage'), function(index, value){
     srcArr.push($(value).attr('src'));
   })
 
   //eventually background will be refactored to simply be included with the rest of the images
-  var background = $('#edit #diagram').css('background-image') 
+  var background = $('#edit #diagram').css('background-image')
 
   var formData = new FormData();
   //var filename = $scope.pyuserid;

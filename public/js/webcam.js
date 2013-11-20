@@ -18,7 +18,7 @@ function getUserMedia(){
 	var button = document.querySelector('#button');
 	var ctx = canvas.getContext('2d');
 	var localMediaStream = null;
-	
+
 	navigator.getMedia = ( navigator.getUserMedia ||
 	                       navigator.webkitGetUserMedia ||
 	                       navigator.mozGetUserMedia ||
@@ -57,10 +57,10 @@ function getUserMedia(){
 			ctx.drawImage(video, 0, 0);
 			document.querySelector('img').src = canvas.toDataURL('image/png');
 		//}
-    }
+   	 }
 
-    button.addEventListener('click', snapshot, false);
-	
+   	button.addEventListener('click', snapshot, false);
+
 }
 
 
