@@ -4,8 +4,8 @@ var port = '9393';
 var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
+window.mynamespace = window.mynamespace || {};
 
-	
 function setCookie(c_name,value,exdays) {
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate() + exdays);
@@ -33,16 +33,16 @@ function getCookie(c_name) {
 
 function checkCookie(pyuserid){
   if (pyuserid!=null && pyuserid!="")
-  	console.log('creating pyuserid'); 
+  	console.log('creating pyuserid');
 	else  {
-		var randomID = GUID();
-  	// check if value GUID is already registered on server	  	
-    setCookie(pyuseridtag,randomID,pyuseridlife);	 	   
+		var randomID = mynamespace.GUID();
+  	// check if value GUID is already registered on server
+    setCookie(pyuseridtag,randomID,pyuseridlife);
     console.log(getCookie(pyuseridtag));
   }
 }
 
-function GUID() {
+mynamespace.GUID = function() {
 	var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
 		return v.toString(16);
@@ -60,16 +60,16 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	var button = document.querySelector('#button');
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
-    
+
 	// variables for cut creation
 	var x = 0;
 	var y = 0;
 	var width = 0;
 	var height = 0;
-	
+
 	//Call grabcut with coordinates
 	// fix - Make it so users can drag from bottom right
-	
+
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
 		var formData = new FormData();
@@ -86,15 +86,15 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			$scope.selfie();
 		},1000);
 	}
-	
+
 	$scope.send_snapshot = function(){
 		kinetic($('#snapshot').attr('src'));
 	}
 
 	// fix - Does this need to be a function?
-	$scope.selfie = function() { 
+	$scope.selfie = function() {
 		//console.log("redirecting"); // Dev
-		window.location = '/selfie';	
+		window.location = '/selfie';
 	}
 
 	$scope.upload_webcam = function(){
@@ -107,13 +107,13 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/fileupload');
 		xhr.send(formData);
-	
+
 		// fix - impliment to happen with successful call instead of timeout
 		$timeout(function(){
 			$scope.cut();
 		},1000);
 	}
-	
+
 	// Looks for when img changes then recreates canvas for rect selection
 	// fix - need to look up img by id instead
 	$('img').bind('load',function(){
@@ -123,18 +123,18 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	// Creates the kineticJS environment
 	// Should be called by the change of img
-	
+
 	var kinetic = function(result) {
         $scope.imageSrc = result;
       	var imageObj = new Image();
 		imageObj.src = result;
-		
+
 		var stage = new Kinetic.Stage({
         container: 'container',
         width: imageObj.width,
         height: imageObj.height
       	});
-		
+
 		var background = new Kinetic.Rect({
 			x:0,
 			y:0,
@@ -143,7 +143,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			fillEnabled: false,
 			opacity: 1
 		});
-		
+
 		var selection = new Kinetic.Rect({
 			x:0,
 			y:0,
@@ -155,7 +155,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
       	var layer = new Kinetic.Layer();
 		var down = false;
-		
+
       	imageObj.onload = function() {
         	var yoda = new Kinetic.Image({
           		x: 0,
@@ -173,7 +173,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
        	 // add the layer to the stage
        	 stage.add(layer);
       	}; // end of imageObj.onload
-	
+
 		stage.on('mousedown',function(){
 			down = true;
 			selection.setX(stage.getMousePosition().x);
@@ -181,7 +181,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			x = selection.getX();
 			y = selection.getY();
 		});
-	
+
 		stage.on('mouseup', function(){
 		down = false;
 	})
@@ -205,54 +205,54 @@ app.directive("ngFileSelect",function(){
 
   return {
     link: function($scope,el){
-      
+
       el.bind("change", function(e){
-      
+
         $scope.file = (e.srcElement || e.target).files[0];
         $scope.getFile();
       })
-      
+
     }
-    
+
   }
-  
-  
+
+
 })
 
 function LoginCtrl($scope){
 	//create proper login methods etc...
 	$scope.username = 'username';
-	$scope.login = function(){	
+	$scope.login = function(){
 		console.log($scope.username);
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST','/loggedin?username='+$scope.username);
 		xhr.send();
 		window.location.href = 'http://'+ip+':'+port+'/loggedin?username='+$scope.username;
-		}				
+		}
 }
 
 function LayoutCtrl($scope){
-	
+
 }
 
 function IndexCtrl($scope){
-	
+
 }
 
-function StickerCtrl($scope){	
+function StickerCtrl($scope){
 	var img = angular.element("#picture").attr('src');
 	var background = new Image();
   	var imageObj = new Image();
 	var hatObj = new Image();
-  	
+
 	$scope.background = background;
 	$scope.imageObj = imageObj;
 	$scope.hatObj = hatObj;
 	imageObj.src = img;
 	background.src = 'img/background.jpg'
 	hatObj.src = 'img/hat.png'
-	
-	
+
+
 	var stage = new Kinetic.Stage({
     container: 'container',
     width: background.width,
@@ -261,7 +261,7 @@ function StickerCtrl($scope){
 
     var layer = new Kinetic.Layer();
 
-	
+
   	imageObj.onload = function() {
     	var floater = new Kinetic.Image({
       		x: 0,
@@ -286,7 +286,7 @@ function StickerCtrl($scope){
 			height: hatObj.hidth,
 			draggable:true
 		})
-		
+
 		layer.add(backgroundImg);
 		layer.add(floater);
 		layer.add(hat);
@@ -307,5 +307,5 @@ function StickerCtrl($scope){
 			layer.draw();
 		}
 
-	}	
+	}
 }

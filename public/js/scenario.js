@@ -1,5 +1,10 @@
 //http://angular-ui.github.io/bootstrap/
 
+window.mynamespace = window.mynamespace || {};
+/*
+* Tabs
+*/
+
 ;(function($){
   $.fn.html5jTabs = function(options){
     return this.each(function(index, value){
@@ -32,35 +37,154 @@ $(document).ready(function() {
   $(".tabs a").html5jTabs();
 });
 
+/*
+* Gets user selfie
+*/
+//hardcoded because I don't know how to get userID
+//also have to refresh page to get changes, why?
+$('#selfie').attr('src', '../users/a3033004-5490-4df9-7fa7-4119773aaa73/1_sticker.png');
+
+
+/*
+* Background choosing
+*/
 $('.background').click(function(){
   $('#scenario').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
-})
+});
 
-//kinetic
-var stage = new Kinetic.Stage({
-        container: 'scenario',
-        width:  950,
-        height: 650
-      });
-      var layer = new Kinetic.Layer();
 
-      var imageObj = new Image();
-      imageObj.onload = function() {
-        var yoda = new Kinetic.Image({
-          x: 200,
-          y: 50,
-          image: imageObj,
-          width: 106,
-          height: 118
+
+
+/*
+* The actual Kinetic Stage where users can move stickers around
+*/
+window.onload = function(){
+    var stage = new Kinetic.Stage({
+      container: 'scenario',
+      width: parseInt($('#scenario').css('width')) ,
+      height: parseInt($('#scenario').css('height'))
+    });
+    var layer = new Kinetic.Layer();
+    stage.add(layer);
+    var con = stage.getContainer();
+    var dragSrcEl = null;
+    //image
+    $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
+           dragSrcEl = this;
+    });
+
+    con.addEventListener('dragover',function(e){
+        e.preventDefault(); //@important
+    });
+    //insert image to stage
+    con.addEventListener('drop',function(e){
+        console.log(e);
+        var image = new Kinetic.Image({
+           draggable : true,
+           width: 120,  //this makes the image lower quality for some reason
+           height: 120,
+           x: e.offsetX,  //TOFIX: drop it at mouse location, instead of top left corner
+           y: e.offsetY
+        });
+        layer.add(image);
+        imageObj = new Image();
+        imageObj.src = dragSrcEl.src;
+        imageObj.onload = function(){
+            image.setImage(imageObj)
+            layer.draw()
+        };
+
+     });
+
+
+
+
+
+}
+
+
+
+//http://jsfiddle.net/projeqht/ttUd4/
+
+
+//http://jsfiddle.net/hF36S/1/
+
+//http://www.html5canvastutorials.com/labs/html5-canvas-drag-and-drop-resize-and-invert-images/
+
+//for transformations, maybe use kinetic group to add circles on, and then do some bullshit
+
+//http://stackoverflow.com/questions/8270612/get-element-moz-transformrotate-value-in-jquery (-webkit transform matrix to degree/rad)
+
+//http://jqueryui.com/resizable/
+
+
+
+//http://superdit.com/2011/12/04/jquery-plugin-for-rotating-image/
+;(function( $ ) {
+    $.fn.myrotate = function() {
+        var img = this.find("img"); //wtf
+        var imgpos = img.position();
+        var x0, y0;
+
+        $(window).load(function() {
+            img.removeAttr("width");
+            img.removeAttr("height");
+
+            x0 = imgpos.left + (img.width() / 2);
+            y0 = imgpos.top + (img.height() / 2);
         });
 
-        // add the shape to the layer
-        layer.add(yoda);
+        var x, y, x1, y1, drag = 0;
 
-        // add the layer to the stage
-        stage.add(layer);
-      };
-      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/yoda.jpg';
+        img.css({
+            "cursor": "pointer",
+            "position": "relative"
+        });
+
+        img.mousemove(function(e) {
+            x1 = e.pageX;
+            y1 = e.pageY;
+            x = x1 - x0;
+            y = y1 - y0;
+
+            r = 360 - ((180/Math.PI) * Math.atan2(y,x));
+
+            if (drag == 1) {
+                img.css("transform","rotate(-"+r+"deg)");
+                img.css("-moz-transform","rotate(-"+r+"deg)");
+                img.css("-webkit-transform","rotate(-"+r+"deg)");
+                img.css("-o-transform","rotate(-"+r+"deg)");
+            }
+        });
+
+        img.mousedown(function() {
+            if (drag == 0) {
+                drag = 1;
+                img.css("-webkit-box-shadow", "0 0 5px #999");
+                img.css("-moz-box-shadow", "0 0 5px #999");
+                img.css("box-shadow", "0 0 5px #999");
+            } else {
+                drag = 0;
+                img.css("-webkit-box-shadow", "0 0 2px #999");
+                img.css("-moz-box-shadow", "0 0 2px #999");
+                img.css("box-shadow", "0 0 2px #999");
+            }
+        });
+
+        img.mouseleave(function() {
+            drag = 0;
+        });
+    };
+})( jQuery );
+
+
+$('.sticker').myrotate();
+
+
+
+
+
+
 
 
 
