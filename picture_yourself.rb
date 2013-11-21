@@ -44,7 +44,7 @@ post '/grabcut' do
 end
 
 get '/selfie' do
-  erb :selfie
+  erb :scenario
 end
 
 post '/session' do

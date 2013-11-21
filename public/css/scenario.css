@@ -1,0 +1,38 @@
+.tabs a{
+  cursor: pointer;
+  padding: 5px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #666;
+}
+.tabs a:hover, .tabs a.active{
+  background: #666;
+  color: #fff;
+}
+
+.tabContent{
+  border: 1px solid #666;
+  margin: 5px 0;
+  padding: 5px;
+  width: 244px;
+}
+
+.sticker{
+  width: 120px;
+  height: 120px;
+}
+
+.background{
+  width: 120px;
+  height: 120px;
+}
+
+#scenario{
+  border: 1px solid #666;
+  position: fixed;
+  top: 2px;
+  left: 300px;
+  background-image: url( '../images/Rec1.jpg');
+  background-size: 950px 650px;
+
+}

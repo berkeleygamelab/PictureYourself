@@ -1,1 +1,1 @@
-{"leftArr"=>"", "topArr"=>"", "srcArr"=>"", "rotArr"=>"", "background"=>"url(http://127.0.0.1:8283/images/Rec6.jpg)"}
+{"leftArr"=>"", "topArr"=>"", "srcArr"=>"", "rotArr"=>"", "background"=>"undefined"}
