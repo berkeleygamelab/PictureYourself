@@ -43,7 +43,7 @@ $(document).ready(function() {
 */
 //hardcoded because I don't know how to get userID
 //also have to refresh page to get changes, why?
-$('#selfie').attr('src', '../users/a3033004-5490-4df9-7fa7-4119773aaa73/1_sticker.png');
+$('#selfie').attr('src', '../users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/1_sticker.png');
 
 
 /*
@@ -109,21 +109,37 @@ $('.background').click(function(){
 
      });
 
-//layer.getChildren()[0].attrs.image.src
-//layer.getChildren()[0].attrs.x
-$(window).on('click', function(){
-  $.each(layer.getChildren(), function(index, value){
-    var sticker = {
-      src: value.attrs.image.src,
-      x: value.attrs.x,
-      y: value.attrs.y
-    }
-    stickers.push(sticker);
-  })
-  console.log(stickers)
-});
 
 
+/*
+* CSS filters, basic implementation
+*/
+var filter = '';
+$('.filter').on('click', function(){
+
+  var filterVal =  $(this).attr('id');
+  if(filterVal == 'gray'){
+    filter += ' grayscale(0.5)';
+  } else if (filterVal == 'blur'){
+    filter += ' blur(5px)';
+  } else if (filterVal == 'sepia'){
+    filter += ' sepia(0.5)';
+  } else if (filterVal == 'saturate'){
+    filter += ' saturate(0.5)';
+  } else if (filterVal == 'invert'){
+    filter += ' invert(100%)';
+  } else if (filterVal == 'opacity'){
+    filter += ' opacity(0.5)';
+  } else if (filterVal == 'bright'){
+    filter += ' brightness(2)';
+  } else if (filterVal == 'contrast'){
+    filter += ' contrast(0.5)';
+  } else if(filterVal == 'reset'){
+    filter = 'blur(0px)';
+  }
+  $('#container').css('-webkit-filter', filter);
+
+})
 
 //for transformations, maybe use kinetic group to add circles on
 //for rotations, i have three points: centre, some predetermined default, and wherever the user's mouse is moved to
@@ -209,45 +225,33 @@ $(window).on('click', function(){
 
 
 
-//THIS IS NOW OBSOLETE
+
+//layer.getChildren()[0].attrs.image.src
+//layer.getChildren()[0].attrs.x
 $(window).on('beforeunload', function(){
-
-  var leftArr = []; //don't forget to clear array so that things aren't added more than once when beforeunload is called multiple times
-  var topArr = [];
-  var srcArr = [];
-  var rotArr = [];
-
-  $.each($('#edit .toolboxImage'), function(index, value){
-    leftArr.push($(value).css('left'));
+  stickers = [];
+  stickers.push($('#container').css('background-image'));
+  $.each(layer.getChildren(), function(index, value){
+    var sticker = {
+      src: value.attrs.image.src,
+      x: value.attrs.x,
+      y: value.attrs.y
+    }
+    //console.log($(sticker).serializeArray());
+    console.log(JSON.stringify(sticker));
+    stickers.push(JSON.stringify(sticker));
+   // stickers[index] = sticker;
   })
-
-  $.each($('#edit .toolboxImage'), function(index, value){
-    topArr.push($(value).css('top'));
-  })
-
-  $.each($('#edit .toolboxImage'), function(index, value){
-    rotArr.push($(value).css('-webkit-transform'));
-  })
-
-  $.each($('#edit .toolboxImage .itemImage'), function(index, value){
-    srcArr.push($(value).attr('src'));
-  })
-
-  //eventually background will be refactored to simply be included with the rest of the images
-  var background = $('#edit #diagram').css('background-image')
-
+  //console.log(stickers)
+    console.log(stickers);
   var formData = new FormData();
   //var filename = $scope.pyuserid;
   //formData.append("name", name);
 
-  formData.append("leftArr", leftArr);
-  formData.append("topArr", topArr);
-  formData.append("srcArr", srcArr);
-  formData.append("rotArr", rotArr);
-  formData.append("background", background);
-
+  formData.append("stickers", stickers);
   var xhr2 = new XMLHttpRequest();
   xhr2.open('POST', '/session');
+
   xhr2.send(formData);
 });
 

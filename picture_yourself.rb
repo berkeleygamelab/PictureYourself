@@ -27,8 +27,7 @@ get '/' do
 end
 
 get '/sticker' do
-  @file = 'processed//grabcut_img_alpha.png'
-  erb :sticker
+  puts params
 end
 
 post '/fileupload' do
@@ -68,7 +67,7 @@ post '/session' do
   end
   # fix - fix to have dynamic txt numbers - or naming
   File.open(dirname+'/test.txt', 'wb') do |f|
-    puts "write"
+    puts "write\n "
       f.write(params)
   end
 end
