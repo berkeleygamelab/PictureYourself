@@ -5,14 +5,14 @@ require "data_mapper"
 require "dm-core"
 require "dm-migrations"
 require "digest/sha1"
-require 'rack-flash'
+#
 require "sinatra-authentication"
 
 DataMapper.setup(:default, "mysql://root:123ReM123@127.0.0.1/py-test")
 DataMapper.auto_upgrade!
 #change session secret...
-use Rack::Session::Cookie, :secret => 'superdupersecret'
-use Rack::Flash
+#use Rack::Session::Cookie, :secret => 'superdupersecret'
+#use Rack::Flash
 
 
 get '/' do
