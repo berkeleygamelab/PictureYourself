@@ -2,19 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>currentDocument</key>
+	<string>public/js/scenario.js</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>picture_yourself.rb</string>
 			<key>lastUsed</key>
-			<date>2013-11-10T00:47:28Z</date>
+			<date>2013-11-16T01:11:24Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>public/js/PictureYourself.js</string>
 			<key>lastUsed</key>
-			<date>2013-11-10T00:47:29Z</date>
+			<date>2013-11-16T01:09:42Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -26,15 +28,19 @@
 			<key>filename</key>
 			<string>views/index.erb</string>
 			<key>lastUsed</key>
-			<date>2013-11-10T00:42:10Z</date>
+			<date>2013-11-16T01:09:42Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>apis.rb</string>
+			<key>lastUsed</key>
+			<date>2013-11-16T01:09:39Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>views/layout.erb</string>
 			<key>lastUsed</key>
-			<date>2013-11-10T00:47:30Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2013-11-16T01:11:28Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -48,11 +54,140 @@
 			<key>lastUsed</key>
 			<date>2013-11-10T00:47:29Z</date>
 		</dict>
+		<dict>
+			<key>filename</key>
+			<string>public/js/scenario.js</string>
+			<key>lastUsed</key>
+			<date>2013-11-16T01:14:14Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>views/scenario.erb</string>
+			<key>lastUsed</key>
+			<date>2013-11-16T01:14:14Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>db.rb</string>
+			<key>lastUsed</key>
+			<date>2013-11-15T23:49:23Z</date>
+		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
-	<dict/>
+	<dict>
+		<key>apis.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>23</integer>
+				<key>line</key>
+				<integer>12</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>picture_yourself.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>41</integer>
+				<key>line</key>
+				<integer>51</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>18</integer>
+		</dict>
+		<key>public/js/PictureYourself.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>55</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>135</integer>
+		</dict>
+		<key>public/js/scenario.js</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>34</integer>
+				<key>line</key>
+				<integer>17</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>views/index.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>9</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>views/layout.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>41</integer>
+				<key>line</key>
+				<integer>14</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>views/scenario.erb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>2</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>openDocuments</key>
+	<array>
+		<string>picture_yourself.rb</string>
+		<string>views/index.erb</string>
+		<string>public/js/PictureYourself.js</string>
+		<string>views/scenario.erb</string>
+		<string>public/js/scenario.js</string>
+		<string>apis.rb</string>
+		<string>views/layout.erb</string>
+	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>

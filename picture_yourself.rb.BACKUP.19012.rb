@@ -6,7 +6,7 @@ require 'json'
 
 # DEV
 
-
+<<<<<<< HEAD
 class PictureYourself
   include DataMapper::Resource
 
@@ -15,10 +15,10 @@ class PictureYourself
   property :picture, Text
 
 end
-
+=======
 require_relative 'apis'
 require_relative 'db'
-
+>>>>>>> ba514a58203144c371d8429f655299bea2c5ef5b
 
 DataMapper.finalize.auto_upgrade!
 
@@ -49,6 +49,7 @@ post '/grabcut' do
 end
 
 get '/selfie' do
+<<<<<<< HEAD
   erb :scenario
 end
 
@@ -97,6 +98,11 @@ post 'send_email' do
 end
 
 
+
+=======
+  erb :selfie
+end
+
 get '/scenario' do
   erb :scenario
 end
@@ -108,4 +114,4 @@ get '/seed' do
     Sticker.create(name:filename,source:'images/stickers/'+filename)
   end
 end
-
+>>>>>>> ba514a58203144c371d8429f655299bea2c5ef5b

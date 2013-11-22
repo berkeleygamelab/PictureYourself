@@ -2,10 +2,9 @@ require 'sinatra'
 require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
-require 'json'
 
 # DEV
-
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/PictureYourself.db")
 
 class PictureYourself
   include DataMapper::Resource
@@ -15,10 +14,6 @@ class PictureYourself
   property :picture, Text
 
 end
-
-require_relative 'apis'
-require_relative 'db'
-
 
 DataMapper.finalize.auto_upgrade!
 
@@ -97,15 +92,4 @@ post 'send_email' do
 end
 
 
-get '/scenario' do
-  erb :scenario
-end
-
-get '/seed' do
-  file = open('public/images/stickers/filenames.txt','r').read
-  file = file.split("\n")
-  file.each do |filename|
-    Sticker.create(name:filename,source:'images/stickers/'+filename)
-  end
-end
 

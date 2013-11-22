@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //http://angular-ui.github.io/bootstrap/
 
 window.mynamespace = window.mynamespace || {};
@@ -49,7 +50,7 @@ $('#selfie').attr('src', '../users/a3033004-5490-4df9-7fa7-4119773aaa73/1_sticke
 * Background choosing
 */
 $('.background').click(function(){
-  $('#scenario').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+  $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
 });
 
 
@@ -60,9 +61,9 @@ $('.background').click(function(){
 */
 window.onload = function(){
     var stage = new Kinetic.Stage({
-      container: 'scenario',
-      width: parseInt($('#scenario').css('width')) ,
-      height: parseInt($('#scenario').css('height'))
+      container: 'container',
+      width: parseInt($('#container').css('width')) ,
+      height: parseInt($('#container').css('height'))
     });
     var layer = new Kinetic.Layer();
     stage.add(layer);
@@ -232,3 +233,37 @@ $(window).on('beforeunload', function(){
   xhr2.open('POST', '/session');
   xhr2.send(formData);
 });
+
+function ScenarioCtrl($scope, $resource, $http){
+
+		var layer = new Kinetic.Layer();
+		var stage = new Kinetic.Stage({
+		    container: 'container',
+		    width: 600,
+		    height: 600
+		});
+		stage.add(layer);
+
+		$http.get('test/stickers').success(function(data){
+			angular.forEach(data,function(sticker){
+
+				var image = new Image();
+				image.src = sticker;
+
+				image.onload = function() {
+					var pic = new Kinetic.Image({
+						image:image,
+						draggable:true
+					});
+
+					layer.add(pic);
+					layer.draw();
+				};
+
+			}); //forEach
+		});//success
+
+
+
+
+}
