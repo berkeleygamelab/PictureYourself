@@ -44,6 +44,7 @@ $(document).ready(function() {
 //hardcoded because I don't know how to get userID
 //also have to refresh page to get changes, why?
 $('#selfie').attr('src', '../users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/1_sticker.png');
+console.log("ID: " + getCookie('pyuserid'));
 
 
 /*
