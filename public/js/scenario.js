@@ -54,11 +54,10 @@ $('.background').click(function(){
 });
 
 
-
-
-//every time a sticker is added to the stage, also add it to a global array for session storing
 /*
 * The actual Kinetic Stage where users can move stickers around
+* Also loads all the images dynamically
+* And stores data about the images on the canvas into the stickers array
 */
 
 //try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
@@ -110,7 +109,6 @@ $('.background').click(function(){
 
      });
 
-
 //layer.getChildren()[0].attrs.image.src
 //layer.getChildren()[0].attrs.x
 $(window).on('click', function(){
@@ -125,14 +123,19 @@ $(window).on('click', function(){
   console.log(stickers)
 });
 
-//http://jsfiddle.net/projeqht/ttUd4/
 
+
+//for transformations, maybe use kinetic group to add circles on
+//for rotations, i have three points: centre, some predetermined default, and wherever the user's mouse is moved to
+//given that information, make two vectors from centre to both points, take a dot product to get the angle
+
+
+
+//http://jsfiddle.net/projeqht/ttUd4/
 
 //http://jsfiddle.net/hF36S/1/
 
 //http://www.html5canvastutorials.com/labs/html5-canvas-drag-and-drop-resize-and-invert-images/
-
-//for transformations, maybe use kinetic group to add circles on, and then do some bullshit
 
 //http://stackoverflow.com/questions/8270612/get-element-moz-transformrotate-value-in-jquery (-webkit transform matrix to degree/rad)
 
@@ -141,6 +144,8 @@ $(window).on('click', function(){
 
 
 //http://superdit.com/2011/12/04/jquery-plugin-for-rotating-image/
+
+//NONE WORKING ROTATE
 // ;(function( $ ) {
 //     $.fn.myrotate = function() {
 //         var img = this.find("img"); //wtf
@@ -204,15 +209,7 @@ $(window).on('click', function(){
 
 
 
-
-
-
-
-
-
-//how to dynamically get images from server
-
-
+//THIS IS NOW OBSOLETE
 $(window).on('beforeunload', function(){
 
   var leftArr = []; //don't forget to clear array so that things aren't added more than once when beforeunload is called multiple times
