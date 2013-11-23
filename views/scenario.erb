@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/css/scenario.css">
+<meta charset=utf-8 />
+</head>
+<body >
+<div ng-controller='ScenarioCtrl'>
+  <div class="tabs">
+    <a data-toggle="tab1">Stickers</a>
+    <a data-toggle="tab2">Backgrounds</a>
+    <a data-toggle="tab3">Filters</a>
+    <a data-toggle="tab4">Frames</a>
+  </div>
+
+  <div class="tabContent">
+    <div id="tab1" >
+      <h3> Your selfie!</h3>
+      <img class='sticker' id='selfie' src='' >
+
+      <h3>Stickers</h3>
+
+    </div>
+
+    <div id="tab2">
+      <h3>Backgrounds</h3>
+      <img class = 'background' id='back1' src="/images/Rec1.jpg">
+      <img class = 'background' id='back2' src="/images/Rec2.jpg">
+      <img class = 'background' id='back3' src="/images/Rec3.jpg">
+      <img class = 'background' id='back4' src="/images/Rec4.jpg">
+      <img class = 'background' id='back5' src="/images/Rec5.jpg">
+      <img class = 'background' id='back6' src="/images/Rec6.jpg">
+      <img class = 'background' id='back7' src="/images/Rec7.jpg">
+      <img class = 'background' id='back8' src="/images/Rec8.jpg">
+      <img class = 'background' id='back9' src="/images/Rec9.jpg">
+    </div>
+
+    <div id="tab3">
+      <h3>Filters</h3>
+      <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
+      <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
+      <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
+      <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
+      <input class = 'filter' id = 'invert' type='button' value = 'Invert'>
+      <input class = 'filter' id = 'opacity' type='button' value = 'Opacity'>
+      <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
+      <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
+      <input class = 'filter' id = 'reset' type='button' value = 'Reset'>
+
+
+    </div>
+
+    <div id="tab4">
+      <h3>Frames</h3>
+    </div>
+
+  </div>
+
+  <div id = "container" >
+</div>
+  </div>
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="/js/scenario.js"></script>
+  <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+  <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
+
+</body>
+</html>
+
+
+<!--http://code-tricks.com/create-a-simple-html5-tabs-using-jquery/-->
+
