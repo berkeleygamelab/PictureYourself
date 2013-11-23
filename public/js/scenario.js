@@ -107,8 +107,8 @@ $('.background').click(function(){
            //draggable : true,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: e.offsetX,  //TOFIX: drop it at mouse location, instead of top left corner
-           y: e.offsetY
+           x: e.offsetX + 15,  //TOFIX: drop it at mouse location, instead of top left corner
+           y: e.offsetY + 15
         });
         //layer.add(image);
         imageObj = new Image();
@@ -119,27 +119,29 @@ $('.background').click(function(){
 
         imageObj.onload = function(){
             image.setImage(imageObj)
-
             group.add(image);
-            image.on('mouseover', function(e){
-              console.log(e);
-              group.add(rotate);
-            })
-            image.on('mouseleave', function(){
-              image.remove();
-            })
-
+            group.add(rotate);
             layer.add(group);
-            //layer.add(rotate);
-            //layer.add(image);
-
             layer.draw()
         };
         //group.add(image);
 
      });
 
+function rotate(centre, start, end){
+  var v1 = {
+    dirX = start.x - centre.x,
+    dirY = start.y - centre.y
+  }
+  var v2 = {
+    dirX = end.x - centre.x.
+    dirY = end.y - centre.y
+  }
 
+  var dot = v1.dirX * v2.dirX + v1.dirY * v2.dirY;
+  var angle = acos(dot);
+  console.log(angle);
+}
 
 
 
