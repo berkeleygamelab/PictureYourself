@@ -89,25 +89,56 @@ $('.background').click(function(){
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
     });
+
+
     //insert image to stage
     con.addEventListener('drop',function(e){
+        var group = new Kinetic.Group({
+            draggable: true
+        });
+        var rotate = new Kinetic.Image({
+            //draggable:true,
+            x: e.offsetX,
+            y: e.offsetY
+        });
+        //layer.add(rotate);
         var image = new Kinetic.Image({
-           draggable : true,
+           //draggable : true,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
            x: e.offsetX,  //TOFIX: drop it at mouse location, instead of top left corner
            y: e.offsetY
         });
-        layer.add(image);
+        //layer.add(image);
         imageObj = new Image();
-
         imageObj.src = dragSrcEl.src;
+        rotateObj = new Image();
+        rotateObj.src = '/images/rotate.png';
+        rotate.setImage(rotateObj);
+
         imageObj.onload = function(){
             image.setImage(imageObj)
+
+            group.add(image);
+            image.on('mouseover', function(e){
+              console.log(e);
+              group.add(rotate);
+            })
+            image.on('mouseleave', function(){
+              image.remove();
+            })
+
+            layer.add(group);
+            //layer.add(rotate);
+            //layer.add(image);
+
             layer.draw()
         };
+        //group.add(image);
 
      });
+
+
 
 
 
