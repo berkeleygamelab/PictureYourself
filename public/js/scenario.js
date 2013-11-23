@@ -91,6 +91,7 @@ $('.background').click(function(){
         e.preventDefault(); //@important
     });
     //insert image to stage
+	var count = 0;
     con.addEventListener('drop',function(e){
         var image = new Kinetic.Image({
            draggable : true,
@@ -99,6 +100,7 @@ $('.background').click(function(){
            x: e.offsetX,  //TOFIX: drop it at mouse location, instead of top left corner
            y: e.offsetY
         });
+
         layer.add(image);
         imageObj = new Image();
 
@@ -107,8 +109,23 @@ $('.background').click(function(){
             image.setImage(imageObj)
             layer.draw()
         };
-
-     });
+		
+		if(count % 2 == 0){
+			image.on('mouseover',function(){
+				console.log('EVEN');
+			})
+			count += 1;
+		}	
+		
+		else if(count % 2 == 1){
+			image.on('mouseover',function(){
+				console.log('ODD');
+			})
+			count += 1;
+		}
+		
+		
+	})
 
 
 
