@@ -3,20 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>public/js/scenario.js</string>
+	<string>views/scenario.erb</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>picture_yourself.rb</string>
 			<key>lastUsed</key>
-			<date>2013-11-16T01:11:24Z</date>
+			<date>2013-11-22T22:19:06Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>public/js/PictureYourself.js</string>
 			<key>lastUsed</key>
-			<date>2013-11-16T01:09:42Z</date>
+			<date>2013-11-22T22:20:26Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -34,13 +34,13 @@
 			<key>filename</key>
 			<string>apis.rb</string>
 			<key>lastUsed</key>
-			<date>2013-11-16T01:09:39Z</date>
+			<date>2013-11-22T22:18:30Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>views/layout.erb</string>
 			<key>lastUsed</key>
-			<date>2013-11-16T01:11:28Z</date>
+			<date>2013-11-22T22:19:23Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -58,15 +58,15 @@
 			<key>filename</key>
 			<string>public/js/scenario.js</string>
 			<key>lastUsed</key>
-			<date>2013-11-16T01:14:14Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2013-11-22T22:24:50Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>views/scenario.erb</string>
 			<key>lastUsed</key>
-			<date>2013-11-16T01:14:14Z</date>
+			<date>2013-11-22T22:24:50Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -98,7 +98,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>41</integer>
+				<integer>3</integer>
 				<key>line</key>
 				<integer>51</integer>
 			</dict>
@@ -112,23 +112,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>55</integer>
+				<integer>27</integer>
 				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>135</integer>
-		</dict>
-		<key>public/js/scenario.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>34</integer>
-				<key>line</key>
-				<integer>17</integer>
+				<integer>4</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -184,13 +170,12 @@
 		<string>views/index.erb</string>
 		<string>public/js/PictureYourself.js</string>
 		<string>views/scenario.erb</string>
-		<string>public/js/scenario.js</string>
 		<string>apis.rb</string>
 		<string>views/layout.erb</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{216, 88}, {1064, 690}}</string>
+	<string>{{280, 88}, {1064, 690}}</string>
 </dict>
 </plist>

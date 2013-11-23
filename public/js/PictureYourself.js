@@ -4,7 +4,6 @@ var port = '9393';
 var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
-window.mynamespace = window.mynamespace || {};
 
 function setCookie(c_name,value,exdays) {
 	var exdate=new Date();
@@ -35,14 +34,14 @@ function checkCookie(pyuserid){
   if (pyuserid!=null && pyuserid!="")
   	console.log('creating pyuserid');
 	else  {
-		var randomID = mynamespace.GUID();
+		var randomID = GUID();
   	// check if value GUID is already registered on server
     setCookie(pyuseridtag,randomID,pyuseridlife);
     console.log(getCookie(pyuseridtag));
   }
 }
 
-mynamespace.GUID = function() {
+function GUID(){
 	var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
 		return v.toString(16);
