@@ -90,25 +90,58 @@ $('.background').click(function(){
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
     });
+
+
     //insert image to stage
 	var count = 0;
     con.addEventListener('drop',function(e){
+        var group = new Kinetic.Group({
+            draggable: true
+        });
+        var rotate = new Kinetic.Image({
+            //draggable:true,
+            x: e.offsetX,
+            y: e.offsetY
+        });
+        //layer.add(rotate);
         var image = new Kinetic.Image({
-           draggable : true,
+           //draggable : true,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
            x: e.offsetX,  //TOFIX: drop it at mouse location, instead of top left corner
            y: e.offsetY
         });
+<<<<<<< HEAD
 
         layer.add(image);
+=======
+        //layer.add(image);
+>>>>>>> d05b75a75e86954f4739bf4557bcc34e07bb6ffd
         imageObj = new Image();
-
         imageObj.src = dragSrcEl.src;
+        rotateObj = new Image();
+        rotateObj.src = '/images/rotate.png';
+        rotate.setImage(rotateObj);
+
         imageObj.onload = function(){
             image.setImage(imageObj)
+
+            group.add(image);
+            image.on('mouseover', function(e){
+              console.log(e);
+              group.add(rotate);
+            })
+            image.on('mouseleave', function(){
+              image.remove();
+            })
+
+            layer.add(group);
+            //layer.add(rotate);
+            //layer.add(image);
+
             layer.draw()
         };
+<<<<<<< HEAD
 		
 		if(count % 2 == 0){
 			image.on('mouseover',function(){
@@ -126,6 +159,13 @@ $('.background').click(function(){
 		
 		
 	})
+=======
+        //group.add(image);
+
+     });
+>>>>>>> d05b75a75e86954f4739bf4557bcc34e07bb6ffd
+
+
 
 
 
