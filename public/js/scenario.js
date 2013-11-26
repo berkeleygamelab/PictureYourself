@@ -93,6 +93,7 @@ $('.background').click(function(){
 
 
     //insert image to stage
+	var count = 0;
     con.addEventListener('drop',function(e){
         var group = new Kinetic.Group({
             draggable: true
@@ -110,7 +111,12 @@ $('.background').click(function(){
            x: e.offsetX + 15,  //TOFIX: drop it at mouse location, instead of top left corner
            y: e.offsetY + 15
         });
+<<<<<<< HEAD
+
+        layer.add(image);
+=======
         //layer.add(image);
+>>>>>>> d05b75a75e86954f4739bf4557bcc34e07bb6ffd
         imageObj = new Image();
         imageObj.src = dragSrcEl.src;
         rotateObj = new Image();
@@ -124,6 +130,25 @@ $('.background').click(function(){
             layer.add(group);
             layer.draw()
         };
+<<<<<<< HEAD
+		
+		if(count % 2 == 0){
+			image.on('mouseover',function(){
+				console.log('EVEN');
+			})
+			count += 1;
+		}	
+		
+		else if(count % 2 == 1){
+			image.on('mouseover',function(){
+				console.log('ODD');
+			})
+			count += 1;
+		}
+		
+		
+	})
+=======
         //group.add(image);
         var centre = {
           x: image.attrs.x + 60,
@@ -136,6 +161,7 @@ $('.background').click(function(){
         })
 
      });
+>>>>>>> d05b75a75e86954f4739bf4557bcc34e07bb6ffd
 
 $(window).click(function(e){
     console.log(e.pageX + " " e.pageY);
