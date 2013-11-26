@@ -125,24 +125,46 @@ $('.background').click(function(){
             layer.draw()
         };
         //group.add(image);
+        var centre = {
+          x: image.attrs.x + 60,
+          y: image.attrs.y + 60
+        }
+        console.log(image);
+        console.log(centre);
+        rotate.on('mousedown', function(){
+
+        })
 
      });
 
+$(window).click(function(e){
+    console.log(e.pageX + " " e.pageY);
+  });
+
 function rotate(centre, start, end){
+  //console.log(centre, start, end);
   var v1 = {
-    dirX = start.x - centre.x,
-    dirY = start.y - centre.y
+    x: start.x - centre.x,
+    y: start.y - centre.y,
+    dist: distance(centre, start)
   }
   var v2 = {
-    dirX = end.x - centre.x.
-    dirY = end.y - centre.y
+    x: end.x - centre.x,
+    y: end.y - centre.y,
+    dist: distance(centre, end)
   }
-
-  var dot = v1.dirX * v2.dirX + v1.dirY * v2.dirY;
-  var angle = acos(dot);
+  // console.log(v1);
+  // console.log(v2);
+  var dot = v1.x * v2.x  + v1.y * v2.y;
+  // console.log(dot);
+  dot /= (v1.dist * v2.dist);
+  var angle = Math.acos(dot);
   console.log(angle);
 }
 
+function distance(p1, p2){
+  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y -p2.y, 2));
+}
 
 
 /*
