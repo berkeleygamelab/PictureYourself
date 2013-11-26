@@ -4,4 +4,4 @@ gem 'shotgun'
 gem 'sinatra' 
 gem 'datamapper'
 gem 'dm-timestamps'
-
+gem 'dm-sqlite-adapter'

@@ -119,6 +119,8 @@ function createEditableLayout(index) {
     </div>';
     document.getElementById('document').innerHTML = content;  */
 }
+
+
 function createToolbox(location) {
     var imgNum = 0;
     var num_rows = 4;
@@ -171,7 +173,7 @@ function createTabContent() {
     }
     tabs += '</ul>';
     var topNav = document.getElementById("tabNav");
-  
+
     for (var i = 0; i < navigationTabsContent.length; i++) {
         tabs += "<div id='tabs-"+i+"'>";
         var checklist = navigationTabsContent[i];
@@ -179,7 +181,7 @@ function createTabContent() {
             tabs += '<input type="checkbox">' + checklist[j] + '</input><br/>';
         }
         tabs += "</div>";
-        
+
 
     }
     topNav.innerHTML = tabs;
@@ -210,7 +212,7 @@ function showTabContent(index) {
          tabLink.style.removeProperty('color');
          tabLink.style.removeProperty('background-color');
      }
- }		
+ }
 }
 
 function showChecklist(ev) {
@@ -226,11 +228,6 @@ function reset() {
     createEditableLayout(layoutNumber);
 	window.location = "/"
 }
-
-
-
-
-
 
 
 
@@ -259,15 +256,25 @@ function saveCopy() {
 }
 
 function doneDeal() {
-    // document.getElementById("homepage").style.display = "none"; 
-    // document.getElementById("topbar").style.display = "none"; 
+    // document.getElementById("homepage").style.display = "none";
+    // document.getElementById("topbar").style.display = "none";
     document.getElementById("layout_edit").style.display = "none";
     document.getElementById("done_email").style.display = "block";
     // createEditableLayout(layout_number);
     // createToolbox("./images/toolbox/");
     document.getElementById("selfie@").innerHTML = document.getElementById('edit').outerHTML;
+    a = document.getElementById("selfie@").innerHTML;
     // addSelfie();
-  
+
+    /* all these divs need to be changed to canvases
+    var canvas = document.getElementById("selfie@");
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(document.getElementById('edit').outerHTML);
+    var formData = new FormData();
+    formData.append("data", a);
+    var xhr2 = new XMLHttpRequest();
+    xhr2.open('POST','/email');
+    xhr2.send(formData);*/
 }
 
 function addSelfie(){
@@ -285,8 +292,8 @@ function addSelfie(){
 
 function makeLayoutPage(layout_number){
     layoutNumber = layout_number;
-    document.getElementById("homepage").style.display = "none"; 
-    document.getElementById("topbar").style.display = "none"; 
+    document.getElementById("homepage").style.display = "none";
+    document.getElementById("topbar").style.display = "none";
     document.getElementById("layout_edit").style.display = "block";
     createEditableLayout(layout_number);
     var useruid = getCookie('pyuserid');
@@ -382,7 +389,7 @@ function init() {
 
     $('#workspaceMenu').hide();
     $('#checklistMenu').show();
-    
+
     if ( visible ) {
         $('#edit_body').slideUp('fast',function(){
             $('#edit_body').addClass('hide')
@@ -423,7 +430,7 @@ function clickClone(){
         'left': event.clientX + 30,
         'top': event.clientY
       });
-	  
+
       clonedElement.appendTo($('#edit'));
       clickDroppedItem();
       clickDelete();
@@ -472,3 +479,46 @@ function applyRotation() {
     }
   });
 }
+
+
+$(window).on('beforeunload', function(){
+
+  var leftArr = []; //don't forget to clear array so that things aren't added more than once when beforeunload is called multiple times
+  var topArr = [];
+  var srcArr = [];
+  var rotArr = [];
+
+  $.each($('#edit .toolboxImage'), function(index, value){
+    leftArr.push($(value).css('left'));
+  })
+
+  $.each($('#edit .toolboxImage'), function(index, value){
+    topArr.push($(value).css('top'));
+  })
+
+  $.each($('#edit .toolboxImage'), function(index, value){
+    rotArr.push($(value).css('-webkit-transform'));
+  })
+
+  $.each($('#edit .toolboxImage .itemImage'), function(index, value){
+    srcArr.push($(value).attr('src'));
+  })
+
+  //eventually background will be refactored to simply be included with the rest of the images
+  var background = $('#edit #diagram').css('background-image')
+
+  var formData = new FormData();
+  //var filename = $scope.pyuserid;
+  //formData.append("name", name);
+
+  formData.append("leftArr", leftArr);
+  formData.append("topArr", topArr);
+  formData.append("srcArr", srcArr);
+  formData.append("rotArr", rotArr);
+  formData.append("background", background);
+
+  var xhr2 = new XMLHttpRequest();
+  xhr2.open('POST', '/session');
+  xhr2.send(formData);
+});
+
