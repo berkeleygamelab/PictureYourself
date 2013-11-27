@@ -52,7 +52,7 @@ function GUID(){
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
-
+	var mouse = 'up';
 	var pyuserid = getCookie(pyuseridtag);
 	//console.log(pyuserid);   // Dev
 	checkCookie(pyuserid);
@@ -65,6 +65,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var y = 0;
 	var width = 0;
 	var height = 0;
+	var mouse = 'up';
 
 	//Call grabcut with coordinates
 	// fix - Make it so users can drag from bottom right
@@ -172,29 +173,49 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
        	 // add the layer to the stage
        	 stage.add(layer);
       	}; // end of imageObj.onload
+		
+		$(document).on('mousedown', function(){
+			if (stage){
+				if(mouse == 'up'){
+					mouse = 'down';
+					console.log('Up: ' + mouse);
+				}
+				
+				selection.setX(stage.getMousePosition().x);
+				selection.setY(stage.getMousePosition().y);
+				x = selection.getX();
+				y = selection.getY();
+			}
+			
+		});
+		
+		$(document).on('mousemove', function(){
+			if (stage){
+				if(mouse == 'up') return;
+				if(stage.getMousePosition().x && stage.getMousePosition().y){
+					selection.setWidth(stage.getMousePosition().x - selection.getX());
+					selection.setHeight(stage.getMousePosition().y - selection.getY());
+				}
 
-		stage.on('mousedown',function(){
-			down = true;
-			selection.setX(stage.getMousePosition().x);
-			selection.setY(stage.getMousePosition().y);
-			x = selection.getX();
-			y = selection.getY();
+				width = selection.getWidth();
+				height = selection.getHeight();
+				layer.draw();
+			}
 		});
 
-		stage.on('mouseup', function(){
-		down = false;
-	})
+		$(document).on('mouseup', function(){
+			if (stage){
 
-	    stage.on('mousemove', function(){
-			if (!down) return;
-
-			selection.setWidth(stage.getMousePosition().x - selection.getX());
-			selection.setHeight(stage.getMousePosition().y - selection.getY());
-
-			width = selection.getWidth();
-			height = selection.getHeight();
-			layer.draw();
+					if(mouse == 'down'){
+						mouse = 'up';
+						console.log('Down: ' + mouse);
+						console.log('Params: X:' + x + ", Y:"+y+ ", W:"+width+ ", H:"+height);
+			
+					}
+				}
 		});
+
+	    
 	}
 
 };//End of new SnapshotCtrl
