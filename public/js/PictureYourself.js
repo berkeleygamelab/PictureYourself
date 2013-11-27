@@ -180,11 +180,11 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 					mouse = 'down';
 					console.log('Up: ' + mouse);
 				}
-				
 				selection.setX(stage.getMousePosition().x);
 				selection.setY(stage.getMousePosition().y);
 				x = selection.getX();
 				y = selection.getY();
+
 			}
 			
 		});
@@ -192,10 +192,9 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		$(document).on('mousemove', function(){
 			if (stage){
 				if(mouse == 'up') return;
-				if(stage.getMousePosition().x && stage.getMousePosition().y){
-					selection.setWidth(stage.getMousePosition().x - selection.getX());
-					selection.setHeight(stage.getMousePosition().y - selection.getY());
-				}
+
+				selection.setWidth(stage.getMousePosition().x - selection.getX());
+				selection.setHeight(stage.getMousePosition().y - selection.getY());
 
 				width = selection.getWidth();
 				height = selection.getHeight();
