@@ -35,16 +35,18 @@
 
 $(document).ready(function() {
   $(".tabs a").html5jTabs();
-});
-
-/*
+  /*
 * Gets user selfie
 */
 //hardcoded because I don't know how to get userID
 //also have to refresh page to get changes, why?
+  $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
+  console.log("ID: " + getCookie('pyuserid'));
+});
 
-$('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
-console.log("ID: " + getCookie('pyuserid'));
+
+
+
 
 
 /*
@@ -62,21 +64,31 @@ $('.background').click(function(){
 */
 
 //try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
-    var stickers = []; //will store information about stickers
-    var stage = new Kinetic.Stage({
-      container: 'container',
-      width: parseInt($('#container').css('width')) ,
-      height: parseInt($('#container').css('height'))
-    });
-    var layer = new Kinetic.Layer();
-    stage.add(layer);
-    var con = stage.getContainer();
-    var dragSrcEl = null;
+
 
     function ScenarioCtrl($scope, $resource, $http){
+
+      var stickers = []; //will store information about stickers
+
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: parseInt($('#container').css('width')) ,
+        height: parseInt($('#container').css('height'))
+      });
+
+      var layer = new Kinetic.Layer();
+      stage.add(layer);
+
+      var con = stage.getContainer();
+
+
+      console.log('Con: ' + String($("#container").html()));
+      var dragSrcEl = null;
+
+    //Grab Stickers
       $http.get('test/stickers').success(function(data){
         angular.forEach(data,function(sticker){
-           console.log(sticker)
+           //console.log(sticker)
            if(sticker.match('txt') == null)
               $("#tab1").append('<img class=\'sticker\' src="/' + sticker + '">');
         }); //forEach
@@ -86,7 +98,7 @@ $('.background').click(function(){
         });
 
       });//success
-    }
+    
 
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
@@ -96,39 +108,59 @@ $('.background').click(function(){
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
+        //stop Firefox from opening image
+        e.preventDefault();
+        //get position relative to the container and page
+        x = e.pageX - $('#container').offset().left;
+        y = e.pageY - $('#container').offset().top;
+
+
         var group = new Kinetic.Group({
             draggable: true
         });
+
+
         var rotate = new Kinetic.Image({
-            //draggable:true,
-            x: e.offsetX,
-            y: e.offsetY
-        });
-        //layer.add(rotate);
-        var image = new Kinetic.Image({
-           //draggable : true,
-           width: 120,  //this makes the image lower quality for some reason
-           height: 120,
-           x: e.offsetX + 15,  //TOFIX: drop it at mouse location, instead of top left corner
-           y: e.offsetY + 15
+
+            x: x,
+            y: y
         });
 
-        layer.add(image);
+
+        var image = new Kinetic.Image({
+
+            //draggable:true,
+            width: 120,
+            height: 120,
+            x: x,
+            y: y
+        });
+
+        rotateObj = new Image();
+        rotateObj.src = '/images/rotate.png';
 
         imageObj = new Image();
         imageObj.src = dragSrcEl.src;
-        rotateObj = new Image();
-        rotateObj.src = '/images/rotate.png';
+
         rotate.setImage(rotateObj);
+        image.setImage(imageObj);
 
         imageObj.onload = function(){
-            image.setImage(imageObj)
-            group.add(image);
-            group.add(rotate);
-            layer.add(group);
-            layer.draw()
+          console.log("On Load");
+          group.add(image);
+          group.add(rotate);
+          layer.add(group);
+
+            layer.draw();
         };
     })
+} // SearchCtrl End
+
+
+
+
+
+
 
 /*
 		if(count % 2 == 0){
@@ -321,12 +353,12 @@ $(window).on('beforeunload', function(){
       y: value.attrs.y
     }
     //console.log($(sticker).serializeArray());
-    console.log(JSON.stringify(sticker));
+    //console.log(JSON.stringify(sticker));
     stickers.push(JSON.stringify(sticker));
    // stickers[index] = sticker;
   })
   //console.log(stickers)
-    console.log(stickers);
+    //console.log(stickers);
   var formData = new FormData();
   //var filename = $scope.pyuserid;
   //formData.append("name", name);
@@ -339,6 +371,7 @@ $(window).on('beforeunload', function(){
 });
 
 
+// Get Mouse Position
 
 
 

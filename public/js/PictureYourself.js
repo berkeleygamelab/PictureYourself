@@ -72,10 +72,11 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
+		
 		var formData = new FormData();
 		var filename = $scope.pyuserid + "/1.png";
 		formData.append("filename",filename);
-		formData.append('coords',x + ' ' + y + ' ' + width + ' ' + height);
+		formData.append('coords', x + ' ' + y + ' ' + width + ' ' + height);
 		formData.append('pyuserid', $scope.pyuserid)
 		//console.log('got this far');  // Dev
 		var xhr2 = new XMLHttpRequest();
@@ -174,14 +175,15 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
        	 stage.add(layer);
       	}; // end of imageObj.onload
 		
-		$(document).on('mousedown', function(){
+		$(document).on('mousedown', function(e){
 			if (stage){
 				if(mouse == 'up'){
 					mouse = 'down';
 					console.log('Up: ' + mouse);
 				}
-				selection.setX(stage.getMousePosition().x);
-				selection.setY(stage.getMousePosition().y);
+				
+				selection.setX(stage.getPointerPosition().x);
+				selection.setY(stage.getPointerPosition().y);
 				x = selection.getX();
 				y = selection.getY();
 
@@ -189,12 +191,12 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			
 		});
 		
-		$(document).on('mousemove', function(){
+		$(document).on('mousemove', function(e){
 			if (stage){
 				if(mouse == 'up') return;
-
-				selection.setWidth(stage.getMousePosition().x - selection.getX());
-				selection.setHeight(stage.getMousePosition().y - selection.getY());
+				
+				selection.setWidth(stage.getPointerPosition().x - selection.getX());
+				selection.setHeight(stage.getPointerPosition().y - selection.getY());
 
 				width = selection.getWidth();
 				height = selection.getHeight();
