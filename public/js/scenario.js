@@ -42,19 +42,51 @@ $(document).ready(function() {
 //also have to refresh page to get changes, why?
   $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
   console.log("ID: " + getCookie('pyuserid'));
-  $('.background').click(function(){
-  $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
-});
-});
-
-
-
-
-
 
 /*
 * Background choosing
 */
+  $('.background').click(function(){
+    $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+  });
+
+
+/*
+* CSS filters, basic implementation
+*/
+var filter = '';
+$('.filter').on('click', function(){
+
+  var filterVal =  $(this).attr('id');
+  if(filterVal == 'gray'){
+    filter += ' grayscale(0.5)';
+  } else if (filterVal == 'blur'){
+    filter += ' blur(5px)';
+  } else if (filterVal == 'sepia'){
+    filter += ' sepia(0.5)';
+  } else if (filterVal == 'saturate'){
+    filter += ' saturate(0.5)';
+  } else if (filterVal == 'invert'){
+    filter += ' invert(100%)';
+  } else if (filterVal == 'opacity'){
+    filter += ' opacity(0.5)';
+  } else if (filterVal == 'bright'){
+    filter += ' brightness(2)';
+  } else if (filterVal == 'contrast'){
+    filter += ' contrast(0.5)';
+  } else if(filterVal == 'reset'){
+    filter = 'blur(0px)';
+  }
+  $('#container').css('-webkit-filter', filter);
+
+});
+
+
+
+
+
+
+});
 
 
 
@@ -227,35 +259,7 @@ function distance(p1, p2){
 }
 
 
-/*
-* CSS filters, basic implementation
-*/
-var filter = '';
-$('.filter').on('click', function(){
 
-  var filterVal =  $(this).attr('id');
-  if(filterVal == 'gray'){
-    filter += ' grayscale(0.5)';
-  } else if (filterVal == 'blur'){
-    filter += ' blur(5px)';
-  } else if (filterVal == 'sepia'){
-    filter += ' sepia(0.5)';
-  } else if (filterVal == 'saturate'){
-    filter += ' saturate(0.5)';
-  } else if (filterVal == 'invert'){
-    filter += ' invert(100%)';
-  } else if (filterVal == 'opacity'){
-    filter += ' opacity(0.5)';
-  } else if (filterVal == 'bright'){
-    filter += ' brightness(2)';
-  } else if (filterVal == 'contrast'){
-    filter += ' contrast(0.5)';
-  } else if(filterVal == 'reset'){
-    filter = 'blur(0px)';
-  }
-  $('#container').css('-webkit-filter', filter);
-
-})
 
 //for transformations, maybe use kinetic group to add circles on
 //for rotations, i have three points: centre, some predetermined default, and wherever the user's mouse is moved to
@@ -371,8 +375,6 @@ $(window).on('beforeunload', function(){
   xhr2.send(formData);
 });
 
-
-// Get Mouse Position
 
 
 
