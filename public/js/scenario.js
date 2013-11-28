@@ -141,6 +141,12 @@ $('.filter').on('click', function(){
         x = e.pageX - $('#container').offset().left;
         y = e.pageY - $('#container').offset().top;
 
+        var rotateClick = false;
+        rotateObj = new Image();
+        rotateObj.src = '/images/rotate.png';
+
+        imageObj = new Image();
+        imageObj.src = dragSrcEl.src;
 
         var group = new Kinetic.Group({
             draggable: true
@@ -148,9 +154,10 @@ $('.filter').on('click', function(){
 
 
         var rotate = new Kinetic.Image({
-
+            visible: false,
             x: x,
-            y: y
+            y: y,
+            offset:[rotateObj.width/2 + 1,rotateObj.height/2 + 1]
         });
 
 
@@ -160,23 +167,51 @@ $('.filter').on('click', function(){
             width: 120,
             height: 120,
             x: x,
-            y: y
+            y: y,
+            offset:[rotateObj.width/2,rotateObj.height/2]
         });
 
-        rotateObj = new Image();
-        rotateObj.src = '/images/rotate.png';
 
-        imageObj = new Image();
-        imageObj.src = dragSrcEl.src;
 
         rotate.setImage(rotateObj);
         image.setImage(imageObj);
 
+
+
+
+        group.on('mouseover',function(){
+            rotate.setVisible(true);
+            layer.draw();
+          });
+        group.on('mouseout',function(){
+            rotate.setVisible(false);
+            layer.draw();
+          });
+
         imageObj.onload = function(){
           console.log("On Load");
+
           group.add(image);
           group.add(rotate);
           layer.add(group);
+
+       stage.on('mousedown',function(){
+          group.setDraggable(false);
+          layer.draw();
+        });
+
+        stage.on('mousemove',function(){
+          if(group.getDraggable() == false){
+            image.rotateDeg(1);
+            rotate.rotateDeg(1);
+            layer.draw();
+          }
+        })
+
+        stage.on('mouseup',function(){
+          group.setDraggable(true)
+          layer.draw();
+        })
 
             layer.draw();
         };
