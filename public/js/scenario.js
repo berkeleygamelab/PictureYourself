@@ -42,6 +42,9 @@ $(document).ready(function() {
 //also have to refresh page to get changes, why?
   $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
   console.log("ID: " + getCookie('pyuserid'));
+  $('.background').click(function(){
+  $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+});
 });
 
 
@@ -52,9 +55,7 @@ $(document).ready(function() {
 /*
 * Background choosing
 */
-$('.background').click(function(){
-  $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
-});
+
 
 
 /*
