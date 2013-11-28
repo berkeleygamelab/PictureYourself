@@ -55,6 +55,7 @@ $(document).ready(function() {
 * CSS filters, basic implementation
 */
 var filter = '';
+
 $('.filter').on('click', function(){
 
   var filterVal =  $(this).attr('id');
@@ -79,12 +80,7 @@ $('.filter').on('click', function(){
   }
   $('#container').css('-webkit-filter', filter);
 
-});
-
-
-
-
-
+  });
 
 });
 
@@ -114,8 +110,6 @@ $('.filter').on('click', function(){
 
       var con = stage.getContainer();
 
-
-      console.log('Con: ' + String($("#container").html()));
       var dragSrcEl = null;
 
     //Grab Stickers
