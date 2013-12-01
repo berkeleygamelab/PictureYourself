@@ -183,7 +183,10 @@ $('.filter').on('click', function(){
         imageObj.src = dragSrcEl.src;
         
         rotateObj = new Image();
-        
+        rotateObj.src = '/images/rotate.png';
+
+        deleteObj = new Image();
+        deleteObj.src = '/images/delete_button.png';
         //stop Firefox from opening image
         e.preventDefault();
 
@@ -216,7 +219,22 @@ $('.filter').on('click', function(){
             y: y,
             offset:[image.getWidth()/2,image.getHeight()/2]
         });
-        rotateObj.src = '/images/rotate.png';
+
+
+        var delete_icon = new Kinetic.Image({
+          visible:false,
+          width:25,
+          height:25,
+          image:deleteObj,
+          x:x+image.getWidth() - 10,
+          y:y,
+          offset:[image.getWidth()/2,image.getHeight()/2]
+        })
+
+        delete_icon.on('click', function(){
+          group.remove();
+          layer.draw();
+        })
 
 
         //object to drag to scale image on X axis
@@ -260,12 +278,14 @@ $('.filter').on('click', function(){
         group.on('mouseover',function(){
             scalerX.setVisible(true);
             scalerY.setVisible(true);
+            delete_icon.setVisible(true);
             rotate.setVisible(true);
             layer.draw();
           });
         group.on('mouseout',function(){
             scalerX.setVisible(false);
             scalerY.setVisible(false);
+            delete_icon.setVisible(false);
             rotate.setVisible(false);
             layer.draw();
           });
@@ -297,6 +317,7 @@ $('.filter').on('click', function(){
             group.add(image);
             group.add(scalerX);
             group.add(scalerY);
+            group.add(delete_icon);
             group.add(rotate);
             layer.add(group);
             layer.draw()
