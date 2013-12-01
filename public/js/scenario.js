@@ -35,24 +35,28 @@
 
 $(document).ready(function() {
   $(".tabs a").html5jTabs();
+  /*
+  * Background choosing
+  */
+  $('.background').click(function(){
+    $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+  });
+  /*
+  * Gets user selfie
+  */
+  //hardcoded because I don't know how to get userID
+  //also have to refresh page to get changes, why?
+
+  $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
+  //console.log("ID: " + getCookie('pyuserid'));
+
 });
 
-/*
-* Gets user selfie
-*/
-//hardcoded because I don't know how to get userID
-//also have to refresh page to get changes, why?
-
-$('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
-console.log("ID: " + getCookie('pyuserid'));
 
 
-/*
-* Background choosing
-*/
-$('.background').click(function(){
-  $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
-});
+
+
+
 
 
 /*
@@ -62,21 +66,24 @@ $('.background').click(function(){
 */
 
 //try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
-    var stickers = []; //will store information about stickers
-    var stage = new Kinetic.Stage({
-      container: 'container',
-      width: parseInt($('#container').css('width')) ,
-      height: parseInt($('#container').css('height'))
-    });
-    var layer = new Kinetic.Layer();
-    stage.add(layer);
-    var con = stage.getContainer();
-    var dragSrcEl = null;
+
 
     function ScenarioCtrl($scope, $resource, $http){
+
+      var stickers = []; //will store information about stickers
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: parseInt($('#container').css('width')) ,
+        height: parseInt($('#container').css('height'))
+      });
+      var layer = new Kinetic.Layer();
+      stage.add(layer);
+      var con = stage.getContainer();
+      var dragSrcEl = null;
+
       $http.get('test/stickers').success(function(data){
         angular.forEach(data,function(sticker){
-           console.log(sticker)
+           //console.log(sticker)
            if(sticker.match('txt') == null)
               $("#tab1").append('<img class=\'sticker\' src="/' + sticker + '">');
         }); //forEach
@@ -86,7 +93,6 @@ $('.background').click(function(){
         });
 
       });//success
-    }
 
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
@@ -96,22 +102,54 @@ $('.background').click(function(){
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
+
+        //stop Firefox from opening image
+        e.preventDefault();
+        //get position relative to the container and page
+        x = e.pageX - $('#container').offset().left;
+        y = e.pageY - $('#container').offset().top;
+
         var group = new Kinetic.Group({
             draggable: true
         });
-        var rotate = new Kinetic.Image({
-            //draggable:true,
-            x: e.offsetX,
-            y: e.offsetY
-        });
-        //layer.add(rotate);
+
         var image = new Kinetic.Image({
            //draggable : true,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: e.offsetX + 15,  //TOFIX: drop it at mouse location, instead of top left corner
-           y: e.offsetY + 15
+           x: x,  //TOFIX: drop it at mouse location, instead of top left corner
+           y: y,
+           offset:[60,60]
         });
+
+        var rotate = new Kinetic.Image({
+            visible:false,
+            x: x,
+            y: y,
+            offset:[image.getWidth()/2,image.getHeight()/2]
+        });
+        //layer.add(rotate);
+
+
+        //object to drag to scale image
+        var scaler = new Kinetic.Circle({
+          //x,y relative to the image size
+          x:image.getX() + image.getWidth(),
+          y:image.getY() + image.getHeight(),
+          radius:10,
+          stroke:'black',
+          draggable:true,
+          visible:false,
+          offset:[image.getWidth()/2,image.getHeight()/2],
+          dragBoundFunc: function(pos){
+            return{
+            x: Math.max(image.getX()+image.getWidth(),pos.x),
+            y: Math.max(image.getY()+image.getHeight(),pos.y)
+            }
+          }
+
+        })
+
 
         layer.add(image);
 
@@ -121,14 +159,46 @@ $('.background').click(function(){
         rotateObj.src = '/images/rotate.png';
         rotate.setImage(rotateObj);
 
+        //hide and show resize and scaler
+        group.on('mouseover',function(){
+            scaler.setVisible(true);
+            rotate.setVisible(true);
+            layer.draw();
+          });
+        group.on('mouseout',function(){
+            scaler.setVisible(false);
+            rotate.setVisible(false);
+            layer.draw();
+          });
+
+        //Sets the size of the image based on post of scaler
+        scaler.on('dragmove',function(){
+          var x1 = this.getX();
+          var x2 = image.getX();
+          var y1 = this.getY();
+          var y2 = image.getY();
+          var dx = x1 - x2 - 60;
+          var dy = y1 - y2 - 60;
+          image.setScale(Math.max(1,dx/50),Math.max(1,dy/50));
+          group.setSize(image.getSize());
+
+          layer.draw();
+        })
+
         imageObj.onload = function(){
             image.setImage(imageObj)
+            scaler.setX(image.getX() + image.getWidth());
+            scaler.setY(image.getY() + image.getHeight());
             group.add(image);
+            group.add(scaler);
             group.add(rotate);
             layer.add(group);
             layer.draw()
         };
-    })
+
+    })//Drop event
+
+} //End of Selfie Ctrl
 
 /*
 		if(count % 2 == 0){
@@ -321,12 +391,12 @@ $(window).on('beforeunload', function(){
       y: value.attrs.y
     }
     //console.log($(sticker).serializeArray());
-    console.log(JSON.stringify(sticker));
+    //console.log(JSON.stringify(sticker));
     stickers.push(JSON.stringify(sticker));
    // stickers[index] = sticker;
   })
   //console.log(stickers)
-    console.log(stickers);
+   // console.log(stickers);
   var formData = new FormData();
   //var filename = $scope.pyuserid;
   //formData.append("name", name);
