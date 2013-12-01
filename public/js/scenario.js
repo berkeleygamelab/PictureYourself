@@ -37,28 +37,6 @@ $(document).ready(function() {
   $(".tabs a").html5jTabs();
 
   /*
-  * Background choosing
-  */
-  // $('.background').click(function(){
-  //   //$('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
-  //   backgroundObj = new Image();
-  //   backgroundObj.src = 'url(\'..' + $(this).attr('src') + '\')';
-  //   var background = new Kinetic.Image({
-  //     image:backgroundObj,
-  //     x:0,
-  //     y:0,
-  //     width:$('#container').width(),
-  //     height:$('#container').height()
-  //   }
-
-  //   background.moveToBottom();
-  //   layer.draw();
-
-
-  //   })
-  // });
-
-  /*
   * Gets user selfie
   */
   //hardcoded because I don't know how to get userID
@@ -128,7 +106,6 @@ $('.filter').on('click', function(){
       stage.add(layer);
 
       var con = stage.getContainer();
-
       var dragSrcEl = null;
 
 
@@ -151,6 +128,7 @@ $('.filter').on('click', function(){
         })
       };
 
+    //Background selection
     backgroundObj = new Image();
     var background = new Kinetic.Image({
         image:backgroundObj,
@@ -163,13 +141,13 @@ $('.filter').on('click', function(){
 
 
     $('.background').click(function(){
-      //$('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
       console.log($(this).attr('src'));
 
       backgroundObj.src = $(this).attr('src');
       background.moveToBottom();
       layer.draw();
       })
+
 
 
 
@@ -187,6 +165,9 @@ $('.filter').on('click', function(){
 
       });//success
 
+
+// Drag and drop stickers start
+
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
     });
@@ -195,15 +176,17 @@ $('.filter').on('click', function(){
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
+
         //set up imageObj before creating other items that
         //may be reliant on its dimensions
         imageObj = new Image();
         imageObj.src = dragSrcEl.src;
-
+        
         rotateObj = new Image();
         
         //stop Firefox from opening image
         e.preventDefault();
+
         //get position relative to the container and page
         x = e.pageX - $('#container').offset().left;
         y = e.pageY - $('#container').offset().top;
@@ -213,37 +196,19 @@ $('.filter').on('click', function(){
         });
 
         var image = new Kinetic.Image({
-           //draggable : true,
            image:imageObj,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: x,  //TOFIX: drop it at mouse location, instead of top left corner
+           x: x, 
            y: y,
-           offset:[60,60]
+           offset:[60,60] //size determined by width, height input
         });
 
+        //may not need, but may need to refactor code
         var start_size = {"width":120,"height":120};
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
-        //might not need
-        function image_bounds(pos){
-          new_pos = {"x":0,"y":0};
-
-          var scaled_width = image.getWidth()*image.getScaleX();
-          var scaled_height = image.getHeight()*image.getScaleY();
-          if(scaled_width <= image.getWidth())
-            new_pos.x = image.getWidth() + image.getX();
-          else
-            new_pos.x = pos.x
-          if(scaled_height <= image.getHeight())
-            new_pos.y = image.getHeight() + image.getY();
-          else
-            new_pos.y = pos.y
-
-          return new_pos
-
-        }
-
+        //icon for rotation
         var rotate = new Kinetic.Image({
             visible:false,
             image:rotateObj,
@@ -251,11 +216,11 @@ $('.filter').on('click', function(){
             y: y,
             offset:[image.getWidth()/2,image.getHeight()/2]
         });
-        //layer.add(rotate);
+        rotateObj.src = '/images/rotate.png';
 
-        //object to drag to scale image
+
+        //object to drag to scale image on X axis
         var scalerX = new Kinetic.Circle({
-          //x,y relative to the image size
           x:image.getX() + start_size.width,
           y:image.getY() + start_size.height/2,
           radius:10,
@@ -265,7 +230,6 @@ $('.filter').on('click', function(){
           visible:false,
           offset:[image.getWidth()/2,image.getHeight()/2],
           dragBoundFunc: function(pos){
-              //return image_bounds(pos);
               return{
                 x: pos.x,
                 y: this.getAbsolutePosition().y
@@ -273,6 +237,7 @@ $('.filter').on('click', function(){
             }
         })
 
+        //object to drag to scale image on Y axis
         var scalerY = new Kinetic.Circle({
           x:image.getX() + start_size.width/2,
           y:image.getY() + start_size.height,
@@ -283,7 +248,6 @@ $('.filter').on('click', function(){
           visible:false,
           offset:[image.getWidth()/2,image.getHeight()/2],
           dragBoundFunc: function(pos){
-              //return image_bounds(pos);
               return{
                 x: this.getAbsolutePosition().x,
                 y: pos.y
@@ -291,16 +255,12 @@ $('.filter').on('click', function(){
             }
         })
 
-        rotateObj.src = '/images/rotate.png';
-        //rotate.setImage(rotateObj);
-
 
         //hide and show resize and scaler
         group.on('mouseover',function(){
             scalerX.setVisible(true);
             scalerY.setVisible(true);
             rotate.setVisible(true);
-
             layer.draw();
           });
         group.on('mouseout',function(){
@@ -316,8 +276,6 @@ $('.filter').on('click', function(){
           var x1 = this.getX();
           var x2 = image.getX();
           var dx = (x1 - x2 - image.getWidth()/2)/50;
-          //console.log('dx: '+ dx);
-          //var dy = y1 - y2 - 60;
           image.setScaleX(dx);
           group.setSize(image.getSize());
           layer.draw();
@@ -333,6 +291,8 @@ $('.filter').on('click', function(){
           group.setSize(image.getSize());
           layer.draw();
         })
+
+        //construct group to drop after image loads
         imageObj.onload = function(){
             group.add(image);
             group.add(scalerX);
@@ -342,7 +302,8 @@ $('.filter').on('click', function(){
             layer.draw()
         };
 
-    })//Drop event
+    })
+//Drop event end
 
 } //End of Selfie Ctrl
 
