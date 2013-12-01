@@ -36,23 +36,20 @@
 $(document).ready(function() {
   $(".tabs a").html5jTabs();
   /*
-  * Background choosing
-  */
+<<<<<<< HEAD
+* Gets user selfie
+*/
+//hardcoded because I don't know how to get userID
+//also have to refresh page to get changes, why?
+  $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
+  console.log("ID: " + getCookie('pyuserid'));
+
+/*
+* Background choosing
+*/
   $('.background').click(function(){
     $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
   });
-  /*
-  * Gets user selfie
-  */
-  //hardcoded because I don't know how to get userID
-  //also have to refresh page to get changes, why?
-
-  $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
-  //console.log("ID: " + getCookie('pyuserid'));
-
-});
-
-
 
 
 /*
@@ -87,7 +84,29 @@ $('.filter').on('click', function(){
   });
 
 });
+=======
+  * Background choosing
+  */
+  $('.background').click(function(){
+    $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+  });
+  /*
+  * Gets user selfie
+  */
+  //hardcoded because I don't know how to get userID
+  //also have to refresh page to get changes, why?
 
+  $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
+  //console.log("ID: " + getCookie('pyuserid'));
+
+});
+
+
+
+
+
+
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
 
 
 
@@ -103,12 +122,16 @@ $('.filter').on('click', function(){
     function ScenarioCtrl($scope, $resource, $http){
 
       var stickers = []; //will store information about stickers
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
       var stage = new Kinetic.Stage({
         container: 'container',
         width: parseInt($('#container').css('width')) ,
         height: parseInt($('#container').css('height'))
       });
+<<<<<<< HEAD
 
       var layer = new Kinetic.Layer();
       stage.add(layer);
@@ -118,6 +141,13 @@ $('.filter').on('click', function(){
       var dragSrcEl = null;
 
     //Grab Stickers
+=======
+      var layer = new Kinetic.Layer();
+      stage.add(layer);
+      var con = stage.getContainer();
+      var dragSrcEl = null;
+
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
       $http.get('test/stickers').success(function(data){
         angular.forEach(data,function(sticker){
            //console.log(sticker)
@@ -130,6 +160,10 @@ $('.filter').on('click', function(){
         });
 
       });//success
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
 
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
@@ -139,17 +173,41 @@ $('.filter').on('click', function(){
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
         //stop Firefox from opening image
         e.preventDefault();
         //get position relative to the container and page
         x = e.pageX - $('#container').offset().left;
         y = e.pageY - $('#container').offset().top;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
         var group = new Kinetic.Group({
             draggable: true
         });
 
+<<<<<<< HEAD
+
+        var rotate = new Kinetic.Image({
+
+            x: x,
+            y: y
+        });
+
+
+        var image = new Kinetic.Image({
+
+            //draggable:true,
+            width: 120,
+            height: 120,
+            x: x,
+            y: y
+=======
         var image = new Kinetic.Image({
            //draggable : true,
            width: 120,  //this makes the image lower quality for some reason
@@ -164,6 +222,7 @@ $('.filter').on('click', function(){
             x: x,
             y: y,
             offset:[image.getWidth()/2,image.getHeight()/2]
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
         });
         //layer.add(rotate);
 
@@ -188,13 +247,14 @@ $('.filter').on('click', function(){
         })
 
 
-        layer.add(image);
+        rotateObj = new Image();
+        rotateObj.src = '/images/rotate.png';
 
         imageObj = new Image();
         imageObj.src = dragSrcEl.src;
-        rotateObj = new Image();
-        rotateObj.src = '/images/rotate.png';
+
         rotate.setImage(rotateObj);
+        image.setImage(imageObj);
 
         //hide and show resize and scaler
         group.on('mouseover',function(){
@@ -223,6 +283,23 @@ $('.filter').on('click', function(){
         })
 
         imageObj.onload = function(){
+<<<<<<< HEAD
+          console.log("On Load");
+          group.add(image);
+          group.add(rotate);
+          layer.add(group);
+
+            layer.draw();
+        };
+    })
+} // SearchCtrl End
+
+
+
+
+
+
+=======
             image.setImage(imageObj)
             scaler.setX(image.getX() + image.getWidth());
             scaler.setY(image.getY() + image.getHeight());
@@ -236,6 +313,7 @@ $('.filter').on('click', function(){
     })//Drop event
 
 } //End of Selfie Ctrl
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
 
 /*
 		if(count % 2 == 0){
@@ -405,7 +483,11 @@ $(window).on('beforeunload', function(){
    // stickers[index] = sticker;
   })
   //console.log(stickers)
+<<<<<<< HEAD
+    //console.log(stickers);
+=======
    // console.log(stickers);
+>>>>>>> 5cb68d6e25bea794e8849716718317cff2652894
   var formData = new FormData();
   //var filename = $scope.pyuserid;
   //formData.append("name", name);
