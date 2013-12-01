@@ -39,9 +39,24 @@ $(document).ready(function() {
   /*
   * Background choosing
   */
-  $('.background').click(function(){
-    $('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
-  });
+  // $('.background').click(function(){
+  //   //$('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+  //   backgroundObj = new Image();
+  //   backgroundObj.src = 'url(\'..' + $(this).attr('src') + '\')';
+  //   var background = new Kinetic.Image({
+  //     image:backgroundObj,
+  //     x:0,
+  //     y:0,
+  //     width:$('#container').width(),
+  //     height:$('#container').height()
+  //   }
+
+  //   background.moveToBottom();
+  //   layer.draw();
+
+
+  //   })
+  // });
 
   /*
   * Gets user selfie
@@ -84,6 +99,8 @@ $('.filter').on('click', function(){
 
   });
 
+
+
 });
 
 
@@ -99,8 +116,7 @@ $('.filter').on('click', function(){
 
 
     function ScenarioCtrl($scope, $resource, $http, $log){
-
-      var stickers = []; //will store information about stickers
+      
 
       var stage = new Kinetic.Stage({
         container: 'container',
@@ -114,6 +130,48 @@ $('.filter').on('click', function(){
       var con = stage.getContainer();
 
       var dragSrcEl = null;
+
+
+      $scope.image_download = 'test.jpg';
+      var stickers = []; //will store information about stickers
+
+      $scope.create_image = function(){
+        console.log('called');
+        $scope.image_download = 'somethingelse.jpg';
+        stage.toDataURL({
+        callback: function(dataUrl) {
+          console.log('callback');
+          var link = document.createElement('a');
+            angular.element(link)
+            .attr('href', dataUrl)
+            .attr('download', 'test.jpg') // Pretty much only works in chrome
+            link.click();
+          console.log('click?')
+          }
+        })
+      };
+
+    backgroundObj = new Image();
+    var background = new Kinetic.Image({
+        image:backgroundObj,
+        x:0,
+        y:0,
+        width:$('#container').width(),
+        height:$('#container').height()
+      });
+    layer.add(background);
+
+
+    $('.background').click(function(){
+      //$('#container').css('background-image', 'url(\'..' + $(this).attr('src') + '\')' );
+      console.log($(this).attr('src'));
+
+      backgroundObj.src = $(this).attr('src');
+      background.moveToBottom();
+      layer.draw();
+      })
+
+
 
     //Grab Stickers
       $http.get('test/stickers').success(function(data){
@@ -251,7 +309,7 @@ $('.filter').on('click', function(){
             rotate.setVisible(false);
             layer.draw();
           });
-        
+
         //set horizontal height of image
        scalerX.on('dragmove',function(){
           
