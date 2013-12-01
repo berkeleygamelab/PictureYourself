@@ -131,10 +131,35 @@ $('.filter').on('click', function(){
         e.preventDefault(); //@important
     });
 
+    $scope.rotate = function(centre, start, end){
+  //console.log(centre, start, end);
+        var v1 = {
+          x: start.x - centre.x,
+          y: start.y - centre.y,
+          dist: distance(centre, start)
+        }
+        var v2 = {
+          x: end.x - centre.x,
+          y: end.y - centre.y,
+          dist: distance(centre, end)
+        }
+        // console.log(v1);
+        // console.log(v2);
+        var dot = v1.x * v2.x  + v1.y * v2.y;
+        // console.log(dot);
+        dot /= (v1.dist * v2.dist);
+        var angle = Math.acos(dot);
+        console.log(angle);
+        return angle;
+    }
+
 
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
+        var start = {"x":0, "y":0};
+        var prev_angle = 0;
+        var angle = 0;
         //stop Firefox from opening image
         e.preventDefault();
         //get position relative to the container and page
@@ -154,38 +179,33 @@ $('.filter').on('click', function(){
 
 
         var rotate = new Kinetic.Image({
-            visible: false,
+            visible: true,
             x: x,
             y: y,
-            offset:[rotateObj.width/2 + 1,rotateObj.height/2 + 1]
+            offset:[60,60]
         });
 
 
         var image = new Kinetic.Image({
-
-            //draggable:true,
             width: 120,
             height: 120,
             x: x,
             y: y,
-            offset:[rotateObj.width/2,rotateObj.height/2]
+            offset:[60,60]
         });
-
-
 
         rotate.setImage(rotateObj);
         image.setImage(imageObj);
-
-
-
 
         group.on('mouseover',function(){
             rotate.setVisible(true);
             layer.draw();
           });
         group.on('mouseout',function(){
+            if(!rotateClick){
             rotate.setVisible(false);
             layer.draw();
+            }
           });
 
         imageObj.onload = function(){
@@ -194,27 +214,10 @@ $('.filter').on('click', function(){
           group.add(image);
           group.add(rotate);
           layer.add(group);
-
-       stage.on('mousedown',function(){
-          group.setDraggable(false);
           layer.draw();
-        });
-
-        stage.on('mousemove',function(){
-          if(group.getDraggable() == false){
-            image.rotateDeg(1);
-            rotate.rotateDeg(1);
-            layer.draw();
-          }
-        })
-
-        stage.on('mouseup',function(){
-          group.setDraggable(true)
-          layer.draw();
-        })
+        }
 
             layer.draw();
-        };
     })
 } // SearchCtrl End
 
@@ -281,6 +284,7 @@ function rotate(centre, start, end){
   dot /= (v1.dist * v2.dist);
   var angle = Math.acos(dot);
   console.log(angle);
+  return angle;
 }
 
 function distance(p1, p2){
