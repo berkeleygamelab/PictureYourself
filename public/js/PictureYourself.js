@@ -52,7 +52,7 @@ function GUID(){
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
-
+	var mouse = 'up';
 	var pyuserid = getCookie(pyuseridtag);
 	//console.log(pyuserid);   // Dev
 	checkCookie(pyuserid);
@@ -65,16 +65,18 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var y = 0;
 	var width = 0;
 	var height = 0;
+	var mouse = 'up';
 
 	//Call grabcut with coordinates
 	// fix - Make it so users can drag from bottom right
 
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
+		
 		var formData = new FormData();
 		var filename = $scope.pyuserid + "/1.png";
 		formData.append("filename",filename);
-		formData.append('coords',x + ' ' + y + ' ' + width + ' ' + height);
+		formData.append('coords', x + ' ' + y + ' ' + width + ' ' + height);
 		formData.append('pyuserid', $scope.pyuserid)
 		//console.log('got this far');  // Dev
 		var xhr2 = new XMLHttpRequest();
@@ -172,29 +174,49 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
        	 // add the layer to the stage
        	 stage.add(layer);
       	}; // end of imageObj.onload
+		
+		$(document).on('mousedown', function(e){
+			if (stage){
+				if(mouse == 'up'){
+					mouse = 'down';
+					console.log('Up: ' + mouse);
+				}
+				
+				selection.setX(stage.getPointerPosition().x);
+				selection.setY(stage.getPointerPosition().y);
+				x = selection.getX();
+				y = selection.getY();
 
-		stage.on('mousedown',function(){
-			down = true;
-			selection.setX(stage.getMousePosition().x);
-			selection.setY(stage.getMousePosition().y);
-			x = selection.getX();
-			y = selection.getY();
+			}
+			
+		});
+		
+		$(document).on('mousemove', function(e){
+			if (stage){
+				if(mouse == 'up') return;
+				
+				selection.setWidth(stage.getPointerPosition().x - selection.getX());
+				selection.setHeight(stage.getPointerPosition().y - selection.getY());
+
+				width = selection.getWidth();
+				height = selection.getHeight();
+				layer.draw();
+			}
 		});
 
-		stage.on('mouseup', function(){
-		down = false;
-	})
+		$(document).on('mouseup', function(){
+			if (stage){
 
-	    stage.on('mousemove', function(){
-			if (!down) return;
-
-			selection.setWidth(stage.getMousePosition().x - selection.getX());
-			selection.setHeight(stage.getMousePosition().y - selection.getY());
-
-			width = selection.getWidth();
-			height = selection.getHeight();
-			layer.draw();
+					if(mouse == 'down'){
+						mouse = 'up';
+						console.log('Down: ' + mouse);
+						console.log('Params: X:' + x + ", Y:"+y+ ", W:"+width+ ", H:"+height);
+			
+					}
+				}
 		});
+
+	    
 	}
 
 };//End of new SnapshotCtrl

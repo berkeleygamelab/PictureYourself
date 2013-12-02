@@ -1,12 +1,16 @@
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/scenario.css">
 <meta charset=utf-8 />
-</head>
-<body >
-<div ng-controller='ScenarioCtrl'>
+</head> -->
+<!-- <body 
+ -->
+    <link rel="stylesheet" type="text/css" href="/css/scenario.css">
+    <script src='/js/scenario.js'></script>
+    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+ <div ng-controller='ScenarioCtrl' >
   <div class="tabs">
     <a data-toggle="tab1">Stickers</a>
     <a data-toggle="tab2">Backgrounds</a>
@@ -39,6 +43,8 @@
     <div id="tab3">
       <h3>Filters</h3>
       <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
+            <input class = 'filter' id = 'blur2' type='button' value = 'Blur'>
+
       <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
       <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
       <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
@@ -58,17 +64,20 @@
   </div>
 
   <div id = "container" >
-</div>
+</div><!-- KineticJS Canvas -->
+<div id='save_div'>
+  <button type='button' id='save' ng-click='create_image()'>Save as image</button>
+  <a ng-href="{{image_download}}" id='download_link' download='scenario.jpg'>Download</a>
   </div>
 
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="/js/scenario.js"></script>
   <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
-  <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
+  <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script> -->
 
-</body>
-</html>
+<!-- </body>
+</html> -->
 
 
 <!--http://code-tricks.com/create-a-simple-html5-tabs-using-jquery/-->

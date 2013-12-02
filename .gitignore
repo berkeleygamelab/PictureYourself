@@ -1,3 +1,7 @@
 .DS_Store
+<<<<<<< HEAD
 uploads
 public/users
+=======
+*/.DS_Store
+>>>>>>> 670a8ce8337a9da4bb1eeafd2d2ec7f82a8df67d
