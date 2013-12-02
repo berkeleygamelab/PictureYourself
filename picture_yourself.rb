@@ -4,6 +4,10 @@ require 'data_mapper'
 require 'dm-timestamps'
 require 'json'
 
+set :port, 80
+set :bind, '128.32.189.148'
+#trying to lock threads to avoid not receiving requests 
+set :lock, true
 # DEV
 
 
