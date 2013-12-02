@@ -37,8 +37,11 @@ end
 post '/fileupload' do
     data = params[:data].split(',')[1]
     dirname = 'uploads/'+params[:name]
+    puts 'Params[:name] ' + params[:name]
+    puts 'dirname: ' + dirname
     unless File.directory?(dirname)
       Dir.mkdir(dirname)
+      puts 'Directory should have been written'
     else
       puts 'Directory already exits'
     end
@@ -48,6 +51,7 @@ post '/fileupload' do
       puts "write"
       f.write(Base64.decode64(data))
     end
+    status 200
 end
 
 post '/grabcut' do

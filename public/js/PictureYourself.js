@@ -100,19 +100,29 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	$scope.upload_webcam = function(){
 		console.log('here')
-		var formData = new FormData();
-		var name = $scope.pyuserid
-		formData.append("name",name);
-		formData.append("data",$('#snapshot').attr('src'));
+		var name = $scope.pyuserid;
+		var formData = {"name":name, "data":$('#snapshot').attr('src')};
+		
+		// formData.append("name",name);
+		// 		console.log(typeof($('#snapshot').attr('src')));
+		// 		formData.append("data", $('#snapshot').attr('src'));
 		// console.log($('#snapshot').attr('src')); // Dev
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/fileupload');
-		xhr.send(formData);
-
-		// fix - impliment to happen with successful call instead of timeout
-		$timeout(function(){
-			$scope.cut();
-		},1000);
+		$.ajax({
+			url: '/fileupload',
+			type: 'POST',
+			data: formData,
+			success: function(){
+				$scope.cut();
+			}
+		})
+		// var xhr = new XMLHttpRequest();
+		// xhr.open('POST', '/fileupload');
+		// xhr.send(formData);
+		// 
+		// // fix - impliment to happen with successful call instead of timeout
+		// $timeout(function(){
+		// 	$scope.cut();
+		// },1000);
 	}
 
 	// Looks for when img changes then recreates canvas for rect selection
