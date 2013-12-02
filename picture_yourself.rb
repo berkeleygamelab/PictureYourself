@@ -35,11 +35,14 @@ post '/fileupload' do
     dirname = 'uploads/'+params[:name]
     unless File.directory?(dirname)
       Dir.mkdir(dirname)
+    else
+      puts 'Directory already exits'
     end
+    
     # fix - fix to have dynamic png numbers - or naming
     File.open(dirname+'/1.png', 'wb') do |f|
       puts "write"
-        f.write(Base64.decode64(data))
+      f.write(Base64.decode64(data))
     end
 end
 
