@@ -1,44 +1,3 @@
-.tabs a{
-  cursor: pointer;
-  padding: 5px;
-  background: #fff;
-  color: #000;
-  border: 1px solid #666;
-}
-.tabs a:hover, .tabs a.active{
-  background: #666;
-  color: #fff;
-}
-
-.tabContent{
-  border: 1px solid #666;
-  margin: 5px 0;
-  padding: 5px;
-  width: 244px;
-  height: 613px;
-  overflow: auto;
-}
-
-.sticker, #selfie{
-  width: 120px;
-  height: 120px;
-}
-
-.background{
-  width: 120px;
-  height: 120px;
-}
-
-#container{
-  border: 1px solid #666;
-  position: absolute;
-  top:2px;
-  left: 300px;
-  background-size: 950px 650px;
-  width: 950px;
-  height: 650px;
-}
-
 /* main.css
 // 11/27/2013 by Hiro Kai
 */
@@ -94,7 +53,7 @@ div.signout {
 /* Tool box tabs */
 
 #toolbox {
-  background: #e8e8e7;
+  background: #e8e8e7;  
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
   height: 500px;
   margin-right: 25px;
@@ -140,7 +99,7 @@ div.signout {
 /* Body of tool box */
 
 #toolboxbody {
-  background: #e8e8e7;
+  background: #e8e8e7; 
   height: 440px;
   overflow-y: scroll;
 }
@@ -154,6 +113,5 @@ div.signout {
   background: white;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
 }
-
 
 

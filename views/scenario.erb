@@ -7,15 +7,33 @@
 </head> -->
 <!-- <body
  -->
+ <body style='background-color: #E8E8E7; min-width: 1000px;'>
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src='/js/scenario.js'></script>
     <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+
  <div ng-controller='ScenarioCtrl' >
+ <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
+ <p>
+      <a href="#" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
+      <a href="#" class="navbar-link"><img class='navbaricon' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
+      </p>
+      <p class="nav-adjust-right">
+      <a href="#" class="navbar-link"><img class='navbaricon' alt='Take picture' src='/images/img/new_cam.png'></a>
+      <a href="#" class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
+      <a href="#" class="navbar-link"><img class='navbaricon' alt='Settings'  src='/images/img/new_config.png'></a>
+      </p>
+    </nav>
+  <div class="row signout">
+    <span>SIGN OUT</span>
+  </div>
+
   <div class="tabs">
-    <a data-toggle="tab1">Stickers</a>
-    <a data-toggle="tab2">Backgrounds</a>
-    <a data-toggle="tab3">Filters</a>
-    <a data-toggle="tab4">Frames</a>
+    <a data-toggle="tab1"><img src="/images/img/stickers.png" width="50"></a>
+    <a data-toggle="tab2"><img src="/images/img/backgrounds.png" width = "50"></a>
+    <a data-toggle="tab3"><img src="/images/img/filters.png"></a>
+    <a data-toggle="tab4"><img src="/images/img/borders.png"></a>
   </div>
 
   <div class="tabContent">
@@ -76,8 +94,8 @@
   <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
   <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script> -->
 
-<!-- </body>
-</html> -->
+</body>
+<!--</html> -->
 
 
 <!--http://code-tricks.com/create-a-simple-html5-tabs-using-jquery/-->

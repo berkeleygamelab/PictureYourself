@@ -6,7 +6,7 @@ require 'json'
 
 set :port, 80
 set :bind, '128.32.189.148'
-#trying to lock threads to avoid not receiving requests 
+#trying to lock threads to avoid not receiving requests
 set :lock, true
 # DEV
 
@@ -45,7 +45,7 @@ post '/fileupload' do
     else
       puts 'Directory already exits'
     end
-    
+
     # fix - fix to have dynamic png numbers - or naming
     File.open(dirname+'/1.png', 'wb') do |f|
       puts "write"

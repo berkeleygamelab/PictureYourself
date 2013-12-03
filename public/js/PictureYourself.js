@@ -72,7 +72,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
-		
+
 		var formData = new FormData();
 		var filename = $scope.pyuserid + "/1.png";
 		formData.append("filename",filename);
@@ -102,23 +102,27 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		console.log('here')
 		var name = $scope.pyuserid;
 		var formData = {"name":name, "data":$('#snapshot').attr('src')};
-		
+                            if(height < 3 && width < 3){
+                                alert('Please select a box on your image.');
+                            } else{
+
 		// formData.append("name",name);
 		// 		console.log(typeof($('#snapshot').attr('src')));
 		// 		formData.append("data", $('#snapshot').attr('src'));
 		// console.log($('#snapshot').attr('src')); // Dev
-		$.ajax({
-			url: '/fileupload',
-			type: 'POST',
-			data: formData,
-			success: function(){
-				$scope.cut();
-			}
-		})
+                    		$.ajax({
+                    			url: '/fileupload',
+                    			type: 'POST',
+                    			data: formData,
+                    			success: function(){
+                    				$scope.cut();
+                    			}
+                    		})
+                            }
 		// var xhr = new XMLHttpRequest();
 		// xhr.open('POST', '/fileupload');
 		// xhr.send(formData);
-		// 
+		//
 		// // fix - impliment to happen with successful call instead of timeout
 		// $timeout(function(){
 		// 	$scope.cut();
@@ -184,27 +188,27 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
        	 // add the layer to the stage
        	 stage.add(layer);
       	}; // end of imageObj.onload
-		
+
 		$(document).on('mousedown', function(e){
 			if (stage){
 				if(mouse == 'up'){
 					mouse = 'down';
 					console.log('Up: ' + mouse);
 				}
-				
+
 				selection.setX(stage.getPointerPosition().x);
 				selection.setY(stage.getPointerPosition().y);
 				x = selection.getX();
 				y = selection.getY();
 
 			}
-			
+
 		});
-		
+
 		$(document).on('mousemove', function(e){
 			if (stage){
 				if(mouse == 'up') return;
-				
+
 				selection.setWidth(stage.getPointerPosition().x - selection.getX());
 				selection.setHeight(stage.getPointerPosition().y - selection.getY());
 
@@ -221,12 +225,12 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 						mouse = 'up';
 						console.log('Down: ' + mouse);
 						console.log('Params: X:' + x + ", Y:"+y+ ", W:"+width+ ", H:"+height);
-			
+
 					}
 				}
 		});
 
-	    
+
 	}
 
 };//End of new SnapshotCtrl
