@@ -98,8 +98,8 @@ $('.filter').on('click', function(){
 
       var stage = new Kinetic.Stage({
         container: 'container',
-        width: parseInt($('#container').css('width')) ,
-        height: parseInt($('#container').css('height'))
+        width: 950,// parseInt($('#container').css('width')) ,
+        height: 650//parseInt($('#container').css('height'))
       });
 
       var layer = new Kinetic.Layer();
@@ -173,6 +173,7 @@ $('.filter').on('click', function(){
     });
 
 
+
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
@@ -190,7 +191,7 @@ $('.filter').on('click', function(){
         //get position relative to the container and page
         x = e.pageX - $('#container').offset().left;
         y = e.pageY - $('#container').offset().top;
-
+        //console.log(x + " " + y)
         var group = new Kinetic.Group({
             draggable: true
         });
@@ -204,17 +205,56 @@ $('.filter').on('click', function(){
            offset:[60,60] //size determined by width, height input
         });
 
+        con.addEventListener('click', function(e){
+             console.log(e);
+         })
+
         //may not need, but may need to refactor code
         var start_size = {"width":120,"height":120};
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
-
         //icon for rotation
-        var rotate = new Kinetic.Image({
-            visible:false,
-            image:rotateObj,
-            x: x,
-            y: y,
-            offset:[image.getWidth()/2,image.getHeight()/2]
+        var rotate = new Kinetic.Circle({
+          x:image.getX(),
+          y:image.getY() + start_size.height/2,
+          radius:10,
+          fill: 'green',
+          stroke:'black',
+          draggable:true,
+          visible:false,
+          offset:[image.getWidth()/2,image.getHeight()/2],
+          // new Kinetic.Image({
+          //   visible:false,
+          //   image:rotateObj,
+          //   x:image.getX(),
+          //   y:image.getY() + start_size.height/2 - rotateObj.getY() / 2,
+          //   draggable:true,
+          //   offset:[image.getWidth()/2,image.getHeight()/2],
+            // dragBoundFunc: function(pos) {
+            //     var x = image.getX() + image.getWidth() / 2;
+            //     var y = image.getY() + image.getHeight() / 2;
+            //     //console.log(x + " " + y)
+            //     var radius = Math.max(image.getWidth() / 2 + 10 , image.getHeight() / 2 + 10);
+
+            //     var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2));
+            //     if(scale < 1)
+            //       return {
+            //         y: Math.round((pos.y - y) * scale + y),
+            //         x: Math.round((pos.x - x) * scale + x)
+            //       };
+            //     else
+            //       return pos;
+            //   }
+            dragBoundFunc: function(pos) {
+                var x = image.getX() + start_size.width / 2;
+                var y = image.getY() + start_size.width/2;//100;  // your center point
+                var radius = 60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
+                var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
+                  return {
+                    y: Math.round((pos.y - y) * scale + y),
+                    x: Math.round((pos.x - x) * scale + x)
+                  };
+              }
+
         });
         rotateObj.src = '/images/rotate.png';
 
@@ -270,6 +310,35 @@ $('.filter').on('click', function(){
             layer.draw();
           });
 
+        //set rotation
+
+        var canvasOffset = $("#container").offset();
+        var offsetX = canvasOffset.left;
+        var offsetY = canvasOffset.top;
+        var startX;
+        var startY;
+
+        var cx = image.getWidth()/2; //$("#container").width() / 2;
+        var cy = image.getHeight()/2;//$("#container").height() / 2;
+        //console.log(cx + " " + cy);
+        var currR = 0;
+        var prevR = 0;
+
+        rotate.on('mouseenter', function(e){
+            startX = parseInt(e.clientX - offsetX);
+            startY = parseInt(e.clientY - offsetY);
+        })
+
+        rotate.on('dragmove', function(e){ //dragmove
+         // console.log(mouseX + " " + mouseY);
+          var dx = startX - parseInt(e.clientX - offsetX);
+          var dy = startY - parseInt(e.clientY - offsetY);
+          var angle = Math.atan2(dy, dx);
+          image.setRotation(angle);
+          layer.draw();
+
+        })
+
         //set horizontal height of image
        scalerX.on('dragmove',function(){
 
@@ -306,34 +375,39 @@ $('.filter').on('click', function(){
     })
 
 
-function rotate(centre, start, end){
-  //console.log(centre, start, end);
-  var v1 = {
-    x: start.x - centre.x,
-    y: start.y - centre.y,
-    dist: distance(centre, start)
-  }
-  var v2 = {
-    x: end.x - centre.x,
-    y: end.y - centre.y,
-    dist: distance(centre, end)
-  }
-  // console.log(v1);
-  // console.log(v2);
-  var dot = v1.x * v2.x  + v1.y * v2.y;
-  // console.log(dot);
-  dot /= (v1.dist * v2.dist);
-  var angle = Math.acos(dot);
-  console.log(angle);
-  return angle;
+
+// a = {x: 0, y: 0};
+// b = {x: -0.99, y: -0.1};
+// c = {x: 1, y: 0};
+
+  // function rotate(centre, start, end){
+  //   //console.log(centre, start, end);
+  //   var v1 = {
+  //     x: start.x - centre.x,
+  //     y: start.y - centre.y,
+  //     dist: distance(centre, start)
+  //   }
+  //   var v2 = {
+  //     x: end.x - centre.x,
+  //     y: end.y - centre.y,
+  //     dist: distance(centre, end)
+  //   }
+  //   // console.log(v1);
+  //   // console.log(v2);
+  //   var dot = v1.x * v2.x  + v1.y * v2.y;
+  //   // console.log(dot);
+  //   dot /= (v1.dist * v2.dist);
+  //   var angle = Math.acos(dot);
+  //   console.log(angle);
+  //   return angle;
+  // }
+
+  // function distance(p1, p2){
+  //   return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y -p2.y, 2));
+  // }
 }
 
-function distance(p1, p2){
-  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y -p2.y, 2));
-}
-
-
-
+//}
 
 //for transformations, maybe use kinetic group to add circles on
 //for rotations, i have three points: centre, some predetermined default, and wherever the user's mouse is moved to
