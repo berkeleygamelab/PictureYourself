@@ -98,7 +98,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
     var con = stage.getContainer();
     var dragSrcEl = null;
-
+	$scope.slider = document.getElementById('slider');
+	
     $scope.image_download = 'test.jpg';
     var stickers = []; //will store information about stickers
 
@@ -152,7 +153,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
     });//success
 
-
+	
     // Drag and drop stickers start
 
     con.addEventListener('dragover',function(e){
@@ -192,6 +193,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
            height: 120,
            x: x,
            y: y,
+		   filter: Kinetic.Filters.Blur,
            offset:[60,60] //size determined by width, height input
         });
 
@@ -330,6 +332,11 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             group.setSize(image.getSize());
             layer.draw();
         })
+
+        $('#slider').on('change',function(){
+			image.setFilterRadius($('#slider').val());
+			layer.batchDraw();
+		})
 
         //construct group to drop after image loads
         imageObj.onload = function(){

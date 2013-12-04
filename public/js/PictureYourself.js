@@ -99,14 +99,10 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.upload_webcam = function(){
-		console.log('here')
+		//console.log('here')
 		var name = $scope.pyuserid;
 		var formData = {"name":name, "data":$('#snapshot').attr('src')};
 		
-		// formData.append("name",name);
-		// 		console.log(typeof($('#snapshot').attr('src')));
-		// 		formData.append("data", $('#snapshot').attr('src'));
-		// console.log($('#snapshot').attr('src')); // Dev
 		$.ajax({
 			url: '/fileupload',
 			type: 'POST',

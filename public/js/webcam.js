@@ -47,6 +47,7 @@ function getUserMedia(){
 
 	   // errorCallback
 	   function(err) {
+		alert('DENIED!');
 	    console.log("The following error occured: " + err);
 	   }
 
