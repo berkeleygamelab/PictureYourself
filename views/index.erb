@@ -1,43 +1,41 @@
-'Picture Yourself'
+
+<link rel="stylesheet" href="/css/animate.min.css">
 <div ng-controller="SnapshotCtrl"> <!-- UIDCtrl -->
 
 	<!-- <div ng-controller='UploadController'> -->
 
-	<form id='pic-upload'>
-
-			<div style="float:left;width:640;height:480;">
-				<video autoplay></video>
-				<br>
-				<canvas style="display:none;" width = "640px" height = "480px"></canvas>
-			</div>
-
-			<div>
-				<script>
-					hasGetUserMedia()
-				</script>
-
-			</div>
-
-				<!-- <button ng-click='upload_webcam()'>Webcam upload</button> -->
+	<!--<form id='pic-upload'>-->
+	<div id='snapshot_div'>
+		<div id='camera' ng-show='show_camera'>
+		<video autoplay></video>
+		<br>
+		<canvas style="display:none;" width = "640px" height = "480px"></canvas>
 
 
-				<!-- START OF CLICK FILE UPLOAD -->
+		<!-- <button ng-click='upload_webcam()'>Webcam upload</button> -->
 
-	      <!--<input type="file" ng-file-select="onFileSelect($files)" > -->
 
-		<div id="container" style='float: right; width:640; height:480;'></div>
+		<!-- START OF CLICK FILE UPLOAD -->
 
-	</form>
-	<input type="button" class="clicker" onclick="getUserMedia()" value = "Snapshot!" style='display:inline'>
-	<input type="button" class="clicker" id = "button" value = "Capture" style='display:inline'>
+  <!--<input type="file" ng-file-select="onFileSelect($files)" > -->
+  		</div>
+		<div id="container" ng-show='show_capture'></div>
+	</div>
+	<!--</form> -->
+	<input type="button" class="clicker" ng-click = 'get_camera()' value = "Snapshot!" style='display:inline'><!-- onclick="getUserMedia()"--> 
+	<input type="button" class="clicker" id = "button" ng-click='capture()' value = "Capture" style='display:inline'>
 	<button ng-click='upload_webcam()' class="clicker" style='display:inline'>Cut</button>
 
 	<div ng-hide='true'>
-		<img src="" id='snapshot' style="float: left;">
+		IMAGE SRC:<br>
+		<img src="" id='capture_src' style="float: left;">
 	</div>
 	   <!-- END OF CLICK FILE UPLOAD -->
 
   	<!--</div> --> <!-- UploadController -->
+	<script>
+		hasGetUserMedia()
+	</script>
 </div>
 
 
