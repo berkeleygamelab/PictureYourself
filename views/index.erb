@@ -1,41 +1,60 @@
 
 <link rel="stylesheet" href="/css/animate.min.css">
-<div ng-controller="SnapshotCtrl"> <!-- UIDCtrl -->
+<!-- Temp CSS -->
+<link rel="stylesheet" href="/css/index.css">
 
-	<!-- <div ng-controller='UploadController'> -->
+<div ng-controller="SnapshotCtrl"> 
 
-	<!--<form id='pic-upload'>-->
+	<!-- Should probably set a height for this and adjust the rest -->
 	<div id='snapshot_div'>
-		<div id='camera' ng-show='show_camera'>
-		<video autoplay></video>
-		<br>
-		<canvas style="display:none;" width = "640px" height = "480px"></canvas>
 
+		<!-- Title -->
+		<div id='snapshot_title_div' class='centered'>
+			<span id='snapshot_title'><h1>Take Your Selfie!</h1></span> <br/>
+			You may need to enable your camera
+		</div>
 
-		<!-- <button ng-click='upload_webcam()'>Webcam upload</button> -->
+		<!-- Placeholder Imager -->
+		<div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
+			<img src='images/camera_placeholder.png'>
+		</div>
 
-
-		<!-- START OF CLICK FILE UPLOAD -->
-
-  <!--<input type="file" ng-file-select="onFileSelect($files)" > -->
+		<!-- Webcam Input -->
+		<div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
+			<video autoplay id='video'></video>
+			<canvas style="display:none;" width = "640px" height = "480px"></canvas>
   		</div>
-		<div id="container" ng-show='show_capture'></div>
-	</div>
-	<!--</form> -->
-	<input type="button" class="clicker" ng-click = 'get_camera()' value = "Snapshot!" style='display:inline'><!-- onclick="getUserMedia()"--> 
-	<input type="button" class="clicker" id = "button" ng-click='capture()' value = "Capture" style='display:inline'>
-	<button ng-click='upload_webcam()' class="clicker" style='display:inline'>Cut</button>
 
-	<div ng-hide='true'>
+  		<!-- KineticJS Stage -->
+  		<div id='capture' ng-show='show_capture' class='centered'>
+			<div id="container" ng-show='show_capture'></div>
+
+			<div id='retake_div' ng-show='show_capture' class='centered'>
+				<img src='images/retake.png' ng-click='retake()' id='retake_img'>
+			</div>
+		</div>
+
+		<!-- snapshot_buttons -->
+		<div id='snapshot_button_div' class='centered'>
+			<input type="button" class="clicker" ng-click = 'get_camera()' value = "Start" ng-show='snapshot_button.start'>
+			<input type="button" class="clicker" ng-click = 'capture()' value = "Snap It" id = "button" ng-show = 'snapshot_button.snap_it'>
+			<input type="button" class="clicker" ng-click = 'upload_webcam()' value='Cut' ng-show = 'snapshot_button.cut'>
+		</div>
+
+	</div> <!-- snapshot_div -->
+	
+<!-- 	<div ng-hide='true'>
 		IMAGE SRC:<br>
-		<img src="" id='capture_src' style="float: left;">
-	</div>
+		<img src="" id='capture_src'>
+	</div> -->
 	   <!-- END OF CLICK FILE UPLOAD -->
 
   	<!--</div> --> <!-- UploadController -->
+
 	<script>
 		hasGetUserMedia()
 	</script>
-</div>
+
+</div> <!-- Snapshot Controller -->
 
 

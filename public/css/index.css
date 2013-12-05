@@ -1,9 +1,44 @@
 #snapshop_div{
-	margin:auto;
+
 }
 
-#camerea{
+#camera{
+	width:640px;
+	height:480px;
 	
 }
 
-#
+#camera_placeholder{
+	width:640px;
+	height:480px;
+}
+
+#capture{
+	position:relative;
+	width:640px;
+	height:480px;
+}
+.centered{
+	margin-left: auto;
+	margin-right: auto;
+}
+#retake_div{
+	position:absolute; 
+	bottom:0; 
+	right:0;
+}
+
+#retake_img{
+	width:100px;
+	height:75px;
+}
+
+#snapshot_button_div{
+	width:100px;
+	height:40px;
+}
+
+#snapshot_title_div{
+	width:300px;
+	height:100px;
+}

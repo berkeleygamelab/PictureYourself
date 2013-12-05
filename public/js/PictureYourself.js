@@ -65,10 +65,14 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
+
     //site setup
     $scope.camera = false;
     $scope.show_camera = true;
     $scope.show_capture = false;
+    $scope.camera_loaded = false;
+    $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+
 	// variables for cut creation
 	var x = 0;
 	var y = 0;
@@ -109,6 +113,17 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		fillEnabled: false
 	})
 
+	// Button functions
+
+    $scope.retake = function(){
+    		$scope.snapshot_button.retake = false;
+    		$scope.snapshot_button.snap_it = true;
+    		$scope.snapshot_button.cut = false;
+			$scope.show_camera = true;
+			$scope.show_capture = false;
+			width = 0;
+			height = 0;
+    }
 
 	//Call grabcut with coordinates
 	// fix - Make it so users can drag from bottom right
@@ -136,13 +151,13 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.get_camera = function(){
-		if($scope.camera){
-			$scope.show_camera = true;
-			$scope.show_capture = false;
-		}
-		else
-			$scope.camera = getUserMedia();
+		$scope.camera = getUserMedia();
+		$scope.snapshot_button.start = false;
+		$scope.snapshot_button.snap_it = true;
+		$scope.camera_loaded = true;
 	}
+
+
 	// fix - Does this need to be a function?
 	$scope.selfie = function() {
 		//console.log("redirecting"); // Dev
@@ -150,26 +165,33 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.capture = function(){
-
 		ctx.drawImage(video, 0, 0);
 		//hide camera and show capture
   		$scope.show_camera = false;
   		$scope.show_capture = true;
 		kinetic(canvas.toDataURL('image/png'))
+
+		$scope.snapshot_button.cut = true;
+		$scope.snapshot_button.snap_it = false;
 	}
 
 	$scope.upload_webcam = function(){
-		console.log('here')
-		var name = $scope.pyuserid;
-		var formData = {"name":name, "data":canvas.toDataURL('image/png')};
-		$.ajax({
-			url: '/fileupload',
-			type: 'POST',
-			data: formData,
-			success: function(){
-				$scope.cut();
-			}
-		})
+		if(width > 0 && height > 0){
+			console.log('here')
+			var name = $scope.pyuserid;
+			var formData = {"name":name, "data":canvas.toDataURL('image/png')};
+			$.ajax({
+				url: '/fileupload',
+				type: 'POST',
+				data: formData,
+				success: function(){
+					$scope.cut();
+				}
+			})
+		}
+		else{
+			alert("You must select a cut");
+		}
 	}
 
 
@@ -267,8 +289,6 @@ app.directive("ngFileSelect",function(){
     }
 
   }
-
-
 })
 
 function LoginCtrl($scope){
