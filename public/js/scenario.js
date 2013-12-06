@@ -1,37 +1,5 @@
 //http://angular-ui.github.io/bootstrap/
 
-/*
-* Tabs
-*/
-
-// ;(function($){
-//     $.fn.html5jTabs = function(options){
-//         return this.each(function(index, value){
-//             var obj = $(this),
-//             objFirst = obj.eq(index),
-//             objNotFirst = obj.not(objFirst);
-
-//             $("#" +  objNotFirst.attr("data-toggle")).hide();
-//             $(this).eq(index).addClass("active");
-
-//             obj.click(function(evt){
-
-//                 toggler = "#" + obj.attr("data-toggle");
-//                 togglerRest = $(toggler).parent().find("div");
-
-//                 togglerRest.hide().removeClass("active");
-//                 $(toggler).show().addClass("active");
-
-//                 //toggle Active Class on tab buttons
-//                 $(this).parent("div").find("a").removeClass("active");
-//                 $(this).addClass("active");
-
-//                 return false; //Stop event Bubbling and PreventDefault
-//             });
-//         });
-//     };
-// }(jQuery));
-
 
 
 $(document).ready(function() {
@@ -49,9 +17,6 @@ $(document).ready(function() {
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
     });
-    /*
-    * CSS filters, basic implementation
-    */
 
     var filter = '';
 
@@ -137,7 +102,11 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         width:$('#container').width(),
         height:$('#container').height()
     });
-    layer.add(background);
+    backgroundObj.src = '/images/Rec1.jpg';
+    backgroundObj.onload = function(){
+        layer.add(background);
+        layer.draw();
+    }
 
     $('.background').click(function(){
         console.log($(this).attr('src'));
@@ -242,16 +211,19 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             visible:false,
             offset:[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos) {
-                var x = image.getX() + start_size.width / 2;
-                var y = image.getY() + start_size.width/2;//100;  // your center point
-                var radius = 60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
+                var x = image.getAbsolutePosition().x + start_size.width/2;
+                var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
+                var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
                 var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
+                console.log(scale);
+                console.log("x,y: " + x + ',' + y);
                   return {
                     y: Math.round((pos.y - y) * scale + y),
                     x: Math.round((pos.x - x) * scale + x)
                   };
               }
         });
+
 
         var delete_icon = new Kinetic.Image({
           visible:false,
@@ -280,6 +252,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             visible:false,
             offset:[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos){
+                // var diff = pos.x - this.getAbsolutePosition().x;
+                // rotate.setX(rotate.getAbsolutePosition().x - diff);
                 return{
                     x: pos.x,
                     y: this.getAbsolutePosition().y
