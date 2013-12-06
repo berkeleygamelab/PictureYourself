@@ -1,12 +1,24 @@
 
- <body style='background-color: #E8E8E7; min-width: 1000px;'>
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/css/scenario.css">
+<meta charset=utf-8 />
+</head> -->
+<!-- <body
+ -->
+
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src='/js/scenario.js'></script>
     <script type="text/javascript" src='/js/tabs.js'></script>
 
  <div ng-controller='ScenarioCtrl' >
+ <div class="row" id='framecontainer'>
 
+  <div class='col-md-3 col-sm-3 col-xs-3 col-md-offset-1 col-sm-offset-1 col-xs-offset-1' id='toolbox'>
+<!--   <div class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
+ -->
   <div ng-controller='TabsCtrl'>
     <br/>
     <br/>
@@ -18,8 +30,23 @@
       <!-- <a data-toggle="tab4"> --><img src="/images/img/borders.png" ng-click='show_tab("frames")'></a>
     </div>
 
+  <div class="tabs" >
+    <ul class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
+      <li> <a data-toggle="tab1"><img src="/images/img/stickers.png"></a></li>
+
+      <li><a data-toggle="tab2"><img src="/images/img/backgrounds.png"></a></li>
+
+      <li><a data-toggle="tab3"><img src="/images/img/filters.png"></a></li>
+
+      <li><a data-toggle="tab4"><img src="/images/img/borders.png"></a></li>
+    </ul>
+  </div>
     <div class="tabContent">
 
+  <div class="tabContent" id = "toolboxbody">
+    <div id="tab1" >
+      <h3> Your selfie!</h3>
+      <img class='sticker' id='selfie' src='' >
       <div id="tab1" ng-show='tabs.stickers'>
         <h3> Your selfie!</h3>
         <img class='sticker' id='selfie' src='' >
@@ -62,6 +89,10 @@
 
       </div>
 
+  <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 600px ! important;'></div><!-- KineticJS Canvas -->
+</div>
+
+<!-- <div id='save_div'>
       <div id="tab4" ng-show='tabs.frames'>
         <h3>Frames</h3>
       </div>

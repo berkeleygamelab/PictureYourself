@@ -90,8 +90,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
     var stage = new Kinetic.Stage({
         container: 'container',
-        width: 950,// parseInt($('#container').css('width')) ,
-        height: 650//parseInt($('#container').css('height'))
+        width: parseInt($('#container').css('width')) ,
+        height: parseInt($('#container').css('height'))
     });
 
     var layer = new Kinetic.Layer();
