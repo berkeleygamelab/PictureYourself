@@ -78,6 +78,8 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var y = 0;
 	var width = 0;
 	var height = 0;
+	var x_up = 0;
+	var y_up = 0;
 	var mouse = 'up';
 
 	//KineticJS setup
@@ -131,19 +133,27 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
 
-		var formData = new FormData();
+		var formData = {};
 		var filename = $scope.pyuserid + "/1.png";
-		formData.append("filename",filename);
-		formData.append('coords', x + ' ' + y + ' ' + width + ' ' + height);
-		formData.append('pyuserid', $scope.pyuserid)
-		//console.log('got this far');  // Dev
-		var xhr2 = new XMLHttpRequest();
-		xhr2.open('POST','/grabcut');
-		xhr2.send(formData);
-		// fix - Need to implement code that fires on success
-		$timeout(function(){
-			$scope.selfie();
-		},1000);
+		formData["filename"] = filename;
+		formData['coords'] = x + ' ' + y + ' ' + width + ' ' + height;
+		console.log(formData['coords'])
+		formData['pyuserid'] = $scope.pyuserid;
+		$.ajax({
+			url:'/grabcut',
+			type: 'POST',
+			data: formData,
+			success: function(){
+				window.location = '/selfie';
+			}
+		})
+		// var xhr2 = new XMLHttpRequest();
+		// xhr2.open('POST','/grabcut');
+		// xhr2.send(formData);
+		// // fix - Need to implement code that fires on success
+		// $timeout(function(){
+
+		// },1000);
 	}
 
 	$scope.send_snapshot = function(){
@@ -158,11 +168,11 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 
-	// fix - Does this need to be a function?
-	$scope.selfie = function() {
-		//console.log("redirecting"); // Dev
-		window.location = '/selfie';
-	}
+	// // fix - Does this need to be a function?
+	// $scope.selfie = function() {
+	// 	//console.log("redirecting"); // Dev
+
+	// }
 
 	$scope.capture = function(){
 		ctx.drawImage(video, 0, 0);
@@ -176,6 +186,21 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.upload_webcam = function(){
+		
+		console.log('x: ' + x);
+		console.log('x_up: ' + x_up);
+		console.log('y: ' + y);
+		console.log('y_up: ' + y_up);
+		console.log('w: ' + width);
+		console.log('-w: ' + (-1 * width));
+		console.log('h: ' + height);
+		console.log('-h: ' + (-1*height));
+
+		x = Math.min(x,x_up);
+		y = Math.min(y,y_up);
+		width = Math.max(width, (-1 * width));
+		height = Math.max(height, (-1 * height));
+		console.log('stuff: ' + x + " " + y + " " + width + " " + height + " " )
 		if(width > 0 && height > 0){
 			console.log('here')
 			var name = $scope.pyuserid;
@@ -257,12 +282,10 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 		$(document).on('mouseup', function(){
 			if (stage){
-
 					if(mouse == 'down'){
 						mouse = 'up';
-						console.log('Down: ' + mouse);
-						console.log('Params: X:' + x + ", Y:"+y+ ", W:"+width+ ", H:"+height);
-
+						x_up = stage.getPointerPosition().x;
+						y_up = stage.getPointerPosition().y;
 					}
 				}
 		});
