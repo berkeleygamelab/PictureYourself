@@ -146,6 +146,23 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         layer.draw();
     })
 
+    //frame selection
+    frameObj = new Image();
+    var frame = new Kinetic.Image({
+        image:frameObj,
+        x:0,
+        y:0,
+        width:$('#container').width(),
+        height:$('#container').height()
+    });
+    layer.add(frame);
+
+    $('.frames').click(function(){
+        console.log($(this).attr('src'));
+        frameObj.src = $(this).attr('src');
+        frame.moveToTop();
+        layer.draw();
+    })
 
 
     //Grab Stickers
