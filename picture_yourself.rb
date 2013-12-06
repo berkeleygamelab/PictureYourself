@@ -114,10 +114,16 @@ get '/scenario' do
 end
 
 get '/seed' do
-  file = open('public/images/stickers/filenames.txt','r').read
+  file = open('public/images/stickers/files.txt','r').read
   file = file.split("\n")
+
+  dir = ''
   file.each do |filename|
-    Sticker.create(name:filename,source:'images/stickers/'+filename)
+    if filename.include? './'
+      dir = filename.gsub(':', '').gsub('.', '')
+    elsif filename.include? ".png"
+      Sticker.create(name: dir + "/" + filename, source:'images/stickers'+ dir + "/" + filename)
+    end
   end
 end
 

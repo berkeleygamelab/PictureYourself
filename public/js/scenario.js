@@ -53,32 +53,32 @@ $(document).ready(function() {
     * CSS filters, basic implementation
     */
 
-    // var filter = '';
+    var filter = '';
 
-    // $('.filter').on('click', function(){
+    $('.filter').on('click', function(){
 
-    //     var filterVal =  $(this).attr('id');
-    //         if(filterVal == 'gray'){
-    //             filter += ' grayscale(0.5)';
-    //         } else if (filterVal == 'blur'){
-    //             filter += ' blur(5px)';
-    //         } else if (filterVal == 'sepia'){
-    //             filter += ' sepia(0.5)';
-    //         } else if (filterVal == 'saturate'){
-    //             filter += ' saturate(0.5)';
-    //         } else if (filterVal == 'invert'){
-    //             filter += ' invert(100%)';
-    //         } else if (filterVal == 'opacity'){
-    //             filter += ' opacity(0.5)';
-    //         } else if (filterVal == 'bright'){
-    //             filter += ' brightness(2)';
-    //         } else if (filterVal == 'contrast'){
-    //             filter += ' contrast(0.5)';
-    //         } else if(filterVal == 'reset'){
-    //             filter = 'blur(0px)';
-    //         }
-    //         $('#container').css('-webkit-filter', filter);
-    //     });
+        var filterVal =  $(this).attr('id');
+            if(filterVal == 'gray'){
+                filter += ' grayscale(0.5)';
+            } else if (filterVal == 'blur'){
+                filter += ' blur(5px)';
+            } else if (filterVal == 'sepia'){
+                filter += ' sepia(0.5)';
+            } else if (filterVal == 'saturate'){
+                filter += ' saturate(0.5)';
+            } else if (filterVal == 'invert'){
+                filter += ' invert(100%)';
+            } else if (filterVal == 'opacity'){
+                filter += ' opacity(0.5)';
+            } else if (filterVal == 'bright'){
+                filter += ' brightness(2)';
+            } else if (filterVal == 'contrast'){
+                filter += ' contrast(0.5)';
+            } else if(filterVal == 'reset'){
+                filter = 'blur(0px)';
+            }
+            $('#container').css('-webkit-filter', filter);
+        });
 });
 
 
@@ -98,8 +98,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
     var stage = new Kinetic.Stage({
         container: 'container',
-        width: parseInt($('#container').css('width')) ,
-        height: parseInt($('#container').css('height'))
+        width: $('#container').width() ,
+        height: $('#container').height()
     });
 
     var layer = new Kinetic.Layer();
