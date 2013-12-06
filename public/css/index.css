@@ -1,11 +1,11 @@
-#snapshop_div{
-
+#snapshot_div{
+	padding: 50px;
 }
 
 #camera{
 	width:640px;
 	height:480px;
-	
+
 }
 
 #camera_placeholder{
@@ -23,8 +23,8 @@
 	margin-right: auto;
 }
 #retake_div{
-	position:absolute; 
-	bottom:0; 
+	position:absolute;
+	bottom:0;
 	right:0;
 }
 

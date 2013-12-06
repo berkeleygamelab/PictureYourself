@@ -82,3 +82,125 @@ table { border-collapse: collapse; }
     position:relative;
     top:1px;
 }
+
+/* main.css
+// 11/27/2013 by Hiro Kai
+*/
+
+
+/* Setting minimum size of the entire content so that a horizontal scroll bar appears when the window is small. */
+
+.outside {
+  min-width: 1050px;
+}
+
+/*
+ * Navbar on top
+ */
+
+img.navbaricon {
+  margin: 0px;
+}
+
+.navbar p {
+  display: inline;
+}
+
+p.nav-adjust-right {
+  float: right;
+}
+
+p.signout {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: 30px;
+  margin: 55px 0px 0px 0px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+
+/*
+// Wrapping container that has toolbox and content
+*/
+
+#framecontainer {
+  margin-top: 100px;
+  height: 500px;
+}
+
+
+/*
+//Tool box
+*/
+
+/* Tool box tabs */
+
+#toolbox {
+  background: #e8e8e7;
+  box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
+  height: 500px;
+  margin-right: 25px;
+  padding: 0px;
+}
+
+#toolicon li {
+  width: 25%;
+  height: 60px;
+  background: white;
+  padding: 0px;
+}
+
+#toolicon li a {
+  height: 100%;
+  margin: 0px;
+  padding: 8px;
+  background: white;
+}
+
+#toolicon li img {
+  height: 40px;
+  margin: 10px 19px;
+}
+
+#toolicon li.active {
+  background: #e8e8e7;
+}
+
+#toolicon li.active a {
+  background: #e8e8e7;
+}
+
+#toolicon li:hover {
+/* background: lightblue;*/
+}
+
+#toolicon li:hover a {
+/*  background: lightblue; */
+}
+
+
+/* Body of tool box */
+
+#toolboxbody {
+  background: #e8e8e7;
+  height: 440px;
+  overflow-y: scroll;
+}
+
+/*
+//Content frame on the right side
+*/
+
+#container {
+  height: 100%;
+  background: white;
+  box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
+}
+
+#save_div{
+padding: 15px 100px;
+}
+
+
