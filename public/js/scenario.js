@@ -105,6 +105,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     backgroundObj.src = '/images/Rec1.jpg';
     backgroundObj.onload = function(){
         layer.add(background);
+        background.moveToBottom();
         layer.draw();
     }
 
