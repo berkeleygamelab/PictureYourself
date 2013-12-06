@@ -6,7 +6,7 @@ require 'json'
 
 set :port, 80
 set :bind, '128.32.189.148'
-#trying to lock threads to avoid not receiving requests 
+#trying to lock threads to avoid not receiving requests
 set :lock, true
 # DEV
 
@@ -37,20 +37,22 @@ end
 post '/fileupload' do
     data = params[:data].split(',')[1]
     dirname = 'uploads/'+params[:name]
-    puts 'Params[:name] ' + params[:name]
-    puts 'dirname: ' + dirname
+    # puts 'Params[:name] ' + params[:name]
+    # puts 'dirname: ' + dirname
+    # puts 'data'
     unless File.directory?(dirname)
       Dir.mkdir(dirname)
-      puts 'Directory should have been written'
+      # puts 'Directory should have been written'
     else
-      puts 'Directory already exits'
+      # puts 'Directory already exits'
     end
-    
+
     # fix - fix to have dynamic png numbers - or naming
     File.open(dirname+'/1.png', 'wb') do |f|
-      puts "write"
+      # puts "write"
       f.write(Base64.decode64(data))
     end
+    # Needs to be updated to account for erros
     status 200
 end
 

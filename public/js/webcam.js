@@ -41,8 +41,7 @@ function getUserMedia(){
 			video.src = window.URL.createObjectURL(localMediaStream);
 			video.onloadedmetadata = function(e) {
 	        // Do something with the video here.
-
-	   	};
+	    	};
 	   	},
 
 	   // errorCallback
@@ -50,18 +49,9 @@ function getUserMedia(){
 		alert('DENIED!');
 	    console.log("The following error occured: " + err);
 	   }
-
 	);
 
-	function snapshot() {
-		//if(localMediaStream){
-			ctx.drawImage(video, 0, 0);
-			document.querySelector('img').src = canvas.toDataURL('image/png');
-		//}
-   	 }
-
-   	button.addEventListener('click', snapshot, false);
-
+	return true;
 }
 
 

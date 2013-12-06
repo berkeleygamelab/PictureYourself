@@ -1,2 +1,0 @@
-Picture Yourself in College
-===========================

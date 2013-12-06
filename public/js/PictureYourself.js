@@ -54,11 +54,24 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
 	var mouse = 'up';
 	var pyuserid = getCookie(pyuseridtag);
+	
 	//console.log(pyuserid);   // Dev
 	checkCookie(pyuserid);
 
-	var button = document.querySelector('#button');
+	//canvas setup
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
+	var video = document.querySelector('video');
+
+	var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
+
+    //site setup
+    $scope.camera = false;
+    $scope.show_camera = true;
+    $scope.show_capture = false;
+    $scope.camera_loaded = false;
+    $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
 	// variables for cut creation
 	var x = 0;
@@ -67,12 +80,57 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var height = 0;
 	var mouse = 'up';
 
+	//KineticJS setup
+	var imageObj = new Image();
+	var stage = new Kinetic.Stage({
+        container: 'container'
+     });
+
+    var layer = new Kinetic.Layer();
+    stage.add(layer);
+
+    var selfie = new Kinetic.Image({
+  		x: 0,
+  		y: 0,
+  		image: imageObj,
+  		width: imageObj.width,
+  		height: imageObj.height
+	});
+	var background = new Kinetic.Rect({
+	x:0,
+	y:0,
+	width: imageObj.width,
+	height: imageObj.height,
+	fillEnabled: false,
+	opacity: 1
+	});
+
+	var selection = new Kinetic.Rect({
+		x:0,
+		y:0,
+		stroke:'yellow',
+		strokeWidth: 3,
+		fillEnabled: false
+	})
+
+	// Button functions
+
+    $scope.retake = function(){
+    		$scope.snapshot_button.retake = false;
+    		$scope.snapshot_button.snap_it = true;
+    		$scope.snapshot_button.cut = false;
+			$scope.show_camera = true;
+			$scope.show_capture = false;
+			width = 0;
+			height = 0;
+    }
+
 	//Call grabcut with coordinates
 	// fix - Make it so users can drag from bottom right
 
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
-		
+
 		var formData = new FormData();
 		var filename = $scope.pyuserid + "/1.png";
 		formData.append("filename",filename);
@@ -92,115 +150,102 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		kinetic($('#snapshot').attr('src'));
 	}
 
+	$scope.get_camera = function(){
+		$scope.camera = getUserMedia();
+		$scope.snapshot_button.start = false;
+		$scope.snapshot_button.snap_it = true;
+		$scope.camera_loaded = true;
+	}
+
+
 	// fix - Does this need to be a function?
 	$scope.selfie = function() {
 		//console.log("redirecting"); // Dev
 		window.location = '/selfie';
 	}
 
-	$scope.upload_webcam = function(){
-		//console.log('here')
-		var name = $scope.pyuserid;
-		var formData = {"name":name, "data":$('#snapshot').attr('src')};
-		
-		$.ajax({
-			url: '/fileupload',
-			type: 'POST',
-			data: formData,
-			success: function(){
-				$scope.cut();
-			}
-		})
-		// var xhr = new XMLHttpRequest();
-		// xhr.open('POST', '/fileupload');
-		// xhr.send(formData);
-		// 
-		// // fix - impliment to happen with successful call instead of timeout
-		// $timeout(function(){
-		// 	$scope.cut();
-		// },1000);
+	$scope.capture = function(){
+		ctx.drawImage(video, 0, 0);
+		//hide camera and show capture
+  		$scope.show_camera = false;
+  		$scope.show_capture = true;
+		kinetic(canvas.toDataURL('image/png'))
+
+		$scope.snapshot_button.cut = true;
+		$scope.snapshot_button.snap_it = false;
 	}
 
-	// Looks for when img changes then recreates canvas for rect selection
-	// fix - need to look up img by id instead
-	$('img').bind('load',function(){
-		console.log('img change');
-		kinetic($('img').attr('src'))
-	})
+	$scope.upload_webcam = function(){
+		if(width > 0 && height > 0){
+			console.log('here')
+			var name = $scope.pyuserid;
+			var formData = {"name":name, "data":canvas.toDataURL('image/png')};
+			$.ajax({
+				url: '/fileupload',
+				type: 'POST',
+				data: formData,
+				success: function(){
+					$scope.cut();
+				}
+			})
+		}
+		else{
+			alert("You must select a cut");
+		}
+	}
+
 
 	// Creates the kineticJS environment
 	// Should be called by the change of img
 
 	var kinetic = function(result) {
-        $scope.imageSrc = result;
-      	var imageObj = new Image();
-		imageObj.src = result;
+        //$scope.imageSrc = result;
+        imageObj.src = result;
+        layer.removeChildren();
 
-		var stage = new Kinetic.Stage({
-        container: 'container',
-        width: imageObj.width,
-        height: imageObj.height
-      	});
-
-		var background = new Kinetic.Rect({
-			x:0,
-			y:0,
-			width: imageObj.width,
-			height: imageObj.height,
-			fillEnabled: false,
-			opacity: 1
-		});
-
-		var selection = new Kinetic.Rect({
-			x:0,
-			y:0,
-			stroke:'yellow',
-			strokeWidth: 3,
-			fillEnabled: false
-		})
 		var originalPoint = {x: selection.getX(), y: selection.getY()};
 
-      	var layer = new Kinetic.Layer();
 		var down = false;
 
       	imageObj.onload = function() {
-        	var yoda = new Kinetic.Image({
-          		x: 0,
-          		y: 0,
-          		image: imageObj,
-          		width: imageObj.width,
-          		height: imageObj.height
-        	});
 
-       	 // add the shape to the layer
-	        layer.add(yoda);
+      		//setup stage
+      		stage.setWidth(imageObj.width);
+      		stage.setHeight(imageObj.height);
+      		//reset selection
+      		selection.setWidth(0);
+      		selection.setHeight(0);
+       	 	// add the shape to the layer
+	        layer.add(selfie);
 			layer.add(background);
 			layer.add(selection);
+			layer.draw();
 
-       	 // add the layer to the stage
-       	 stage.add(layer);
+			//snapshot effect
+			$('#container').addClass('animated fadeInUp');
+
       	}; // end of imageObj.onload
-		
+
 		$(document).on('mousedown', function(e){
 			if (stage){
 				if(mouse == 'up'){
 					mouse = 'down';
 					console.log('Up: ' + mouse);
 				}
-				
+
 				selection.setX(stage.getPointerPosition().x);
 				selection.setY(stage.getPointerPosition().y);
 				x = selection.getX();
 				y = selection.getY();
 
 			}
-			
+
 		});
-		
+
 		$(document).on('mousemove', function(e){
 			if (stage){
 				if(mouse == 'up') return;
-				
+
 				selection.setWidth(stage.getPointerPosition().x - selection.getX());
 				selection.setHeight(stage.getPointerPosition().y - selection.getY());
 
@@ -217,15 +262,17 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 						mouse = 'up';
 						console.log('Down: ' + mouse);
 						console.log('Params: X:' + x + ", Y:"+y+ ", W:"+width+ ", H:"+height);
-			
+
 					}
 				}
 		});
 
 	    
-	}
+	} // End of Kinetic Function
 
 };//End of new SnapshotCtrl
+
+
 
 
 app.directive("ngFileSelect",function(){
@@ -242,8 +289,6 @@ app.directive("ngFileSelect",function(){
     }
 
   }
-
-
 })
 
 function LoginCtrl($scope){

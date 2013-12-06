@@ -1,433 +1,9 @@
-<<<<<<< HEAD
-=======
-//CHANGE!!!!!!
-//Hardcoded redirect in upload button
 //add UID to uploaded/saved file when user is not yet registered
 //Global variables for IP and port
 var port = '9393';
 var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
->>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
-
-app.factory('Upload', function($resource,$http){
-	return {
-		image: function(data){
-			return $resource('/fileupload',{},{post:{method:'POST', params:{data:data}}}).post();
-			//$http.post('/fileupload',{data:data});
-		}
-	}
-})
-
-var UploadController = function ($scope, fileReader, Upload, $http, $timeout) {
-<<<<<<< HEAD
-    
-	$scope.send_snapshot = function(){
-		//$scope.test = $('#snapshot').attr('src');
-		kinetic($('#snapshot').attr('src'));
-	}
-	
-	function stringGen(len)
-	{
-	    var text = " ";
-
-	    var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-	    for( var i=0; i < len; i++ )
-	        text += charset.charAt(Math.floor(Math.random() * charset.length));
-
-	    return text;
-	}
-	
-	$scope.upload_webcam = function(){
-		var formData = new FormData();
-		var name = stringGen(5);
-		formData.append("name",name);
-		formData.append("data",$('#snapshot').attr('src'));
-		console.log($('#snapshot').attr('src'));
-		var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/webcam_test')
-				//xhr.open('POST', '/grabcut?filename=imgtest.jpg'+'&coords=0+0+100+100'//+x+'+'+y+'+'+width+'+'+height)
-				xhr.send(formData);
-				
-				$timeout(function(){
-					window.location.href = 'http://localhost:1234/webcam_test/'+ name;
-				},3000);
-	}
-	
-	var kinetic = function(result) {
-        $scope.imageSrc = result;
-      	var imageObj = new Image();
-		imageObj.src = result;
-		
-		var stage = new Kinetic.Stage({
-        container: 'container',
-        width: imageObj.width,
-        height: imageObj.height
-      	});
-		
-		var background = new Kinetic.Rect({
-			x:0,
-			y:0,
-			width: imageObj.width,
-			height: imageObj.height,
-			fillEnabled: false,
-			opacity: 1
-		});
-		
-		var selection = new Kinetic.Rect({
-			x:0,
-			y:0,
-			stroke:'yellow',
-			strokeWidth: 3,
-			fillEnabled: false
-		})
-		var originalPoint = {x: selection.getX(), y: selection.getY()};
-
-      	var layer = new Kinetic.Layer();
-		var down = false;
-		
-      	imageObj.onload = function() {
-        	var yoda = new Kinetic.Image({
-          		x: 0,
-          		y: 0,
-          		image: imageObj,
-          		width: imageObj.width,
-          		height: imageObj.height
-        	});
-
-       	 // add the shape to the layer
-	        layer.add(yoda);
-			layer.add(background);
-			layer.add(selection);
-
-       	 // add the layer to the stage
-       	 stage.add(layer);
-      	}; // end of imageObj.onload
-	
-	stage.on('mousedown',function(){
-		down = true;
-		selection.setX(stage.getMousePosition().x);
-		selection.setY(stage.getMousePosition().y);
-		x = selection.getX();
-		y = selection.getY();
-	})
-	
-	stage.on('mouseup', function(){
-		down = false;
-	})
-
-	stage.on('mousemove', function(){
-		if (!down) return;
-
-		selection.setWidth(stage.getMousePosition().x - selection.getX());
-		selection.setHeight(stage.getMousePosition().y - selection.getY());
-
-		width = selection.getWidth();
-		height = selection.getHeight();
-		layer.draw();
-	});
-};
-	
-=======
-    $scope.pyuserid = getCookie(pyuseridtag);
->>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
-    $scope.getFile = function () {
-		var x = 0;
-		var y = 0;
-		var width = 0;
-		var height = 0;
-		//var filename = '';
-        $scope.progress = 0;
-        fileReader.readAsDataUrl($scope.file, $scope)
-                      .then(
-						function(result) {
-		                        $scope.imageSrc = result;
-					      	var imageObj = new Image();
-							imageObj.src = result;
-							
-							var stage = new Kinetic.Stage({
-					        container: 'container',
-					        width: imageObj.width,
-					        height: imageObj.height
-					      	});
-							
-							var background = new Kinetic.Rect({
-								x:0,
-								y:0,
-								width: imageObj.width,
-								height: imageObj.height,
-								fillEnabled: false,
-								opacity: 1
-							});
-							
-							var selection = new Kinetic.Rect({
-								x:0,
-								y:0,
-								stroke:'yellow',
-								strokeWidth: 3,
-								fillEnabled: false
-							})
-							var originalPoint = {x: selection.getX(), y: selection.getY()};
-					
-					      	var layer = new Kinetic.Layer();
-							var down = false;
-							
-					      	imageObj.onload = function() {
-					        	var yoda = new Kinetic.Image({
-					          		x: 0,
-					          		y: 0,
-					          		image: imageObj,
-					          		width: imageObj.width,
-					          		height: imageObj.height
-					        	});
-		
-					       	 // add the shape to the layer
-						        layer.add(yoda);
-								layer.add(background);
-								layer.add(selection);
-		
-					       	 // add the layer to the stage
-					       	 stage.add(layer);
-					      	}; // end of imageObj.onload
-						
-						stage.on('mousedown',function(){
-							down = true;
-							selection.setX(stage.getMousePosition().x);
-							selection.setY(stage.getMousePosition().y);
-							x = selection.getX();
-							y = selection.getY();
-						})
-<<<<<<< HEAD
-						
-						stage.on('mouseup', function(){
-							down = false;
-						})
-		
-						stage.on('mousemove', function(){
-							if (!down) return;
-		
-							selection.setWidth(stage.getMousePosition().x - selection.getX());
-							selection.setHeight(stage.getMousePosition().y - selection.getY());
-		
-							width = selection.getWidth();
-							height = selection.getHeight();
-							layer.draw();
-						})
-=======
-						var originalPoint = {x: selection.getX(), y: selection.getY()};
-				
-				    var layer = new Kinetic.Layer();
-						var down = false;
-						
-		      	imageObj.onload = function() {
-		        	var yoda = new Kinetic.Image({
-		          		x: 0,
-		          		y: 0,
-		          		image: imageObj,
-		          		width: imageObj.width,
-		          		height: imageObj.height
-		        	});
-
-		       	 // add the shape to the layer
-			        layer.add(yoda);
-							layer.add(background);
-							layer.add(selection);
-
-			       	 // add the layer to the stage
-			       	 stage.add(layer);
-			      	}; // end of imageObj.onload
-					
-					stage.on('mousedown',function(){
-						down = true;
-						selection.setX(stage.getMousePosition().x);
-						selection.setY(stage.getMousePosition().y);
-						x = selection.getX();
-						y = selection.getY();
-					})
-					
-					stage.on('mouseup', function(){
-						down = false;
-					})
-
-					stage.on('mousemove', function(){
-						if (!down) return;
-
-						selection.setWidth(stage.getMousePosition().x - selection.getX());
-						selection.setHeight(stage.getMousePosition().y - selection.getY());
-
-						width = selection.getWidth();
-						height = selection.getHeight();
-						layer.draw();
-					})
->>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
-
-						}); //end of then
- 	
-	
-	$scope.upload = function(){
-		var data = new FormData();
-		var xhr = new XMLHttpRequest();
-		
-		data.append('file',$scope.file,$scope.file.name);
-		xhr.open('POST','/fileupload');
-		xhr.send(data);
-		$timeout(function(){
-			var xhr = new XMLHttpRequest();
-			console.log($scope.file.name);
-			console.log('here it is', $scope.pyuserid);
-			xhr.open('POST', '/grabcut?filename='+$scope.file.name+'&coords='+x+'+'+y+'+'+width+'+'+height+'&pyuserid='+$scope.pyuserid);			
-			xhr.send();
-			// $http.post('/grabcut', {filename:'test.jpg',coord:'10 10 100 200'});
-		},1000)
-		$timeout(function(){
-			window.location.href = 'http://'+ip+':'+port+'/sticker'; //pass filename to make access dynamic
-		},2000);
-		
-	}				
-    $scope.$on("fileProgress", function(e, progress) {
-        $scope.progress = progress.loaded / progress.total;
-    });
-
-
-}; //$scope.getFile
-} //UploadController
-
-app.directive("ngFileSelect",function(){
-
-  return {
-    link: function($scope,el){
-      
-      el.bind("change", function(e){
-      
-        $scope.file = (e.srcElement || e.target).files[0];
-        $scope.getFile();
-      })
-      
-    }
-    
-  }
-  
-  
-})
-
-function LoginCtrl($scope){
-	//create proper login methods etc...
-	$scope.username = 'username';
-	$scope.login = function(){	
-		console.log($scope.username);
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST','/loggedin?username='+$scope.username);
-		xhr.send();
-		window.location.href = 'http://'+ip+':'+port+'/loggedin?username='+$scope.username;
-		}				
-}
-
-function LayoutCtrl($scope){
-	
-}
-
-function IndexCtrl($scope){
-	
-}
-
-function StickerCtrl($scope){	
-	var img = angular.element("#picture").attr('src');
-	var background = new Image();
-  	var imageObj = new Image();
-	var hatObj = new Image();
-  	
-	$scope.background = background;
-	$scope.imageObj = imageObj;
-	$scope.hatObj = hatObj;
-	imageObj.src = img;
-	background.src = 'img/background.jpg'
-	hatObj.src = 'img/hat.png'
-	
-	
-	var stage = new Kinetic.Stage({
-    container: 'container',
-    width: background.width,
-    height: background.height
-  	});
-
-    var layer = new Kinetic.Layer();
-
-	
-  	imageObj.onload = function() {
-    	var floater = new Kinetic.Image({
-      		x: 0,
-      		y: 0,
-      		image: imageObj,
-      		width: imageObj.width,
-      		height: imageObj.height,
-			draggable:true
-    	});
-		var backgroundImg = new Kinetic.Image({
-			x:0,
-			y:0,
-			image: background,
-			width: background.width,
-			height: background.hidth
-		})
-		var hat = new Kinetic.Image({
-			x:0,
-			y:0,
-			image: hatObj,
-			width: hatObj.width,
-			height: hatObj.hidth,
-			draggable:true
-		})
-		
-		layer.add(backgroundImg);
-		layer.add(floater);
-		layer.add(hat);
-
-
-        // add the shape to the layer
-		hat.hide();
-		stage.add(layer);
-<<<<<<< HEAD
-
-        // add button event bindings
-        document.getElementById('show').addEventListener('click', function() {
-		hat.show();
-        layer.draw();
-        }, false);
-
-		var addHat = function(){
-			hat.show();
-			layer.draw();
-		}
-
-	}
-	
-	var addHat = function(){
-		hat.show()
-	};
-		
-$scope.images = [imageObj,hatObj,background];
-	
-}
-=======
-	}	
-}
-
-function UIDCtrl($scope){
-	//create proper login methods etc...
-
-	var pyuserid=getCookie(pyuseridtag);
-	console.log(pyuserid);
-	checkCookie(pyuserid);
-
-	function GUID() {
-		var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
-		return v.toString(16);
-		});
-		return guid;
-	}
-}
 
 function setCookie(c_name,value,exdays) {
 	var exdate=new Date();
@@ -452,16 +28,379 @@ function getCookie(c_name) {
 		c_value = unescape(c_value.substring(c_start,c_end));
 	}
 	return c_value;
+}
+
+function checkCookie(pyuserid){
+  if (pyuserid!=null && pyuserid!="")
+  	console.log('creating pyuserid');
+	else  {
+		var randomID = GUID();
+  	// check if value GUID is already registered on server
+    setCookie(pyuseridtag,randomID,pyuseridlife);
+    console.log(getCookie(pyuseridtag));
+  }
+}
+
+function GUID(){
+	var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x7;
+		return v.toString(16);
+	});
+	return guid;
+}
+
+
+function SnapshotCtrl($scope, fileReader, $http, $timeout){
+	//create proper login methods etc...
+	var mouse = 'up';
+	var pyuserid = getCookie(pyuseridtag);
+	
+	//console.log(pyuserid);   // Dev
+	checkCookie(pyuserid);
+
+	//canvas setup
+	var canvas = document.querySelector('canvas');
+	var ctx = canvas.getContext('2d');
+	var video = document.querySelector('video');
+
+	var button = document.querySelector('#button'); // need this?
+    $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
+
+    //site setup
+    $scope.camera = false;
+    $scope.show_camera = true;
+    $scope.show_capture = false;
+    $scope.camera_loaded = false;
+    $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+
+	// variables for cut creation
+	var x = 0;
+	var y = 0;
+	var width = 0;
+	var height = 0;
+	var mouse = 'up';
+
+	//KineticJS setup
+	var imageObj = new Image();
+	var stage = new Kinetic.Stage({
+        container: 'container'
+     });
+
+    var layer = new Kinetic.Layer();
+    stage.add(layer);
+
+    var selfie = new Kinetic.Image({
+  		x: 0,
+  		y: 0,
+  		image: imageObj,
+  		width: imageObj.width,
+  		height: imageObj.height
+	});
+	var background = new Kinetic.Rect({
+	x:0,
+	y:0,
+	width: imageObj.width,
+	height: imageObj.height,
+	fillEnabled: false,
+	opacity: 1
+	});
+
+	var selection = new Kinetic.Rect({
+		x:0,
+		y:0,
+		stroke:'yellow',
+		strokeWidth: 3,
+		fillEnabled: false
+	})
+
+	// Button functions
+
+    $scope.retake = function(){
+    		$scope.snapshot_button.retake = false;
+    		$scope.snapshot_button.snap_it = true;
+    		$scope.snapshot_button.cut = false;
+			$scope.show_camera = true;
+			$scope.show_capture = false;
+			width = 0;
+			height = 0;
+    }
+
+	//Call grabcut with coordinates
+	// fix - Make it so users can drag from bottom right
+
+	$scope.cut = function(){
+		//console.log('cut was called');  // Dev
+
+		var formData = new FormData();
+		var filename = $scope.pyuserid + "/1.png";
+		formData.append("filename",filename);
+		formData.append('coords', x + ' ' + y + ' ' + width + ' ' + height);
+		formData.append('pyuserid', $scope.pyuserid)
+		//console.log('got this far');  // Dev
+		var xhr2 = new XMLHttpRequest();
+		xhr2.open('POST','/grabcut');
+		xhr2.send(formData);
+		// fix - Need to implement code that fires on success
+		$timeout(function(){
+			$scope.selfie();
+		},1000);
 	}
 
-	function checkCookie(pyuserid){
-	  if (pyuserid!=null && pyuserid!="")
-	  	console.log('creating pyuserid'); 
-		else  {
-			var randomID = GUID();
-	  	// check if value GUID is already registered on server	  	
-	    setCookie(pyuseridtag,randomID,pyuseridlife);	 	   
-	    console.log(getCookie(pyuseridtag)); 
-	  }
+	$scope.send_snapshot = function(){
+		kinetic($('#snapshot').attr('src'));
 	}
->>>>>>> 9e982331b90ce6c3f0cd7125333f342f51e319ab
+
+	$scope.get_camera = function(){
+		$scope.camera = getUserMedia();
+		$scope.snapshot_button.start = false;
+		$scope.snapshot_button.snap_it = true;
+		$scope.camera_loaded = true;
+	}
+
+
+	// fix - Does this need to be a function?
+	$scope.selfie = function() {
+		//console.log("redirecting"); // Dev
+		window.location = '/selfie';
+	}
+
+	$scope.capture = function(){
+		ctx.drawImage(video, 0, 0);
+		//hide camera and show capture
+  		$scope.show_camera = false;
+  		$scope.show_capture = true;
+		kinetic(canvas.toDataURL('image/png'))
+
+		$scope.snapshot_button.cut = true;
+		$scope.snapshot_button.snap_it = false;
+	}
+
+	$scope.upload_webcam = function(){
+<<<<<<< HEAD
+		//console.log('here')
+		var name = $scope.pyuserid;
+		var formData = {"name":name, "data":$('#snapshot').attr('src')};
+		
+		$.ajax({
+			url: '/fileupload',
+			type: 'POST',
+			data: formData,
+			success: function(){
+				$scope.cut();
+			}
+		})
+		// var xhr = new XMLHttpRequest();
+		// xhr.open('POST', '/fileupload');
+		// xhr.send(formData);
+		// 
+		// // fix - impliment to happen with successful call instead of timeout
+		// $timeout(function(){
+		// 	$scope.cut();
+		// },1000);
+=======
+		if(width > 0 && height > 0){
+			console.log('here')
+			var name = $scope.pyuserid;
+			var formData = {"name":name, "data":canvas.toDataURL('image/png')};
+			$.ajax({
+				url: '/fileupload',
+				type: 'POST',
+				data: formData,
+				success: function(){
+					$scope.cut();
+				}
+			})
+		}
+		else{
+			alert("You must select a cut");
+		}
+>>>>>>> 2915e9c76f50afec60ab71f71f7b7bcaa81fa0e0
+	}
+
+
+	// Creates the kineticJS environment
+	// Should be called by the change of img
+
+	var kinetic = function(result) {
+        //$scope.imageSrc = result;
+        imageObj.src = result;
+        layer.removeChildren();
+
+		var originalPoint = {x: selection.getX(), y: selection.getY()};
+
+		var down = false;
+
+      	imageObj.onload = function() {
+
+      		//setup stage
+      		stage.setWidth(imageObj.width);
+      		stage.setHeight(imageObj.height);
+      		//reset selection
+      		selection.setWidth(0);
+      		selection.setHeight(0);
+       	 	// add the shape to the layer
+	        layer.add(selfie);
+			layer.add(background);
+			layer.add(selection);
+			layer.draw();
+
+			//snapshot effect
+			$('#container').addClass('animated fadeInUp');
+
+      	}; // end of imageObj.onload
+
+		$(document).on('mousedown', function(e){
+			if (stage){
+				if(mouse == 'up'){
+					mouse = 'down';
+					console.log('Up: ' + mouse);
+				}
+
+				selection.setX(stage.getPointerPosition().x);
+				selection.setY(stage.getPointerPosition().y);
+				x = selection.getX();
+				y = selection.getY();
+
+			}
+
+		});
+
+		$(document).on('mousemove', function(e){
+			if (stage){
+				if(mouse == 'up') return;
+
+				selection.setWidth(stage.getPointerPosition().x - selection.getX());
+				selection.setHeight(stage.getPointerPosition().y - selection.getY());
+
+				width = selection.getWidth();
+				height = selection.getHeight();
+				layer.draw();
+			}
+		});
+
+		$(document).on('mouseup', function(){
+			if (stage){
+
+					if(mouse == 'down'){
+						mouse = 'up';
+						console.log('Down: ' + mouse);
+						console.log('Params: X:' + x + ", Y:"+y+ ", W:"+width+ ", H:"+height);
+
+					}
+				}
+		});
+
+	    
+	} // End of Kinetic Function
+
+};//End of new SnapshotCtrl
+
+
+
+
+app.directive("ngFileSelect",function(){
+
+  return {
+    link: function($scope,el){
+
+      el.bind("change", function(e){
+
+        $scope.file = (e.srcElement || e.target).files[0];
+        $scope.getFile();
+      })
+
+    }
+
+  }
+})
+
+function LoginCtrl($scope){
+	//create proper login methods etc...
+	$scope.username = 'username';
+	$scope.login = function(){
+		console.log($scope.username);
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST','/loggedin?username='+$scope.username);
+		xhr.send();
+		window.location.href = 'http://'+ip+':'+port+'/loggedin?username='+$scope.username;
+		}
+}
+
+function LayoutCtrl($scope){
+
+}
+
+function IndexCtrl($scope){
+
+}
+
+function StickerCtrl($scope){
+	var img = angular.element("#picture").attr('src');
+	var background = new Image();
+  	var imageObj = new Image();
+	var hatObj = new Image();
+
+	$scope.background = background;
+	$scope.imageObj = imageObj;
+	$scope.hatObj = hatObj;
+	imageObj.src = img;
+	background.src = 'img/background.jpg'
+	hatObj.src = 'img/hat.png'
+
+
+	var stage = new Kinetic.Stage({
+    container: 'container',
+    width: background.width,
+    height: background.height
+  	});
+
+    var layer = new Kinetic.Layer();
+
+
+  	imageObj.onload = function() {
+    	var floater = new Kinetic.Image({
+      		x: 0,
+      		y: 0,
+      		image: imageObj,
+      		width: imageObj.width,
+      		height: imageObj.height,
+			draggable:true
+    	});
+		var backgroundImg = new Kinetic.Image({
+			x:0,
+			y:0,
+			image: background,
+			width: background.width,
+			height: background.hidth
+		})
+		var hat = new Kinetic.Image({
+			x:0,
+			y:0,
+			image: hatObj,
+			width: hatObj.width,
+			height: hatObj.hidth,
+			draggable:true
+		})
+
+		layer.add(backgroundImg);
+		layer.add(floater);
+		layer.add(hat);
+
+
+        // add the shape to the layer
+		hat.hide();
+		stage.add(layer);
+
+        // add button event bindings
+        document.getElementById('show').addEventListener('click', function() {
+		hat.show();
+        layer.draw();
+        }, false);
+
+		var addHat = function(){
+			hat.show();
+			layer.draw();
+		}
+
+	}
+}
