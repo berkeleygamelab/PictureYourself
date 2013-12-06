@@ -1,24 +1,4 @@
-/*.tabs a{
-  cursor: pointer;
-  padding: 5px;
-  background: #fff;
-  color: #000;
-  border: 1px solid #666;
-}
-.tabs a:hover, .tabs a.active{
-  background: #666;
-  color: #fff;
-}
 
-.tabContent{
-  border: 1px solid #666;
-  margin: 5px 0;
-  padding: 5px;
-  width: 244px;
-  height: 613px;
-  overflow: auto;
-}
-*/
 .sticker{
   width: 80px;
   height: 80px;
@@ -33,17 +13,6 @@
   width: 155px;
   height: 155px;
 }
-/*
-#container{
-  border: 1px solid #666;
-  position: absolute;
-  top:2px;
-  left: 300px;
-  background-size: 950px 650px;
-  width: 950px;
-  height: 650px;
-}*/
-
 /* main.css
 // 11/27/2013 by Hiro Kai
 */
