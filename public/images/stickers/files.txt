@@ -108,7 +108,6 @@ winterhatblack.png
 yellowpajamas.png
 
 ./Dorm Room Pack:
-DormBGRND.png
 bed.png
 bluecalpillow.png
 bluepillow.png
