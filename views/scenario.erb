@@ -3,72 +3,71 @@
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src='/js/scenario.js'></script>
+    <script type="text/javascript" src='/js/tabs.js'></script>
 
  <div ng-controller='ScenarioCtrl' >
 
-
-  <div class="tabs">
-    <a data-toggle="tab1"><img src="/images/img/stickers.png" width="50"></a>
-    <a data-toggle="tab2"><img src="/images/img/backgrounds.png" width = "50"></a>
-    <a data-toggle="tab3"><img src="/images/img/filters.png"></a>
-    <a data-toggle="tab4"><img src="/images/img/borders.png"></a>
-  </div>
-
-  <div class="tabContent">
-    <div id="tab1" >
-      <h3> Your selfie!</h3>
-      <img class='sticker' id='selfie' src='' >
-
-      <h3>Stickers</h3>
-
+  <div ng-controller='TabsCtrl'>
+    <br/>
+    <br/>
+    <br/>
+    <div class="tabs">
+      <!-- <a data-toggle="tab1"> --><img src="/images/img/stickers.png" width="50" ng-click='show_tab("stickers")'><!-- </a> -->
+     <!--  <a data-toggle="tab2"> --><img src="/images/img/backgrounds.png" width = "50" ng-click='show_tab("backgrounds")'><!-- </a> -->
+     <!--  <a data-toggle="tab3"> --><img src="/images/img/filters.png" ng-click='show_tab("filters")'></a>
+      <!-- <a data-toggle="tab4"> --><img src="/images/img/borders.png" ng-click='show_tab("frames")'></a>
     </div>
 
-    <div id="tab2">
-      <h3>Backgrounds</h3>
-      <img class = 'background' id='back1' src="/images/Rec1.jpg">
-      <img class = 'background' id='back2' src="/images/Rec2.jpg">
-      <img class = 'background' id='back3' src="/images/Rec3.jpg">
-      <img class = 'background' id='back4' src="/images/Rec4.jpg">
-      <img class = 'background' id='back5' src="/images/Rec5.jpg">
-      <img class = 'background' id='back6' src="/images/Rec6.jpg">
-      <img class = 'background' id='back7' src="/images/Rec7.jpg">
-      <img class = 'background' id='back8' src="/images/Rec8.jpg">
-      <img class = 'background' id='back9' src="/images/Rec9.jpg">
-    </div>
+    <div class="tabContent">
 
-    <div id="tab3">
+      <div id="tab1" ng-show='tabs.stickers'>
+        <h3> Your selfie!</h3>
+        <img class='sticker' id='selfie' src='' >
 
-      <div id='filter_div'>
-
-        Blur: <input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Grey: <input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Sepia: <input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Saturate: <input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Invert: <input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Opacity: <input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Bright: <input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-
-        Contrast: <input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+        <h3>Stickers</h3>
 
       </div>
 
-      <div id='reset_div'>
-        <input class = 'filter' id = 'reset_plus' type='button' value = '-'>Reset<input id='reset_minus' type='button' value='+'>
+      <div id="tab2" ng-show='tabs.backgrounds'>
+        <h3>Backgrounds</h3>
+        <img class = 'background' id='back1' src="/images/Rec1.jpg">
+        <img class = 'background' id='back2' src="/images/Rec2.jpg">
+        <img class = 'background' id='back3' src="/images/Rec3.jpg">
+        <img class = 'background' id='back4' src="/images/Rec4.jpg">
+        <img class = 'background' id='back5' src="/images/Rec5.jpg">
+        <img class = 'background' id='back6' src="/images/Rec6.jpg">
+        <img class = 'background' id='back7' src="/images/Rec7.jpg">
+        <img class = 'background' id='back8' src="/images/Rec8.jpg">
+        <img class = 'background' id='back9' src="/images/Rec9.jpg">
+      </div>
+
+      <div id="tab3" ng-show='tab.filters'>
+
+        <div id='filter_div'>
+
+          Blur: <input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Grey: <input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Sepia: <input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Saturate: <input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Invert: <input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Opacity: <input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Bright: <input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          Contrast: <input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        </div>
+
+        <div id='reset_div'>
+          <input class = 'filter' id = 'reset_plus' type='button' value = '-'>Reset<input id='reset_minus' type='button' value='+'>
+        </div>
+
+      </div>
+
+      <div id="tab4" ng-show='tabs.frames'>
+        <h3>Frames</h3>
       </div>
 
     </div>
-
-    <div id="tab4">
-      <h3>Frames</h3>
-    </div>
-
-  </div>
+  </div> <!-- Tabs Ctrl -->
 
   <div id = "container" >
   </div><!-- KineticJS Canvas -->
