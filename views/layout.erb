@@ -28,9 +28,9 @@
 		</style>
 	</head>
 
-	<body>
+	<body  style='background-color: #E8E8E7; min-width: 1000px;'>
 		<div ng-controller='LayoutCtrl'>
-
+		<div class="outside">
 		 <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
 		 <p>
 		      <a href="/" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
@@ -47,6 +47,7 @@
 		  </div>
 
 			<%= yield %>
+		</div>
 
 		</div> <!-- End of LayoutCtrl-->
 	</body>

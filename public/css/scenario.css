@@ -1,4 +1,4 @@
-.tabs a{
+/*.tabs a{
   cursor: pointer;
   padding: 5px;
   background: #fff;
@@ -18,7 +18,7 @@
   height: 613px;
   overflow: auto;
 }
-
+*/
 .sticker, #selfie{
   width: 120px;
   height: 120px;
@@ -28,7 +28,7 @@
   width: 120px;
   height: 120px;
 }
-
+/*
 #container{
   border: 1px solid #666;
   position: absolute;
@@ -37,7 +37,7 @@
   background-size: 950px 650px;
   width: 950px;
   height: 650px;
-}
+}*/
 
 /* main.css
 // 11/27/2013 by Hiro Kai
@@ -46,7 +46,7 @@
 
 /* Setting minimum size of the entire content so that a horizontal scroll bar appears when the window is small. */
 
-.container {
+.outside {
   min-width: 1050px;
 }
 
@@ -149,7 +149,7 @@ div.signout {
 //Content frame on the right side
 */
 
-#mainframe {
+#container {
   height: 100%;
   background: white;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);

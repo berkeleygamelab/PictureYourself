@@ -7,22 +7,31 @@
 </head> -->
 <!-- <body
  -->
- <body style='background-color: #E8E8E7; min-width: 1000px;'>
+
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src='/js/scenario.js'></script>
 
  <div ng-controller='ScenarioCtrl' >
+ <div class="row" id='framecontainer'>
 
+  <div class='col-md-3 col-sm-3 col-xs-3 col-md-offset-1 col-sm-offset-1 col-xs-offset-1' id='toolbox'>
+<!--   <div class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
+ -->
 
-  <div class="tabs">
-    <a data-toggle="tab1"><img src="/images/img/stickers.png" width="50"></a>
-    <a data-toggle="tab2"><img src="/images/img/backgrounds.png" width = "50"></a>
-    <a data-toggle="tab3"><img src="/images/img/filters.png"></a>
-    <a data-toggle="tab4"><img src="/images/img/borders.png"></a>
+  <div class="tabs" >
+    <ul class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
+      <li> <a data-toggle="tab1"><img src="/images/img/stickers.png"></a></li>
+
+      <li><a data-toggle="tab2"><img src="/images/img/backgrounds.png"></a></li>
+
+      <li><a data-toggle="tab3"><img src="/images/img/filters.png"></a></li>
+
+      <li><a data-toggle="tab4"><img src="/images/img/borders.png"></a></li>
+    </ul>
   </div>
 
-  <div class="tabContent">
+  <div class="tabContent" id = "toolboxbody">
     <div id="tab1" >
       <h3> Your selfie!</h3>
       <img class='sticker' id='selfie' src='' >
@@ -64,15 +73,16 @@
     <div id="tab4">
       <h3>Frames</h3>
     </div>
-
+  </div>
   </div>
 
-  <div id = "container" >
-</div><!-- KineticJS Canvas -->
-<div id='save_div'>
+  <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 600px ! important;'></div><!-- KineticJS Canvas -->
+</div>
+
+<!-- <div id='save_div'>
   <button type='button' id='save' ng-click='create_image()'>Save as image</button>
   <a ng-href="{{image_download}}" id='download_link' download='scenario.jpg'>Download</a>
-  </div>
+  </div> -->
 
 
   <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -80,7 +90,7 @@
   <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
   <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script> -->
 
-</body>
+
 <!--</html> -->
 
 
