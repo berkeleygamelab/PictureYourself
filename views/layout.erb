@@ -8,6 +8,8 @@
 
 		<script src='/js/modernizr-latest.js'></script>
 		<script src='/js/compatibility.js'></script>
+		<script type="text/javascript">checkCompatibility();
+		</script>
 
 		<script src='/js/jquery-2.0.3.min.js'> </script>
 		<script src='/js/angular.min.js'> </script>
@@ -28,6 +30,8 @@
 	</head>
 
 	<body  style='background-color: #E8E8E7; min-width: 1000px;'>
+		<div id="compatibility" style="visibility:hidden; width:636px; height:69px; border:1px solid">
+		</div>
 		<div ng-controller='LayoutCtrl'>
 			<div class="outside"> <!--container-->
 			 <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
