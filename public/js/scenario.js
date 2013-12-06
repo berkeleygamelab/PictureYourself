@@ -142,7 +142,6 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     })
 
 
-
     //Grab Stickers
     $http.get('test/stickers').success(function(data){
         angular.forEach(data,function(sticker){
