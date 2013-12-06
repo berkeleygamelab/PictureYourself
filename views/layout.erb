@@ -3,6 +3,7 @@
 	<head>
 		<title>Picture Yourself</title>
 		<link rel="stylesheet" type="text/css" href="/css/PictureYourself.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/scenario.css"/>
 
 		<script src='/js/jquery-2.0.3.min.js'> </script>
 		<script src='/js/angular.min.js'> </script>
@@ -12,7 +13,7 @@
 
 
 		<script src='/js/helpers.js'></script>
-		
+
 		<script> var app = angular.module('PictureYourselfApp', ['ngResource']); </script>
 		<script src='/js/upload.js'></script>
 
@@ -30,9 +31,24 @@
 	<body>
 		<div ng-controller='LayoutCtrl'>
 
+		 <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
+		 <p>
+		      <a href="/" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
+		      <a  class="navbar-link"><img class='navbaricon' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
+		      </p>
+		      <p class="nav-adjust-right">
+		      <a  class="navbar-link"><img class='navbaricon' alt='Take picture' src='/images/img/new_cam.png'></a>
+		      <a  class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
+		      <a  class="navbar-link"><img class='navbaricon' alt='Settings'  src='/images/img/new_config.png'></a>
+		      </p>
+		    </nav>
+		  <div class="row signout">
+		    <span>SIGN OUT</span>
+		  </div>
+
 			<%= yield %>
 
-		</div> <!-- End of LayoutCtrl>
+		</div> <!-- End of LayoutCtrl-->
 	</body>
 
 </html>
