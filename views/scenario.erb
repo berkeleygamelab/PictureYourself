@@ -11,42 +11,27 @@
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src='/js/scenario.js'></script>
+    <script type="text/javascript" src='/js/caman.full.min.js'></script>
     <script type="text/javascript" src='/js/tabs.js'></script>
 
  <div ng-controller='ScenarioCtrl' >
- <div class="row" id='framecontainer'>
+  <div class="row" id='framecontainer'> 
 
   <div class='col-md-3 col-sm-3 col-xs-3 col-md-offset-1 col-sm-offset-1 col-xs-offset-1' id='toolbox'>
 <!--   <div class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
  -->
   <div ng-controller='TabsCtrl'>
-    <br/>
-    <br/>
-    <br/>
     <div class="tabs">
-      <!-- <a data-toggle="tab1"> --><img src="/images/img/stickers.png" width="50" ng-click='show_tab("stickers")'><!-- </a> -->
-     <!--  <a data-toggle="tab2"> --><img src="/images/img/backgrounds.png" width = "50" ng-click='show_tab("backgrounds")'><!-- </a> -->
-     <!--  <a data-toggle="tab3"> --><img src="/images/img/filters.png" ng-click='show_tab("filters")'></a>
-      <!-- <a data-toggle="tab4"> --><img src="/images/img/borders.png" ng-click='show_tab("frames")'></a>
+
+      <ul class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
+        <li> <img src="/images/img/stickers.png" ng-click='show_tab("stickers")'></li>
+        <li> <img src="/images/img/backgrounds.png" ng-click='show_tab("backgrounds")'></li>
+        <li> <img src="/images/img/filters.png" ng-click='show_tab("filters")'></li>
+        <li> <img src="/images/img/borders.png" ng-click='show_tab("frames")'></li>
+      </ul>
+
     </div>
-
-  <div class="tabs" >
-    <ul class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
-      <li> <a data-toggle="tab1"><img src="/images/img/stickers.png"></a></li>
-
-      <li><a data-toggle="tab2"><img src="/images/img/backgrounds.png"></a></li>
-
-      <li><a data-toggle="tab3"><img src="/images/img/filters.png"></a></li>
-
-      <li><a data-toggle="tab4"><img src="/images/img/borders.png"></a></li>
-    </ul>
-  </div>
-    <div class="tabContent">
-
-  <div class="tabContent" id = "toolboxbody">
-    <div id="tab1" >
-      <h3> Your selfie!</h3>
-      <img class='sticker' id='selfie' src='' >
+    <div class='tabContent' id='toolboxbody'>
       <div id="tab1" ng-show='tabs.stickers'>
         <h3> Your selfie!</h3>
         <img class='sticker' id='selfie' src='' >
@@ -68,18 +53,28 @@
         <img class = 'background' id='back9' src="/images/Rec9.jpg">
       </div>
 
-      <div id="tab3" ng-show='tab.filters'>
+      <div id="tab3" ng-show='tabs.filters'>
 
         <div id='filter_div'>
-
-          Blur: <input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Grey: <input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Sepia: <input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Saturate: <input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Invert: <input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Opacity: <input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Bright: <input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
-          Contrast: <input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+          <table>
+            <tr>
+          <td>Blur:</td><td><input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+        </tr><tr>
+          <td>Grey:</td><td><input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+          <td>Sepia:</td><td><input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+          <td>Saturate:</td><td><input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+          <td>Invert:</td><td><input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+          <td>Opacity:</td><td><input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+          <td>Bright:</td><td><input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+          <td>Contrast:</td><td><input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+          </tr><tr>
+        </table>
 
         </div>
 
@@ -89,24 +84,21 @@
 
       </div>
 
-  <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 600px ! important;'></div><!-- KineticJS Canvas -->
-</div>
-
-<!-- <div id='save_div'>
       <div id="tab4" ng-show='tabs.frames'>
         <h3>Frames</h3>
       </div>
-
     </div>
-  </div> <!-- Tabs Ctrl -->
+  </div> <!-- Tabs Ctrl-->
+    
+  </div> <!-- Toolbox -->
 
-  <div id = "container" >
-  </div><!-- KineticJS Canvas -->
+<div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 600px ! important;'></div><!-- KineticJS Canvas -->
+</div> <!-- Framecontainer -->
 
 <div id='save_div'>
   <button type='button' id='save' ng-click='create_image()'>Save as image</button>
-</div>
 
+</div>
 
 </body>
 
