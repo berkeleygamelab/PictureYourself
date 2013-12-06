@@ -1,20 +1,11 @@
 
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="/css/scenario.css">
-<meta charset=utf-8 />
-</head> -->
-<!-- <body
- -->
  <body style='background-color: #E8E8E7; min-width: 1000px;'>
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <script src='/js/scenario.js'></script>
-    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+    <!-- <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script> -->
 
  <div ng-controller='ScenarioCtrl' >
- <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
  <p>
       <a href="#" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
       <a href="#" class="navbar-link"><img class='navbaricon' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
@@ -59,19 +50,30 @@
     </div>
 
     <div id="tab3">
-      <h3>Filters</h3>
-      <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
-      <!--<input class = 'filter' id = 'blur2' type='button' value = 'Blur'> -->
-		Blur Slider<input id="slider" type="range" min="0" max="40" step="1" value="20">
-      <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
-      <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
-      <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
-      <input class = 'filter' id = 'invert' type='button' value = 'Invert'>
-      <input class = 'filter' id = 'opacity' type='button' value = 'Opacity'>
-      <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
-      <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
-      <input class = 'filter' id = 'reset' type='button' value = 'Reset'>
 
+      <div id='filter_div'>
+
+        Blur: <input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Grey: <input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Sepia: <input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Saturate: <input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Invert: <input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Opacity: <input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Bright: <input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+        Contrast: <input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'>
+
+      </div>
+
+      <div id='reset_div'>
+        <input class = 'filter' id = 'reset_plus' type='button' value = '-'>Reset<input id='reset_minus' type='button' value='+'>
+      </div>
 
     </div>
 
@@ -82,21 +84,13 @@
   </div>
 
   <div id = "container" >
-</div><!-- KineticJS Canvas -->
+  </div><!-- KineticJS Canvas -->
+
 <div id='save_div'>
   <button type='button' id='save' ng-click='create_image()'>Save as image</button>
-  <a ng-href="{{image_download}}" id='download_link' download='scenario.jpg'>Download</a>
-  </div>
+</div>
 
-
-  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script src="/js/scenario.js"></script>
-  <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
-  <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script> -->
 
 </body>
-<!--</html> -->
 
-
-<!--http://code-tricks.com/create-a-simple-html5-tabs-using-jquery/-->
 
