@@ -251,7 +251,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
       	}; // end of imageObj.onload
 
-		$(document).on('mousedown', function(e){
+		$(document).on('mousedown touchstart', function(e){
 			if (stage){
 				if(mouse == 'up'){
 					mouse = 'down';
@@ -267,7 +267,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 		});
 
-		$(document).on('mousemove', function(e){
+		$(document).on('mousemove touchmove', function(e){
 			if (stage){
 				if(mouse == 'up') return;
 
@@ -280,7 +280,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			}
 		});
 
-		$(document).on('mouseup', function(){
+		$(document).on('mouseup touchend', function(){
 			if (stage){
 					if(mouse == 'down'){
 						mouse = 'up';
