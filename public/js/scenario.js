@@ -47,6 +47,9 @@ $(document).ready(function() {
             }
             $('#container').css('-webkit-filter', filter);
         });
+
+    //fixes positioning issue with kineticJS canvas
+   $(".kineticjs-content").css('position',''); 
 });
 
 
@@ -62,14 +65,10 @@ $(document).ready(function() {
 function ScenarioCtrl($scope, $resource, $http, $log){
     var previous_edit = {'image':null,'collapse':null};
 
-    var filters = {'grey_slider': Kinetic.Filters.Grayscale,
-                    'blur_slider':Kinetic.Filters.Blur,
-                    'bright_slider':Kinetic.Filters.Brighten}
-
     var stage = new Kinetic.Stage({
         container: 'container',
-        width: $('#container').width() ,
-        height: $('#container').height()
+        width: 630,//$('#container').width(),
+        height: 500//$('#container').height()
     });
 
     var layer = new Kinetic.Layer();
@@ -104,8 +103,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         image:backgroundObj,
         x:0,
         y:0,
-        width:$('#container').width(),
-        height:$('#container').height()
+        width:630,//$('#container').width(),
+        height:500//$('#container').height()
     });
     backgroundObj.src = '/images/Rec1.jpg';
 
