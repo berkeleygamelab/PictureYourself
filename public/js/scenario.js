@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = false;
+var debug_flag = true;
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -12,6 +12,7 @@ $(document).ready(function() {
     * Gets user selfie
     */
     //also have to refresh page to get changes, why?
+    //set pyuserid as global variable to easily access it
 
     $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
     //debug("ID: " + getCookie('pyuserid'));
@@ -415,6 +416,27 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             previous_edit.image = null;
         }    
         layer.draw();
+    }
+
+    $scope.call_email = function(){
+
+        var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+        //check if typed input is correct
+        if(emails != null) {                      
+          debug('calling email');
+          //remove spaces to have one long string as argv for python
+          emails = emails.replace(/\s+/g, '');        
+          debug(emails);
+          //use as scope variable instead
+          pyuserid = getCookie('pyuserid')
+          stage.toDataURL({
+            callback: function(dataUrl) {
+                debug('callback');
+                //from helpertools
+                email(pyuserid, emails, dataUrl);
+            }
+          })          
+        }
     }
 
 } // End of Scenario Controller

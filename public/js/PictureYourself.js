@@ -1,5 +1,6 @@
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
+var debug_flag = false;
 
 function setCookie(c_name,value,exdays) {
 	var exdate=new Date();
@@ -28,7 +29,7 @@ function getCookie(c_name) {
 
 function checkCookie(pyuserid){
   if (pyuserid!=null && pyuserid!="")
-  	//console.log('creating pyuserid'); //DEV
+  	debug('pyuserid already created')
 	else  {
 		var randomID = GUID();
   	// check if value GUID is already registered on server or as cookie
@@ -43,37 +44,6 @@ function GUID(){
 		return v.toString(16);
 	});
 	return guid;
-}
-
-//should this be inside stickerCtrl?
-function emailCtrl($scope, $http){ //$http needed?
-  $scope.pyuserid = getCookie(pyuseridtag);
-
-  $scope.email = function(emails){
-    $scope.emails = emails;
-    var formData = {"pyuserid":$scope.pyuserid, "data":canvas.toDataURL('image/png')};
-    $.ajax({
-      url: '/email',
-      type: 'POST',
-      data: formData,
-      success: function(){        
-        $scope.send_email();
-      }
-    })
-  }
-
-  $scope.send_email = function (){
-    var formData = {"pyuserid":$scope.pyuserid, "emails":$scope.emails};
-    $.ajax({
-      url: '/send_email',
-      type: 'POST',
-      data: formData,
-      success: function(){
-        //maybe confirm that the email has been sent and them redirect?
-        window.location = '/selfie';
-      }
-    })
-  }
 }
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
@@ -344,6 +314,14 @@ app.directive("ngFileSelect",function(){
   }
 })
 
+function LayoutCtrl($scope){
+  
+}
+
+function IndexCtrl($scope){
+  
+}
+
 function StickerCtrl($scope){
 	var img = angular.element("#picture").attr('src');
 	var background = new Image();
@@ -413,4 +391,10 @@ function StickerCtrl($scope){
 		}
 
 	}
+}
+
+function debug(msg){
+    if(debug_flag){
+        console.log(msg);
+    }
 }

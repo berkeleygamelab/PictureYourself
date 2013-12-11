@@ -11,22 +11,20 @@ USERNAME = "picyourfuture"
 PASSWORD = "Py12ab21yP"
 SERVER = "smtp.gmail.com"
 SUBJECT = "PIC YOUR FUTURE"
-TEXT = 'PIC Your Future at Berkeley'
+TEXT = 'PIC Your Future at Berkeley\nwww.py-bcnm.berkeley.edu\n;)'
 SEND_FROM = 'picyourfuture@gmail.com'
 
-send_tos = sys.argv[1]
-send_to = send_tos.split(',')
+send_to = sys.argv[1] #person@domain.com,person@domain.com
 filepath = sys.argv[2]
-
-print send_to
+  
+print send_to.replace(',', ', ')  
 print filepath
-COMMASPACE = ', '
 
 try:  
     msg = MIMEMultipart()
     msg['Subject'] = SUBJECT
     msg['From'] = SEND_FROM
-    msg['To'] = COMMASPACE.join(send_to)
+    msg['To'] = send_to.replace(',', ', ')    
 
     part1 = (MIMEText(TEXT, 'plain'))
     fp = open(filepath, 'rb')
