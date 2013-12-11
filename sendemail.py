@@ -30,6 +30,7 @@ try:
     fp = open(filepath, 'rb')
     part2 = MIMEImage(fp.read(), _subtype= "jpeg")
     fp.close()
+    part2.add_header('Content-Disposition', 'attachment', filename='selfieAt.png')
     msg.attach(part1)
     msg.attach(part2)
 
