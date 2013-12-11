@@ -6,7 +6,7 @@ function setCookie(c_name,value,exdays) {
 	exdate.setDate(exdate.getDate() + exdays);
 	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
 	document.cookie=c_name + "=" + c_value;
-	console.log('set cookie');
+	//console.log('set cookie'); //DEV
 }
 
 function getCookie(c_name) {
@@ -28,10 +28,10 @@ function getCookie(c_name) {
 
 function checkCookie(pyuserid){
   if (pyuserid!=null && pyuserid!="")
-  	console.log('creating pyuserid');
+  	//console.log('creating pyuserid'); //DEV
 	else  {
 		var randomID = GUID();
-  	// check if value GUID is already registered on server
+  	// check if value GUID is already registered on server or as cookie
     setCookie(pyuseridtag,randomID,pyuseridlife);
     console.log(getCookie(pyuseridtag));
   }
@@ -43,6 +43,37 @@ function GUID(){
 		return v.toString(16);
 	});
 	return guid;
+}
+
+//should this be inside stickerCtrl?
+function emailCtrl($scope, $http){ //$http needed?
+  $scope.pyuserid = getCookie(pyuseridtag);
+
+  $scope.email = function(emails){
+    $scope.emails = emails;
+    var formData = {"pyuserid":$scope.pyuserid, "data":canvas.toDataURL('image/png')};
+    $.ajax({
+      url: '/email',
+      type: 'POST',
+      data: formData,
+      success: function(){        
+        $scope.send_email();
+      }
+    })
+  }
+
+  $scope.send_email = function (){
+    var formData = {"pyuserid":$scope.pyuserid, "emails":$scope.emails};
+    $.ajax({
+      url: '/send_email',
+      type: 'POST',
+      data: formData,
+      success: function(){
+        //maybe confirm that the email has been sent and them redirect?
+        window.location = '/selfie';
+      }
+    })
+  }
 }
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
@@ -59,7 +90,8 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var video = document.querySelector('video');
 
 	var button = document.querySelector('#button'); // need this?
-    $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
+    $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
+
 
     //site setup
     $scope.camera = false;
@@ -156,6 +188,9 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.get_camera = function(){
+    /*if iPhone, do input...)
+      else if no getUserMedia() do fileupload.
+    */
 		$scope.camera = getUserMedia();
 		$scope.snapshot_button.start = false;
 		$scope.snapshot_button.snap_it = true;
