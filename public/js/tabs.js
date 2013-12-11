@@ -1,3 +1,4 @@
+debug = true;
 function TabsCtrl($scope, $http){
 	$scope.tabs = {'stickers':true,'backgrounds':false,'filters':false,'frames':false}
 

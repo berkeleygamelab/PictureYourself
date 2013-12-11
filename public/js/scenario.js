@@ -62,13 +62,13 @@ $(document).ready(function() {
 //try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
 
 
-function ScenarioCtrl($scope, $resource, $http, $log){
-    $http.get('/stickers').success(
-        function(data)
-        {
-            debug(data);
-            $scope.test = data;
-        });
+function ScenarioCtrl($scope, $resource, $http, $compile){
+    // $http.get('/stickers').success(
+    //     function(data)
+    //     {
+    //         debug(data);
+    //         $scope.test = data;
+    //     });
 
     var previous_edit = {'image':null,'collapse':null};
 
@@ -149,17 +149,25 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     })
 
     // Grab stickers
+    $http.get('/categories')
     $http.get('/stickers').success(
     function(data){
-        // debug(data);
+        data = angular.fromJson(data);
         $scope.visible = {};
-        $scope.stickers = data;
-        angular.forEach(data,
+        $scope.stickers = data['stickers'];
+        $scope.categories = data['categories'];
+
+        angular.forEach($scope.stickers,
             function(stickers,category){
                 $scope.visible[category] = true;
-                $("#sticker_tab").append("<div id="+category+"_subtab class='subtab_title' "+
-                    "ng-click='toggle(\""+category+"\")''></div>"+
-                    "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>");
+                //create the dynamic html
+                html= "<div id="+category+"_subtab class='subtab_title' "+
+                    "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
+                    "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
+                //compile it with angular so functions work
+                compiledElement = $compile(html)($scope);
+                $("#sticker_tab").append(compiledElement);
+                //add stickers
                 angular.forEach(stickers,
                     function(path,name){
                          $("#"+category+"_content").append('<img class=\'sticker\' src="/' + path + '" name="/' + name + '"/>');
@@ -171,10 +179,10 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
     })//success
 
+
     $scope.toggle = function(category){
-
+        $scope.visible[category] = !$scope.visible[category];
     }
-
 
 
     // Drag and drop stickers start

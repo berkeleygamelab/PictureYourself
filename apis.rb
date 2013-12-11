@@ -1,13 +1,23 @@
 #all stickers
 get '/stickers' do
+
+	categories = {}
+
+	settings.categories.each do |cat|
+		title = cat.gsub('_',' ')
+		categories[cat] = title.split.map(&:capitalize)*' '
+	end
+
 	stickers = {}
 	settings.categories.each do |cat|
 		stickers[cat] = {}
 	end
+
 	Sticker.all.each do |sticker|
 		stickers[sticker.category][sticker.name] = sticker.source
 	end
-	stickers.to_json
+
+	"{\"stickers\":"+stickers.to_json+", \"categories\":"+categories.to_json+"}"
 end
 
 get '/stickers/:category' do
@@ -17,6 +27,7 @@ get '/stickers/:category' do
 	end
 	stickers.to_json
 end
+
 
 get '/test/stickers' do
   images  = []
