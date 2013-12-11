@@ -1,5 +1,9 @@
 //http://angular-ui.github.io/bootstrap/
 
+//This flag is used to determine if you want console output or not.
+//Don't use console.log, instead use debug("some thing you want to send to console")
+
+var debug_flag = false;
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -10,7 +14,7 @@ $(document).ready(function() {
     //also have to refresh page to get changes, why?
 
     $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
-    //console.log("ID: " + getCookie('pyuserid'));
+    //debug("ID: " + getCookie('pyuserid'));
 
     $("#toolicon li").on("click", function(){
         $(this).parent().children().removeClass("active");
@@ -79,17 +83,17 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     var stickers = []; //will store information about stickers
 
     $scope.create_image = function(){
-        console.log('called');
+        debug('called');
         $scope.image_download = 'somethingelse.jpg';
         stage.toDataURL({
             callback: function(dataUrl) {
-                console.log('callback');
+                debug('callback');
                 var link = document.createElement('a');
                 angular.element(link)
                 .attr('href', dataUrl)
                 .attr('download', 'test.jpg') // Pretty much only works in chrome
                 link.click();
-                console.log('click?')
+                debug('click?')
             }
         })
     };
@@ -116,7 +120,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     })
 
     background.on('click', function(){
-        console.log('background click')
+        debug('background click')
         collapse_last()
     })
 
@@ -132,7 +136,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     layer.add(frame);
 
     $('.frames').click(function(){
-        console.log($(this).attr('src'));
+        debug($(this).attr('src'));
         frameObj.src = $(this).attr('src');
         frame.moveToTop();
         layer.draw();
@@ -142,7 +146,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     //Grab Stickers
     $http.get('test/stickers').success(function(data){
         angular.forEach(data,function(sticker){
-           //console.log(sticker)
+           //debug(sticker)
            if(sticker.match('txt') == null)
               $("#tab1").append('<img class=\'sticker\' src="/' + sticker + '">');
         }); //forEach
@@ -183,6 +187,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         //get position relative to the container and page
         x = e.pageX - $('#container').offset().left;
         y = e.pageY - $('#container').offset().top;
+        size_offset = 60;
 
         var group = new Kinetic.Group({
             draggable: true
@@ -193,8 +198,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
            image:imageObj,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: x,
-           y: y//,
+           x: x - size_offset,
+           y: y - size_offset//,
 		   //filter: Kinetic.Filters.Blur,
            //offset:[60,60] //size determined by width, height input
         });
@@ -218,8 +223,8 @@ function ScenarioCtrl($scope, $resource, $http, $log){
                 var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
                 var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
                 var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
-                console.log(scale);
-                console.log("x,y: " + x + ',' + y);
+                debug(scale);
+                debug("x,y: " + x + ',' + y);
                   return {
                     y: Math.round((pos.y - y) * scale + y),
                     x: Math.round((pos.x - x) * scale + x)
@@ -239,7 +244,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         })
 
         delete_icon.on('click', function(){
-          console.log('DELETE')
+          debug('DELETE')
           group.remove();
           layer.draw();
         })
@@ -283,7 +288,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
         //hide and show resize and scaler
         image.on('click',function(){
-            console.log('image click') 
+            debug('image click') 
             if (previous_edit.image != null)
                 previous_edit.collapse();
 
@@ -322,7 +327,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         })
 
         rotate.on('dragmove', function(e){ //dragmove
-            // console.log(mouseX + " " + mouseY);
+            // debug(mouseX + " " + mouseY);
             var dx = startX - parseInt(e.clientX - offsetX);
             var dy = startY - parseInt(e.clientY - offsetY);
             var angle = Math.atan2(dy, dx);
@@ -349,6 +354,27 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
         })
 
+        //Mouse events for hover over
+        /*
+        image.on('mouseenter', function(){
+                scalerX.setVisible(true);
+                scalerY.setVisible(true);
+                delete_icon.setVisible(true);
+                rotate.setVisible(true);
+                layer.draw();
+        });
+
+        image.on('mouseleave', function(){
+
+                scalerX.setVisible(false);
+                scalerY.setVisible(false);
+                delete_icon.setVisible(false);
+                rotate.setVisible(false);
+                layer.draw();
+        })
+
+        */
+
         //construct group to drop after image loads
         imageObj.onload = function(){
             group.add(image);
@@ -357,6 +383,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             group.add(delete_icon);
             group.add(rotate);
             layer.add(group);
+            reposition();
             layer.draw()
         };
 
@@ -368,6 +395,14 @@ function ScenarioCtrl($scope, $resource, $http, $log){
           scalerX.setAbsolutePosition(x + image.getWidth(),y + image.getHeight()/2);
           scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
           delete_icon.setAbsolutePosition(x + image.getWidth(), y);
+
+          //Position for hover over
+          /**
+          rotate.setAbsolutePosition(x + rotate.getWidth(), y + rotate.getHeight());
+          scalerX.setAbsolutePosition(x + image.getWidth() - scalerX.getWidth(), y + image.getHeight()/2);
+          scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight() - scalerY.getHeight());
+          delete_icon.setAbsolutePosition(x + image.getWidth() - delete_icon.getWidth(), y + delete_icon.getHeight());
+          **/
 
         } //End of reposition
 
@@ -410,5 +445,12 @@ $(window).on('beforeunload', function(){
 
     xhr2.send(formData);
 });
+
+//Used to make it easy to turn on and off console.log
+function debug(msg){
+    if(debug_flag){
+        console.log(msg);
+    }
+}
 
 
