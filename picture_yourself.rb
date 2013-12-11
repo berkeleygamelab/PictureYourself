@@ -88,7 +88,7 @@ end
 
 #write email behaviour (save image, attach to email)
 post '/email' do
-  puts "EMAIL"
+  puts "email\n"
 
   puts params
 
@@ -103,15 +103,19 @@ post '/email' do
     puts "write"
       f.write(Base64.decode64(data))
   end
+  status 200
 end
 
-post 'send_email' do
-  puts "SEND_EMAIL"
+post '/send_email' do
+  puts "send_email\n"
 
-  puts params
   pyuserid = params[:pyuserid]
   filepath = 'email/'+pyuserid+'/1.png'  
-  system('python ' + 'sendemail' + params[:emails] + ' ' + filepath)
+  emails = params[:emails]
+  puts pyuserid
+  puts filepath
+  puts emails
+  system('python ' + 'sendemail.py '+params[:emails]+' '+filepath)
 end
 
 
@@ -132,4 +136,3 @@ get '/seed' do
     end
   end
 end
-
