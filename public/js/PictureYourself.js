@@ -1,7 +1,3 @@
-//add UID to uploaded/saved file when user is not yet registered
-//Global variables for IP and port
-var port = '9393';
-var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
 
@@ -48,7 +44,6 @@ function GUID(){
 	});
 	return guid;
 }
-
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
@@ -313,26 +308,6 @@ app.directive("ngFileSelect",function(){
 
   }
 })
-
-function LoginCtrl($scope){
-	//create proper login methods etc...
-	$scope.username = 'username';
-	$scope.login = function(){
-		console.log($scope.username);
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST','/loggedin?username='+$scope.username);
-		xhr.send();
-		window.location.href = 'http://'+ip+':'+port+'/loggedin?username='+$scope.username;
-		}
-}
-
-function LayoutCtrl($scope){
-
-}
-
-function IndexCtrl($scope){
-
-}
 
 function StickerCtrl($scope){
 	var img = angular.element("#picture").attr('src');
