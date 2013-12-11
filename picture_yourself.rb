@@ -8,21 +8,14 @@ set :port, 80
 set :bind, '128.32.189.148'
 #trying to lock threads to avoid not receiving requests
 set :lock, true
-# DEV
+#sticker categories
+set :categories, ["accessories","backgrounds","cal_day_pack",
+                    "clothing","dorm_room_pack",
+                    "football_game_pack","frames","misc"]
 
-
-class PictureYourself
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :name, Text
-  property :picture, Text
-
-end
 
 require_relative 'apis'
 require_relative 'db'
-
 
 DataMapper.finalize.auto_upgrade!
 
@@ -30,9 +23,9 @@ get '/' do
   erb :index
 end
 
-get '/sticker' do
-  puts params
-end
+# get '/sticker' do
+#   puts params
+# end
 
 post '/fileupload' do
     data = params[:data].split(',')[1]
@@ -113,17 +106,4 @@ get '/scenario' do
   erb :scenario
 end
 
-get '/seed' do
-  file = open('public/images/stickers/files.txt','r').read
-  file = file.split("\n")
-
-  dir = ''
-  file.each do |filename|
-    if filename.include? './'
-      dir = filename.gsub(':', '').gsub('.', '')
-    elsif filename.include? ".png"
-      Sticker.create(name: dir + "/" + filename, source:'images/stickers'+ dir + "/" + filename)
-    end
-  end
-end
 

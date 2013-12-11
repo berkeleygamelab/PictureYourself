@@ -1,4 +1,4 @@
-function TabsCtrl($scope){
+function TabsCtrl($scope, $http){
 	$scope.tabs = {'stickers':true,'backgrounds':false,'filters':false,'frames':false}
 
 	$scope.show_tab = function(category){
@@ -13,5 +13,8 @@ function TabsCtrl($scope){
 			// console.log(tab + ' == ' + category + " is " + (tab == category))
 			// console.log('tab: ' + tab + " = " + value)
 		})
-	}
+	}//show_tab
+
+
+
 }

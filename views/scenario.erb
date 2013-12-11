@@ -11,11 +11,13 @@
 
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <script type="text/javascript" src='/js/tabs.js'></script>
+
     <script type="text/javascript" src='/js/scenario.js'></script>
-    <script type="text/javascript" src='/js/caman.full.min.js'></script>
-    <script type="text/javascript" src='/js/tabs.js'></script>
+
 
  <div ng-controller='ScenarioCtrl' >
+
   <div class="row" id='framecontainer'>
 
   <div class='col-md-3 col-sm-3 col-xs-3 col-md-offset-1 col-sm-offset-1 col-xs-offset-1' id='toolbox'>
@@ -32,18 +34,21 @@
       </ul>
 
     </div> <!-- Tabs -->
+
     <div class='tabContent' id='toolboxbody'>
-      <div id="tab1" ng-show='tabs.stickers'>
-        <h3> Your selfie!</h3>
-        <img class='sticker' id='selfie' src='' >
+      <div id="sticker_tab" ng-show='tabs.stickers'>
+        <div id='selfie_div'>
+          <h3> Your selfie!</h3>
+              <img class='sticker' id='selfie' src='' >
 
+        </div>
         <h3>Stickers</h3>
+        
+      </div> <!-- #sticker_tab -->
 
-      </div> <!-- Tab1 -->
-
-      <div id="tab2" ng-show='tabs.backgrounds'>
+      <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
         <h3>Backgrounds</h3>
-        <img class = 'background' id='back1' src="/images/Rec1.jpg">
+<!--    <img class = 'background' id='back1' src="/images/Rec1.jpg">
         <img class = 'background' id='back2' src="/images/Rec2.jpg">
         <img class = 'background' id='back3' src="/images/Rec3.jpg">
         <img class = 'background' id='back4' src="/images/Rec4.jpg">
@@ -55,7 +60,7 @@
         <img class = 'background' id='back6' src="/images/stickers/Backgrounds/CalDay2BGRND.png">
         <img class = 'background' id='back7' src="/images/stickers/Backgrounds/CalDayBGRND.png">
         <img class = 'background' id='back8' src="/images/stickers/Backgrounds/DormBGRND.png">
-        <img class = 'background' id='back9' src="/images/stickers/Backgrounds/footballbgrnd.png">
+        <img class = 'background' id='back9' src="/images/stickers/Backgrounds/footballbgrnd.png"> -->
       </div>  <!-- Tab2 -->
 
       <div id="tab3" ng-show='tabs.filters'>
@@ -99,13 +104,13 @@
 
       </div> <!-- Tab3 -->
 
-      <div id="tab4" ng-show='tabs.frames'>
+      <div id="frames_tab" ng-show='tabs.frames'>
         <h3>Frames</h3>
-          <img class = 'frames' id='back6' src="/images/stickers/Frames/frame1.png">
+        <!--   <img class = 'frames' id='back6' src="/images/stickers/Frames/frame1.png">
           <img class = 'frames' id='back6' src="/images/stickers/Frames/frame2.png">
           <img class = 'frames' id='back6' src="/images/stickers/Frames/frame3.png">
           <img class = 'frames' id='back6' src="/images/stickers/Frames/frame4.png">
-
+ -->
       </div> <!--tab4-->
 
     </div><!--  Toolbox body -->
