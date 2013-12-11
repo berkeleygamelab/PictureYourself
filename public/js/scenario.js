@@ -1,7 +1,6 @@
 //http://angular-ui.github.io/bootstrap/
 
 
-
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
 
@@ -57,6 +56,8 @@ $(document).ready(function() {
 
 
 function ScenarioCtrl($scope, $resource, $http, $log){
+    var previous_edit = {'image':null,'collapse':null};
+
     var filters = {'grey_slider': Kinetic.Filters.Grayscale,
                     'blur_slider':Kinetic.Filters.Blur,
                     'bright_slider':Kinetic.Filters.Brighten}
@@ -103,17 +104,20 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         height:$('#container').height()
     });
     backgroundObj.src = '/images/Rec1.jpg';
+
     backgroundObj.onload = function(){
         layer.add(background);
-        background.moveToBottom();
+        background.setZIndex(1);
         layer.draw();
     }
 
     $('.background').click(function(){
-        console.log($(this).attr('src'));
         backgroundObj.src = $(this).attr('src');
-        background.moveToBottom();
-        layer.draw();
+    })
+
+    background.on('click', function(){
+        console.log('background click')
+        collapse_last()
     })
 
     //frame selection
@@ -158,16 +162,13 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
 
 
+
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
-
-        $(".slider").each(function(){
-            $(this).attr('value',0);
-        })
-
-    //set up imageObj before creating other items that
-    //may be reliant on its dimensions
+        collapse_last();
+        //set up imageObj before creating other items that
+        //may be reliant on its dimensions
         imageObj = new Image();
         imageObj.src = dragSrcEl.src;
 
@@ -187,14 +188,15 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             draggable: true
         });
 
+
         var image = new Kinetic.Image({
            image:imageObj,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
            x: x,
-           y: y,
+           y: y//,
 		   //filter: Kinetic.Filters.Blur,
-           offset:[60,60] //size determined by width, height input
+           //offset:[60,60] //size determined by width, height input
         });
 
         //may not need, but may need to refactor code
@@ -204,13 +206,13 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         //icon for rotation
         var rotate = new Kinetic.Circle({
             x:image.getX(),
-            y:image.getY() + start_size.height/2,
+            y:image.getY(),// + start_size.height/2,
             radius:10,
             fill: 'green',
             stroke:'black',
             draggable:true,
             visible:false,
-            offset:[image.getWidth()/2,image.getHeight()/2],
+           // offset://[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos) {
                 var x = image.getAbsolutePosition().x + start_size.width/2;
                 var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
@@ -232,11 +234,12 @@ function ScenarioCtrl($scope, $resource, $http, $log){
           height:25,
           image:deleteObj,
           x:x+image.getWidth() - 10,
-          y:y,
-          offset:[image.getWidth()/2,image.getHeight()/2]
+          y:y//,
+          //offset:[image.getWidth()/2,image.getHeight()/2]
         })
 
         delete_icon.on('click', function(){
+          console.log('DELETE')
           group.remove();
           layer.draw();
         })
@@ -251,10 +254,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             stroke:'black',
             draggable:true,
             visible:false,
-            offset:[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos){
-                // var diff = pos.x - this.getAbsolutePosition().x;
-                // rotate.setX(rotate.getAbsolutePosition().x - diff);
                 return{
                     x: pos.x,
                     y: this.getAbsolutePosition().y
@@ -271,7 +271,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
           stroke:'black',
           draggable:true,
           visible:false,
-          offset:[image.getWidth()/2,image.getHeight()/2],
+          //offset:[image.getWidth()/2,image.getHeight()/2],
           dragBoundFunc: function(pos){
               return{
                 x: this.getAbsolutePosition().x,
@@ -282,20 +282,32 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
 
         //hide and show resize and scaler
-        group.on('mouseover',function(){
-            scalerX.setVisible(true);
-            scalerY.setVisible(true);
-            delete_icon.setVisible(true);
-            rotate.setVisible(true);
+        image.on('click',function(){
+            console.log('image click') 
+            if (previous_edit.image != null)
+                previous_edit.collapse();
+
+            if(previous_edit.image == image)
+                previous_edit.image = null;
+            else
+            {
+                scalerX.setVisible(true);
+                scalerY.setVisible(true);
+                delete_icon.setVisible(true);
+                rotate.setVisible(true);
+                previous_edit.image = image;
+                previous_edit.collapse = function()
+                {
+                    scalerX.setVisible(false);
+                    scalerY.setVisible(false);
+                    delete_icon.setVisible(false);
+                    rotate.setVisible(false);
+                }
+            }
+
             layer.draw();
-        });
-        group.on('mouseout',function(){
-            scalerX.setVisible(false);
-            scalerY.setVisible(false);
-            delete_icon.setVisible(false);
-            rotate.setVisible(false);
-            layer.draw();
-        });
+
+        })
 
         //set rotation
         var canvasOffset = $("#container").offset();
@@ -320,28 +332,22 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
         //set horizontal height of image
         scalerX.on('dragmove',function(){
-            var x1 = this.getX();
-            var x2 = image.getX();
-            var dx = (x1 - x2 - image.getWidth()/2)/50;
-            image.setScaleX(dx);
-            group.setSize(image.getSize());
+            var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
+            image.setWidth(image.getWidth() + diff * 2)
+            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y)
+            reposition();
             layer.draw();
         })
 
         //set vertical height of image
         scalerY.on('dragmove',function(){
-            var y1 = this.getY();
-            var y2 = image.getY();
-            var dy = (y1 - y2 - image.getHeight()/2)/50;
-            image.setScaleY(dy);
-            group.setSize(image.getSize());
+            var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
+            image.setHeight(image.getHeight() + diff * 2)
+            image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
+            reposition();
             layer.draw();
-        })
 
-  //       $('#slider').on('change',function(){
-		// 	image.setFilterRadius($('#slider').val());
-		// 	layer.batchDraw();
-		// })
+        })
 
         //construct group to drop after image loads
         imageObj.onload = function(){
@@ -354,14 +360,29 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             layer.draw()
         };
 
-    })
+        var reposition = function(){
+          var x = image.getAbsolutePosition().x;
+          var y = image.getAbsolutePosition().y;
 
-    $(".slider").change(function(){
+          rotate.setAbsolutePosition(x,y);
+          scalerX.setAbsolutePosition(x + image.getWidth(),y + image.getHeight()/2);
+          scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
+          delete_icon.setAbsolutePosition(x + image.getWidth(), y);
 
-    })
+        } //End of reposition
 
 
-}
+    }) // End of drop listener
+
+    var collapse_last = function(){
+        if(previous_edit.image != null){
+            previous_edit.collapse();
+            previous_edit.image = null;
+        }    
+        layer.draw();
+    }
+
+} // End of Scenario Controller
 
 
 
