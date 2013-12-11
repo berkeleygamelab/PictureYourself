@@ -110,6 +110,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
           debug(emails);
           //change to use scope variable instead
           pyuserid = getCookie('pyuserid')
+          $scope.image_download = 'somethingelse.jpg'; //is this needed to include selfie?
           stage.toDataURL({
             callback: function(dataUrl) {
                 debug('callback');
