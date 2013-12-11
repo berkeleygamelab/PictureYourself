@@ -99,6 +99,27 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         })
     };
 
+    $scope.call_email = function(){
+
+        var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+        //check if input is correct
+        if(emails != null) {                      
+          debug('calling email');
+          //remove spaces to have one long string as argv for python
+          emails = emails.replace(/\s+/g, '');        
+          debug(emails);
+          //change to use scope variable instead
+          pyuserid = getCookie('pyuserid')
+          stage.toDataURL({
+            callback: function(dataUrl) {
+                debug('callback');
+                //from helpertools
+                email(pyuserid, emails, dataUrl);
+            }
+          })          
+        }
+    }
+
     //Background selection
     backgroundObj = new Image();
     var background = new Kinetic.Image({
@@ -407,7 +428,6 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
         } //End of reposition
 
-
     }) // End of drop listener
 
     var collapse_last = function(){
@@ -416,28 +436,7 @@ function ScenarioCtrl($scope, $resource, $http, $log){
             previous_edit.image = null;
         }    
         layer.draw();
-    }
-
-    $scope.call_email = function(){
-
-        var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
-        //check if typed input is correct
-        if(emails != null) {                      
-          debug('calling email');
-          //remove spaces to have one long string as argv for python
-          emails = emails.replace(/\s+/g, '');        
-          debug(emails);
-          //use as scope variable instead
-          pyuserid = getCookie('pyuserid')
-          stage.toDataURL({
-            callback: function(dataUrl) {
-                debug('callback');
-                //from helpertools
-                email(pyuserid, emails, dataUrl);
-            }
-          })          
-        }
-    }
+    }    
 
 } // End of Scenario Controller
 
