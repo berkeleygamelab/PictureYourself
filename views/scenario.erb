@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="/css/scenario.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script type="text/javascript" src='/js/helpertools.js'></script>
     <script type="text/javascript" src='/js/scenario.js'></script>
     <script type="text/javascript" src='/js/caman.full.min.js'></script>
     <script type="text/javascript" src='/js/tabs.js'></script>
@@ -116,10 +117,12 @@
   <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 630px ! important; height:500px;'>
   </div><!-- KineticJS Canvas -->
 </div> <!-- Framecontainer -->
-   <div id='save_div'>
+   <div id='save_div' style="display:inline-block">
     <button type='button' id='save' ng-click='create_image()'>Save as image</button>
   </div>   <!--save_div -->
-
+   <div id='email_div' style="display:inline-block;">
+    <button type='button' id='email' ng-click='call_email()'>E-mail to friends</button>
+  </div>   <!--email_div -->
 </div> <!-- ScenarioCtrl -->
 
 

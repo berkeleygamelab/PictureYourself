@@ -61,6 +61,7 @@ post '/grabcut' do
 end
 
 get '/selfie' do
+  #TODO : check if user has PYUID / is logged before allowing access
   erb :scenario
 end
 
@@ -87,25 +88,34 @@ end
 
 #write email behaviour (save image, attach to email)
 post '/email' do
-  puts "EMAIL"
+  puts "email\n"
 
   puts params
 
   data = params[:data].split(',')[1]
-    dirname = 'email/'
-    unless File.directory?(dirname)
-      Dir.mkdir(dirname)
-    end
-    # fix - fix to have dynamic png numbers - or naming
-    File.open(dirname+'/1.png', 'wb') do |f|
-      puts "write"
-        f.write(Base64.decode64(data))
-    end
+  #how about... pyuserid
+  dirname = 'email/' + params[:pyuserid]
+  unless File.directory?(dirname)
+    Dir.mkdir(dirname)
+  end
+  # fix - fix to have dynamic png numbers - or naming (pic_index.filetype)
+  File.open(dirname+'/1.png', 'wb') do |f|
+    puts "write"
+      f.write(Base64.decode64(data))
+  end
+  status 200
 end
 
+post '/send_email' do
+  puts "send_email\n"
 
-post 'send_email' do
-
+  pyuserid = params[:pyuserid]
+  filepath = 'email/'+pyuserid+'/1.png'  
+  emails = params[:emails]
+  puts pyuserid
+  puts filepath
+  puts emails
+  system('python ' + 'sendemail.py '+params[:emails]+' '+filepath)
 end
 
 
@@ -126,4 +136,3 @@ get '/seed' do
     end
   end
 end
-

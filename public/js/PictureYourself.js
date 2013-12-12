@@ -1,16 +1,13 @@
-//add UID to uploaded/saved file when user is not yet registered
-//Global variables for IP and port
-var port = '9393';
-var ip = '127.0.0.1';
 var pyuseridtag = 'pyuserid' //cookie for GUID
 var pyuseridlife = 1;
+var debug_flag = false;
 
 function setCookie(c_name,value,exdays) {
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate() + exdays);
 	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
 	document.cookie=c_name + "=" + c_value;
-	console.log('set cookie');
+	//console.log('set cookie'); //DEV
 }
 
 function getCookie(c_name) {
@@ -32,10 +29,10 @@ function getCookie(c_name) {
 
 function checkCookie(pyuserid){
   if (pyuserid!=null && pyuserid!="")
-  	console.log('creating pyuserid');
+  	debug('pyuserid already created')
 	else  {
 		var randomID = GUID();
-  	// check if value GUID is already registered on server
+  	// check if value GUID is already registered on server or as cookie
     setCookie(pyuseridtag,randomID,pyuseridlife);
     console.log(getCookie(pyuseridtag));
   }
@@ -48,7 +45,6 @@ function GUID(){
 	});
 	return guid;
 }
-
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
@@ -64,7 +60,8 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var video = document.querySelector('video');
 
 	var button = document.querySelector('#button'); // need this?
-    $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid?
+    $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
+
 
     //site setup
     $scope.camera = false;
@@ -161,6 +158,9 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.get_camera = function(){
+    /*if iPhone, do input...)
+      else if no getUserMedia() do fileupload.
+    */
 		$scope.camera = getUserMedia();
 		$scope.snapshot_button.start = false;
 		$scope.snapshot_button.snap_it = true;
@@ -314,24 +314,12 @@ app.directive("ngFileSelect",function(){
   }
 })
 
-function LoginCtrl($scope){
-	//create proper login methods etc...
-	$scope.username = 'username';
-	$scope.login = function(){
-		console.log($scope.username);
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST','/loggedin?username='+$scope.username);
-		xhr.send();
-		window.location.href = 'http://'+ip+':'+port+'/loggedin?username='+$scope.username;
-		}
-}
-
 function LayoutCtrl($scope){
-
+  
 }
 
 function IndexCtrl($scope){
-
+  
 }
 
 function StickerCtrl($scope){
@@ -403,4 +391,10 @@ function StickerCtrl($scope){
 		}
 
 	}
+}
+
+function debug(msg){
+    if(debug_flag){
+        console.log(msg);
+    }
 }
