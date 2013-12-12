@@ -7,14 +7,11 @@
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 
 		<script src='/js/modernizr-latest.js'></script>
-
+		
 		<script src='/js/jquery-2.0.3.min.js'> </script>
 		<script src='/js/angular.min.js'> </script>
 		<script src='/js/angular-resource.min.js'></script>
-		<!-- <script src='/js/kinetic-v4.7.2.min.js'></script>-->
 		<script src='/js/kinetic-v4.7.4.js'></script>
-
-
 		<script src='/js/helpers.js'></script>
 
 		<script> var app = angular.module('PictureYourselfApp', ['ngResource']); </script>
@@ -26,10 +23,11 @@
 		<script src='/js/compatibility.js'></script>
 		<script type="text/javascript">checkCompatibility();
 		</script>
+		
 	</head>
 
 	<body  style='background-color: #E8E8E7; min-width: 1000px;'>
-		<div id="compatibility" style="visibility:hidden; width:636px; height:69px; border:1px solid">
+		<div id="compatibility" style="visibility:hidden; width:636px; border:1px solid"> <!--height:69px; removed -->
 		</div>
 		<div ng-controller='LayoutCtrl'>
 			<div class="outside"> <!--container-->
@@ -40,7 +38,7 @@
 			    <a  class="navbar-link"><img class='navbaricon' alt='Take picture' src='/images/img/new_cam.png'></a>
 			    <a  class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
 			    <a  class="navbar-link"><img class='navbaricon' alt='Settings' src='/images/img/new_config.png'></a>
-			    <a  class="navbar-link">
+			    <!-- <a  class="navbar-link">
 					<div id="hamburger">
 						<img id="ham" src="/images/img/new_config.png" />
 						<div id="dropdown">
@@ -52,15 +50,16 @@
 						</div>
 					</div>
 				</a>
-			    </p>
-			    <p class="row signout">
-			    	<span>SIGN OUT</span>
-			    </p> <!--signout-->
-			</nav>
+			  </p> -->
+
+		     <div class="row signout">
+		    	<span>SIGN OUT</span>
+		     </div> <!--signout-->
+		</nav>
+			</div> <!--outside-->
 
 
 				<%= yield %>
-			</div> <!--outside-->
 
 		</div> <!-- End of LayoutCtrl-->
 	</body>

@@ -47,31 +47,40 @@ function GUID(){
 }
 
 // Hamburger drop-down
-var click = false;
-var visible = false;
-document.getElementById("dropdown").style.width = (document.getElementById("hamburger").width - parseInt(document.getElementById("dropdown").style.left)).toString + 'px';
-// document.getElementById("dropdown").style.top = (document.getElementById("ham").style.height.slice(0, 2)).toString + 'px';
-$("#hamburger")
-    .mouseover(function () {
-        document.getElementById("dropdown").style.visibility = "visible";
-        visible = true;
-    })
-    .mouseleave(function () {
-        if (!click) {
-            document.getElementById("dropdown").style.visibility = "hidden";
-            visible = false;
-        }
-    })
-    .on('click', function () {
-        if (click) {
-            document.getElementById("dropdown").style.visibility = "hidden";
-            visible = false;
-        } else {
-            document.getElementById("dropdown").style.visibility = "visible";
-            visible = true;
-        }
-        click = !click;
-    });
+
+$(document).ready(function(){
+	//Commented out because original code is commented out
+	//was causing an error and stopping other elements from
+	//loading.
+	
+	/*
+	var click = false;
+	var visible = false;
+	document.getElementById("dropdown").style.width = (document.getElementById("hamburger").width - parseInt(document.getElementById("dropdown").style.left)).toString + 'px';
+	// document.getElementById("dropdown").style.top = (document.getElementById("ham").style.height.slice(0, 2)).toString + 'px';
+	$("#hamburger")
+	    .mouseover(function () {
+	        document.getElementById("dropdown").style.visibility = "visible";
+	        visible = true;
+	    })
+	    .mouseleave(function () {
+	        if (!click) {
+	            document.getElementById("dropdown").style.visibility = "hidden";
+	            visible = false;
+	        }
+	    })
+	    .on('click', function () {
+	        if (click) {
+	            document.getElementById("dropdown").style.visibility = "hidden";
+	            visible = false;
+	        } else {
+	            document.getElementById("dropdown").style.visibility = "visible";
+	            visible = true;
+	        }
+	        click = !click;
+	    });
+	*/
+	})
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
@@ -278,7 +287,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
       	}; // end of imageObj.onload
 
-		$(document).on('mousedown', function(e){
+		$(document).on('mousedown touchstart', function(e){
 			if (stage){
 				if(mouse == 'up'){
 					mouse = 'down';
@@ -294,7 +303,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 		});
 
-		$(document).on('mousemove', function(e){
+		$(document).on('mousemove touchmove', function(e){
 			if (stage){
 				if(mouse == 'up') return;
 
@@ -307,7 +316,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			}
 		});
 
-		$(document).on('mouseup', function(){
+		$(document).on('mouseup touchend', function(){
 			if (stage){
 					if(mouse == 'down'){
 						mouse = 'up';
@@ -345,80 +354,8 @@ function LayoutCtrl($scope){
   
 }
 
-function IndexCtrl($scope){
-  
-}
-
-function StickerCtrl($scope){
-	var img = angular.element("#picture").attr('src');
-	var background = new Image();
-  	var imageObj = new Image();
-	var hatObj = new Image();
-
-	$scope.background = background;
-	$scope.imageObj = imageObj;
-	$scope.hatObj = hatObj;
-	imageObj.src = img;
-	background.src = 'img/background.jpg'
-	hatObj.src = 'img/hat.png'
 
 
-	var stage = new Kinetic.Stage({
-    container: 'container',
-    width: background.width,
-    height: background.height
-  	});
-
-    var layer = new Kinetic.Layer();
-
-
-  	imageObj.onload = function() {
-    	var floater = new Kinetic.Image({
-      		x: 0,
-      		y: 0,
-      		image: imageObj,
-      		width: imageObj.width,
-      		height: imageObj.height,
-			draggable:true
-    	});
-		var backgroundImg = new Kinetic.Image({
-			x:0,
-			y:0,
-			image: background,
-			width: background.width,
-			height: background.hidth
-		})
-		var hat = new Kinetic.Image({
-			x:0,
-			y:0,
-			image: hatObj,
-			width: hatObj.width,
-			height: hatObj.hidth,
-			draggable:true
-		})
-
-		layer.add(backgroundImg);
-		layer.add(floater);
-		layer.add(hat);
-
-
-        // add the shape to the layer
-		hat.hide();
-		stage.add(layer);
-
-        // add button event bindings
-        document.getElementById('show').addEventListener('click', function() {
-		hat.show();
-        layer.draw();
-        }, false);
-
-		var addHat = function(){
-			hat.show();
-			layer.draw();
-		}
-
-	}
-}
 
 function debug(msg){
     if(debug_flag){

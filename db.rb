@@ -8,7 +8,7 @@ end
 
 def seed_stickers
   Sticker_Category.all.each do |category|
-    dir = "images/stickers/" + category.folder + "/"
+    dir = "images/stickers/" + category.display_order.to_s + "-" + category.folder + "/"
     files = Dir.entries("public/"+dir)
     #remove things that don't end in jpg/png
     files.delete_if {|a| not (a.include? ".jpg" or a.include? ".png")}
@@ -27,9 +27,11 @@ def seed_categories
   categories = Dir["public/images/stickers/**/"].each{|cat| cat.gsub!('public/images/stickers/','').slice!('/')}
   categories.delete_at(0) #gets ride of empty element
   
-  categories.each do |cat|
+  #entries format "<display_order>-<folder>" e.g. 0-backgrounds
+  categories.each do |entry|
+    display_order,cat = entry.split('-')
     unless Sticker_Category.first(:folder => cat)
-      Sticker_Category.create(title: cat.split('_').map(&:capitalize)*' ', folder:cat)
+      Sticker_Category.create(title: cat.split('_').map(&:capitalize)*' ', folder:cat, display_order:display_order)
     end
   end
 end
@@ -98,6 +100,7 @@ class Sticker_Category
   property :id, Serial
   property :title, Text
   property :folder, Text
+  property :display_order, Integer
 end
 
 
