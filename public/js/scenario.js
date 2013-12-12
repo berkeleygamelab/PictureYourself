@@ -3,7 +3,8 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = true;
+var debug_flag = false;
+var default_background = '/images/stickers/backgrounds/CalDay2BGRND.png';
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -130,7 +131,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         width:stage_width,//$('#container').width(),
         height:stage_height//$('#container').height()
     });
-    $scope.backgroundObj.src = 'http://localhost:9393/images/stickers/backgrounds/CalDay2BGRND.png '
+    $scope.backgroundObj.src = default_background;
 
     $scope.backgroundObj.onload = function(){
         debug("Bacground onload");
@@ -237,6 +238,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             $scope.dragSrcEl = this;
         });
 
+
     })//success
 
 
@@ -251,13 +253,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         e.preventDefault(); //@important
     });
 
-
-
-
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
-        debug($scope.dragSrcEl)
         collapse_last();
         //set up imageObj before creating other items that
         //may be reliant on its dimensions
@@ -415,7 +413,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             startY = parseInt(e.clientY - offsetY);
         })
 
-        rotate.on('dragmove', function(e){ //dragmove
+        rotate.on('dragmove touchmove', function(e){ //dragmove
             // debug(mouseX + " " + mouseY);
             var dx = startX - parseInt(e.clientX - offsetX);
             var dy = startY - parseInt(e.clientY - offsetY);
@@ -425,7 +423,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         })
 
         //set horizontal height of image
-        scalerX.on('dragmove',function(){
+        scalerX.on('dragmove touchmove',function(){
             var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
             image.setWidth(image.getWidth() + diff * 2)
             image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y)
@@ -434,7 +432,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         })
 
         //set vertical height of image
-        scalerY.on('dragmove',function(){
+        scalerY.on('dragmove touchmove',function(){
             var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
             image.setHeight(image.getHeight() + diff * 2)
             image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
@@ -503,7 +501,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             previous_edit.image = null;
         }    
         layer.draw();
-    }    
+    } 
+   
 
 } // End of Scenario Controller
 
