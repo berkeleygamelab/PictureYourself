@@ -18,7 +18,11 @@ img.navbaricon {
 }
 
 .navbar p {
-  display: inline;
+  /* display: inline; */
+}
+
+.navbar-link div {
+    float: right;
 }
 
 p.nav-adjust-right {
