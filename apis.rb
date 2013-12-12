@@ -27,12 +27,7 @@ get '/stickers/:category' do
 	stickers = {}
 
 	if cat = Sticker_Category.first(:folder=>params[:category])
-		puts "Cat: " + cat.folder
-		# Sticker.all(:category=>cat.folder).each do |sticker|
-		# 	puts sticker.name
-		# end
 		Sticker.all(:category=>cat.folder).each do |sticker|
-			puts "Sticker: " + sticker.name
 			stickers[sticker.name] = sticker.source
 		end
 	end

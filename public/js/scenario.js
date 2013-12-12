@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = true;
+var debug_flag = false;
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -70,7 +70,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     var stage = new Kinetic.Stage({
         container: 'container',
         width: stage_width,//$('#container').width(),
-        height: 500//$('#container').height()
+        height: stage_height//$('#container').height()
     });
 
     var layer = new Kinetic.Layer();
@@ -106,7 +106,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         x:0,
         y:0,
         width:stage_width,//$('#container').width(),
-        height:500//$('#container').height()
+        height:stage_height//$('#container').height()
     });
     $scope.backgroundObj.src = 'http://localhost:9393/images/stickers/backgrounds/CalDay2BGRND.png '
 
@@ -148,7 +148,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         x:0,
         y:0,
         width:stage_width,//$('#container').width(),
-        height:500,//$('#container').height()
+        height:stage_height,//$('#container').height()
     });
     layer.add(frame);
 
@@ -176,6 +176,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 })
 
     }) //success
+
+    $scope.remove_frame = function(){
+        frame.remove();
+        layer.draw();
+    }
 
     // Grab stickers
     $http.get('/stickers').success(
