@@ -4,7 +4,7 @@
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
 var debug_flag = false;
-var default_background = '/images/stickers/0-backgrounds/CalDay2BGRND.png';
+var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
