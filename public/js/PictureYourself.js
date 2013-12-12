@@ -46,6 +46,36 @@ function GUID(){
 	return guid;
 }
 
+// Hamburger drop-down
+
+$(document).ready(function(){
+	var click = false;
+	var visible = false;
+	document.getElementById("dropdown").style.width = (document.getElementById("hamburger").width - parseInt(document.getElementById("dropdown").style.left)).toString + 'px';
+	// document.getElementById("dropdown").style.top = (document.getElementById("ham").style.height.slice(0, 2)).toString + 'px';
+	$("#hamburger")
+	    .mouseover(function () {
+	        document.getElementById("dropdown").style.visibility = "visible";
+	        visible = true;
+	    })
+	    .mouseleave(function () {
+	        if (!click) {
+	            document.getElementById("dropdown").style.visibility = "hidden";
+	            visible = false;
+	        }
+	    })
+	    .on('click', function () {
+	        if (click) {
+	            document.getElementById("dropdown").style.visibility = "hidden";
+	            visible = false;
+	        } else {
+	            document.getElementById("dropdown").style.visibility = "visible";
+	            visible = true;
+	        }
+	        click = !click;
+	    });
+	})
+
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
 	var mouse = 'up';
@@ -318,80 +348,8 @@ function LayoutCtrl($scope){
   
 }
 
-function IndexCtrl($scope){
-  
-}
-
-function StickerCtrl($scope){
-	var img = angular.element("#picture").attr('src');
-	var background = new Image();
-  	var imageObj = new Image();
-	var hatObj = new Image();
-
-	$scope.background = background;
-	$scope.imageObj = imageObj;
-	$scope.hatObj = hatObj;
-	imageObj.src = img;
-	background.src = 'img/background.jpg'
-	hatObj.src = 'img/hat.png'
 
 
-	var stage = new Kinetic.Stage({
-    container: 'container',
-    width: background.width,
-    height: background.height
-  	});
-
-    var layer = new Kinetic.Layer();
-
-
-  	imageObj.onload = function() {
-    	var floater = new Kinetic.Image({
-      		x: 0,
-      		y: 0,
-      		image: imageObj,
-      		width: imageObj.width,
-      		height: imageObj.height,
-			draggable:true
-    	});
-		var backgroundImg = new Kinetic.Image({
-			x:0,
-			y:0,
-			image: background,
-			width: background.width,
-			height: background.hidth
-		})
-		var hat = new Kinetic.Image({
-			x:0,
-			y:0,
-			image: hatObj,
-			width: hatObj.width,
-			height: hatObj.hidth,
-			draggable:true
-		})
-
-		layer.add(backgroundImg);
-		layer.add(floater);
-		layer.add(hat);
-
-
-        // add the shape to the layer
-		hat.hide();
-		stage.add(layer);
-
-        // add button event bindings
-        document.getElementById('show').addEventListener('click', function() {
-		hat.show();
-        layer.draw();
-        }, false);
-
-		var addHat = function(){
-			hat.show();
-			layer.draw();
-		}
-
-	}
-}
 
 function debug(msg){
     if(debug_flag){

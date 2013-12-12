@@ -7,14 +7,11 @@
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 
 		<script src='/js/modernizr-latest.js'></script>
-
+		
 		<script src='/js/jquery-2.0.3.min.js'> </script>
 		<script src='/js/angular.min.js'> </script>
 		<script src='/js/angular-resource.min.js'></script>
-		<!-- <script src='/js/kinetic-v4.7.2.min.js'></script>-->
 		<script src='/js/kinetic-v4.7.4.js'></script>
-
-
 		<script src='/js/helpers.js'></script>
 
 		<script> var app = angular.module('PictureYourselfApp', ['ngResource']); </script>
@@ -26,6 +23,7 @@
 		<script src='/js/compatibility.js'></script>
 		<script type="text/javascript">checkCompatibility();
 		</script>
+		
 	</head>
 
 	<body  style='background-color: #E8E8E7; min-width: 1000px;'>
@@ -34,19 +32,35 @@
 		<div ng-controller='LayoutCtrl'>
 			<div class="outside"> <!--container-->
 			 <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
-			      <a href="/" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
-			      <a  class="navbar-link"><img class='navbaricon' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
-			      <p class="nav-adjust-right">
-			      <a  class="navbar-link"><img class='navbaricon' alt='Take picture' src='/images/img/new_cam.png'></a>
-			      <a  class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
-			      <a  class="navbar-link"><img class='navbaricon' alt='Settings'  src='/images/img/new_config.png'></a>
-			      </p>
+				<a href="/" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
+			    <a  class="navbar-link"><img class='navbaricon' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
+			    <p class="nav-adjust-right">
+			    <a  class="navbar-link"><img class='navbaricon' alt='Take picture' src='/images/img/new_cam.png'></a>
+			    <a  class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
+			    <a  class="navbar-link"><img class='navbaricon' alt='Settings' src='/images/img/new_config.png'></a>
+			    <a  class="navbar-link">
+					<div id="hamburger">
+						<img id="ham" src="/images/img/new_config.png" />
+						<div id="dropdown">
+							<ul id="nav-list">
+								<li><a class="nav-link" href="/"><div class="nav-button">Take Selfie</div></a></li>
+								<li><a class="nav-link" href="/selfie"></a><div class="nav-button">A Year at Cal</div></a></li>
+								<li><a class="nav-link" href="/"><div class="nav-button">Gallery</div></a></li>
+							</ul>
+						</div>
+					</div>
+				</a>
+			  </p>
+
 		     <div class="row signout">
 		    	<span>SIGN OUT</span>
 		     </div> <!--signout-->
-			 </nav>
+		</nav>
 			</div> <!--outside-->
+
+
 				<%= yield %>
+
 		</div> <!-- End of LayoutCtrl-->
 	</body>
 
