@@ -129,9 +129,6 @@ p.signout {
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
 }
 
-#save_div{
-padding: 15px 100px;
-}
 
 .kineticjs-content{
 }
@@ -148,4 +145,11 @@ padding: 15px 100px;
   border-color: gold;
 }
 
+#save_div{
+  margin-bottom: 10px;
+}
+#scenario_ctrl{
+  margin-top: -20px;
+  padding-bottom: 20px;
+}
 
