@@ -65,6 +65,8 @@ $(document).ready(function() {
 
 
 function ScenarioCtrl($scope, $resource, $http, $compile){
+    var previous_x = 0;
+    var previous_y = 0;
     var stage_width = 630;
     var stage_height = 500;
     var previous_edit = {'image':null,'collapse':null};
@@ -411,7 +413,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         var startX;
         var startY;
 
-        rotate.on('mouseenter', function(e){
+        rotate.on('mousedown', function(e){
+            previous_x = image.getPosition().x;
+            previous_y = image.getPosition().y;
+            group.setDraggable(false);
+            image.setOffset(image.getWidth()/2, image.getHeight()/2);
+            rotate.setPosition(image.getAbsolutePosition().x + image.getWidth()/2, image.getAbsolutePosition().y + image.getHeight()/2);
+
+            image.setPosition(image.getAbsolutePosition().x + image.getWidth()/2, image.getAbsolutePosition().y + image.getHeight()/2);
+            rotate.setOffset(image.getWidth()/2,image.getHeight()/2);
+            layer.draw();
             startX = parseInt(e.clientX - offsetX);
             startY = parseInt(e.clientY - offsetY);
         })
@@ -423,6 +434,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             var angle = Math.atan2(dy, dx);
             image.setRotation(angle);
             layer.draw();
+        })
+
+        rotate.on('mouseup', function(e){
+            group.setDraggable(true);
+            image.setOffset(0,0);
+            image.setPosition(previous_x - image.getWidth()/2, previous_y - image.getHeight()/2);
+            reposition();
+            layer.draw();
+            startX = parseInt(e.clientX - offsetX);
+            startY = parseInt(e.clientY - offsetY);
         })
 
         //set horizontal height of image
