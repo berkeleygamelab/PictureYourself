@@ -46,6 +46,33 @@ function GUID(){
 	return guid;
 }
 
+// Hamburger drop-down
+var click = false;
+var visible = false;
+document.getElementById("dropdown").style.width = (document.getElementById("hamburger").width - parseInt(document.getElementById("dropdown").style.left)).toString + 'px';
+// document.getElementById("dropdown").style.top = (document.getElementById("ham").style.height.slice(0, 2)).toString + 'px';
+$("#hamburger")
+    .mouseover(function () {
+        document.getElementById("dropdown").style.visibility = "visible";
+        visible = true;
+    })
+    .mouseleave(function () {
+        if (!click) {
+            document.getElementById("dropdown").style.visibility = "hidden";
+            visible = false;
+        }
+    })
+    .on('click', function () {
+        if (click) {
+            document.getElementById("dropdown").style.visibility = "hidden";
+            visible = false;
+        } else {
+            document.getElementById("dropdown").style.visibility = "visible";
+            visible = true;
+        }
+        click = !click;
+    });
+
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
 	var mouse = 'up';

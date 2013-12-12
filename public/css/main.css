@@ -36,6 +36,44 @@ div.signout {
   font-size: 14px;
 }
 
+#hamburger {
+    position: relative;
+    margin: 0px;
+    display: inline-block;
+}
+
+#nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#dropdown {
+    visibility: hidden;
+    top: 48px;
+    left: -50px;
+    position: absolute;
+    border: 1px solid;
+    width: 98px;
+}
+
+.nav-button {
+    height: 25px;
+    background-color: #e8e8e7;
+    cursor: pointer;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.nav-button:hover {
+    background-color: white;
+}
+
+a.nav-link {
+    color: black;
+    text-decoration: none;
+}
+
 /*
 // Wrapping container that has toolbox and content
 */
