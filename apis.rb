@@ -4,14 +4,14 @@ get '/stickers' do
 	categories = {}
 	stickers = {}
 
-	Sticker_Category.all(:order=>:folder.asc).each do |cat|
-		unless isBackground?(cat.folder)
+	Sticker_Category.all(:order=>:display_order.asc).each do |cat|
+		unless cat.display_order == 0
 			categories[cat.folder] = cat.title
 			stickers[cat.folder] = {}
 		end
 	end
 
-	Sticker.all.each do |sticker|
+	Sticker.all(:order=>:name.asc).each do |sticker|
 		unless isBackground?(sticker.category)
 			if Sticker_Category.first(:folder => sticker.category)
 				stickers[sticker.category][sticker.name] = sticker.source

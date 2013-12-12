@@ -49,6 +49,11 @@ function GUID(){
 // Hamburger drop-down
 
 $(document).ready(function(){
+	//Commented out because original code is commented out
+	//was causing an error and stopping other elements from
+	//loading.
+	
+	/*
 	var click = false;
 	var visible = false;
 	document.getElementById("dropdown").style.width = (document.getElementById("hamburger").width - parseInt(document.getElementById("dropdown").style.left)).toString + 'px';
@@ -74,6 +79,7 @@ $(document).ready(function(){
 	        }
 	        click = !click;
 	    });
+	*/
 	})
 
 function SnapshotCtrl($scope, fileReader, $http, $timeout){

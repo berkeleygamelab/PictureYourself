@@ -4,7 +4,7 @@
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
 var debug_flag = false;
-var default_background = '/images/stickers/backgrounds/CalDay2BGRND.png';
+var default_background = '/images/stickers/0-backgrounds/CalDay2BGRND.png';
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -89,6 +89,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         debug('called');
         $scope.image_download = 'somethingelse.jpg';
         stage.toDataURL({
+            mimeType: 'image/jpg',
+            quality: 1,
             callback: function(dataUrl) {
                 debug('callback');
                 var link = document.createElement('a');
@@ -220,7 +222,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         angular.forEach($scope.stickers,
             function(stickers,category){
-                $scope.visible[category] = true;
+                $scope.visible[category] = (category == "shoes_and_pants");
                 //create the dynamic html
                 html= "<div id="+category+"_subtab class='subtab_title' "+
                     "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
@@ -237,6 +239,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
             $scope.dragSrcEl = this;
         });
+
 
 
     })//success
