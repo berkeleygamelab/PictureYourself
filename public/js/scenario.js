@@ -63,7 +63,14 @@ $(document).ready(function() {
 //try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
 
 
-function ScenarioCtrl($scope, $resource, $http, $log){
+function ScenarioCtrl($scope, $resource, $http, $compile){
+    // $http.get('/stickers').success(
+    //     function(data)
+    //     {
+    //         debug(data);
+    //         $scope.test = data;
+    //     });
+
     var previous_edit = {'image':null,'collapse':null};
 
     var stage = new Kinetic.Stage({
@@ -163,20 +170,41 @@ function ScenarioCtrl($scope, $resource, $http, $log){
         layer.draw();
     })
 
+    // Grab stickers
+    $http.get('/categories')
+    $http.get('/stickers').success(
+    function(data){
+        data = angular.fromJson(data);
+        $scope.visible = {};
+        $scope.stickers = data['stickers'];
+        $scope.categories = data['categories'];
 
-    //Grab Stickers
-    $http.get('test/stickers').success(function(data){
-        angular.forEach(data,function(sticker){
-           //debug(sticker)
-           if(sticker.match('txt') == null)
-              $("#tab1").append('<img class=\'sticker\' src="/' + sticker + '">');
-        }); //forEach
-        //image
+        angular.forEach($scope.stickers,
+            function(stickers,category){
+                $scope.visible[category] = true;
+                //create the dynamic html
+                html= "<div id="+category+"_subtab class='subtab_title' "+
+                    "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
+                    "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
+                //compile it with angular so functions work
+                compiledElement = $compile(html)($scope);
+                $("#sticker_tab").append(compiledElement);
+                //add stickers
+                angular.forEach(stickers,
+                    function(path,name){
+                         $("#"+category+"_content").append('<img class=\'sticker\' src="/' + path + '" name="/' + name + '"/>');
+                })
+            })
         $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
-         dragSrcEl = this;
+            $scope.dragSrcEl = this;
         });
 
-    });//success
+    })//success
+
+
+    $scope.toggle = function(category){
+        $scope.visible[category] = !$scope.visible[category];
+    }
 
 
     // Drag and drop stickers start
@@ -191,11 +219,13 @@ function ScenarioCtrl($scope, $resource, $http, $log){
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
+        debug($scope.dragSrcEl)
         collapse_last();
         //set up imageObj before creating other items that
         //may be reliant on its dimensions
+
         imageObj = new Image();
-        imageObj.src = dragSrcEl.src;
+        imageObj.src = $scope.dragSrcEl.src;
 
         rotateObj = new Image();
         rotateObj.src = '/images/rotate.png';
@@ -443,28 +473,28 @@ function ScenarioCtrl($scope, $resource, $http, $log){
 
 //layer.getChildren()[0].attrs.image.src
 //layer.getChildren()[0].attrs.x
-$(window).on('beforeunload', function(){
-    stickers = [];
-    stickers.push($('#container').css('background-image'));
-    $.each(layer.getChildren(), function(index, value){
-        var sticker = {
-            src: value.attrs.image.src,
-            x: value.attrs.x,
-            y: value.attrs.y
-        }
-        stickers.push(JSON.stringify(sticker));
-    // stickers[index] = sticker;
-    })
-    var formData = new FormData();
-    //var filename = $scope.pyuserid;
-    //formData.append("name", name);
+// $(window).on('beforeunload', function(){
+//     stickers = [];
+//     stickers.push($('#container').css('background-image'));
+//     $.each(layer.getChildren(), function(index, value){
+//         var sticker = {
+//             src: value.attrs.image.src,
+//             x: value.attrs.x,
+//             y: value.attrs.y
+//         }
+//         stickers.push(JSON.stringify(sticker));
+//     // stickers[index] = sticker;
+//     })
+//     var formData = new FormData();
+//     //var filename = $scope.pyuserid;
+//     //formData.append("name", name);
 
-    formData.append("stickers", stickers);
-    var xhr2 = new XMLHttpRequest();
-    xhr2.open('POST', '/session');
+//     formData.append("stickers", stickers);
+//     var xhr2 = new XMLHttpRequest();
+//     xhr2.open('POST', '/session');
 
-    xhr2.send(formData);
-});
+//     xhr2.send(formData);
+// });
 
 //Used to make it easy to turn on and off console.log
 function debug(msg){
