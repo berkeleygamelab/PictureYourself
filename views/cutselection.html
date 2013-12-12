@@ -1,0 +1,279 @@
+<html>
+    <head>
+        <title>Picture yourself in College</title>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/kinetic-v4.7.4.min.js"></script>
+        <script type="text/javascript" defer="defer">
+
+            //Setup stage
+            var stage = new Kinetic.Stage({
+                container: 'container',
+                width: 578,
+                height: 578,
+            });
+
+            var staticLayer = new Kinetic.Layer();
+            var dynamicLayer = new Kinetic.Layer();
+
+            var background = new Image();
+            var bgImage = new Kinetic.Image({
+                x: 0,
+                y: 0,
+                image: background,
+                width: stage.attrs.width,
+                height: stage.attrs.height,
+            });
+
+            // Setup selection rectangle
+            var stageHeight = stage.attrs.height,
+                stageWidth = stage.attrs.width;
+            var cutLeft = stageWidth / 3,
+                cutRight = stageWidth * 2 / 3,
+                cutTop = stageHeight / 3,
+                cutBottom = stageHeight * 2 / 3;
+            var rectangle = new Kinetic.Rect({
+                x: cutLeft,
+                y: cutTop,
+                width: cutRight - cutLeft,
+                height: cutBottom - cutTop,
+                fillEnabled: false,
+                stroke: 'yellow',
+                strokeWidth: 3,
+                opacity: 0.6,
+            });
+
+            // Toggles
+            var toggleSize = 12;
+            var topLeft = new Kinetic.Rect({
+                x: cutLeft - toggleSize / 2,
+                y: cutTop - toggleSize / 2,
+                width: toggleSize,
+                height: toggleSize,
+                fill: 'yellow',
+                mouse: false,
+            });
+            var topRight = new Kinetic.Rect({
+                x: cutRight - toggleSize / 2,
+                y: cutTop - toggleSize / 2,
+                width: toggleSize,
+                height: toggleSize,
+                fill: 'yellow',
+                mouse: false,
+            });
+            var bottomLeft = new Kinetic.Rect({
+                x: cutLeft - toggleSize / 2,
+                y: cutBottom - toggleSize / 2,
+                width: toggleSize,
+                height: toggleSize,
+                fill: 'yellow',
+                mouse: false,
+            });
+            var bottomRight = new Kinetic.Rect({
+                x: cutRight - toggleSize / 2,
+                y: cutBottom - toggleSize / 2,
+                width: toggleSize,
+                height: toggleSize,
+                fill: 'yellow',
+                mouse: false,
+            });
+
+            // Masks
+            var leftMask = new Kinetic.Rect({
+                x: 0,
+                y: 0,
+                width: cutLeft,
+                height: stageHeight,
+                fill: 'black',
+                opacity: 0.4,
+            });
+            var rightMask = new Kinetic.Rect({
+                x: cutRight,
+                y: 0,
+                width: stageWidth - cutRight,
+                height: stageHeight,
+                fill: 'black',
+                opacity: 0.4,
+            });
+            var topMask = new Kinetic.Rect({
+                x: cutLeft,
+                y: 0,
+                width: cutRight - cutLeft,
+                height: cutTop,
+                fill: 'black',
+                opacity: 0.4,
+            });
+            var bottomMask = new Kinetic.Rect({
+                x: cutLeft,
+                y: cutBottom,
+                width: cutRight - cutLeft,
+                height: stageHeight - cutBottom,
+                fill: 'black',
+                opacity: 0.4,
+            });
+
+            // Mouse events
+            function moveSelection() {
+                // move Rectangle
+                rectangle.setX(cutLeft);
+                rectangle.setY(cutTop);
+                rectangle.setWidth(cutRight - cutLeft);
+                rectangle.setHeight(cutBottom - cutTop);
+                // move Toggles
+                topLeft.setX(cutLeft - toggleSize / 2);
+                topLeft.setY(cutTop - toggleSize / 2);
+                topRight.setX(cutRight - toggleSize / 2);
+                topRight.setY(cutTop - toggleSize / 2);
+                bottomLeft.setX(cutLeft - toggleSize / 2);
+                bottomLeft.setY(cutBottom - toggleSize / 2);
+                bottomRight.setX(cutRight - toggleSize / 2);
+                bottomRight.setY(cutBottom - toggleSize / 2);
+                // move Masks
+                topMask.setX(cutLeft);
+                topMask.setWidth(cutRight - cutLeft);
+                topMask.setHeight(cutTop);
+                bottomMask.setX(cutLeft);
+                bottomMask.setY(cutBottom);
+                bottomMask.setWidth(cutRight - cutLeft);
+                bottomMask.setHeight(stageHeight - cutBottom);
+                leftMask.setWidth(cutLeft);
+                rightMask.setX(cutRight);
+                rightMask.setWidth(stageWidth - cutRight);
+                // draw Layer
+                dynamicLayer.draw();
+            }
+            var mouse = false;
+            topLeft
+                .on('mousedown touchstart', function () {
+                    if (!mouse) {
+                        mouse = true;
+                        topLeft.attrs.mouse = true;
+                    }
+                })
+                .on('mousemove touchmove', function () {
+                    if (!mouse) return;
+                    cutTop = stage.getPointerPosition().y;
+                    cutLeft = stage.getPointerPosition().x;
+                })
+                .on('mouseup touchend', function () {
+                    if (mouse) {
+                        mouse = false;
+                        topLeft.attrs.mouse = false;
+                    }
+                });
+            topRight
+                .on('mousedown touchstart', function () {
+                    if (!mouse) {
+                        mouse = true;
+                        topRight.attrs.mouse = true;
+                    }
+                })
+                .on('mousemove touchmove', function () {
+                    if (!mouse) return;
+                    cutRight = stage.getPointerPosition().x;
+                    cutTop = stage.getPointerPosition().y;
+                })
+                .on('mouseup touchend', function () {
+                    if (mouse) {
+                        mouse = false;
+                        topRight.attrs.mouse = false;
+                    }
+                });
+            bottomLeft
+                .on('mousedown touchstart', function () {
+                    if (!mouse) {
+                        mouse = true;
+                        bottomLeft.attrs.mouse = true;
+                    }
+                })
+                .on('mousemove touchmove', function () {
+                    if (!mouse) return;
+                    cutLeft = stage.getPointerPosition().x;
+                    cutBottom = stage.getPointerPosition().y;
+                })
+                .on('mouseup touchend', function () {
+                    if (mouse) {
+                        mouse = false;
+                        bottomLeft.attrs.mouse = false;
+                    }
+                });
+            bottomRight
+                .on('mousedown touchstart', function () {
+                    if (!mouse) {
+                        mouse = true;
+                        bottomRight.attrs.mouse = true;
+                    }
+                })
+                .on('mousemove touchmove', function () {
+                    if (!mouse) return;
+                    cutRight = stage.getPointerPosition().x;
+                    cutBottom = stage.getPointerPosition().y;
+                })
+                .on('mouseup touchend', function () {
+                    if (mouse) {
+                        mouse = false;
+                        bottomRight.attrs.mouse = false;
+                    }
+                });
+            stage.on('mousemove', function () {
+                // handling for when selection is inverted
+                if (cutLeft > cutRight) {
+                    var temp = cutLeft;
+                    cutLeft = cutRight;
+                    cutRight = temp;
+                }
+                if (cutTop > cutBottom) {
+                    var temp = cutTop;
+                    cutTop = cutBottom;
+                    cutBottom = temp;
+                }
+                if (mouse) {
+                    if (topLeft.attrs.mouse) topLeft.fire('mousemove');
+                    if (topRight.attrs.mouse) topRight.fire('mousemove');
+                    if (bottomLeft.attrs.mouse) bottomLeft.fire('mousemove');
+                    if (bottomRight.attrs.mouse) bottomRight.fire('mousemove');
+                    moveSelection();
+                }
+            });
+            stage.on('touchmove', function () {
+                // handling for when selection is inverted
+                if (cutLeft > cutRight) {
+                    var temp = cutLeft;
+                    cutLeft = cutRight;
+                    cutRight = temp;
+                }
+                if (cutTop > cutBottom) {
+                    var temp = cutTop;
+                    cutTop = cutBottom;
+                    cutBottom = temp;
+                }
+                if (mouse) {
+                    if (topLeft.attrs.mouse) topLeft.fire('touchmove');
+                    if (topRight.attrs.mouse) topRight.fire('touchmove');
+                    if (bottomLeft.attrs.mouse) bottomLeft.fire('touchmove');
+                    if (bottomRight.attrs.mouse) bottomRight.fire('touchmove');
+                    moveSelection();
+                }
+            });
+
+            background.onload = function () {
+                staticLayer.add(bgImage);
+                dynamicLayer.add(rectangle);
+                dynamicLayer.add(leftMask);
+                dynamicLayer.add(rightMask);
+                dynamicLayer.add(topMask);
+                dynamicLayer.add(bottomMask);
+                dynamicLayer.add(topLeft);
+                dynamicLayer.add(topRight);
+                dynamicLayer.add(bottomLeft);
+                dynamicLayer.add(bottomRight);
+                stage.add(staticLayer).add(dynamicLayer);
+            };
+            background.src = "images/background.jpg"; // change to snapped picture
+
+
+        </script>
+    </body>
+</html>
