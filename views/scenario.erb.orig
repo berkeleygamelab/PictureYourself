@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 <<<<<<< HEAD
     <script type="text/javascript" src='/js/helpertools.js'></script>
-=======
         <script type="text/javascript" src='/js/tabs.js'></script>
 
->>>>>>> 67b767a14831e5a7d2aca91176b242253c3d3c4c
+=======
+    <script type="text/javascript" src='/js/tabs.js'></script>
+>>>>>>> c572a317bd263d337c38b55142ba05ba9cad0a13
     <script type="text/javascript" src='/js/scenario.js'></script>
 
 
@@ -51,19 +52,7 @@
       </div> <!-- #sticker_tab -->
       <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
         <h3>Backgrounds</h3>
-<!--    <img class = 'background' id='back1' src="/images/Rec1.jpg">
-        <img class = 'background' id='back2' src="/images/Rec2.jpg">
-        <img class = 'background' id='back3' src="/images/Rec3.jpg">
-        <img class = 'background' id='back4' src="/images/Rec4.jpg">
-        <img class = 'background' id='back5' src="/images/Rec5.jpg">
-        <img class = 'background' id='back6' src="/images/Rec6.jpg">
-        <img class = 'background' id='back7' src="/images/Rec7.jpg">
-        <img class = 'background' id='back8' src="/images/Rec8.jpg">
-        <img class = 'background' id='back9' src="/images/Rec9.jpg">
-        <img class = 'background' id='back6' src="/images/stickers/Backgrounds/CalDay2BGRND.png">
-        <img class = 'background' id='back7' src="/images/stickers/Backgrounds/CalDayBGRND.png">
-        <img class = 'background' id='back8' src="/images/stickers/Backgrounds/DormBGRND.png">
-        <img class = 'background' id='back9' src="/images/stickers/Backgrounds/footballbgrnd.png"> -->
+
       </div>  <!-- Tab2 -->
 
       <div id="tab3" ng-show='tabs.filters'>
@@ -108,7 +97,7 @@
       </div> <!-- Tab3 -->
 
       <div id="frames_tab" ng-show='tabs.frames'>
-        <h3>Frames</h3>
+        <div><h3>Frames</h3> <button id='remove_frame_button' ng-click='remove_frame()'>Remove</button></div>
         <!--   <img class = 'frames' id='back6' src="/images/stickers/Frames/frame1.png">
           <img class = 'frames' id='back6' src="/images/stickers/Frames/frame2.png">
           <img class = 'frames' id='back6' src="/images/stickers/Frames/frame3.png">

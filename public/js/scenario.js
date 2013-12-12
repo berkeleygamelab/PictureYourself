@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = true;
+var debug_flag = false;
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -64,19 +64,14 @@ $(document).ready(function() {
 
 
 function ScenarioCtrl($scope, $resource, $http, $compile){
-    // $http.get('/stickers').success(
-    //     function(data)
-    //     {
-    //         debug(data);
-    //         $scope.test = data;
-    //     });
-
+    var stage_width = 630;
+    var stage_height = 500;
     var previous_edit = {'image':null,'collapse':null};
 
     var stage = new Kinetic.Stage({
         container: 'container',
-        width: 630,//$('#container').width(),
-        height: 500//$('#container').height()
+        width: stage_width,//$('#container').width(),
+        height: stage_height//$('#container').height()
     });
 
     var layer = new Kinetic.Layer();
@@ -127,51 +122,89 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     }
 
     //Background selection
-    backgroundObj = new Image();
+    $scope.backgroundObj = new Image();
     var background = new Kinetic.Image({
-        image:backgroundObj,
+        image:$scope.backgroundObj,
         x:0,
         y:0,
-        width:630,//$('#container').width(),
-        height:500//$('#container').height()
+        width:stage_width,//$('#container').width(),
+        height:stage_height//$('#container').height()
     });
-    backgroundObj.src = '/images/Rec1.jpg';
+    $scope.backgroundObj.src = 'http://localhost:9393/images/stickers/backgrounds/CalDay2BGRND.png '
 
-    backgroundObj.onload = function(){
+    $scope.backgroundObj.onload = function(){
+        debug("Bacground onload");
         layer.add(background);
         background.setZIndex(1);
         layer.draw();
     }
 
-    $('.background').click(function(){
-        backgroundObj.src = $(this).attr('src');
-    })
+
 
     background.on('click', function(){
         debug('background click')
         collapse_last()
     })
 
+    $scope.background_update = function(e){
+        $scope.backgroundObj.src = e.target.src
+    }
+    $http.get('/stickers/backgrounds').success(
+        function(data)
+        {
+            angular.forEach(data,
+                function(source,name)
+                {
+                    html = "<img src='/" +  source + "' class='background' ng-click=\"background_update($event)\" alt='"+name+"'>"
+                    compiledElement = $compile(html)($scope);
+                    $("#backgrounds_tab").append(compiledElement)
+                })
+
+        }) //success
+
+
     //frame selection
-    frameObj = new Image();
+    $scope.frameObj = new Image();
     var frame = new Kinetic.Image({
-        image:frameObj,
+        image:$scope.frameObj,
         x:0,
         y:0,
-        width:$('#container').width(),
-        height:$('#container').height()
+        width:stage_width,//$('#container').width(),
+        height:stage_height,//$('#container').height()
     });
     layer.add(frame);
 
-    $('.frames').click(function(){
-        debug($(this).attr('src'));
-        frameObj.src = $(this).attr('src');
-        frame.moveToTop();
+    $scope.frameObj.onload = function(){
+        layer.add(frame);
         layer.draw();
+    }
+
+    $('.frames').click(function(){
+        collapse_last()
     })
 
+    $scope.frame_update = function(e){
+        $scope.frameObj.src = e.target.src
+    }
+    $http.get('/stickers/frames').success(
+        function(data)
+        {
+            angular.forEach(data,
+                function(source,name)
+                {
+                    html = "<img src='/" +  source + "' class='frames' ng-click=\"frame_update($event)\" alt='"+name+"'>"
+                    compiledElement = $compile(html)($scope);
+                    $("#frames_tab").append(compiledElement)
+                })
+
+    }) //success
+
+    $scope.remove_frame = function(){
+        frame.remove();
+        layer.draw();
+    }
+
     // Grab stickers
-    $http.get('/categories')
     $http.get('/stickers').success(
     function(data){
         data = angular.fromJson(data);

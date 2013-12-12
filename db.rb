@@ -1,20 +1,21 @@
 
 get '/seed' do
   #sticker folders and category names
+  seed_categories
   seed_stickers
-  redirect to '/'
+  redirect to '/selfie'
 end
 
 def seed_stickers
-  settings.categories.each do |category|
-    dir = "images/stickers/" + category + "/"
+  Sticker_Category.all.each do |category|
+    dir = "images/stickers/" + category.folder + "/"
     files = Dir.entries("public/"+dir)
     #remove things that don't end in jpg/png
     files.delete_if {|a| not (a.include? ".jpg" or a.include? ".png")}
 
     files.each do |file|
       unless Sticker.first(:name=>file.split('.').first)
-        Sticker.create(name: file.split('.').first, source: dir + file, category: category)
+        Sticker.create(name: file.split('.').first, source: dir + file, category: category.folder)
       end
     end
 
@@ -22,6 +23,16 @@ def seed_stickers
 
 end 
 
+def seed_categories
+  categories = Dir["public/images/stickers/**/"].each{|cat| cat.gsub!('public/images/stickers/','').slice!('/')}
+  categories.delete_at(0) #gets ride of empty element
+  
+  categories.each do |cat|
+    unless Sticker_Category.first(:folder => cat)
+      Sticker_Category.create(title: cat.split('_').map(&:capitalize)*' ', folder:cat)
+    end
+  end
+end
 
 # Database setup and table definitions
 
@@ -81,6 +92,13 @@ class User_Sticker
   
 end
 
+class Sticker_Category
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :title, Text
+  property :folder, Text
+end
 
 
 

@@ -9,9 +9,9 @@ set :bind, '128.32.189.148'
 #trying to lock threads to avoid not receiving requests
 set :lock, true
 #sticker categories
-set :categories, ["accessories","backgrounds","cal_day_pack",
-                    "clothing","dorm_room_pack",
-                    "football_game_pack","frames","misc"]
+# set :categories, ["accessories","backgrounds","cal_day_pack",
+#                     "clothing","dorm_room_pack",
+#                     "football_game_pack","frames","misc"]
 
 
 require_relative 'apis'
