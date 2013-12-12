@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = false;
+var debug_flag = true;
 
 $(document).ready(function() {
     // $(".tabs a").html5jTabs();
@@ -175,6 +175,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     layer.add(frame);
 
     $scope.frameObj.onload = function(){
+        debug('frame onload')
         layer.add(frame);
         layer.draw();
     }
@@ -184,8 +185,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     })
 
     $scope.frame_update = function(e){
+        debug('frame update')
         $scope.frameObj.src = e.target.src
     }
+
     $http.get('/stickers/frames').success(
         function(data)
         {
@@ -200,7 +203,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     }) //success
 
     $scope.remove_frame = function(){
-        frame.remove();
+        debug('remove frame')
+        $scope.frameObj.src = "";
+        
         layer.draw();
     }
 
