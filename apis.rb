@@ -2,29 +2,41 @@
 get '/stickers' do
 
 	categories = {}
-
-	settings.categories.each do |cat|
-		title = cat.gsub('_',' ')
-		categories[cat] = title.split.map(&:capitalize)*' '
-	end
-
 	stickers = {}
-	settings.categories.each do |cat|
-		stickers[cat] = {}
+
+	Sticker_Category.all(:order=>:folder.asc).each do |cat|
+		unless isBackground?(cat.folder)
+			categories[cat.folder] = cat.title
+			stickers[cat.folder] = {}
+		end
 	end
 
 	Sticker.all.each do |sticker|
-		stickers[sticker.category][sticker.name] = sticker.source
+		unless isBackground?(sticker.category)
+			if Sticker_Category.first(:folder => sticker.category)
+				stickers[sticker.category][sticker.name] = sticker.source
+			end
+		end
 	end
 
 	"{\"stickers\":"+stickers.to_json+", \"categories\":"+categories.to_json+"}"
 end
 
+#get categories, good for backgrounds and frames
 get '/stickers/:category' do
 	stickers = {}
-	Sticker.all(:category => params[:category]).each do |sticker|
-		stickers[sticker.name] = sticker.source
+
+	if cat = Sticker_Category.first(:folder=>params[:category])
+		puts "Cat: " + cat.folder
+		# Sticker.all(:category=>cat.folder).each do |sticker|
+		# 	puts sticker.name
+		# end
+		Sticker.all(:category=>cat.folder).each do |sticker|
+			puts "Sticker: " + sticker.name
+			stickers[sticker.name] = sticker.source
+		end
 	end
+
 	stickers.to_json
 end
 
@@ -38,4 +50,8 @@ get '/test/stickers' do
   puts images
 
   return images.to_json
+end
+
+def isBackground? (category)
+	['backgrounds','frames'].include? category
 end

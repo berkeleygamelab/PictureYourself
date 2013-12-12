@@ -1,7 +1,7 @@
 debug = true;
-function TabsCtrl($scope, $http){
+function TabsCtrl($scope, $http, $compile){
 	$scope.tabs = {'stickers':true,'backgrounds':false,'filters':false,'frames':false}
-
+	
 	$scope.show_tab = function(category){
 		//console.log("category: " + category)
 		angular.forEach($scope.tabs,function(value,tab){
@@ -17,5 +17,5 @@ function TabsCtrl($scope, $http){
 	}//show_tab
 
 
-
+	
 }
