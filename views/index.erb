@@ -9,15 +9,9 @@
 	<!-- Should probably set a height for this and adjust the rest -->
 	<div id='snapshot_div'>
 
-		<!-- Title -->
-		<div id='snapshot_title_div' class='centered'>
-			<span id='snapshot_title'><h1>Take Your Selfie!</h1></span> <br/>
-			You may need to enable your camera
-		</div>
-
 		<!-- Placeholder Imager -->
 		<div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
-			<img src='images/camera_placeholder.png'>
+			<img src='images/camera_placeholder.png' ng-click='get_camera()'>
 		</div>
 
 		<!-- Webcam Input -->

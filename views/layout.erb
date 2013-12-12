@@ -29,7 +29,7 @@
 	</head>
 
 	<body  style='background-color: #E8E8E7; min-width: 1000px;'>
-		<div id="compatibility" style="visibility:hidden; width:636px; height:69px; border:1px solid">
+		<div id="compatibility" style="visibility:hidden; width:636px; border:1px solid"> <!--height:69px; removed -->
 		</div>
 		<div ng-controller='LayoutCtrl'>
 			<div class="outside"> <!--container-->
@@ -41,15 +41,12 @@
 			      <a  class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
 			      <a  class="navbar-link"><img class='navbaricon' alt='Settings'  src='/images/img/new_config.png'></a>
 			      </p>
-			      <p class="row signout">
-			    	<span>SIGN OUT</span>
-			      </p> <!--signout-->
+		     <div class="row signout">
+		    	<span>SIGN OUT</span>
+		     </div> <!--signout-->
 			 </nav>
-
-
-				<%= yield %>
 			</div> <!--outside-->
-
+				<%= yield %>
 		</div> <!-- End of LayoutCtrl-->
 	</body>
 
