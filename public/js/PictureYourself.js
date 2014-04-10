@@ -166,7 +166,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
-
+		/*
 		var formData = {};
 		var filename = $scope.pyuserid + "/1.png";
 		formData["filename"] = filename;
@@ -180,7 +180,22 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			success: function(){
 				window.location = '/selfie';
 			}
-		})
+		}) */
+		var coord = cropObj.getSelectionRectangle().getXYWH();
+		var formData = {};
+		var filename = $scope.pyuserid + "/1.png";
+		formData["filename"] = filename;
+		formData['coords'] = coord.x + ' ' + coord.y + ' ' + coord.width + ' ' + coord.height;
+		console.log(formData['coords']);
+		formData['pyuserid'] = $scope.pyuserid;
+		$ajax({
+			url: '/grabcut',
+			type: 'POST',
+			data: formData,
+			success: function() {
+				window.location = '/selfie';
+			}
+		});
 		// var xhr2 = new XMLHttpRequest();
 		// xhr2.open('POST','/grabcut');
 		// xhr2.send(formData);
