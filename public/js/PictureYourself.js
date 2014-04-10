@@ -115,6 +115,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var y_up = 0;
 	var mouse = 'up';
 
+	/* Kinetic Object set up in CropJS, not required here
 	//KineticJS setup
 	var imageObj = new Image();
 	var stage = new Kinetic.Stage({
@@ -146,7 +147,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		stroke:'yellow',
 		strokeWidth: 3,
 		fillEnabled: false
-	})
+	}) */
 
 	// Button functions
 
@@ -222,7 +223,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.upload_webcam = function(){
-		
+		/*
 		console.log('x: ' + x);
 		console.log('x_up: ' + x_up);
 		console.log('y: ' + y);
@@ -252,7 +253,22 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		}
 		else{
 			alert("You must select a cut");
+		} */
+		if (cropObj.getSelectionRectangle()) {
+			var name = $scope.pyuserid;
+			var formData = {"name":name, "data":canvas.toDataURL('image/png')};
+			$.ajax({
+				url: '/fileupload',
+				type: 'POST',
+				data: formData,
+				success: function(){
+					$scope.cut();
+				}
+			});
+		} else {
+			alert("You must select a cut");
 		}
+
 	}
 
 
