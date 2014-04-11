@@ -94,6 +94,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var canvas = document.querySelector('canvas');
 	var ctx = canvas.getContext('2d');
 	var video = document.querySelector('video');
+	var cropObj; // CropJS object set up in function kinetic()
 
 	var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
@@ -106,6 +107,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     $scope.camera_loaded = false;
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
+	/* Kinetic Object set up in CropJS, not required here
 	// variables for cut creation
 	var x = 0;
 	var y = 0;
@@ -146,7 +148,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		stroke:'yellow',
 		strokeWidth: 3,
 		fillEnabled: false
-	})
+	}) */
 
 	// Button functions
 
@@ -165,7 +167,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	$scope.cut = function(){
 		//console.log('cut was called');  // Dev
-
+		/*
 		var formData = {};
 		var filename = $scope.pyuserid + "/1.png";
 		formData["filename"] = filename;
@@ -179,7 +181,22 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			success: function(){
 				window.location = '/selfie';
 			}
-		})
+		}) */
+		var coord = cropObj.getSelectionRectangle().getXYWH();
+		var formData = {};
+		var filename = $scope.pyuserid + "/1.png";
+		formData["filename"] = filename;
+		formData['coords'] = coord.x + ' ' + coord.y + ' ' + coord.width + ' ' + coord.height;
+		console.log(formData['coords']);
+		formData['pyuserid'] = $scope.pyuserid;
+		$ajax({
+			url: '/grabcut',
+			type: 'POST',
+			data: formData,
+			success: function() {
+				window.location = '/selfie';
+			}
+		});
 		// var xhr2 = new XMLHttpRequest();
 		// xhr2.open('POST','/grabcut');
 		// xhr2.send(formData);
@@ -222,7 +239,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.upload_webcam = function(){
-		
+		/* handled in CropJS
 		console.log('x: ' + x);
 		console.log('x_up: ' + x_up);
 		console.log('y: ' + y);
@@ -252,7 +269,22 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		}
 		else{
 			alert("You must select a cut");
+		} */
+		if (cropObj.getSelectionRectangle()) {
+			var name = $scope.pyuserid;
+			var formData = {"name":name, "data":canvas.toDataURL('image/png')};
+			$.ajax({
+				url: '/fileupload',
+				type: 'POST',
+				data: formData,
+				success: function(){
+					$scope.cut();
+				}
+			});
+		} else {
+			alert("You must select a cut");
 		}
+
 	}
 
 
@@ -262,14 +294,14 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var kinetic = function(result) {
         //$scope.imageSrc = result;
         imageObj.src = result;
-        layer.removeChildren();
+        // layer.removeChildren();
 
-		var originalPoint = {x: selection.getX(), y: selection.getY()};
+		// var originalPoint = {x: selection.getX(), y: selection.getY()};
 
-		var down = false;
+		// var down = false;
 
       	imageObj.onload = function() {
-
+      		/*
       		//setup stage
       		stage.setWidth(imageObj.width);
       		stage.setHeight(imageObj.height);
@@ -281,12 +313,18 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			layer.add(background);
 			layer.add(selection);
 			layer.draw();
-
+			*/
+			// CropJS set up
+			cropObj = new CropJS({
+				image: imageObj,
+				imageContainerID: "container",
+			})
 			//snapshot effect
 			$('#container').addClass('animated fadeInUp');
 
       	}; // end of imageObj.onload
 
+      	/* done in CropJS
 		$(document).on('mousedown touchstart', function(e){
 			if (stage){
 				if(mouse == 'up'){
@@ -325,7 +363,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 					}
 				}
 		});
-
+		*/
 	    
 	} // End of Kinetic Function
 
