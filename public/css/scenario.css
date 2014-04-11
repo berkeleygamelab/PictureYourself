@@ -142,7 +142,7 @@ p.signout {
   color:white;
 	border: solid;
   border-width: 1px;
-  border-color: gold;
+  border-color: 'gold';
 }
 
 #save_div{

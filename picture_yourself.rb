@@ -39,6 +39,7 @@ module OS
 end
 
 get '/' do
+  puts OS.mac?
   cookie = request.cookies["pyuserid"]
   name = 'public/users/' + cookie + "/1_sticker.png"
   if File.file?(name)
@@ -74,10 +75,10 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
-  if OS.unix?
-    system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
-  elsif OX.mac?
+  if OS.mac?
     system('./opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  elsif OX.unix?
+    system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   end
 end
 

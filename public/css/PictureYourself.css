@@ -1,3 +1,15 @@
+body{
+  -webkit-transform: translate3d(0, 0, 0);
+-webkit-font-smoothing: subpixel-antialiased;
+-moz-font-smoothing: subpixel-antialiased;
+font-smoothing: subpixel-antialiased;
+-webkit-transition: all 0.2s ease-out;
+-moz-transition: all 0.2s ease-out;
+-ms-transition: all 0.2s ease-out;
+-o-transition: all 0.2s ease-out;
+transition: all 0.2s ease-out;
+}
+
 table { border-collapse: collapse; }
 .percent {
     position: absolute; width: 300px; height: 14px; z-index: 1; text-align: center; font-size: 0.8em; color: white;
