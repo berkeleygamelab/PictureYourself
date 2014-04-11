@@ -314,6 +314,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			layer.add(selection);
 			layer.draw();
 			*/
+			// CropJS set up
 			cropObj = new CropJS({
 				image: imageObj,
 				imageContainerID: "container",
