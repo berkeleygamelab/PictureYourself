@@ -3,6 +3,7 @@ require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
 require 'json'
+require 'sinatra/contrib/all'
 
 set :port, 80
 set :bind, '128.32.189.148'
@@ -19,7 +20,30 @@ require_relative 'db'
 
 DataMapper.finalize.auto_upgrade!
 
+module OS
+  def OS.windows?
+    (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def OS.mac?
+   (/darwin/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def OS.unix?
+    !OS.windows?
+  end
+
+  def OS.linux?
+    OS.unix? and not OS.mac?
+  end
+end
+
 get '/' do
+  cookie = request.cookies["pyuserid"]
+  name = 'public/users/' + cookie + "/1_sticker.png"
+  if File.file?(name)
+      File.delete(name)
+  end
   erb :index
 end
 
@@ -50,7 +74,11 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
-  system('./opencv_trans ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  if OS.unix?
+    system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  elsif OX.mac?
+    system('./opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  end
 end
 
 get '/selfie' do
