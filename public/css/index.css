@@ -4,19 +4,22 @@
 
 #camera{
 	width:640px;
-	height:480px;
+	height:500px;
+	padding-top: 3em;
 
 }
 
 #camera_placeholder{
 	width:640px;
-	height:480px;
+	height:500px;
+	padding-top: 3em;
 }
 
 #capture{
 	position:relative;
 	width:640px;
-	height:480px;
+	height:500px;
+	padding-top: 3em;
 }
 .centered{
 	margin-left: auto;
@@ -36,6 +39,8 @@
 #snapshot_button_div{
 	width:100px;
 	height:40px;
+	padding-top: 4em;
+	    padding-bottom: 2em;
 }
 
 #snapshot_title_div{

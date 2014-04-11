@@ -24,9 +24,9 @@
   		<div id='capture' ng-show='show_capture' class='centered'>
 			<div id="container" ng-show='show_capture'></div>
 
-			<div id='retake_div' ng-show='show_capture' class='centered'>
+			<!-- <div id='retake_div' ng-show='show_capture' class='centered'>
 				<img src='images/retake.png' ng-click='retake()' id='retake_img'>
-			</div>
+			</div> --> <!-- issues with cut selection  -->
 		</div>
 
 		<!-- snapshot_buttons -->
@@ -35,6 +35,7 @@
 			<input type="button" class="clicker" ng-click = 'capture()' value = "SNAP IT" id = "button" ng-show = 'snapshot_button.snap_it'>
 			<input type="button" class="clicker" ng-click = 'upload_webcam()' value='CUT' ng-show = 'snapshot_button.cut'>
 		</div>
+		<!-- <input type="button" value="RESTART" class="clicker centered" ng-click='retake()'> -->
 
 	</div> <!-- snapshot_div -->
 

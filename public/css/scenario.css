@@ -56,8 +56,8 @@ p.signout {
 */
 
 #framecontainer {
-  margin-top: 100px;
-  height: 500px;
+  margin-top: 6em;
+  height: 39em;
 }
 
 
@@ -70,8 +70,9 @@ p.signout {
 #toolbox {
   background: #e8e8e7;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
-  height: 550px;
-  margin-right: 25px;
+  height: 39em;
+  margin-right: 3em;
+  margin-left: 4em;
   padding: 0px;
 }
 
@@ -115,7 +116,7 @@ p.signout {
 
 #toolboxbody {
   background: #e8e8e7;
-  height: 440px;
+  height: 34em;
   overflow-y: scroll;
 }
 
@@ -145,8 +146,15 @@ p.signout {
   border-color: 'gold';
 }
 
+#save_div, #email_div{
+  margin-bottom: 0.55em;
+  float:left; 
+  margin-right:2em; 
+  padding-top: 0.7em;
+}
 #save_div{
-  margin-bottom: 10px;
+    padding-left:6.2em; 
+    padding-right:2em;
 }
 #scenario_ctrl{
   margin-top: -20px;
