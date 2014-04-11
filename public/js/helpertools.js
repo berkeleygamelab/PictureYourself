@@ -18,20 +18,23 @@ function send_email(pyuserid, emails){
     data: formData,
     success: function(){
       $( "#dialog-confirm-email" ).dialog({
-      resizable: false,
-      height:140,
-      width: 70,
-      modal: true,
-      dialogClass: 'email-dialog',
-      buttons: {
-        "Start over": function() {
-          window.location = "/"
-        },
-        "Continue": function() {
-          $( this ).dialog( "close" );
+        resizable: false,
+        // height:140,
+        // width: 70,
+        modal: true,
+        draggable:false,
+        closeOnEscape:false,
+        dialogClass: 'email-dialog no-close',
+        buttons: {
+          "Start over": function() {
+            window.location = "/"
+          },
+          "Continue": function() {
+            $( this ).dialog( "close" );
+          }
         }
-      }
-    });
+    })
+      .position({of:'#container'});
     }
   })
 }
