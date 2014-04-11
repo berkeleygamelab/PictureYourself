@@ -110,7 +110,7 @@ end
 post '/email' do
   puts "email\n"
 
-  puts params
+  # puts params
 
   data = params[:data].split(',')[1]
   #how about... pyuserid
@@ -127,14 +127,14 @@ post '/email' do
 end
 
 post '/send_email' do
-  puts "send_email\n"
+  # puts "send_email\n"
 
   pyuserid = params[:pyuserid]
   filepath = 'email/'+pyuserid+'/1.png'  
   emails = params[:emails]
-  puts pyuserid
-  puts filepath
-  puts emails
+  # puts pyuserid
+  # puts filepath
+  # puts emails
   system('python ' + 'sendemail.py '+params[:emails]+' '+filepath)
 end
 

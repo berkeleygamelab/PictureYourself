@@ -65,8 +65,8 @@ $(document).ready(function() {
 
 
 function ScenarioCtrl($scope, $resource, $http, $compile){
-    var stage_width = 630;
-    var stage_height = 500;
+    var stage_width = 800;
+    var stage_height = 550;
     var previous_edit = {'image':null,'collapse':null};
 
     var stage = new Kinetic.Stage({

@@ -14,11 +14,14 @@ SUBJECT = "PIC YOUR FUTURE"
 TEXT = 'PIC Your Future at Berkeley\nwww.py-bcnm.berkeley.edu\n;)'
 SEND_FROM = 'picyourfuture@gmail.com'
 
-send_to = sys.argv[1] #person@domain.com,person@domain.com
-filepath = sys.argv[2]
-  
-print send_to.replace(',', ', ')  
-print filepath
+try:
+    send_to = sys.argv[1] #person@domain.com,person@domain.com
+    filepath = sys.argv[2]
+except:
+    print "Failed"
+      
+# print send_to.replace(',', ', ')  
+# print filepath
 
 try:  
     msg = MIMEMultipart()
