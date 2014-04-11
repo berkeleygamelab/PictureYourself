@@ -94,6 +94,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var canvas = document.querySelector('canvas');
 	var ctx = canvas.getContext('2d');
 	var video = document.querySelector('video');
+	var cropObj; // CropJS object set up in function kinetic()
 
 	var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
@@ -106,6 +107,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     $scope.camera_loaded = false;
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
+	/* Kinetic Object set up in CropJS, not required here
 	// variables for cut creation
 	var x = 0;
 	var y = 0;
@@ -115,7 +117,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var y_up = 0;
 	var mouse = 'up';
 
-	/* Kinetic Object set up in CropJS, not required here
 	//KineticJS setup
 	var imageObj = new Image();
 	var stage = new Kinetic.Stage({
@@ -238,7 +239,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	}
 
 	$scope.upload_webcam = function(){
-		/*
+		/* handled in CropJS
 		console.log('x: ' + x);
 		console.log('x_up: ' + x_up);
 		console.log('y: ' + y);
@@ -293,14 +294,14 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var kinetic = function(result) {
         //$scope.imageSrc = result;
         imageObj.src = result;
-        layer.removeChildren();
+        // layer.removeChildren();
 
-		var originalPoint = {x: selection.getX(), y: selection.getY()};
+		// var originalPoint = {x: selection.getX(), y: selection.getY()};
 
-		var down = false;
+		// var down = false;
 
       	imageObj.onload = function() {
-
+      		/*
       		//setup stage
       		stage.setWidth(imageObj.width);
       		stage.setHeight(imageObj.height);
@@ -312,12 +313,17 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			layer.add(background);
 			layer.add(selection);
 			layer.draw();
-
+			*/
+			cropObj = new CropJS({
+				image: imageObj,
+				imageContainerID: "container",
+			})
 			//snapshot effect
 			$('#container').addClass('animated fadeInUp');
 
       	}; // end of imageObj.onload
 
+      	/* done in CropJS
 		$(document).on('mousedown touchstart', function(e){
 			if (stage){
 				if(mouse == 'up'){
@@ -356,7 +362,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 					}
 				}
 		});
-
+		*/
 	    
 	} // End of Kinetic Function
 
