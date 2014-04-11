@@ -148,8 +148,20 @@ p.signout {
 #save_div{
   margin-bottom: 10px;
 }
+
 #scenario_ctrl{
   margin-top: -20px;
   padding-bottom: 20px;
 }
 
+.ui-dialog.email-dialog {
+  /*
+  text-align: center;
+  font-size: large;
+  */
+  background-color:#e8e8e7; 
+  /*color:white;*/
+  border: solid;
+  border-width: 1px;
+  border-color: 'gold';
+}
