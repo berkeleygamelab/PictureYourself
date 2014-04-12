@@ -43,10 +43,10 @@
       var d=a.extend(c,b)
     }
 
-    a("body").append('<div title="Session Timeout" id="sessionTimeout-dialog">'+d.message+"</div>");
     a("#sessionTimeout-dialog").dialog({
       autoOpen:false,
       width:400,
+      height:250,
       modal:true,
       closeOnEscape:false,
       open:function(b,c){

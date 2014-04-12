@@ -195,6 +195,27 @@ border-radius: 10px;
   display: none;
 }
 
+.ui-dialog{
+  width: 400px;
+  height: 250px;
+
+  border: 4px #030303 solid;
+
+  background-color: #ffffff;
+
+  padding: 17px;
+
+  color: #000000;
+  font-size: inherit;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  text-decoration: none;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
 /* Buttons for JQuery UI dialog*/
 
 .ui-button {
