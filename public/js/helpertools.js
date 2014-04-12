@@ -1,5 +1,4 @@
 function email(pyuserid, emails, data){
-  console.log('at email')
   var formData = {"pyuserid":pyuserid, "data":data};
   $.ajax({
     url: '/email',
@@ -12,22 +11,23 @@ function email(pyuserid, emails, data){
 }
 
 function send_email(pyuserid, emails){
-  console.log('sending email')
   var formData = {"pyuserid":pyuserid, "emails":emails};
   $.ajax({
     url: '/send_email',
     type: 'POST',
     data: formData,
     success: function(){
-      $( "#dialog-confirm" ).dialog({
+      $( "#dialog-confirm-email" ).dialog({
       resizable: false,
       height:140,
+      width: 70,
       modal: true,
+      dialogClass: 'email-dialog',
       buttons: {
-        "Delete all items": function() {
-          $( this ).dialog( "close" );
+        "Start over": function() {
+          window.location = "/"
         },
-        Cancel: function() {
+        "Continue": function() {
           $( this ).dialog( "close" );
         }
       }

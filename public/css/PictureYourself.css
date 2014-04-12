@@ -232,6 +232,31 @@ a.nav-link {
   height: 100%;
   background: white;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
+
+}
+.index_container{
+  position:absolute;
+}
+
+#loader{
+  /*Overlay image*/
+  position:absolute;
+  height:100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+
+}
+
+#loader img{
+  /*Center image*/
+  position:absolute;
+  width:128px;
+  height:128px;
+  top:50%;
+  left:50%;
+  margin-left: -64px;
+  margin-top: -64px;
 }
 */
 

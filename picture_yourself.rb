@@ -41,10 +41,15 @@ end
 get '/' do
   puts OS.mac?
   cookie = request.cookies["pyuserid"]
-  name = 'public/users/' + cookie + "/1_sticker.png"
-  if File.file?(name)
-      File.delete(name)
+  
+  # Check if cookie exits, if it does delete picture associated with cookie
+  unless cookie.nil?
+    name = 'public/users/' + cookie + "/1_sticker.png"
+    if File.file?(name)
+        File.delete(name)
+    end
   end
+
   erb :index
 end
 

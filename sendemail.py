@@ -38,7 +38,7 @@ try:
     msg.attach(part2)
 
     conn = smtplib.SMTP(SERVER)
-    conn.set_debuglevel(True)
+    conn.set_debuglevel(False)#To avoid verbosing...
     conn.ehlo()
     conn.starttls()
     conn.ehlo()

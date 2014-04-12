@@ -104,6 +104,8 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     $scope.show_camera = true;
     $scope.show_capture = false;
     $scope.camera_loaded = false;
+    $scope.loading = false;
+    $scope.cutDisabled = false;
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
 	// variables for cut creation
@@ -156,6 +158,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     		$scope.snapshot_button.cut = false;
 			$scope.show_camera = true;
 			$scope.show_capture = false;
+			$scope.loading = false;
 			width = 0;
 			height = 0;
     }
@@ -172,12 +175,22 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		formData['coords'] = x + ' ' + y + ' ' + width + ' ' + height;
 		console.log(formData['coords'])
 		formData['pyuserid'] = $scope.pyuserid;
+		
+		// Display loading
+		$scope.loading = true;
+		$scope.cutDisabled = true;
+		$scope.$apply();
+
 		$.ajax({
 			url:'/grabcut',
 			type: 'POST',
 			data: formData,
 			success: function(){
 				window.location = '/selfie';
+			},
+			error: function(){
+				$scope.loading = false;
+				$scope.cutDisabled = true;
 			}
 		})
 		// var xhr2 = new XMLHttpRequest();

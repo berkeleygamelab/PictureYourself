@@ -22,18 +22,24 @@
 
   		<!-- KineticJS Stage -->
   		<div id='capture' ng-show='show_capture' class='centered'>
-			<div id="container" ng-show='show_capture'></div>
+			<div id="container" ng-show='show_capture' class='index_container'></div>
 
 			<!-- <div id='retake_div' ng-show='show_capture' class='centered'>
 				<img src='images/retake.png' ng-click='retake()' id='retake_img'>
+<<<<<<< HEAD
 			</div> --> <!-- issues with cut selection  -->
-		</div>
+			</div>
+
+			<div id='loader' ng-show='loading' class='centered'>
+				<img src='images/loader.gif' id='loader_img' class='centered'>
+			</div>
+
 
 		<!-- snapshot_buttons -->
 		<div id='snapshot_button_div' class='centered'>
 			<input type="button" class="clicker" ng-click = 'get_camera()' value = "START" ng-show='snapshot_button.start'>
 			<input type="button" class="clicker" ng-click = 'capture()' value = "SNAP IT" id = "button" ng-show = 'snapshot_button.snap_it'>
-			<input type="button" class="clicker" ng-click = 'upload_webcam()' value='CUT' ng-show = 'snapshot_button.cut'>
+			<input type="button" class="clicker" ng-click = 'upload_webcam()' value='CUT' ng-show = 'snapshot_button.cut' ng-disabled="cutDisabled">
 		</div>
 		<!-- <input type="button" value="RESTART" class="clicker centered" ng-click='retake()'> -->
 
