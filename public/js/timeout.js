@@ -45,15 +45,16 @@
 
     a("#sessionTimeout-dialog").dialog({
       autoOpen:false,
-      width:400,
+      width:325,
       height:250,
       modal:true,
       closeOnEscape:false,
       open:function(b,c){
         a(".ui-dialog-titlebar-close").hide()},
-        buttons:{"Log Out Now":function(){
+        buttons:{
+          "FINISH":function(){
           window.location=d.logoutUrl},
-          "Stay Connected":function(){
+          "STAY":function(){
             a(this).dialog("close");
             a.ajax({type:"GET",url:d.keepAliveUrl});
             f("stop");
@@ -65,7 +66,7 @@
 
 $(document).ready(function() {
   $.sessionTimeout({
-    warnAfter: 180000,
+    warnAfter: 1800,
     redirAfter: 300000
   });
 });
