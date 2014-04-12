@@ -192,18 +192,21 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         $scope.frameObj.src = e.target.src
     }
 
-    $http.get('/stickers/frames').success(
-        function(data)
-        {
-            angular.forEach(data,
-                function(source,name)
-                {
-                    html = "<img src='/" +  source + "' class='frames' ng-click=\"frame_update($event)\" alt='"+name+"'>"
-                    compiledElement = $compile(html)($scope);
-                    $("#frames_tab").append(compiledElement)
-                })
 
-    }) //success
+    //TEMPORARY SO WE CAN HAVE IT SAY COMING SOON FOR FRAMES!!!!!!
+    
+    // $http.get('/stickers/frames').success(
+    //     function(data)
+    //     {
+    //         angular.forEach(data,
+    //             function(source,name)
+    //             {
+    //                 html = "<img src='/" +  source + "' class='frames' ng-click=\"frame_update($event)\" alt='"+name+"'>"
+    //                 compiledElement = $compile(html)($scope);
+    //                 $("#frames_tab").append(compiledElement)
+    //             })
+
+    // }) //success
 
     $scope.remove_frame = function(){
         debug('remove frame')

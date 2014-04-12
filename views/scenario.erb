@@ -39,24 +39,28 @@
     <div class='tabContent' id='toolboxbody'>
       <div id="sticker_tab" ng-show='tabs.stickers'>
         <div id='selfie_div'>
-          <h3> Your selfie!</h3>
+          <h3 class="toolbox_text"> Your Selfie!</h3>
               <img class='sticker' id='selfie' src='' >
 
         </div>
-        <h3>Stickers</h3>
+        <h3 class="toolbox_text">Stickers</h3>
 
       </div> <!-- #sticker_tab -->
       <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
-        <h3>Backgrounds</h3>
+        <h3 class="toolbox_text">Backgrounds</h3>
 
       </div>  <!-- Tab2 -->
 
       <div id="tab3" ng-show='tabs.filters'>
 
         <div id='filter_div'>
+
+            <p>Coming soon!</p>
 <!--           <table>
             <tr> -->
-              <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
+
+
+             <!--  <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
               <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
               <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
               <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
@@ -64,7 +68,7 @@
               <input class = 'filter' id = 'opacity' type='button' value = 'Opacity'>
               <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
               <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
-              <input class = 'filter' id = 'reset' type='button' value = 'Reset'>
+              <input class = 'filter' id = 'reset' type='button' value = 'Reset'> -->
 <!-- 
           <td>Blur:</td><td><input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
         </tr><tr>
@@ -92,11 +96,14 @@
 
       </div> <!-- Tab3 -->
 
-      <div id="frames_tab" ng-show='tabs.frames'>
+      <!-- <div id="frames_tab" ng-show='tabs.frames'> 
         <div><h3>Frames</h3> <button id='remove_frame_button' ng-click='remove_frame()'>Remove</button></div>
 
+      </div>  --><!--tab4-->
 
-      </div> <!--tab4-->
+      <div ng-show='tabs.frames'>  <!-- temporary for now -->
+        <p class="toolbox_text">Coming soon!</p>
+      </div>
 
     </div><!--  Toolbox body -->
   </div> <!-- Tabs Ctrl-->
