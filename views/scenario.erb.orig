@@ -106,13 +106,9 @@
   <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 800px; height:550px;'>
   </div><!-- KineticJS Canvas -->
 
-  <div id="dialog-confirm-email" title="E-mail sent!">
+  <div id="dialog-confirm-email" title="E-mail sent! ">
   <!-- <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p> -->
 </div>
-
-  <div title="Session Timeout" id="sessionTimeout-dialog">
-     
-  </div>
 
 
 </div> <!-- Framecontainer -->
@@ -121,8 +117,14 @@
   <!-- style='float:left; margin-right:10px; padding-left:92px; padding-top:10px;' -->
     <input type='button' id='save' class='clicker' ng-click='create_image()' value = "SAVE">
   </div>   <!--save_div -->
+<<<<<<< HEAD
+  
+   <div id='email_div' style='padding-top:10px;'>
+    <button type='button' id='email' ng-click='call_email()'>E-mail to friends</button>
+=======
    <div id='email_div'>
     <input type='button' id='email' class='clicker' ng-click='call_email()' value = "EMAIL">
+>>>>>>> 084f06a762d283c9c6f31f553ffe7b3449518105
   </div>   <!--email_div -->
 
 

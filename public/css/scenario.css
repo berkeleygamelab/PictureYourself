@@ -166,9 +166,142 @@ p.signout {
   text-align: center;
   font-size: large;
   */
-  background-color:#e8e8e7; 
+  /*background-color:#e8e8e7; */
   /*color:white;*/
-  border: solid;
+/*  border: solid;
   border-width: 1px;
-  border-color: 'gold';
+  border-color: 'gold';*/
+
+  width: 400px;
+height: 250px;
+
+border: 4px #030303 solid;
+
+background-color: #ffffff;
+
+padding: 17px;
+
+color: #000000;
+font-size: inherit;
+font-weight: normal;
+font-family: Arial, Helvetica, sans-serif;
+font-style: normal;
+text-decoration: none;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+.ui-dialog{
+  width: 400px;
+  height: 250px;
+
+  border: 4px #030303 solid;
+
+  background-color: #ffffff;
+
+  padding: 17px;
+
+  color: #000000;
+  font-size: inherit;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  text-decoration: none;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Buttons for JQuery UI dialog*/
+
+.ui-button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #97c4fe;
+    background: -moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+    background-color: #242941;
+    -webkit-border-top-left-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    text-indent: 0;
+    border: none;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    height: 40px;
+    line-height: 40px;
+    width: 100px;
+    text-decoration: none;
+    text-align: center;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.ui-button:hover {
+    background-color:rgba(36, 41, 65, 0.89);
+}.ui-button:active {
+    position:relative;
+    top:1px;
+}
+
+/*.ui-button{
+  /* Style 
+   border-top: 1px solid #242941;
+   background: #242941; 
+   background: -webkit-gradient(linear, left top, left bottom, from(#242941), to(#242941));
+   background: -webkit-linear-gradient(top, #242941, #242941);
+   background: -moz-linear-gradient(top, #242941, #242941);
+   background: -ms-linear-gradient(top, #242941, #242941);
+   background: -o-linear-gradient(top, #242941, #024194);
+   padding: 7.5px 15px;
+   -webkit-border-radius: 1px;
+   -moz-border-radius: 1px;
+   border-radius: 1px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 13px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+
+   /* Position 
+   margin-left:10px;
+   margin-right:10px;
+   }
+.ui-button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.ui-button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+}*/
+
+.ui-dialog-titlebar{
+  text-align: center;
+}
+
+#dialog-text{
+  text-align: center;
+}
+
+.ui-dialog-buttonset{
+  text-align: center;
 }
