@@ -200,7 +200,6 @@ CropJS.prototype = {
           canvas._addSelectionRectangle();
           canvas._handles.active = 'bottomRight';
           canvas._removeFullMask();
-          console.log('Down - X: ' + canvas._stage.getPointerPosition().x + " Y: " + canvas._stage.getPointerPosition().y);
         })
 
       ;
@@ -445,7 +444,6 @@ CropJS.prototype = {
         })
         .on('mouseup touchend', function () {
           canvas._handles.active = undefined;
-          console.log('Up - X: ' + canvas._stage.getPointerPosition().x + " Y: " + canvas._stage.getPointerPosition().y);
         });
         
     },
@@ -690,7 +688,6 @@ CropJS.prototype = {
     if (!this.handleSize) {
       this.handleSize = 10;
     }
-    console.log(this);
     this._handles.init(this);        
     
     // Masks
