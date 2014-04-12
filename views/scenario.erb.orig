@@ -117,8 +117,14 @@
   <!-- style='float:left; margin-right:10px; padding-left:92px; padding-top:10px;' -->
     <input type='button' id='save' class='clicker' ng-click='create_image()' value = "SAVE">
   </div>   <!--save_div -->
+<<<<<<< HEAD
+  
+   <div id='email_div' style='padding-top:10px;'>
+    <button type='button' id='email' ng-click='call_email()'>E-mail to friends</button>
+=======
    <div id='email_div'>
     <input type='button' id='email' class='clicker' ng-click='call_email()' value = "EMAIL">
+>>>>>>> 084f06a762d283c9c6f31f553ffe7b3449518105
   </div>   <!--email_div -->
 
 

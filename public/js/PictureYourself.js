@@ -203,12 +203,22 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
 		console.log(formData['coords']);
 		formData['pyuserid'] = $scope.pyuserid;
+
+		// Display loading
+		$scope.loading = true;
+		$scope.cutDisabled = true;
+		$scope.$apply();
+
 		$.ajax({
 			url: '/grabcut',
 			type: 'POST',
 			data: formData,
 			success: function() {
 				window.location = '/selfie';
+			},
+			error: function(){
+				$scope.loading = false;
+				$scope.cutDisabled = true;
 			}
 		});
 		// var xhr2 = new XMLHttpRequest();
