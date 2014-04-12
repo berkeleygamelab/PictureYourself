@@ -67,6 +67,7 @@ $(document).ready(function() {
 function ScenarioCtrl($scope, $resource, $http, $compile){
     var stage_width = 800;
     var stage_height = 550;
+    $scope.loading = false;
     var previous_edit = {'image':null,'collapse':null};
 
     var stage = new Kinetic.Stage({
@@ -312,8 +313,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             visible:false,
            // offset://[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos) {
-                var x = image.getAbsolutePosition().x - start_size.width/2;
-                var y = image.getAbsolutePosition().y - start_size.height/2;//100;  // your center point
+                var x = image.getAbsolutePosition().x + start_size.width/2;
+                var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
                 var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
                 var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
                 debug(scale);
@@ -414,6 +415,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         var startX;
         var startY;
 
+        image.setOffsetX(start_size.width/2);
+        image.setOffsetY(start_size.height/2);
+        rotate.setOffsetX(start_size.width/2);
+        rotate.setOffsetY(start_size.height/2);
+
         rotate.on('mouseenter', function(e){
             startX = parseInt(e.clientX - offsetX);
             startY = parseInt(e.clientY - offsetY);
@@ -421,11 +427,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         rotate.on('dragmove touchmove', function(e){ //dragmove
             // debug(mouseX + " " + mouseY);
+            start_position = {"x":image.getAbsolutePosition().x, "y": image.getAbsolutePosition().y};
+            rotate_position = {"x":image.getAbsolutePosition().x + start_size.width/2,"y": image.getAbsolutePosition().y + start_size.height/2};
+
             var dx = startX - parseInt(e.clientX - offsetX);
             var dy = startY - parseInt(e.clientY - offsetY);
             var angle = Math.atan2(dy, dx);
             image.setRotation(angle);
+
             layer.draw();
+
         })
 
         //set horizontal height of image
@@ -509,6 +520,56 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         layer.draw();
     } 
    
+function email(pyuserid, emails, data){
+  var formData = {"pyuserid":pyuserid, "data":data};
+  $.ajax({
+    url: '/email',
+    type: 'POST',
+    data: formData,
+    success: function(){        
+      send_email(pyuserid, emails);
+    }
+  })
+}
+
+function send_email(pyuserid, emails){
+    
+    $scope.loading = true;
+    $scope.$apply();
+
+    var formData = {"pyuserid":pyuserid, "emails":emails};
+    $.ajax({
+    url: '/send_email',
+    type: 'POST',
+    data: formData,
+    success: function(){
+        $scope.loading = false;
+        $scope.$apply();
+      $( "#dialog-confirm-email" ).dialog({
+        resizable: false,
+        // height:140,
+        // width: 70,
+        modal: true,
+        draggable:false,
+        closeOnEscape:false,
+        dialogClass: 'email-dialog no-close',
+        buttons: {
+          "Start over": function() {
+            window.location = "/"
+          },
+          "Continue": function() {
+            $( this ).dialog( "close" );
+          }
+        }
+    })
+      .position({of:'#container'});
+    },
+    error: function(){
+        $scope.loading = false;
+        $scope.$apply();  
+    }
+    })
+}
 
 } // End of Scenario Controller
 

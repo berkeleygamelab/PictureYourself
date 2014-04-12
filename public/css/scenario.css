@@ -322,3 +322,7 @@ border-radius: 10px;
 .ui-dialog-buttonset{
   text-align: center;
 }
+
+.loader_scenario{
+  margin-top: -44%;
+}
