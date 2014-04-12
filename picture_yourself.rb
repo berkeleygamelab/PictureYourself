@@ -39,7 +39,6 @@ module OS
 end
 
 get '/' do
-  puts OS.mac?
   cookie = request.cookies["pyuserid"]
   
   # Check if cookie exits, if it does delete picture associated with cookie
