@@ -72,7 +72,7 @@ p.signout {
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
   height: 39em;
   margin-right: 3em;
-  margin-left: 4em;
+  margin-left: 5em;
   padding: 0px;
 }
 
@@ -116,7 +116,7 @@ p.signout {
 
 #toolboxbody {
   background: #e8e8e7;
-  height: 34em;
+  height: 35em;
   overflow-y: scroll;
 }
 
