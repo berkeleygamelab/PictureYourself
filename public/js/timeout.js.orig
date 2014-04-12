@@ -51,7 +51,12 @@
       closeOnEscape:false,
       open:function(b,c){
         a(".ui-dialog-titlebar-close").hide()},
+<<<<<<< HEAD
+        buttons:{
+          "FINISH":function(){
+=======
         buttons:{"FINISH":function(){
+>>>>>>> 66c5837d28b204e17d4fc4d4a91e1c411cb50d1c
           window.location=d.logoutUrl},
           "STAY":function(){
             a(this).dialog("close");
@@ -65,7 +70,7 @@
 
 $(document).ready(function() {
   $.sessionTimeout({
-    warnAfter: 180000,
+    warnAfter: 1800,
     redirAfter: 300000
   });
 });
