@@ -317,6 +317,12 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			*/
 			// CropJS set up
 			cropObj = new CropJS({
+				cropEdges: new EdgeList({
+					topY: 160,
+					bottomY: 320,
+					leftX: 213,
+					rightX: 426,
+				}),
 				image: imageObj,
 				imageContainerID: "container",
 			})
