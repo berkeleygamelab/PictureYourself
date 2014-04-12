@@ -196,8 +196,47 @@ border-radius: 10px;
 }
 
 /* Buttons for JQuery UI dialog*/
-.ui-button{
-  /* Style */
+
+.ui-button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #97c4fe;
+    background: -moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+    background-color: #242941;
+    -webkit-border-top-left-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    text-indent: 0;
+    border: none;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    height: 40px;
+    line-height: 40px;
+    width: 100px;
+    text-decoration: none;
+    text-align: center;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.ui-button:hover {
+    background-color:rgba(36, 41, 65, 0.89);
+}.ui-button:active {
+    position:relative;
+    top:1px;
+}
+
+/*.ui-button{
+  /* Style 
    border-top: 1px solid #242941;
    background: #242941; 
    background: -webkit-gradient(linear, left top, left bottom, from(#242941), to(#242941));
@@ -219,7 +258,7 @@ border-radius: 10px;
    text-decoration: none;
    vertical-align: middle;
 
-   /* Position */
+   /* Position 
    margin-left:10px;
    margin-right:10px;
    }
@@ -232,9 +271,13 @@ border-radius: 10px;
    border-top-color: #1b435e;
    background: #1b435e;
    }
+}*/
+
+.ui-dialog-titlebar{
+  text-align: center;
 }
 
-.ui-dialog{
+#dialog-text{
   text-align: center;
 }
 
