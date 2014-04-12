@@ -39,7 +39,7 @@
     <div class='tabContent' id='toolboxbody'>
       <div id="sticker_tab" ng-show='tabs.stickers'>
         <div id='selfie_div'>
-          <h3 class="toolbox_text"> Your Selfie!</h3>
+          <h3 class="toolbox_text" id ="selfie_text"> Your Selfie</h3>
               <img class='sticker' id='selfie' src='' >
 
         </div>
@@ -55,7 +55,7 @@
 
         <div id='filter_div'>
 
-            <p>Coming soon!</p>
+            <h3 class="toolbox_text">Filters are coming soon!</h3>
 <!--           <table>
             <tr> -->
 
@@ -102,7 +102,7 @@
       </div>  --><!--tab4-->
 
       <div ng-show='tabs.frames'>  <!-- temporary for now -->
-        <p class="toolbox_text">Coming soon!</p>
+        <h3 class="toolbox_text">Frames are coming soon!</h3>
       </div>
 
     </div><!--  Toolbox body -->
@@ -124,14 +124,16 @@
 
 </div> <!-- Framecontainer -->
   <div id='save_div' >
-
-  <!-- style='float:left; margin-right:10px; padding-left:92px; padding-top:10px;' -->
     <input type='button' id='save' class='clicker' ng-click='create_image()' value = "SAVE">
   </div>   <!--save_div -->
+
    <div id='email_div'>
     <input type='button' id='email' class='clicker' ng-click='call_email()' value = "EMAIL">
   </div>   <!--email_div -->
 
+<div id='loader' ng-show='loading' class='centered'>
+        <img src='images/loader.gif' id='loader_img'>
+</div>
 
 </div> <!-- ScenarioCtrl -->
 
