@@ -268,5 +268,10 @@ a.nav-link {
   margin-top: -64px;
 }
 
+#warning{
+  background-color: black;
+  opacity: 0.5;
+}
+
 
 
