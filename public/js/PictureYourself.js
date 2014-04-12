@@ -107,48 +107,48 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     $scope.camera_loaded = false;
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
-	/* Kinetic Object set up in CropJS, not required here
-	// variables for cut creation
-	var x = 0;
-	var y = 0;
-	var width = 0;
-	var height = 0;
-	var x_up = 0;
-	var y_up = 0;
-	var mouse = 'up';
+	//  Kinetic Object set up in CropJS, not required here
+	// // variables for cut creation
+	// var x = 0;
+	// var y = 0;
+	// var width = 0;
+	// var height = 0;
+	// var x_up = 0;
+	// var y_up = 0;
+	// var mouse = 'up';
 
-	//KineticJS setup
+	// //KineticJS setup
 	var imageObj = new Image();
-	var stage = new Kinetic.Stage({
-        container: 'container'
-     });
+	// var stage = new Kinetic.Stage({
+ //        container: 'container'
+ //     });
 
-    var layer = new Kinetic.Layer();
-    stage.add(layer);
+ //    var layer = new Kinetic.Layer();
+ //    stage.add(layer);
 
-    var selfie = new Kinetic.Image({
-  		x: 0,
-  		y: 0,
-  		image: imageObj,
-  		width: imageObj.width,
-  		height: imageObj.height
-	});
-	var background = new Kinetic.Rect({
-	x:0,
-	y:0,
-	width: imageObj.width,
-	height: imageObj.height,
-	fillEnabled: false,
-	opacity: 1
-	});
+ //    var selfie = new Kinetic.Image({
+ //  		x: 0,
+ //  		y: 0,
+ //  		image: imageObj,
+ //  		width: imageObj.width,
+ //  		height: imageObj.height
+	// });
+	// var background = new Kinetic.Rect({
+	// x:0,
+	// y:0,
+	// width: imageObj.width,
+	// height: imageObj.height,
+	// fillEnabled: false,
+	// opacity: 1
+	// });
 
-	var selection = new Kinetic.Rect({
-		x:0,
-		y:0,
-		stroke:'yellow',
-		strokeWidth: 3,
-		fillEnabled: false
-	}) */
+	// var selection = new Kinetic.Rect({
+	// 	x:0,
+	// 	y:0,
+	// 	stroke:'yellow',
+	// 	strokeWidth: 3,
+	// 	fillEnabled: false
+	// }) 
 
 	// Button functions
 
@@ -182,14 +182,15 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 				window.location = '/selfie';
 			}
 		}) */
-		var coord = cropObj.getSelectionRectangle().getXYWH();
+		var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
+		console.log(coord);
 		var formData = {};
 		var filename = $scope.pyuserid + "/1.png";
 		formData["filename"] = filename;
-		formData['coords'] = coord.x + ' ' + coord.y + ' ' + coord.width + ' ' + coord.height;
+		formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
 		console.log(formData['coords']);
 		formData['pyuserid'] = $scope.pyuserid;
-		$ajax({
+		$.ajax({
 			url: '/grabcut',
 			type: 'POST',
 			data: formData,
@@ -391,7 +392,6 @@ app.directive("ngFileSelect",function(){
 function LayoutCtrl($scope){
   
 }
-
 
 
 

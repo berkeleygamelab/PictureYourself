@@ -74,10 +74,10 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
-  if OS.unix?
-    system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
-  elsif OX.mac?
+  if OS.mac?
     system('./opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  elsif OS.unix?
+    system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   end
 end
 

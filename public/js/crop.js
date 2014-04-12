@@ -116,6 +116,15 @@ EdgeList.prototype = {
       height: this.topY - this.bottomY,
     }
 
+  },
+
+  getOpenCVXYWH: function() {
+    return {
+      x: this.leftX,
+      y: this.topY,
+      width: Math.abs(this.rightX - this.leftX),
+      height: Math.abs(this.topY - this.bottomY),
+    }
   }
 
 };
@@ -191,6 +200,7 @@ CropJS.prototype = {
           canvas._addSelectionRectangle();
           canvas._handles.active = 'bottomRight';
           canvas._removeFullMask();
+          console.log('Down - X: ' + canvas._stage.getPointerPosition().x + " Y: " + canvas._stage.getPointerPosition().y);
         })
 
       ;
@@ -435,6 +445,7 @@ CropJS.prototype = {
         })
         .on('mouseup touchend', function () {
           canvas._handles.active = undefined;
+          console.log('Up - X: ' + canvas._stage.getPointerPosition().x + " Y: " + canvas._stage.getPointerPosition().y);
         });
         
     },
