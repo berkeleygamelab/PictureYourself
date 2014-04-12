@@ -76,9 +76,9 @@ p.signout {
   background: #e8e8e7;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
   height: 39em;
-  margin-right: 3em;
-  margin-left: 5em;
-  padding: 0px;
+  margin-right: 0em;
+  margin-left: 4em;
+  margin-bottom: 5em;
 }
 
 #toolicon li {
@@ -135,6 +135,7 @@ p.signout {
 */
 
 #container {
+  margin-left: 4em;
   height: 100%;
   background: white;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
@@ -159,15 +160,16 @@ p.signout {
 
 }
 
-#save_div, #email_div{
+
+#save_email{
   margin-bottom: 0.55em;
-  float:left; 
-  margin-right:2em; 
-  padding-top: 0.7em;
+  margin-left: 7%;
+  position: absolute;
+  padding-top: 1.4em;
 }
-#save_div{
-    padding-left:6.2em; 
-    padding-right:2em;
+#save_div, #email_div{
+  float:left; 
+  padding-right: 2em;
 }
 #scenario_ctrl{
   margin-top: -20px;

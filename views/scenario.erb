@@ -123,17 +123,21 @@
 
 
 </div> <!-- Framecontainer -->
-  <div id='save_div' >
-    <input type='button' id='save' class='clicker' ng-click='create_image()' value = "SAVE">
-  </div>   <!--save_div -->
 
-   <div id='email_div'>
-    <input type='button' id='email' class='clicker' ng-click='call_email()' value = "EMAIL">
-  </div>   <!--email_div -->
+  <div id="save_email">
+    <div id='save_div' >
+      <input type='button' id='save' class='clicker' ng-click='create_image()' value = "SAVE">
+    </div>   <!--save_div -->
 
-<div id='loader' ng-show='loading' class='centered loader_scenario'>
-        <img src='images/loader.gif' id='loader_img'>
-</div>
+     <div id='email_div'>
+      <input type='button' id='email' class='clicker' ng-click='call_email()' value = "EMAIL">
+    </div>   <!--email_div -->
+   </div>
+
+    <div id='loader' ng-show='loading' class='centered loader_scenario'>
+            <img src='images/loader.gif' id='loader_img'>
+    </div>
+
 
 </div> <!-- ScenarioCtrl -->
 
