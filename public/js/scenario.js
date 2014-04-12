@@ -309,8 +309,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             visible:false,
            // offset://[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos) {
-                var x = image.getAbsolutePosition().x + start_size.width/2;
-                var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
+                var x = image.getAbsolutePosition().x - start_size.width/2;
+                var y = image.getAbsolutePosition().y - start_size.height/2;//100;  // your center point
                 var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
                 var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
                 debug(scale);
