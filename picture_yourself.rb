@@ -4,6 +4,7 @@ require 'data_mapper'
 require 'dm-timestamps'
 require 'json'
 require 'sinatra/contrib/all'
+require 'mail'
 
 set :port, 80
 set :bind, '128.32.189.148'
@@ -19,6 +20,20 @@ require_relative 'apis'
 require_relative 'db'
 
 DataMapper.finalize.auto_upgrade!
+
+#mail Settings
+options = { :address              => "smtp.gmail.com",
+            :port                 => 587,
+            :domain               => 'py-bcnm.berkeley.edu',
+            :user_name            => 'picyourfuture',
+            :password             => 'Py12ab21yP',
+            :authentication       => 'plain',
+            :enable_starttls_auto => true  }
+
+
+Mail.defaults do
+  delivery_method :smtp, options
+end
 
 module OS
   def OS.windows?
@@ -113,10 +128,6 @@ end
 
 #write email behaviour (save image, attach to email)
 post '/email' do
-  puts "email\n"
-
-  # puts params
-
   data = params[:data].split(',')[1]
   #how about... pyuserid
   dirname = 'email/' + params[:pyuserid]
@@ -125,27 +136,26 @@ post '/email' do
   end
   # fix - fix to have dynamic png numbers - or naming (pic_index.filetype)
   File.open(dirname+'/1.png', 'wb') do |f|
-    puts "write"
-      f.write(Base64.decode64(data))
+    f.write(Base64.decode64(data))
   end
   status 200
 end
 
 post '/send_email' do
-  # puts "send_email\n"
-
   pyuserid = params[:pyuserid]
   filepath = 'email/'+pyuserid+'/1.png'  
   emails = params[:emails]
-  # puts pyuserid
-  # puts filepath
-  # puts emails
-  system('python ' + 'sendemail.py '+params[:emails]+' '+filepath)
+
+  Mail.deliver do
+    to emails
+    from 'picyourfuture@gmail.com'
+    subject "PIC YOUR FUTURE"
+    body 'PIC Your Future at Berkeley\nwww.py-bcnm.berkeley.edu\n;)'
+    add_file filepath
+  end
 end
 
 
 get '/scenario' do
   erb :scenario
 end
-
-
