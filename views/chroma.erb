@@ -1,0 +1,42 @@
+
+
+
+    <link rel="stylesheet" type="text/css" href="/css/scenario.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script type="text/javascript" src='/js/chroma.js'></script>
+    <script type="text/javascript" src='/js/jquery.colorPicker.min.js'></script>
+
+    <link rel="stylesheet" href="/css/colorPicker.css" type="text/css" />
+
+    <style>
+    #color_change_canvas{
+      display:none;
+    }
+    </style>
+
+
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+ <div ng-controller='ChromaCtrl' id='chroma_ctrl'>
+  <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 800px; height:550px;'>
+  </div><!-- KineticJS Canvas -->
+
+  <div class="controlset">
+    <label for="color1">Select Color</label> 
+    <input id="color1" type="text" name="color1" value="#333399" />
+  </div>
+
+  <canvas id="color_change_canvas" width="120", height="120"></canvas>
+
+
+  
+
+</div> <!-- ChromaCtrl -->
+
+
+
+

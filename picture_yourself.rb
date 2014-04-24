@@ -159,3 +159,9 @@ end
 get '/scenario' do
   erb :scenario
 end
+
+
+# TESTING
+get '/chroma' do
+  erb :chroma
+end
