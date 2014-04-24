@@ -3,8 +3,6 @@
 body{
 	margin:0;
 	padding:0;
-	font-size:13px;
-	font-family:verdana, Arial, Helvetica, sans-serif;
 	color:#FFFFFF;
 	background-color:#666666;
 }
@@ -58,11 +56,15 @@ div.wrapper{
 
 /* ----------------------------------------------Generalise-------------------------------------*/
 
-#topbar, #head, #projects, #breadcrumb, #container, #copyright, #gallery{
+#topbar, #head, #projects, #breadcrumb, #copyright, #gallery{
 	position:relative;
 	margin:0 auto 0;
 	display:block;
 	width:960px;
+}
+#container{
+	margin:0 auto 0;
+	display:block;
 }
 
 /* ----------------------------------------------TopBar-------------------------------------*/
@@ -239,7 +241,7 @@ div.wrapper{
 
 
 #container{
-	padding:15px 0;
+	/*padding:15px 0;*/
 }
 
 #container h1, #container h2, #container h3, #container h4, #container h5, #container h6{
@@ -326,8 +328,9 @@ div.wrapper{
 
 .navtoleft{
 	float: left;
-	margin-right:0.5em;
+	margin-right:0.4em;
 }
+
 .navbar-fixed-top {
 top: 0;
 border-width: 0 0 1px;

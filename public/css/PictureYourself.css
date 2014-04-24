@@ -1,6 +1,11 @@
-/*---------------THIS CSS FILE SHOULD ONLY BE USED FOR GLOBAL CSS---------------*/
-/*---------------I.E. ANY STYLING THAT SHOULD BE CONSISTENT ACROSS ALL PAGES, 
-WHERE THE CORRESPONDING HTML IS NOT FOUND IN layout.erb---------------*/
+/*------------------------------------------------------------------------------------------
+THIS CSS FILE SHOULD ONLY BE USED FOR GLOBAL CSS
+I.E. ANY STYLING THAT SHOULD BE CONSISTENT ACROSS ALL PAGES, 
+WHERE THE CORRESPONDING HTML IS NOT FOUND IN layout.erb
+
+IF YOU'RE UNSURE, DO NOT PLACE IT HERE; PLACE IT IN THE 
+CORRESPONDING CSS FILE TO THE HTML/ERB FILE
+------------------------------------------------------------------------------------------*/
 
 
 html {
@@ -32,7 +37,7 @@ transition: all 0.2s ease-out;
 background-color: rgb(232, 232, 231);
 min-width: 1000px;
 zoom: 1;
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-family: Helvetica,Arial,sans-serif;
 font-size: 14px;
 line-height: 1.428571429;
 color: #333;
@@ -166,11 +171,11 @@ div.signout {
 
 #dropdown {
     visibility: hidden;
-    top: 48px;
-    left: -50px;
+    top: 3.8em;
+    left: -4em;
     position: absolute;
-    border: 1px solid;
-    width: 98px;
+    border: 1px solid black;
+    min-width: 8em;
 }
 
 .nav-button {
@@ -202,63 +207,6 @@ a.nav-link {
 }
 
 
-/*
-//Tool box
-*/
-
-/* Tool box tabs */
-
-#toolbox {
-  background: #e8e8e7;
-  box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
-  height: 500px;
-  margin-right: 25px;
-  padding: 0px;
-}
-
-#toolicon li {
-  width: 25%;
-  height: 60px;
-  background: white;
-  padding: 0px;
-}
-
-#toolicon li a {
-  height: 100%;
-  margin: 0px;
-  padding: 8px;
-  background: white;
-}
-
-#toolicon li img {
-  height: 40px;
-  margin: 10px 19px;
-}
-
-#toolicon li.active {
-  background: #e8e8e7;
-}
-
-#toolicon li.active a {
-  background: #e8e8e7;
-}
-
-#toolicon li:hover {
-/* background: lightblue;*/
-}
-
-#toolicon li:hover a {
-/*  background: lightblue; */
-}
-
-
-/* Body of tool box */
-
-#toolboxbody {
-  background: #e8e8e7;
-  height: 440px;
-  overflow-y: scroll;
-}
 
 /*
 //Content frame on the right side
@@ -286,13 +234,11 @@ a.nav-link {
 
 #loader img{
   /*Center image*/
-  position:absolute;
-  width:128px;
-  height:128px;
-  top:50%;
-  left:50%;
-  margin-left: -64px;
-  margin-top: -64px;
+  width: 128px;
+  height: 128px;
+  margin: auto;
+  display: block;
+  margin-top: 30%;
 }
 
 #warning{
@@ -304,3 +250,8 @@ a.nav-link {
   float: left;
 }
 
+ul{
+  -webkit-padding-start: 0em;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
