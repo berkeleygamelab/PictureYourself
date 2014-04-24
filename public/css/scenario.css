@@ -113,13 +113,8 @@ p.signout {
 }
 
 #toolicon li:hover {
-/* background: lightblue;*/
+ background: #f1f1f1;
 }
-
-#toolicon li:hover a {
-/*  background: lightblue; */
-}
-
 
 /* Body of tool box */
 
@@ -171,7 +166,7 @@ p.signout {
 
 #save_email{
   margin-bottom: 0.55em;
-  margin-left: 7%;
+  margin-left: 12%;
   position: absolute;
   padding-top: 1.4em;
 }
