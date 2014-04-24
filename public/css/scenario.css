@@ -72,6 +72,10 @@ p.signout {
 
 /* Tool box tabs */
 
+.tabs{
+  cursor: pointer;
+}
+
 #toolbox {
   background: #e8e8e7;
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
@@ -128,6 +132,7 @@ p.signout {
 .toolbox_text{
   font-family: Arial;
   text-align: center;
+  cursor: default;
 }
 
 /*
@@ -157,9 +162,12 @@ p.signout {
   border-width: 1px;
   /*border-color: gold;*/
   padding-top: 0.4em;
-
+  cursor: pointer;
 }
 
+.subtab_title:hover {
+    background-color:rgba(36, 41, 65, 0.89);
+}
 
 #save_email{
   margin-bottom: 0.55em;
