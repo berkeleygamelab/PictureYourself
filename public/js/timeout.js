@@ -1,71 +1,94 @@
-(function(a){
-  jQuery.sessionTimeout=function(b){
-    function f(a){
-      switch(a){
-        case "start":
-        redirTimer=setTimeout(function(){
-          window.location=d.redirUrl},
-          d.redirAfter-d.warnAfter
-        );
-        break;
-        case "stop":
-          clearTimeout(redirTimer);
-          break;
-      }
-    }
+(function( $ ){
+    jQuery.sessionTimeout = function( options ) {
+        var defaults = {
+            message      : 'Your session is about to expire.',
+            keepAliveUrl : '/selfie',
+            redirUrl     : '/',
+            logoutUrl    : '/',
+            warnAfter    : 180000, // 3 minutes
+            redirAfter   : 60000 // 1 minute
+        };
 
-    function e(b){
-      switch(b){
-        case "start":
-          dialogTimer=setTimeout(function(){
-            a("#sessionTimeout-dialog").dialog("open");
-            f("start")},
-            d.warnAfter);
-          break;
-        case "stop":
-          clearTimeout(dialogTimer);
-          break;
-      }
-    }
+        // Extend user-set options over defaults
+        var o = defaults,
+                dialogTimer,
+                redirTimer;
 
-    var c = { 
-      message:"Your session is about to expire.",
-      keepAliveUrl:"/selfie",
-      redirUrl:"/",
-      logoutUrl:"/",
-      warnAfter:9e5,
-      redirAfter:12e5
-    };
+        if ( options ) { o = $.extend( defaults, options ); }
 
-    var d=c;
+        // Create timeout warning dialog
+        $('body').append('<div title="" id="sessionTimeout-dialog">'+ o.message +'</div>');
+        $('#sessionTimeout-dialog').dialog({
+            autoOpen: false,
+            width:325,
+            height:250,
+            modal:true,            
+            closeOnEscape: false,
+            open: function() { 
+              $(".ui-dialog-titlebar-close").hide(); 
+            },
+            buttons: {
+              "FINISH": function() {
+                window.location = o.logoutUrl;
+              },
+              "STAY": function() {
+                $(this).dialog('close');
+                $.ajax({
+                    type: 'GET',
+                    url: o.keepAliveUrl
+                });
+                // Stop redirect timer and restart warning timer
+                controlRedirTimer('stop');
+                controlDialogTimer('start');
+              }
+            }
+          });
 
-    if(b){
-      var d=a.extend(c,b)
-    }
+        $(document).bind("click keypress", function() {
+            controlRedirTimer('stop');
+            controlDialogTimer('stop');//why needed?
+            controlDialogTimer('start');
+        })
 
-    a("#sessionTimeout-dialog").dialog({
-      autoOpen:false,
-      width:325,
-      height:250,
-      modal:true,
-      closeOnEscape:false,
-      open:function(b,c){
-        a(".ui-dialog-titlebar-close").hide()},
-        buttons:{"FINISH":function(){
-          window.location=d.logoutUrl},
-          "STAY":function(){
-            a(this).dialog("close");
-            a.ajax({type:"GET",url:d.keepAliveUrl});
-            f("stop");
-            e("start")
-          }
+        function controlDialogTimer(action){
+            switch(action) {
+                case 'start':
+                    // After warning period, show dialog and start redirect timer
+                    dialogTimer = setTimeout(function(){
+                        $('#sessionTimeout-dialog').dialog('open');
+                        controlRedirTimer('start');
+                    }, o.warnAfter);
+                    break;
+
+                case 'stop':
+                    clearTimeout(dialogTimer);
+                    break;
+            }
         }
-      });
-    e("start")}})(jQuery)
+
+        function controlRedirTimer(action){
+            switch(action) {
+                case 'start':
+                    // Dialog has been shown, if no action taken during redir period, redirect
+                    redirTimer = setTimeout(function(){
+                        window.location = o.redirUrl;
+                    }, o.redirAfter - o.warnAfter);
+                    break;
+
+                case 'stop':
+                    clearTimeout(redirTimer);
+                    break;
+            }
+        }
+
+        // Begin warning period
+        controlDialogTimer('start');
+    };
+})( jQuery );
 
 $(document).ready(function() {
-  $.sessionTimeout({
-    warnAfter: 180000,
-    redirAfter: 300000
-  });
+    $.sessionTimeout({
+        warnAfter: 10000,
+        redirAfter: 60000
+    });
 });
