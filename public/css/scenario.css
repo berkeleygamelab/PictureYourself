@@ -93,7 +93,7 @@ p.signout {
 }
 
 #toolicon li {
-  height: 60px;
+  height: 4em;
   background: white;
   padding: 0px;
 }
@@ -106,8 +106,8 @@ p.signout {
 }
 
 #toolicon li img {
-  height: 40px;
-  margin-top: 10px;
+  height: 75%;
+  margin-top: 0.5em;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -346,7 +346,7 @@ border-radius: 10px;
 }
 
 .loader_scenario{
-  margin-top: -44%;
+  margin-top: -1%;
 }
 
 #scenario_canvas{
