@@ -1,4 +1,4 @@
-
+/*---------------CSS corresponding to any and ALL HTML found in layout.erb---------------*/
 
 body{
 	margin:0;
@@ -315,13 +315,24 @@ div.wrapper{
 
 /* Navbar*/
 
-.navbar-default {
-background-color: #f8f8f8;
-border-color: #e7e7e7;
+
+#navright{
+	float: right;
+}
+
+#navcam{
+	margin-top: 5px;
+}
+
+.navtoleft{
+	float: left;
+	margin-right:0.5em;
 }
 .navbar-fixed-top {
 top: 0;
 border-width: 0 0 1px;
+height: 50px;
+background: #242941;
 }
 @media (min-width: 768px)
 .navbar-fixed-top, .navbar-fixed-bottom {
@@ -336,7 +347,7 @@ z-index: 1030;
 @media (min-width: 768px)
 .navbar {
 border-radius: 4px;
-}
+
 .navbar {
 position: relative;
 min-height: 50px;
@@ -350,4 +361,12 @@ display: block;
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;
+}
+
+.navbaricon{
+	vertical-align: middle;
+}
+.nav-adjust-right{
+	margin: 0 0 10px;
+	vertical-align: middle;
 }
