@@ -8,6 +8,13 @@ font-smoothing: subpixel-antialiased;
 -ms-transition: all 0.2s ease-out;
 -o-transition: all 0.2s ease-out;
 transition: all 0.2s ease-out;
+background-color: rgb(232, 232, 231);
+min-width: 1000px;
+zoom: 1;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 1.428571429;
+color: #333;
 }
 
 table { border-collapse: collapse; }

@@ -105,7 +105,7 @@ p.signout {
 }
 
 #toolicon li.active {
-  background: #e8e8e7;
+  background: #eeeeee;
 }
 
 #toolicon li.active a {
@@ -113,13 +113,13 @@ p.signout {
 }
 
 #toolicon li:hover {
- background: #f1f1f1;
+ background: #d8d8d8;
 }
 
 /* Body of tool box */
 
 #toolboxbody {
-  background: #e8e8e7;
+  background: #eeeeee;
   height: 35em;
   overflow-y: scroll;
 }
@@ -161,13 +161,12 @@ p.signout {
 }
 
 .subtab_title:hover {
-    background-color:rgba(36, 41, 65, 0.89);
+    background-color:rgba(36, 41, 65, 0.93);
 }
 
 #save_email{
   margin-bottom: 0.55em;
-  margin-left: 12%;
-  position: absolute;
+  margin-left: 35%;
   padding-top: 1.4em;
 }
 #save_div, #email_div{
