@@ -1,11 +1,11 @@
-/*------------------------------------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------
 THIS CSS FILE SHOULD ONLY BE USED FOR GLOBAL CSS
-I.E. ANY STYLING THAT SHOULD BE CONSISTENT ACROSS ALL PAGES, 
-WHERE THE CORRESPONDING HTML IS NOT FOUND IN layout.erb
+I.E. ANY STYLING THAT SHOULD BE CONSISTENT ACROSS ALL PAGES
+OR USED ACROSS MULTIPLE PAGES (E.G. BUTTON STYLING)
 
 IF YOU'RE UNSURE, DO NOT PLACE IT HERE; PLACE IT IN THE 
 CORRESPONDING CSS FILE TO THE HTML/ERB FILE
-------------------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------------*/
 
 
 html {
@@ -23,7 +23,6 @@ font-family: sans-serif;
 box-sizing: border-box;
 }
 
-
 body{
   -webkit-transform: translate3d(0, 0, 0);
 -webkit-font-smoothing: subpixel-antialiased;
@@ -34,13 +33,13 @@ font-smoothing: subpixel-antialiased;
 -ms-transition: all 0.2s ease-out;
 -o-transition: all 0.2s ease-out;
 transition: all 0.2s ease-out;
-background-color: rgb(232, 232, 231);
-min-width: 1000px;
 zoom: 1;
 font-family: Helvetica,Arial,sans-serif;
 font-size: 14px;
 line-height: 1.428571429;
 color: #333;
+background-color: #E8E8E7; 
+min-width: 55em;
 }
 
 table { border-collapse: collapse; }
@@ -201,9 +200,7 @@ a.nav-link {
 */
 
 #framecontainer {
-  margin-top: 100px;
   height: 500px;
-  margin-right:0em;
 }
 
 
@@ -222,25 +219,6 @@ a.nav-link {
   position:absolute;
 }
 
-#loader{
-  /*Overlay image*/
-  position:absolute;
-  height:100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.5;
-
-}
-
-#loader img{
-  /*Center image*/
-  width: 128px;
-  height: 128px;
-  margin: auto;
-  display: block;
-  margin-top: 30%;
-}
-
 #warning{
   background-color: black;
   opacity: 0.5;
@@ -254,4 +232,31 @@ ul{
   -webkit-padding-start: 0em;
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
+}
+
+
+.loader{
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  margin: 1em 0;
+  display: inline-block;
+}
+
+.loader_helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.loader_img {
+width: 128px;
+height: 128px;
+margin: auto;
+vertical-align: middle;
 }

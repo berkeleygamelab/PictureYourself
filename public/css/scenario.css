@@ -196,8 +196,10 @@ p.signout {
   margin-right: auto;
 }
 #scenario_ctrl{
-  margin-top: -20px;
-  padding-bottom: 20px;
+  margin-top: -1em;
+/* padding-bottom: 1em; */
+min-height: 45em;
+height: 100%;
 }
 
 .ui-dialog.email-dialog {
@@ -356,3 +358,14 @@ border-radius: 10px;
 .kineticjs-content canvas{
   position: relative !important;
 }
+
+/*.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+*/
+
+
+
+

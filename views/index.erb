@@ -5,52 +5,51 @@
 
 <div ng-controller="SnapshotCtrl">
 
-<!---->
+    <!-- Should probably set a height for this and adjust the rest -->
+    <div id='snapshot_div'>
 
-	<!-- Should probably set a height for this and adjust the rest -->
-	<div id='snapshot_div'>
+        <!-- Placeholder Imager -->
+        <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
+            <img src='images/camera_placeholder.png' ng-click='get_camera()'>
+        </div>
 
-		<!-- Placeholder Imager -->
-		<div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
-			<img src='images/camera_placeholder.png' ng-click='get_camera()'>
-		</div>
+        <!-- Webcam Input -->
+        <div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
+            <video autoplay id='video'></video>
+            <canvas style="display:none;" width = "640px" height = "480px"></canvas>
+        </div>
 
-		<!-- Webcam Input -->
-		<div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
-			<video autoplay id='video'></video>
-			<canvas style="display:none;" width = "640px" height = "480px"></canvas>
-  		</div>
+        <!-- KineticJS Stage -->
+        <div id='capture' ng-show='show_capture' class='centered'>
+            <div id="container" ng-show='show_capture' class='index_container'></div>
 
-  		<!-- KineticJS Stage -->
-  		<div id='capture' ng-show='show_capture' class='centered'>
-			<div id="container" ng-show='show_capture' class='index_container'></div>
+            <div ng-show='loading' class='loader'>
+                <span class="loader_helper"></span>
+                <img src='images/loader.gif' class='loader_img'>
+            </div>
 
-			<div id='loader' ng-show='loading' class='centered'>
-				<img src='images/loader.gif' id='loader_img'>
-			</div>
-		</div>
+        </div>
 
+        <!-- snapshot_buttons -->
+        <div id='snapshot_button_div' class='centered'>
+            <input type="button" class="clicker" ng-click = 'get_camera()' value = "START" ng-show='snapshot_button.start'>
+            <input type="button" class="clicker" ng-click = 'capture()' value = "SNAP IT" id = "button" ng-show = 'snapshot_button.snap_it'>
+            <input type="button" class="clicker" ng-click = 'upload_webcam()' value='SELECT' ng-show = 'snapshot_button.cut' ng-disabled="cutDisabled">
+        </div>
 
-		<!-- snapshot_buttons -->
-		<div id='snapshot_button_div' class='centered'>
-			<input type="button" class="clicker" ng-click = 'get_camera()' value = "START" ng-show='snapshot_button.start'>
-			<input type="button" class="clicker" ng-click = 'capture()' value = "SNAP IT" id = "button" ng-show = 'snapshot_button.snap_it'>
-			<input type="button" class="clicker" ng-click = 'upload_webcam()' value='SELECT' ng-show = 'snapshot_button.cut' ng-disabled="cutDisabled">
-		</div>
+    </div> <!-- snapshot_div -->
 
-	</div> <!-- snapshot_div -->
+<!--    <div ng-hide='true'>
+        IMAGE SRC:<br>
+        <img src="" id='capture_src'>
+    </div> -->
+       <!-- END OF CLICK FILE UPLOAD -->
 
-<!-- 	<div ng-hide='true'>
-		IMAGE SRC:<br>
-		<img src="" id='capture_src'>
-	</div> -->
-	   <!-- END OF CLICK FILE UPLOAD -->
+    <!--</div> --> <!-- UploadController -->
 
-  	<!--</div> --> <!-- UploadController -->
-
-	<script>
-		hasGetUserMedia()
-	</script>
+    <script>
+        hasGetUserMedia()
+    </script>
 
 </div> <!-- Snapshot Controller -->
 
