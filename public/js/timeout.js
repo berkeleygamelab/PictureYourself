@@ -89,6 +89,6 @@
 $(document).ready(function() {
     $.sessionTimeout({
         warnAfter: 10000,
-        redirAfter: 60000
+        redirAfter: 300000
     });
 });
