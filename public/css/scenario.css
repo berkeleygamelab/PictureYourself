@@ -1,5 +1,7 @@
 /*---------------CSS corresponding to any and ALL HTML found in scenario.erb---------------*/
 
+/* css originally by Hiro Kai on 11/27/2013 */
+
 .sticker{
   width: 25%;
   height: 25%;
@@ -20,59 +22,10 @@
   border-width: 0.2em;
   border-color: rgb(232, 232, 231);
 }
-/* main.css
-// 11/27/2013 by Hiro Kai
-*/
 
+/*---------------------------------------------Tool box---------------------------------------------*/
 
-/* Setting minimum size of the entire content so that a horizontal scroll bar appears when the window is small. */
-
-.outside {
-  min-width: 1050px;
-}
-
-/*
- * Navbar on top
- */
-
-img.navbaricon {
-  margin: 0px;
-}
-
-.navbar p {
-  display: inline;
-}
-
-p.nav-adjust-right {
-  float: right;
-}
-
-p.signout {
-  position: absolute;
-  left: 0px;
-  width: 100%;
-  height: 30px;
-  margin: 55px 0px 0px 0px;
-  padding-right: 10px;
-  text-align: right;
-  font-size: 14px;
-}
-
-/*
-// Wrapping container that has toolbox and content
-*/
-
-#framecontainer {
-  margin-top: 6em;
-  height: 39em;
-}
-
-
-/*
-//Tool box
-*/
-
-/* Tool box tabs */
+/* -------------------------------Tabs--------------------------------*/
 
 .tabs{
   cursor: pointer;
@@ -125,7 +78,7 @@ p.signout {
  background: #d8d8d8;
 }
 
-/* Body of tool box */
+/*--------------------------------------------- Body of tool box--------------------------------------------- */
 
 #toolboxbody {
   background: #eeeeee;
@@ -148,9 +101,7 @@ p.signout {
   width: 25%;
 }
 
-/*
-//Content frame on the right side
-*/
+/* ---------------------------------------------Content frame on the right side---------------------------------------------*/
 
 #container {
   margin-left: 4em;
@@ -159,8 +110,15 @@ p.signout {
   box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
 }
 
-
 .kineticjs-content{
+}
+
+#scenario_canvas{
+  float: left;
+}
+
+.kineticjs-content canvas{
+  position: relative !important;
 }
 
 .subtab_title{
@@ -173,7 +131,6 @@ p.signout {
   color:white;
   border-bottom: solid;
   border-width: 1px;
-  /*border-color: gold;*/
   padding-top: 0.4em;
   cursor: pointer;
 }
@@ -182,70 +139,31 @@ p.signout {
     background-color:rgba(36, 41, 65, 0.93);
 }
 
-#save_email{
+/*--------------------------------------------- Email div ---------------------------------------------*/
+
+#email_div{
   margin-bottom: 0.55em;
   padding-top: 1.4em;
-}
-#save_div, #email_div{
-  float:left; 
-  padding-right: 2em;
 }
 #email{
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+
 #scenario_ctrl{
   margin-top: -1em;
-/* padding-bottom: 1em; */
 min-height: 45em;
 height: 100%;
 }
 
+/*---------------------------------------------Confirmation dialogs ---------------------------------------------*/
 .ui-dialog.email-dialog {
-  /*
-  text-align: center;
-  font-size: large;
-  */
-  /*background-color:#e8e8e7; */
-  /*color:white;*/
-/*  border: solid;
-  border-width: 1px;
-  border-color: 'gold';*/
-
-  width: 400px;
-height: 250px;
-
-border: 4px #030303 solid;
-
-background-color: #ffffff;
-
-padding: 17px;
-
-color: #000000;
-font-size: inherit;
-font-weight: normal;
-font-family: Arial, Helvetica, sans-serif;
-font-style: normal;
-text-decoration: none;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
-}
-.no-close .ui-dialog-titlebar-close {
-  display: none;
-}
-
-.ui-dialog{
   width: 400px;
   height: 250px;
-
   border: 4px #030303 solid;
-
   background-color: #ffffff;
-
   padding: 17px;
-
   color: #000000;
   font-size: inherit;
   font-weight: normal;
@@ -257,23 +175,12 @@ border-radius: 10px;
   border-radius: 10px;
 }
 
-/* Buttons for JQuery UI dialog*/
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
 
 .ui-button {
-    -moz-box-shadow: inset 0px 1px 0px 0px #97c4fe;
-    background: -moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
     background-color: #242941;
-    -webkit-border-top-left-radius: 0px;
-    -moz-border-radius-topleft: 0px;
-    border-top-left-radius: 0px;
-    -webkit-border-top-right-radius: 0px;
-    -moz-border-radius-topright: 0px;
-    border-top-right-radius: 0px;
-    -webkit-border-bottom-right-radius: 0px;
-    -moz-border-radius-bottomright: 0px;
-    border-bottom-right-radius: 0px;
-    -moz-border-radius-bottomleft: 0px;
     text-indent: 0;
     border: none;
     display: inline-block;
@@ -292,48 +199,7 @@ border-radius: 10px;
 
 .ui-button:hover {
     background-color:rgba(36, 41, 65, 0.89);
-}.ui-button:active {
-    position:relative;
-    top:1px;
 }
-
-/*.ui-button{
-  /* Style 
-   border-top: 1px solid #242941;
-   background: #242941; 
-   background: -webkit-gradient(linear, left top, left bottom, from(#242941), to(#242941));
-   background: -webkit-linear-gradient(top, #242941, #242941);
-   background: -moz-linear-gradient(top, #242941, #242941);
-   background: -ms-linear-gradient(top, #242941, #242941);
-   background: -o-linear-gradient(top, #242941, #024194);
-   padding: 7.5px 15px;
-   -webkit-border-radius: 1px;
-   -moz-border-radius: 1px;
-   border-radius: 1px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: white;
-   font-size: 13px;
-   font-family: Helvetica, Arial, Sans-Serif;
-   text-decoration: none;
-   vertical-align: middle;
-
-   /* Position 
-   margin-left:10px;
-   margin-right:10px;
-   }
-.ui-button:hover {
-   border-top-color: #28597a;
-   background: #28597a;
-   color: #ccc;
-   }
-.ui-button:active {
-   border-top-color: #1b435e;
-   background: #1b435e;
-   }
-}*/
 
 .ui-dialog-titlebar{
   text-align: center;
@@ -350,16 +216,3 @@ border-radius: 10px;
 .loader_scenario{
   margin-top: -1%;
 }
-
-#scenario_canvas{
-  float: left;
-}
-
-.kineticjs-content canvas{
-  position: relative !important;
-}
-
-
-
-
-

@@ -5,7 +5,7 @@ I.E. ANY STYLING THAT SHOULD BE CONSISTENT ACROSS ALL PAGES
 
 ELEMENTS, SUCH AS THE NAVBAR, HAVE THEIR HTML IN LAYOUT,
 SO SHOULD BE STYLED IN LAYOUT.CSS
- 
+
 IF YOU'RE UNSURE, PLACE IT IN THE CORRESPONDING CSS FILE TO 
 THE HTML/ERB FILE. 
 ----------------------------------------------------------------------------------------------*/
@@ -118,23 +118,13 @@ table { border-collapse: collapse; }
 }
 
 /*
- * Navbar on top
- */
-
-
-
-
-
-
-/*
 // Wrapping container that has toolbox and content
 */
 
 #framecontainer {
-    height: 500px;
+  margin-top: 6em;
+  height: 39em;
 }
-
-
 
 /*
 //Content frame on the right side
@@ -166,6 +156,7 @@ ul{
 }
 
 
+/*  --------------------------------------------- Loading Overlay  ---------------------------------------------*/
 .loader{
     height: 100%;
     width: 100%;
