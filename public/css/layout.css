@@ -51,11 +51,12 @@ a{outline:none; text-decoration:none;}
 
 #dropdown {
     visibility: hidden;
-    top: 3.8em;
-    left: -4em;
+    top: 92%;
+    right: 10%;
     position: absolute;
     border: 1px solid black;
     min-width: 8em;
+    text-align: center;
 }
 
 #hamburger {
@@ -78,10 +79,14 @@ a{outline:none; text-decoration:none;}
     padding: 5px;
     vertical-align: middle;
 }
+.nav-button:hover{
+    background-color: white;
+}
 .nav-link {
     color: black;
     text-decoration: none;
 }
+
 
 #navright{
     float: right;

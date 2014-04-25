@@ -7,8 +7,6 @@ var debug_flag = false;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 $(document).ready(function() {
-    // $(".tabs a").html5jTabs();
-
     /*
     * Gets user selfie
     */

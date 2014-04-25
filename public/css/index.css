@@ -39,3 +39,9 @@
     width:300px;
     height:100px;
 }
+
+#cam_canvas{
+    display:none;
+    width: 640px;
+    height: 480px; 
+}

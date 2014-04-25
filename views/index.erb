@@ -1,3 +1,5 @@
+<!-- THERE IS INLINE CSS IN THIS FILE THAT FOR SOME REASON BREAKS THINGS WHEN I TAKE IT OUTSO I'M LEAVING IT IN FOR NOW -->
+
 <link rel="stylesheet" href="/css/animate.min.css">
 <link rel="stylesheet" href="/css/index.css">
 
@@ -14,7 +16,7 @@
         <!-- Webcam Input -->
         <div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
             <video autoplay id='video'></video>
-            <canvas style="display:none;" width = "640px" height = "480px"></canvas>
+            <canvas id='cam_canvas' style="display:none;" width = "640px" height = "480px"></canvas>
         </div>
 
         <!-- KineticJS Stage -->
@@ -36,6 +38,11 @@
         </div>
 
     </div> <!-- snapshot_div -->
+
+    <div ng-show='loading' class='loader'>
+        <span class="loader_helper"></span>
+        <img src='images/loader.gif' class='loader_img'>
+    </div>
 
 <!--    <div ng-hide='true'>
         IMAGE SRC:<br>
