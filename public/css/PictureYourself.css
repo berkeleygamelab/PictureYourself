@@ -18,6 +18,10 @@ THE HTML/ERB FILE.
 
 body{
     -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-font-smoothing: subpixel-antialiased;
     font-smoothing: subpixel-antialiased;
@@ -133,7 +137,7 @@ table { border-collapse: collapse; }
 #container {
     height: 100%;
     background: white;
-    box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
+    box-shadow: 0 8px 5.6px rgba(119,116,117,0.6);
 
 }
 .index_container{
@@ -150,9 +154,10 @@ table { border-collapse: collapse; }
 }
 
 ul{
-    -webkit-padding-start: 0em;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
 }
 
 
@@ -177,8 +182,8 @@ ul{
 }
 
 .loader_img {
-width: 128px;
-height: 128px;
-margin: auto;
-vertical-align: middle;
+    width: 128px;
+    height: 128px;
+    margin: auto;
+    vertical-align: middle;
 }
