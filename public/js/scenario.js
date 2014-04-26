@@ -5,7 +5,6 @@
 
 var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
-var a;
 
 $(document).ready(function() {
     /*
