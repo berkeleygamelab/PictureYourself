@@ -96,8 +96,11 @@ a{outline:none; text-decoration:none;}
     margin-right:0.4em;
 }
 
-#navcam{
-    margin-top: 5px;
+.navbariconright{
+    margin-top: 0.15em;
+    padding: 0 0.1em;
+    font-size: 3em;
+    color: #eaeaea;
 }
 
 /* Nothing below this is currently used */
