@@ -1,74 +1,80 @@
 <!DOCTYPE html>
 <html ng-app='PictureYourselfApp' no-js>
-	<head>
-		<title>Picture Yourself</title>
+    <head>
+        <title>P.I.C. Your Future</title>
 
-		<link rel="stylesheet" type="text/css" href="/css/PictureYourself.css"/>
-		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/PictureYourself.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/layout.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src='/js/modernizr-latest.js'></script>
+        <script src='/js/jquery-2.0.3.min.js'> </script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src='/js/angular.min.js'> </script>
+        <script src='/js/angular-resource.min.js'></script>
+        <script src='/js/kinetic-v4.7.4.js'></script>
+        <script src='/js/helpers.js'></script>
+        <script src='/js/crop.js'></script>
 
-		<script src='/js/modernizr-latest.js'></script>
-		
-		<script src='/js/jquery-2.0.3.min.js'> </script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		<script src='/js/angular.min.js'> </script>
-		<script src='/js/angular-resource.min.js'></script>
-		<script src='/js/kinetic-v4.7.4.js'></script>
-		<script src='/js/helpers.js'></script>
+        <script type="text/javascript">
+            var app = angular.module('PictureYourselfApp', ['ngResource']);
+        </script>
+        
+        <script src='/js/upload.js'></script>
+        <script src='/js/PictureYourself.js'></script>
+        <script src='/js/webcam.js'></script>
+        <script src='/js/compatibility.js'></script>
 
-		<script src='/js/crop.js'></script>
+        <script type="text/javascript">
+            checkCompatibility();
+        </script>
+        
+    </head>
 
-		<script type="text/javascript">
-			var app = angular.module('PictureYourselfApp', ['ngResource']);
-		</script>
-		
-		<script src='/js/upload.js'></script>
+    <body>
+        <div id="compatibility"></div>
+        <div ng-controller='LayoutCtrl'>
+            <div class="outside"> <!--container-->
+                <nav class="navbar" role="navigation">
 
-		<script src='/js/PictureYourself.js'></script>
-		<script src='/js/webcam.js'></script>
+                    <a href="/" class="navbar-link"><img class='navbariconleft' alt='Home' src='/images/img/new_home.png'></a>
+                    <a  class="navbar-link"><img class='navbariconleft' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
 
-		<script src='/js/compatibility.js'></script>
-		<script type="text/javascript">
-			checkCompatibility();
-		</script>
-		
-	</head>
+                    <div id="navright">
+                        <div class="navtoleft">
+                            <a  class="navbar-link" href="/"><i class="fa fa-camera navbariconright" id='navcam'></i></a>
+                        </div>
 
-	<body  style='background-color: #E8E8E7; min-width: 1000px;'>
-		<div id="compatibility" style="visibility:hidden; width:636px; border:1px solid"> <!--height:69px; removed -->
-		</div>
-		<div ng-controller='LayoutCtrl'>
-			<div class="outside"> <!--container-->
-			 <nav class="navbar navbar-default navbar-fixed-top" style='height: 50px; background: #242941;' role="navigation">
-				<a href="/" class="navbar-link"><img class='navbaricon' alt='Home' src='/images/img/new_home.png'></a>
-			    <a  class="navbar-link"><img class='navbaricon' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
-              <div id="hamburger">
-                  <img id="ham" alt="Settings" src="/images/img/new_config.png" />
-                  <div id="dropdown">
-                      <ul id="nav-list">
-                          <li><a class="nav-link" style= "color: black; text-decoration: none;" href="/"><div class="nav-button">Take Selfie</div></a></li>
-                          <li><a class="nav-link" style= "color: black; text-decoration: none;" href="/selfie"></a><div class="nav-button">A Year at Cal</div></a></li>
-                          <li><a class="nav-link" style= "color: black; text-decoration: none;" href="/"><div class="nav-button">Gallery</div></a></li>
-                      </ul>
-                  </div>
-              </div>
-			    <p class="nav-adjust-right">
-			    <a  class="navbar-link" href="/"><img class='navbaricon' alt='Take picture' src='/images/img/new_cam.png'></a>
-			    <a  class="navbar-link"><img class='navbaricon' alt='Notification'  src='/images/img/new_notification.png'></a>
-			    <!-- <a  class="navbar-link"> -->
-					
-				<!-- </a> -->
-			  </p>
+                        <div class="navtoleft">
+                            <a  class="navbar-link"><i class="fa fa-bell navbariconright"></i></a>
+                        </div>
 
-		     <!--<div class="row signout">
-		    	<span>SIGN OUT</span>
-		     </div> <!--signout-->
-		</nav>
-			</div> <!--outside-->
+                        <div class="navtoleft" id='hamburger'>
+                            <i class="fa fa-bars navbariconright"></i>
 
+                            <div id="dropdown">
+                                <ul id="nav-list">
+                                  <li><a class="nav-link" href="/">
+                                        <div class="nav-button">Take Selfie</div>
+                                    </a>
+                                </li>
+                                  <li><a class="nav-link" href="/selfie">
+                                        <div class="nav-button">A Year at Cal</div>
+                                    </a>
+                                </li>
+                                  <li><a class="nav-link" href="#">
+                                        <div class="nav-button">Gallery</div>
+                                    </a>
+                                </li>
+                                </ul>
+                            </div> <!--dropdown-->
+                        </div> <!--navtoleft-->
+                    </div> <!--navright-->
+                </nav>
+            </div> <!--outside-->
 
-				<%= yield %>
+            <%= yield %>
 
-		</div> <!-- End of LayoutCtrl-->
-	</body>
+        </div> <!-- End of LayoutCtrl-->
+    </body>
 
-<html>
+</html>

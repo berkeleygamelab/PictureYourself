@@ -88,7 +88,7 @@
 
 $(document).ready(function() {
     $.sessionTimeout({
-        warnAfter: 10000,
+        warnAfter: 100000,
         redirAfter: 300000
     });
 });

@@ -1,19 +1,52 @@
-body{
-  -webkit-transform: translate3d(0, 0, 0);
--webkit-font-smoothing: subpixel-antialiased;
--moz-font-smoothing: subpixel-antialiased;
-font-smoothing: subpixel-antialiased;
--webkit-transition: all 0.2s ease-out;
--moz-transition: all 0.2s ease-out;
--ms-transition: all 0.2s ease-out;
--o-transition: all 0.2s ease-out;
-transition: all 0.2s ease-out;
+/*----------------------------------------------------------------------------------------------
+THIS CSS FILE SHOULD ONLY BE USED FOR GLOBAL CSS
+I.E. ANY STYLING THAT SHOULD BE CONSISTENT ACROSS ALL PAGES
+(E.G. BUTTON STYLING)
+
+ELEMENTS, SUCH AS THE NAVBAR, HAVE THEIR HTML IN LAYOUT,
+SO SHOULD BE STYLED IN LAYOUT.CSS
+
+IF YOU'RE UNSURE, PLACE IT IN THE CORRESPONDING CSS FILE TO 
+THE HTML/ERB FILE. 
+----------------------------------------------------------------------------------------------*/
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
+body{
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-font-smoothing: subpixel-antialiased;
+    font-smoothing: subpixel-antialiased;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    zoom: 1;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #333;
+    background-color: #E8E8E7; 
+    min-width: 55em;
+    margin:0;
+    padding:0;
+}
+
+/*------- Not sure what this stuff is for so I'm leaving it here for now -------*/
 table { border-collapse: collapse; }
 .percent {
     position: absolute; width: 300px; height: 14px; z-index: 1; text-align: center; font-size: 0.8em; color: white;
 }
+
 .progress-bar {
     width: 300px; height: 14px;
     border-radius: 10px;
@@ -21,6 +54,7 @@ table { border-collapse: collapse; }
     background-image: -webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b4b95));
     border-image: initial;
 }
+
 .uploaded {
     padding: 0;
     height: 14px;
@@ -28,6 +62,7 @@ table { border-collapse: collapse; }
     background-image: -webkit-gradient(linear, left top, left bottom, from(#66cc00), to(#4b9500));
     border-image: initial;
 }
+
 .dropbox {
     width: 15em;
     height: 3em;
@@ -50,21 +85,10 @@ table { border-collapse: collapse; }
     background-color: #bfb;
 }
 
-.clicker {
-    -moz-box-shadow: inset 0px 1px 0px 0px #97c4fe;
-    background: -moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+/*---------Dark blue button ----------*/
+
+.button {
     background-color: #242941;
-    -webkit-border-top-left-radius: 0px;
-    -moz-border-radius-topleft: 0px;
-    border-top-left-radius: 0px;
-    -webkit-border-top-right-radius: 0px;
-    -moz-border-radius-topright: 0px;
-    border-top-right-radius: 0px;
-    -webkit-border-bottom-right-radius: 0px;
-    -moz-border-radius-bottomright: 0px;
-    border-bottom-right-radius: 0px;
-    -moz-border-radius-bottomleft: 0px;
     text-indent: 0;
     border: none;
     display: inline-block;
@@ -78,13 +102,11 @@ table { border-collapse: collapse; }
     text-decoration: none;
     text-align: center;
     text-transform:uppercase;
+    cursor: pointer;
 }
 
-.clicker:hover {
-    background-color:rgba(36, 41, 65, 0.89);
-}.clicker:active {
-    position:relative;
-    top:1px;
+.button:hover {
+        background-color:rgba(36, 41, 65, 0.89);
 }
 
 /* main.css
@@ -95,142 +117,17 @@ table { border-collapse: collapse; }
 /* Setting minimum size of the entire content so that a horizontal scroll bar appears when the window is small. */
 
 .outside {
-  min-width: 1050px;
-  position: relative;
-}
-
-/*
- * Navbar on top
- */
-
-img.navbaricon {
-  margin: 0px;
-}
-
-.navbar p {
-  display: inline;
-  z-index: 3;
-}
-
-p.nav-adjust-right {
-  float: right;
-}
-
-div.signout {
-  position: absolute;
-  top:50px;
-  right: 0;
-  margin-right:5px;
-}
-
-#hamburger {
+    min-width: 1050px;
     position: relative;
-    margin: 0px;
-    display: inline-block;
-    float: right;
-    width: 50px;
 }
-
-#nav-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-#dropdown {
-    visibility: hidden;
-    top: 48px;
-    left: -50px;
-    position: absolute;
-    border: 1px solid;
-    width: 98px;
-}
-
-.nav-button {
-    height: 25px;
-    background-color: #e8e8e7;
-    cursor: pointer;
-    padding: 5px;
-    vertical-align: middle;
-}
-
-.nav-button:hover {
-    background-color: white;
-}
-
-a.nav-link {
-    color: black;
-    text-decoration: none;
-}
-
 
 /*
 // Wrapping container that has toolbox and content
 */
 
 #framecontainer {
-  margin-top: 100px;
-  height: 500px;
-  margin-right:0em;
-}
-
-
-/*
-//Tool box
-*/
-
-/* Tool box tabs */
-
-#toolbox {
-  background: #e8e8e7;
-  box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
-  height: 500px;
-  margin-right: 25px;
-  padding: 0px;
-}
-
-#toolicon li {
-  width: 25%;
-  height: 60px;
-  background: white;
-  padding: 0px;
-}
-
-#toolicon li a {
-  height: 100%;
-  margin: 0px;
-  padding: 8px;
-  background: white;
-}
-
-#toolicon li img {
-  height: 40px;
-  margin: 10px 19px;
-}
-
-#toolicon li.active {
-  background: #e8e8e7;
-}
-
-#toolicon li.active a {
-  background: #e8e8e7;
-}
-
-#toolicon li:hover {
-/* background: lightblue;*/
-}
-
-#toolicon li:hover a {
-/*  background: lightblue; */
-}
-
-
-/* Body of tool box */
-
-#toolboxbody {
-  background: #e8e8e7;
-  height: 440px;
-  overflow-y: scroll;
+  margin-top: 6em;
+  height: 39em;
 }
 
 /*
@@ -238,40 +135,55 @@ a.nav-link {
 */
 
 #container {
-  height: 100%;
-  background: white;
-  box-shadow: 0px 8px 5.6px rgba(119,116,117,0.6);
+    height: 100%;
+    background: white;
+    box-shadow: 0 8px 5.6px rgba(119,116,117,0.6);
 
 }
 .index_container{
-  position:absolute;
-}
-
-#loader{
-  /*Overlay image*/
-  position:absolute;
-  height:100%;
-  width: 100%;
-  background-color: black;
-  opacity: 0.5;
-
-}
-
-#loader img{
-  /*Center image*/
-  position:absolute;
-  width:128px;
-  height:128px;
-  top:50%;
-  left:50%;
-  margin-left: -64px;
-  margin-top: -64px;
+    position:absolute;
 }
 
 #warning{
-  background-color: black;
-  opacity: 0.5;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.toleft{
+    float: left;
+}
+
+ul{
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
 }
 
 
+/*  --------------------------------------------- Loading Overlay  ---------------------------------------------*/
+.loader{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    margin: 1em 0;
+    display: inline-block;
+}
 
+.loader_helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.loader_img {
+    width: 128px;
+    height: 128px;
+    margin: auto;
+    vertical-align: middle;
+}
