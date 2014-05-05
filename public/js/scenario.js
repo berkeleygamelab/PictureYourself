@@ -423,6 +423,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         });
 
+
+
         image.on('drop', function(){
             debug("dropped~");
                             scalerX.setVisible(true);
