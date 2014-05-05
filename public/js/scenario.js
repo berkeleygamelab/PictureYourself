@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = true;
+var debug_flag = false;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 $(document).ready(function() {
@@ -104,7 +104,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     $scope.call_email = function(){
         //first remove any tool circles if they exist
-         a = $(stage.find('.y, .x, .delete, .rotate'));
+        a = $(stage.find('.y, .x, .delete, .rotate'));
         a.each(function(index){
             a[index].setVisible(false);
         });
@@ -395,20 +395,30 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         //hide and show resize and scaler
         image.on('click',function(){
-            if (previous_edit.on){
-                scalerX.setVisible(false);
-                scalerY.setVisible(false);
-                delete_icon.setVisible(false);
-                rotate.setVisible(false);
-                previous_edit.on = false;
-            }
-            else{
-                scalerX.setVisible(true);
-                scalerY.setVisible(true);
-                delete_icon.setVisible(true);
-                rotate.setVisible(true);
-                previous_edit.on = true;
-            }
+            // if (previous_edit.on){
+            //     scalerX.setVisible(false);
+            //     scalerY.setVisible(false);
+            //     delete_icon.setVisible(false);
+            //     rotate.setVisible(false);
+            //     previous_edit.on = false;
+            // }
+            // else{
+            //     scalerX.setVisible(true);
+            //     scalerY.setVisible(true);
+            //     delete_icon.setVisible(true);
+            //     rotate.setVisible(true);
+            //     previous_edit.on = true;
+            // }
+            a = $(stage.find('.y, .x, .delete, .rotate'));
+            a.each(function(index){
+                a[index].setVisible(false);
+            });
+            
+            scalerX.setVisible(true);
+            scalerY.setVisible(true);
+            delete_icon.setVisible(true);
+            rotate.setVisible(true);
+            previous_edit.on = true;
             layer.draw();
 
         });
