@@ -51,7 +51,6 @@ a{outline:none; text-decoration:none;}
 
 #dropdown {
     visibility: hidden;
-    top: 92%;
     right: 10%;
     position: absolute;
     border: 1px solid black;

@@ -97,6 +97,9 @@ post '/grabcut' do
   if OS.mac?
     system('./opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   elsif OS.unix?
+    puts 'Filename: ' + params[:filename]
+    puts 'Coords: ' + params[:coords]
+    puts 'ID: ' + params[:pyuserid]
     system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   end
 end
