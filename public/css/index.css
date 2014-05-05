@@ -9,6 +9,10 @@
     height:480px;
     padding-top: 3em;
 }
+#cam_icon{
+    width: 100%;
+    height: auto;
+}
 
 #capture{
     position:relative;

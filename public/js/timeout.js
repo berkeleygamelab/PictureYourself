@@ -65,7 +65,7 @@
 
 $(document).ready(function() {
   $.sessionTimeout({
-    warnAfter: 18000000,
-    redirAfter: 30000000
+    warnAfter: 300000,
+    redirAfter: 600000
   });
 });
