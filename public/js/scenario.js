@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = false;
+var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 $(document).ready(function() {
@@ -59,9 +59,6 @@ $(document).ready(function() {
 * And stores data about the images on the canvas into the stickers array
 */
 
-//try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
-
-
 function ScenarioCtrl($scope, $resource, $http, $compile){
     var stage_width = 800;
     var stage_height = 550;
@@ -104,10 +101,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     $scope.call_email = function(){
         //first remove any tool circles if they exist
-        a = $(stage.find('.y, .x, .delete, .rotate'));
-        a.each(function(index){
-            a[index].setVisible(false);
-        });
+        closeTools();
         stage.draw();
 
         var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
@@ -262,6 +256,13 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         e.preventDefault(); //@important
     });
 
+    var closeTools = function(){
+        a = $(stage.find('.y, .x, .delete, .rotate'));
+        a.each(function(index){
+            a[index].setVisible(false);
+        });
+    };
+
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
@@ -270,19 +271,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         //may be reliant on its dimensions
 
         //this removes the tool circles around all existing stickers when a new one is dropped
-        a = $(stage.find('.y, .x, .delete, .rotate'));
-        a.each(function(index){
-            a[index].setVisible(false);
-        });
+        closeTools();
 
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
 
-        rotateObj = new Image();
-        rotateObj.src = '/images/rotate.png';
-
-        deleteObj = new Image();
-        deleteObj.src = '/images/delete_button.png';
         //stop Firefox from opening image
         e.preventDefault();
 
@@ -300,8 +293,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
            image:imageObj,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: x - size_offset,
-           y: y - size_offset//,
+           x: x ,//+ size_offset,
+           y: y// + size_offset//,
 		   //filter: Kinetic.Filters.Blur,
            //offset:[60,60] //size determined by width, height input
         });
@@ -311,37 +304,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         var start_size = {"width":120,"height":120};
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
-        //icon for rotation
-        // var rotate = new Kinetic.Circle({
-        //     x:image.getX(),
-        //     y:image.getY(),// + start_size.height/2,
-        //     radius:10,
-        //     fill: 'green',
-        //     stroke:'black',
-        //     draggable:true,
-        //     visible:true,
-        //     name: 'rotate',
-        //    // offset://[image.getWidth()/2,image.getHeight()/2],
-        //     dragBoundFunc: function(pos) {
-        //         var x = image.getAbsolutePosition().x + start_size.width/2;
-        //         var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
-        //         var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
-        //         var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
-        //         debug(scale);
-        //         debug("x,y: " + x + ',' + y);
-        //           return {
-        //             y: Math.round((pos.y - y) * scale + y),
-        //             x: Math.round((pos.x - x) * scale + x)
-        //           };
-        //       }
-        // });
-
         var rotate = new Kinetic.Text({
-            x:image.getX(),
-            y:image.getY(),// + start_size.height/2,
-            text: '',
+            x: 0,// image.getX(),
+            y: 0,// image.getY() + start_size.height/2,
+            text: '',  //leave this it won't render correctly here but will on the canvas
             fontFamily: 'FontAwesome',
-            fontSize: 40,
+            fontSize: 30,
             fill: '#eee',
             stroke: "#222",
             strokeWidth: 2,
@@ -363,34 +331,18 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
               }
         });
 
-        // var delete_icon = new Kinetic.Image({
-        //   visible:true,
-        //   width:25,
-        //   height:25,
-        //   image:deleteObj,
-        //   name: 'delete', 
-        //   x:x+image.getWidth() - 10,
-        //   y:y//,
-        //   //offset:[image.getWidth()/2,image.getHeight()/2]
-        // });
-
-        // delete_icon.on('click', function(){
-        //   debug('DELETE');
-        //   group.remove();
-        //   layer.draw();
-        // });
-
+        //there is a reposition function that sets all the positions
         var delete_icon = new Kinetic.Text({
             visible:true,
             text: '',
             fontFamily: 'FontAwesome',
-            fontSize: 40,
+            fontSize: 30,
             fill: '#eee',
             stroke: "#222",
             strokeWidth: 2,
             name: 'delete', 
-            x:x+image.getWidth() - 10,
-            y:y//,
+            x:0,
+            y:0//,
             //offset:[image.getWidth()/2,image.getHeight()/2]
             });
 
@@ -400,31 +352,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             layer.draw();
         });
 
-
-        //object to drag to scale image on X axis
-        // var scalerX = new Kinetic.Circle({
-        //     x:image.getX() + start_size.width,
-        //     y:image.getY() + start_size.height/2,
-        //     radius:10,
-        //     fill: 'yellow',
-        //     stroke:'black',
-        //     draggable:true,
-        //     visible:true,
-        //     name: 'x',
-        //     dragBoundFunc: function(pos){
-        //         return{
-        //             x: pos.x,
-        //             y: this.getAbsolutePosition().y
-        //         };
-        //     }
-        // });
-
         var scalerX = new Kinetic.Text({
             x:image.getX() + start_size.width,
             y:image.getY() + start_size.height/2,
             text: '',
             fontFamily: 'FontAwesome',
-            fontSize: 40,
+            fontSize: 30,
             fill: '#eee',
             stroke: "#222",
             strokeWidth: 2,
@@ -439,31 +372,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             }
         });
 
-        //object to drag to scale image on Y axis
-        // var scalerY = new Kinetic.Circle({
-        //   x:image.getX() + start_size.width/2,
-        //   y:image.getY() + start_size.height,
-        //   radius:10,
-        //   fill: 'yellow',
-        //   stroke:'black',
-        //   draggable:true,
-        //   visible:true,
-        //   name: 'y',
-        //   //offset:[image.getWidth()/2,image.getHeight()/2],
-        //   dragBoundFunc: function(pos){
-        //       return{
-        //         x: this.getAbsolutePosition().x,
-        //         y: pos.y
-        //       };
-        //     }
-        // });
-
         var scalerY = new Kinetic.Text({
             x:image.getX() + start_size.width/2,
             y:image.getY() + start_size.height,
             text: '',
             fontFamily: 'FontAwesome',
-            fontSize: 40,
+            fontSize: 30,
             fill: '#eee',
             stroke: "#222",
             strokeWidth: 2,
@@ -483,30 +397,24 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         //hide and show resize and scaler
         image.on('click',function(){
             if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
-                a = $(stage.find('.y, .x, .delete, .rotate'));
-                a.each(function(index){
-                    a[index].setVisible(false);
-                });
+                closeTools();
             } else{
-                a = $(stage.find('.y, .x, .delete, .rotate'));
-                a.each(function(index){
-                    a[index].setVisible(false);
-                }); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
                 //to determine the if condition 
                 scalerX.setVisible(true);
                 scalerY.setVisible(true);
                 delete_icon.setVisible(true);
                 rotate.setVisible(true);
             }
-                layer.draw();
+            layer.draw();
         });
 
         image.on('drop', function(){
             debug("dropped~");
-                            scalerX.setVisible(true);
-                scalerY.setVisible(true);
-                delete_icon.setVisible(true);
-                rotate.setVisible(true);
+            scalerX.setVisible(true);
+            scalerY.setVisible(true);
+            delete_icon.setVisible(true);
+            rotate.setVisible(true);
         });
 
         //set rotation
@@ -596,7 +504,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
           var x = image.getAbsolutePosition().x;
           var y = image.getAbsolutePosition().y;
 
-          rotate.setAbsolutePosition(x,y);
+          // debug("x: " + x + " y: " + y);
+
+          rotate.setAbsolutePosition(x - 10, y - 10);
           scalerX.setAbsolutePosition(x + image.getWidth(),y + image.getHeight()/2);
           scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
           delete_icon.setAbsolutePosition(x + image.getWidth(), y);
