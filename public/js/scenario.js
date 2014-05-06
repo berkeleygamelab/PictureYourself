@@ -312,12 +312,39 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
         //icon for rotation
-        var rotate = new Kinetic.Circle({
+        // var rotate = new Kinetic.Circle({
+        //     x:image.getX(),
+        //     y:image.getY(),// + start_size.height/2,
+        //     radius:10,
+        //     fill: 'green',
+        //     stroke:'black',
+        //     draggable:true,
+        //     visible:true,
+        //     name: 'rotate',
+        //    // offset://[image.getWidth()/2,image.getHeight()/2],
+        //     dragBoundFunc: function(pos) {
+        //         var x = image.getAbsolutePosition().x + start_size.width/2;
+        //         var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
+        //         var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
+        //         var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
+        //         debug(scale);
+        //         debug("x,y: " + x + ',' + y);
+        //           return {
+        //             y: Math.round((pos.y - y) * scale + y),
+        //             x: Math.round((pos.x - x) * scale + x)
+        //           };
+        //       }
+        // });
+
+        var rotate = new Kinetic.Text({
             x:image.getX(),
             y:image.getY(),// + start_size.height/2,
-            radius:10,
-            fill: 'green',
-            stroke:'black',
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 40,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
             draggable:true,
             visible:true,
             name: 'rotate',
@@ -336,32 +363,71 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
               }
         });
 
+        // var delete_icon = new Kinetic.Image({
+        //   visible:true,
+        //   width:25,
+        //   height:25,
+        //   image:deleteObj,
+        //   name: 'delete', 
+        //   x:x+image.getWidth() - 10,
+        //   y:y//,
+        //   //offset:[image.getWidth()/2,image.getHeight()/2]
+        // });
 
-        var delete_icon = new Kinetic.Image({
-          visible:true,
-          width:25,
-          height:25,
-          image:deleteObj,
-          name: 'delete', 
-          x:x+image.getWidth() - 10,
-          y:y//,
-          //offset:[image.getWidth()/2,image.getHeight()/2]
-        });
+        // delete_icon.on('click', function(){
+        //   debug('DELETE');
+        //   group.remove();
+        //   layer.draw();
+        // });
 
-        delete_icon.on('click', function(){
-          debug('DELETE');
-          group.remove();
-          layer.draw();
+        var delete_icon = new Kinetic.Text({
+            visible:true,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 40,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            name: 'delete', 
+            x:x+image.getWidth() - 10,
+            y:y//,
+            //offset:[image.getWidth()/2,image.getHeight()/2]
+            });
+
+            delete_icon.on('click', function(){
+            debug('DELETE');
+            group.remove();
+            layer.draw();
         });
 
 
         //object to drag to scale image on X axis
-        var scalerX = new Kinetic.Circle({
+        // var scalerX = new Kinetic.Circle({
+        //     x:image.getX() + start_size.width,
+        //     y:image.getY() + start_size.height/2,
+        //     radius:10,
+        //     fill: 'yellow',
+        //     stroke:'black',
+        //     draggable:true,
+        //     visible:true,
+        //     name: 'x',
+        //     dragBoundFunc: function(pos){
+        //         return{
+        //             x: pos.x,
+        //             y: this.getAbsolutePosition().y
+        //         };
+        //     }
+        // });
+
+        var scalerX = new Kinetic.Text({
             x:image.getX() + start_size.width,
             y:image.getY() + start_size.height/2,
-            radius:10,
-            fill: 'yellow',
-            stroke:'black',
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 40,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
             draggable:true,
             visible:true,
             name: 'x',
@@ -374,17 +440,38 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         });
 
         //object to drag to scale image on Y axis
-        var scalerY = new Kinetic.Circle({
-          x:image.getX() + start_size.width/2,
-          y:image.getY() + start_size.height,
-          radius:10,
-          fill: 'yellow',
-          stroke:'black',
-          draggable:true,
-          visible:true,
-          name: 'y',
-          //offset:[image.getWidth()/2,image.getHeight()/2],
-          dragBoundFunc: function(pos){
+        // var scalerY = new Kinetic.Circle({
+        //   x:image.getX() + start_size.width/2,
+        //   y:image.getY() + start_size.height,
+        //   radius:10,
+        //   fill: 'yellow',
+        //   stroke:'black',
+        //   draggable:true,
+        //   visible:true,
+        //   name: 'y',
+        //   //offset:[image.getWidth()/2,image.getHeight()/2],
+        //   dragBoundFunc: function(pos){
+        //       return{
+        //         x: this.getAbsolutePosition().x,
+        //         y: pos.y
+        //       };
+        //     }
+        // });
+
+        var scalerY = new Kinetic.Text({
+            x:image.getX() + start_size.width/2,
+            y:image.getY() + start_size.height,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 40,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            draggable:true,
+            visible:true,
+            name: 'y',
+            //offset:[image.getWidth()/2,image.getHeight()/2],
+            dragBoundFunc: function(pos){
               return{
                 x: this.getAbsolutePosition().x,
                 y: pos.y
@@ -395,35 +482,24 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         //hide and show resize and scaler
         image.on('click',function(){
-            // if (previous_edit.on){
-            //     scalerX.setVisible(false);
-            //     scalerY.setVisible(false);
-            //     delete_icon.setVisible(false);
-            //     rotate.setVisible(false);
-            //     previous_edit.on = false;
-            // }
-            // else{
-            //     scalerX.setVisible(true);
-            //     scalerY.setVisible(true);
-            //     delete_icon.setVisible(true);
-            //     rotate.setVisible(true);
-            //     previous_edit.on = true;
-            // }
-            a = $(stage.find('.y, .x, .delete, .rotate'));
-            a.each(function(index){
-                a[index].setVisible(false);
-            });
-            
-            scalerX.setVisible(true);
-            scalerY.setVisible(true);
-            delete_icon.setVisible(true);
-            rotate.setVisible(true);
-            previous_edit.on = true;
-            layer.draw();
-
+            if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
+                a = $(stage.find('.y, .x, .delete, .rotate'));
+                a.each(function(index){
+                    a[index].setVisible(false);
+                });
+            } else{
+                a = $(stage.find('.y, .x, .delete, .rotate'));
+                a.each(function(index){
+                    a[index].setVisible(false);
+                }); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                //to determine the if condition 
+                scalerX.setVisible(true);
+                scalerY.setVisible(true);
+                delete_icon.setVisible(true);
+                rotate.setVisible(true);
+            }
+                layer.draw();
         });
-
-
 
         image.on('drop', function(){
             debug("dropped~");
