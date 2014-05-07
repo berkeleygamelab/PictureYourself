@@ -8,6 +8,7 @@ var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 $(document).ready(function() {
 
+    $("#modal").hide();
 
     $("#toolicon li").on("click", function(){
         $(this).parent().children().removeClass("active");
@@ -39,9 +40,25 @@ function ChromaCtrl($scope){
         height: stage_height
     });
 
+
     // Setup layer to add stickers to
     var layer = new Kinetic.Layer();
     stage.add(layer);
+
+    // Background
+    var backgroundRect = new Kinetic.Rect({
+        width: stage_width,
+        height: stage_height,
+        opacity: 0
+
+    })
+
+    backgroundRect.on('click', function(){
+        $scope.selected_image = null;
+        $("#modal").hide();
+    })
+
+    layer.add(backgroundRect);
 
     // Group 1
     var group = new Kinetic.Group({
@@ -56,7 +73,6 @@ function ChromaCtrl($scope){
     });
 
     layer.add(group2);
-
 
     // Load images
     foregroundImg = new Image();
@@ -105,10 +121,28 @@ function ChromaCtrl($scope){
         layer.draw();
         
     }
+    function move_color(selected_group, e){
+        var canvas = document.getElementById('container');
+        $("#modal").css({left: e.pageX, top: e.pageY});
+        $("#modal").show()
+        console.log($("#modal").offset());
+    }
 
     // on click select this image
-    group.on('click dragstart', function(){
-        $scope.selected_image = backgroundImg;
+    group.on('click', function(e){
+        if($scope.selected_image == backgroundImg)
+        {
+            $("#modal").hide();
+            $scope.selected_image = null;
+        }
+        else{
+            $scope.selected_image = backgroundImg;
+            move_color(this,e);
+        };
+    })
+
+    group.on('dragmove', function(e){
+        $("#modal").offset({left: e.pageX, top: e.pageY});
     })
 
     // Group 2
@@ -142,8 +176,20 @@ function ChromaCtrl($scope){
     }
 
         // on click select this image
-    group2.on('click dragstart', function(){
-        $scope.selected_image = f2b;
+    group2.on('click', function(e){
+        if($scope.selected_image == f2b)
+        {
+            $("#modal").hide();
+            $scope.selected_image = null;
+        }
+        else{
+            $scope.selected_image = f2b;
+            move_color(this, e);
+        }
+    })
+
+    group2.on('dragmove', function(e){
+        $("#modal").offset({left: e.pageX - this.getChildren()[0].getWidth()/2, top: e.pageY - this.getChildren()[0].getHeight()});
     })
 
     // function that changes

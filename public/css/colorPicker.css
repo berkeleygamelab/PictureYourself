@@ -38,3 +38,8 @@ div.controlset{
   position:relative;
   margin-left:10%;
 }
+
+#colorPicker_palette-0{
+  position:absolute;
+}
+
