@@ -50,6 +50,8 @@ $(document).ready(function() {
 
     //fixes positioning issue with kineticJS canvas
    $(".kineticjs-content").css('position',''); 
+    
+    $("#modal").hide();
 });
 
 
@@ -62,8 +64,13 @@ $(document).ready(function() {
 function ScenarioCtrl($scope, $resource, $http, $compile){
     var stage_width = 800;
     var stage_height = 550;
+    
     $scope.loading = false;
+    $scope.chroma_green = false;
+
     var previous_edit = {'image':null,'collapse':null, 'on': true};
+
+    // KineticJS Setup ///////////////////////////////////////////////////////////////
 
     var stage = new Kinetic.Stage({
         container: 'container',
@@ -80,47 +87,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     $scope.image_download = 'test.jpg';
     var stickers = []; //will store information about stickers
 
-    $scope.create_image = function(){
-        debug('called');
-        $scope.image_download = 'somethingelse.jpg';
-        stage.toDataURL({
-            mimeType: 'image/jpg',
-            quality: 1,
-            callback: function(dataUrl) {
-                debug('callback');
-                var link = document.createElement('a');
-                angular.element(link)
-                .attr('href', dataUrl)
-                .attr('download', 'test.jpg'); // Pretty much only works in chrome
-                link.click();
-                debug('click?');
-            }
-        });
-    };
-
-    $scope.call_email = function(){
-        //first remove any tool circles if they exist
-        closeTools();
-        stage.draw();
-
-        var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
-        //check if input is correct
-        if(emails !== null) {                      
-          debug('calling email');
-          //remove spaces to have one long string as argv for python
-          emails = emails.replace(/\s+/g, '');        
-          debug(emails);
-          //change to use scope variable instead
-          pyuserid = getCookie('pyuserid');
-          stage.toDataURL({
-            callback: function(dataUrl) {
-                debug('callback');
-                //from helpertools
-                email(pyuserid, emails, dataUrl);
-            }
-          }) ;         
-        }
-    };
+    // Sets the color picker object
+    $('#color1').colorPicker({ onColorChange : function(id, newValue) { 
+        $scope.change_color(newValue); 
+        } 
+    });
 
     // Background ///////////////////////////////////////////////////////////////
     
@@ -226,36 +197,55 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
 
     // Stickers ///////////////////////////////////////////////////////////////
+
+    var default_category = "shoes_and_pants";
+
+    // TODO used to determine if object is part of chromagreen
+    // most likely change if more categories have chromagreen
+    var chromagreen_category = "shirts";
+    
+    // Grab stickers from server and append them to category
     $http.get('/stickers').success(
-    function(data){
-        data = angular.fromJson(data);
-        $scope.visible = {};
-        $scope.stickers = data['stickers'];
-        $scope.categories = data['categories'];
+        function(data){
+            data = angular.fromJson(data);
+            $scope.visible = {};
+            $scope.stickers = data['stickers'];
+            $scope.categories = data['categories'];
 
-        angular.forEach($scope.stickers,
-            function(stickers,category){
-                $scope.visible[category] = (category == "shoes_and_pants");
-                //create the dynamic html
-                html= "<div id="+category+"_subtab class='subtab_title' "+
-                    "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
-                    "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
-                //compile it with angular so functions work
-                compiledElement = $compile(html)($scope);
-                $("#sticker_tab").append(compiledElement);
-                //add stickers
-                angular.forEach(stickers,
-                    function(path,name){
-                         $("#"+category+"_content").append('<img class=\'sticker\' src="/' + path + '" name="/' + name + '"/>');
+            angular.forEach($scope.stickers,
+
+                function(stickers,category){
+
+                    // Category is open on page load if it's the default category
+                    $scope.visible[category] = (category == default_category);
+
+                    //create the dynamic html
+                    html= "<div id="+category+"_subtab class='subtab_title' "+
+                        "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
+                        "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
+                    
+                    //compile it with angular so functions work
+                    compiledElement = $compile(html)($scope);
+                    $("#sticker_tab").append(compiledElement);
+                    
+                    //add stickers
+                    angular.forEach(stickers,
+                        function(path,name){
+                             $("#"+category+"_content").append('<img class=\'sticker ' + category + '\' src="/' + path + '" name="/' + name + '"/>');
+                    });
                 });
+
+            $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
+                $scope.dragSrcEl = this;
+
+                // Flag so color change tool is added to sticker
+                if($(this).hasClass(chromagreen_category))
+                    $scope.chroma_green = true;
+                else
+                    $scope.chroma_green = false;
             });
-        $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
-            $scope.dragSrcEl = this;
-        });
 
-
-
-    });//success
+    });
 
     // Toggle sticker category
     $scope.toggle = function(category){
@@ -264,7 +254,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
 
     // Drag and drop stickers start
-
     con.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
     });
@@ -278,6 +267,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             a[index].setVisible(false);
         });
 
+        $("#modal").hide();
+
         layer.draw();
     };
 
@@ -290,6 +281,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         //this removes the tool circles around all existing stickers when a new one is dropped
         closeTools();
+
+        var has_chroma_green = $scope.chroma_green;
 
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
@@ -320,6 +313,99 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         var start_size = {"width":120,"height":120};
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
+        // Delete //////
+        var delete_icon = new Kinetic.Text({
+            visible:true,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            name: 'delete', 
+            x:0,
+            y:0
+            });
+
+        delete_icon.on('click', function(){
+            debug('DELETE');
+            group.remove();
+            $('#modal').hide();
+
+            layer.draw();
+         });
+ 
+        // Scale X-axis //////
+        var scalerX = new Kinetic.Text({
+            x:image.getX() + start_size.width,
+            y:image.getY() + start_size.height/2,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            draggable:true,
+            visible:true,
+            name: 'x',
+            dragBoundFunc: function(pos){
+                return{
+                    x: pos.x,
+                    y: this.getAbsolutePosition().y
+                };
+            }
+        });
+
+        // set horizontal height of image
+        scalerX.on('dragmove touchmove',function(){
+            
+            var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
+            
+            image.setWidth(image.getWidth() + diff * 2);
+            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
+            
+            reposition();
+            layer.draw();
+        });
+
+        // Scale Y-axis //////
+        var scalerY = new Kinetic.Text({
+            x:image.getX() + start_size.width/2,
+            y:image.getY() + start_size.height,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            draggable:true,
+            visible:true,
+            name: 'y',
+            //offset:[image.getWidth()/2,image.getHeight()/2],
+            dragBoundFunc: function(pos){
+              return{
+                x: this.getAbsolutePosition().x,
+                y: pos.y
+              };
+            }
+        });
+
+        //set vertical height of image
+        scalerY.on('dragmove touchmove',function(){
+            
+            var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
+            
+            image.setHeight(image.getHeight() + diff * 2);
+            image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
+            
+            reposition();   
+            layer.draw();
+
+        });
+
+
+
+        // Rotation //////
         var rotate = new Kinetic.Text({
             x: 0,// image.getX(),
             y: 0,// image.getY() + start_size.height/2,
@@ -346,95 +432,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                   };
               }
         });
-
-
-        //there is a reposition function that sets all the positions
-        var delete_icon = new Kinetic.Text({
-            visible:true,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            name: 'delete', 
-            x:0,
-            y:0
-            });
-
-        delete_icon.on('click', function(){
-            debug('DELETE');
-            group.remove();
-            layer.draw();
-         });
-
-
-        var scalerX = new Kinetic.Text({
-            x:image.getX() + start_size.width,
-            y:image.getY() + start_size.height/2,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'x',
-            dragBoundFunc: function(pos){
-                return{
-                    x: pos.x,
-                    y: this.getAbsolutePosition().y
-                };
-            }
-        });
-
-        var scalerY = new Kinetic.Text({
-            x:image.getX() + start_size.width/2,
-            y:image.getY() + start_size.height,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'y',
-            //offset:[image.getWidth()/2,image.getHeight()/2],
-            dragBoundFunc: function(pos){
-              return{
-                x: this.getAbsolutePosition().x,
-                y: pos.y
-              };
-            }
-        });
-
-
-        //hide and show resize and scaler
-        image.on('click',function(){
-            if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
-                closeTools();
-            } else{
-                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
-                //to determine the if condition 
-                scalerX.setVisible(true);
-                scalerY.setVisible(true);
-                delete_icon.setVisible(true);
-                rotate.setVisible(true);
-            }
-            layer.draw();
-        });
-
-        image.on('drop', function(){
-            debug("dropped~");
-            scalerX.setVisible(true);
-            scalerY.setVisible(true);
-            delete_icon.setVisible(true);
-            rotate.setVisible(true);
-        });
-
-        //set rotation
         var canvasOffset = $("#container").offset();
         var offsetX = canvasOffset.left;
         var offsetY = canvasOffset.top;
@@ -476,33 +473,72 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         });
 
-        //set horizontal height of image
-        scalerX.on('dragmove touchmove',function(){
-            var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
-            image.setWidth(image.getWidth() + diff * 2);
-            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
-            reposition();
+        // Color picker //////
+
+        // Used to move color picker with drag
+        group.on('dragmove', function(){
+            if(scalerX.isVisible() && has_chroma_green)
+                move_color();   
+        });
+
+        // Move color picker to correct spot in reference to image
+        function move_color(){
+            var x = image.getAbsolutePosition().x + $('#container').offset().left;
+            var y = image.getAbsolutePosition().y - $('#container').offset().top;
+
+            var xAdjust = image.getWidth() + image.getOffsetX();
+            var yAdjust = image.getHeight() + image.getOffsetY();    
+
+            $("#modal").css({left: x - xAdjust, top: y + yAdjust});
+            $("#modal").show();
+        }
+
+
+
+        //hide and show resize and scaler
+        image.on('click',function(e){
+            if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
+                closeTools();
+            } else{
+                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                //to determine the if condition 
+                if(has_chroma_green){
+                    move_color();
+                }
+                scalerX.setVisible(true);
+                scalerY.setVisible(true);
+                delete_icon.setVisible(true);
+                rotate.setVisible(true);
+            }
             layer.draw();
         });
 
-        //set vertical height of image
-        scalerY.on('dragmove touchmove',function(){
-            var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
-            image.setHeight(image.getHeight() + diff * 2);
-            image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
-            reposition();
-            layer.draw();
+        image.on('drop', function(){
+            debug("dropped~");
+            scalerX.setVisible(true);
+            scalerY.setVisible(true);
+            delete_icon.setVisible(true);
+            rotate.setVisible(true);
 
+            if(has_chroma_green){
+                move_color();
+            }
         });
 
         //construct group to drop after image loads
         imageObj.onload = function(){
+            
             group.add(image);
             group.add(scalerX);
             group.add(scalerY);
             group.add(delete_icon);
             group.add(rotate);
+            
             layer.add(group);
+            
+            if(has_chroma_green)
+                move_color();
+
             reposition();
             layer.draw();
         };
@@ -514,12 +550,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
           debug("x: " + x + " y: " + y);
 
           rotate.setAbsolutePosition(x - 10, y - 10);
+          
           scalerX.setAbsolutePosition(x + image.getWidth(), y + image.getHeight()/2);
           scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
           delete_icon.setAbsolutePosition(x + image.getWidth(), y);
 
-
-        };//End of reposition
+        };
 
     }); // End of drop listener
 
@@ -575,6 +611,85 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             $scope.$apply();  
         }
         });
+    }
+
+
+    $scope.call_email = function(){
+        //first remove any tool circles if they exist
+        closeTools();
+        stage.draw();
+
+        var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+        //check if input is correct
+        if(emails !== null) {                      
+          debug('calling email');
+          //remove spaces to have one long string as argv for python
+          emails = emails.replace(/\s+/g, '');        
+          debug(emails);
+          //change to use scope variable instead
+          pyuserid = getCookie('pyuserid');
+          stage.toDataURL({
+            callback: function(dataUrl) {
+                debug('callback');
+                //from helpertools
+                email(pyuserid, emails, dataUrl);
+            }
+          }) ;         
+        }
+    };
+
+    $scope.create_image = function(){
+        debug('called');
+        $scope.image_download = 'somethingelse.jpg';
+        stage.toDataURL({
+            mimeType: 'image/jpg',
+            quality: 1,
+            callback: function(dataUrl) {
+                debug('callback');
+                var link = document.createElement('a');
+                angular.element(link)
+                .attr('href', dataUrl)
+                .attr('download', 'test.jpg'); // Pretty much only works in chrome
+                link.click();
+                debug('click?');
+            }
+        });
+    };
+
+
+    // function that changes color of image
+    $scope.change_color = function(color){
+    
+        var canvas = document.getElementById('color_change_canvas');
+        var context = canvas.getContext('2d');
+
+        // clears canvas 
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        context.drawImage($scope.selected_image, 0,0,120,120);
+
+        var imageX = 0;
+        var imageY = 0;
+        var imageWidth = $scope.selected_image.width;
+        var imageHeight = $scope.selected_image.height;
+
+        var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
+        var data = imageData.data;
+
+        var rgb = hexToRgb(color);
+
+        // iterate over all pixels
+        for(var i = 0, n = data.length; i < n; i += 4) {
+          data[i] = rgb['r'];
+          data[i+1] = rgb['g'];
+          data[i+2] = rgb['b'];
+        }
+
+        context.putImageData(imageData,0,0);
+
+        $scope.selected_image.src = canvas.toDataURL("image/png");
+        layer.draw();
+
     }
 
 } // End of Scenario Controller
