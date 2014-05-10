@@ -42,7 +42,6 @@ get '/test/stickers' do
   Sticker.all.each do |sticker|
     images << sticker.source
   end
-  puts images
 
   return images.to_json
 end

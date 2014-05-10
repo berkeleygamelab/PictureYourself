@@ -241,7 +241,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                         function(sticker){
                             $("#"+category+"_content").
                             append('<img class=\'sticker ' + category + 
-                                '\' src="/' + sticker.source + '" name="' + sticker.name + '"/>');
+                                '\' src="/' + sticker.source + '" name="' + sticker.name +
+                                 '" data-chroma_green="' + sticker.chroma_green.toString() +'"/>');
 
 
                             if(sticker.chroma_green){
@@ -256,7 +257,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 $scope.dragSrcEl = this;
 
                 // Flag so color change tool is added to sticker
-                if($(this).hasClass(chromagreen_category)){
+                debug($(this).data('chroma_green'));
+                if($(this).data('chroma_green') == true){
                     $scope.chroma_green = true;
                 }
                 else
