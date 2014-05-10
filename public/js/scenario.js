@@ -2,9 +2,11 @@
 
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
-
-var debug_flag = true;
+var debug_flag = false;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
+
+// TODO 
+// 1 - Rotate and color picker position break when scaled, look into why
 
 $(document).ready(function() {
     /*
@@ -14,7 +16,6 @@ $(document).ready(function() {
     //set pyuserid as global variable to easily access it
 
     $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
-    //debug("ID: " + getCookie('pyuserid'));
 
     $("#toolicon li").on("click", function(){
         $(this).parent().children().removeClass("active");
@@ -52,6 +53,9 @@ $(document).ready(function() {
    $(".kineticjs-content").css('position',''); 
     
     $("#modal").hide();
+
+    // Cavas were color changing occurs. Should always be hidden
+    $("#color_change_canvas").hide();
 });
 
 
@@ -65,10 +69,14 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     var stage_width = 800;
     var stage_height = 550;
     
+    // flags
     $scope.loading = false;
     $scope.chroma_green = false;
 
     var previous_edit = {'image':null,'collapse':null, 'on': true};
+
+    $scope.image_sources = {};
+
 
     // KineticJS Setup ///////////////////////////////////////////////////////////////
 
@@ -105,7 +113,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         height:stage_height
     });
 
-
     $scope.backgroundObj.src = default_background;
 
 
@@ -114,6 +121,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         
         layer.add(background);
         background.setZIndex(1);
+
         layer.draw();
     };
 
@@ -128,7 +136,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         $scope.backgroundObj.src = e.target.src;
     };
 
-    // Grab stickers from server
+    // Grab backgrounds from server
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
@@ -140,7 +148,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                     $("#backgrounds_tab").append(compiledElement);
                 });
 
-        }) ;//success
+        }) ;
 
 
     // Frames ///////////////////////////////////////////////////////////////
@@ -230,8 +238,17 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                     
                     //add stickers
                     angular.forEach(stickers,
-                        function(path,name){
-                             $("#"+category+"_content").append('<img class=\'sticker ' + category + '\' src="/' + path + '" name="/' + name + '"/>');
+                        function(sticker){
+                            $("#"+category+"_content").
+                            append('<img class=\'sticker ' + category + 
+                                '\' src="/' + sticker.source + '" name="' + sticker.name + '"/>');
+
+
+                            if(sticker.chroma_green){
+                                $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
+                                                                     'back': sticker.back_source};
+                            };
+
                     });
                 });
 
@@ -239,8 +256,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 $scope.dragSrcEl = this;
 
                 // Flag so color change tool is added to sticker
-                if($(this).hasClass(chromagreen_category))
+                if($(this).hasClass(chromagreen_category)){
                     $scope.chroma_green = true;
+                }
                 else
                     $scope.chroma_green = false;
             });
@@ -287,6 +305,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
 
+        if (has_chroma_green){
+            var sources = $scope.image_sources[$scope.dragSrcEl.name];
+
+            imageObjBack = new Image();
+            imageObjBack.src = sources['back'];
+
+            imageObjFore = new Image();
+            imageObjFore.src = sources['fore'];
+        }
+
         //stop Firefox from opening image
         e.preventDefault();
 
@@ -299,19 +327,41 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             draggable: true
         });
 
+        if (has_chroma_green){
+            var imageBack = new Kinetic.Image({
+               image:imageObjBack,
+               width: 120,  //this makes the image lower quality for some reason
+               height: 120,
+               x: x,
+               y: y 
+            });
 
-        var image = new Kinetic.Image({
-           image:imageObj,
-           width: 120,  //this makes the image lower quality for some reason
-           height: 120,
-           x: x,
-           y: y
-        });
+            var image = new Kinetic.Image({
+               image:imageObjFore,
+               width: 120,  //this makes the image lower quality for some reason
+               height: 120,
+               x: x,
+               y: y
+            });
 
+        }
+        else{
 
-        //may not need, but may need to refactor code
+            var image = new Kinetic.Image({
+               image:imageObj,
+               width: 120,  //this makes the image lower quality for some reason
+               height: 120,
+               x: x,
+               y: y
+            });
+
+        }
+
+        // Start size for dropped images. Used in code to set sizes
         var start_size = {"width":120,"height":120};
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
+
+
 
         // Delete //////
         var delete_icon = new Kinetic.Text({
@@ -334,6 +384,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             layer.draw();
          });
+
+
+
  
         // Scale X-axis //////
         var scalerX = new Kinetic.Text({
@@ -364,9 +417,18 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             image.setWidth(image.getWidth() + diff * 2);
             image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
             
+            if(has_chroma_green)
+            {
+                imageBack.setWidth(image.getWidth());
+                imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+            }
+
             reposition();
             layer.draw();
         });
+
+
+
 
         // Scale Y-axis //////
         var scalerY = new Kinetic.Text({
@@ -398,10 +460,17 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             image.setHeight(image.getHeight() + diff * 2);
             image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
             
+            if(has_chroma_green)
+            {
+                imageBack.setHeight(image.getHeight());
+                imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+            }
+
             reposition();   
             layer.draw();
 
         });
+
 
 
 
@@ -454,6 +523,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         delete_icon.setOffsetX(start_size.width/2);
         delete_icon.setOffsetY(start_size.height/2);
 
+        if (has_chroma_green){
+            imageBack.setOffsetX(start_size.width/2);
+            imageBack.setOffsetY(start_size.height/2);
+        }
+
         rotate.on('mouseenter', function(e){
             startX = parseInt(e.clientX - offsetX);
             startY = parseInt(e.clientY - offsetY);
@@ -473,7 +547,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         });
 
+        
+
+
         // Color picker //////
+
+        $scope.previous_color = null;
 
         // Used to move color picker with drag
         group.on('dragmove', function(){
@@ -488,10 +567,49 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             var xAdjust = image.getWidth() + image.getOffsetX();
             var yAdjust = image.getHeight() + image.getOffsetY();    
-
+            $("")
             $("#modal").css({left: x - xAdjust, top: y + yAdjust});
             $("#modal").show();
         }
+
+        // function that changes color of image
+        $scope.change_color = function(color){
+    
+            $scope.previous_color = color;
+
+            var canvas = document.getElementById('color_change_canvas');
+            var context = canvas.getContext('2d');
+
+            // clears canvas 
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.drawImage(imageObjBack, 0,0,start_size.width, start_size.height);
+
+            var imageX = 0;
+            var imageY = 0;
+            var imageWidth = image.getWidth();
+            var imageHeight = image.getHeight();
+
+            var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
+            var data = imageData.data;
+
+            // Color picker returns hex, call function in helpertools.js
+            // to convert to RGB
+            var rgb = hexToRgb(color);
+
+            // iterate over all pixels
+            for(var i = 0, n = data.length; i < n; i += 4) {
+              data[i] = rgb['r'];
+              data[i+1] = rgb['g'];
+              data[i+2] = rgb['b'];
+            }
+
+            context.putImageData(imageData,0,0);
+
+            imageObjBack.src = canvas.toDataURL("image/png");
+            layer.draw();
+
+    }
 
 
 
@@ -513,21 +631,15 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             layer.draw();
         });
 
-        image.on('drop', function(){
-            debug("dropped~");
-            scalerX.setVisible(true);
-            scalerY.setVisible(true);
-            delete_icon.setVisible(true);
-            rotate.setVisible(true);
-
-            if(has_chroma_green){
-                move_color();
-            }
-        });
 
         //construct group to drop after image loads
         imageObj.onload = function(){
             
+            if(has_chroma_green){
+                group.add(imageBack);
+                move_color();
+            }
+
             group.add(image);
             group.add(scalerX);
             group.add(scalerY);
@@ -536,12 +648,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             
             layer.add(group);
             
-            if(has_chroma_green)
-                move_color();
-
             reposition();
             layer.draw();
         };
+
 
         var reposition = function(){
           var x = image.getAbsolutePosition().x;
@@ -657,42 +767,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     };
 
 
-    // function that changes color of image
-    $scope.change_color = function(color){
     
-        var canvas = document.getElementById('color_change_canvas');
-        var context = canvas.getContext('2d');
-
-        // clears canvas 
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        context.drawImage($scope.selected_image, 0,0,120,120);
-
-        var imageX = 0;
-        var imageY = 0;
-        var imageWidth = $scope.selected_image.width;
-        var imageHeight = $scope.selected_image.height;
-
-        var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
-        var data = imageData.data;
-
-        var rgb = hexToRgb(color);
-
-        // iterate over all pixels
-        for(var i = 0, n = data.length; i < n; i += 4) {
-          data[i] = rgb['r'];
-          data[i+1] = rgb['g'];
-          data[i+2] = rgb['b'];
-        }
-
-        context.putImageData(imageData,0,0);
-
-        $scope.selected_image.src = canvas.toDataURL("image/png");
-        layer.draw();
-
-    }
 
 } // End of Scenario Controller
+
 
 
 
