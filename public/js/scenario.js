@@ -76,7 +76,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     var con = stage.getContainer();
     var dragSrcEl = null;
-	$scope.slider = document.getElementById('slider');
 
     $scope.image_download = 'test.jpg';
     var stickers = []; //will store information about stickers
@@ -123,32 +122,42 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         }
     };
 
-    //Background selection
+    // Background ///////////////////////////////////////////////////////////////
+    
     $scope.backgroundObj = new Image();
+    
     var background = new Kinetic.Image({
         image:$scope.backgroundObj,
         x:0,
         y:0,
-        width:stage_width,//$('#container').width(),
-        height:stage_height//$('#container').height()
+        width:stage_width,
+        height:stage_height
     });
+
+
     $scope.backgroundObj.src = default_background;
+
 
     $scope.backgroundObj.onload = function(){
         debug("Bacground onload");
+        
         layer.add(background);
         background.setZIndex(1);
         layer.draw();
     };
 
+    // Remove sticker tools when background is clicked
     background.on('click', function(){
         debug('background click');
-        // collapse_last()
+        closeTools();
     });
 
+    // Called when user selects a background
     $scope.background_update = function(e){
         $scope.backgroundObj.src = e.target.src;
     };
+
+    // Grab stickers from server
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
@@ -163,8 +172,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         }) ;//success
 
 
-    //frame selection
+    // Frames ///////////////////////////////////////////////////////////////
+
     $scope.frameObj = new Image();
+
     var frame = new Kinetic.Image({
         image:$scope.frameObj,
         x:0,
@@ -172,17 +183,15 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         width:stage_width,//$('#container').width(),
         height:stage_height,//$('#container').height()
     });
+
     layer.add(frame);
 
     $scope.frameObj.onload = function(){
         debug('frame onload');
+
         layer.add(frame);
         layer.draw();
     };
-
-    $('.frames').click(function(){
-        // collapse_last()
-    });
 
     $scope.frame_update = function(e){
         debug('frame update');
@@ -207,12 +216,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     $scope.remove_frame = function(){
         debug('remove frame');
+
         $scope.frameObj.src = "";
-        
         layer.draw();
     };
 
-    // Grab stickers
+
+
+
+
+    // Stickers ///////////////////////////////////////////////////////////////
     $http.get('/stickers').success(
     function(data){
         data = angular.fromJson(data);
@@ -244,7 +257,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     });//success
 
-
+    // Toggle sticker category
     $scope.toggle = function(category){
         $scope.visible[category] = !$scope.visible[category];
     };
@@ -256,17 +269,22 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         e.preventDefault(); //@important
     });
 
+
+    // Used to close tools for all stickers
     var closeTools = function(){
         a = $(stage.find('.y, .x, .delete, .rotate'));
+
         a.each(function(index){
             a[index].setVisible(false);
         });
+
+        layer.draw();
     };
 
-    //insert image to stage
-    var count = 0;
+    // STAGE ///////////////////////////////////////////////////////////////
+
+    // Add sticker to stage via drop action
     con.addEventListener('drop',function(e){
-        // collapse_last();
         //set up imageObj before creating other items that
         //may be reliant on its dimensions
 
@@ -293,10 +311,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
            image:imageObj,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: x ,//+ size_offset,
-           y: y// + size_offset//,
-		   //filter: Kinetic.Filters.Blur,
-           //offset:[60,60] //size determined by width, height input
+           x: x,
+           y: y
         });
 
 
@@ -331,6 +347,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
               }
         });
 
+
         //there is a reposition function that sets all the positions
         var delete_icon = new Kinetic.Text({
             visible:true,
@@ -342,15 +359,15 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             strokeWidth: 2,
             name: 'delete', 
             x:0,
-            y:0//,
-            //offset:[image.getWidth()/2,image.getHeight()/2]
+            y:0
             });
 
-            delete_icon.on('click', function(){
+        delete_icon.on('click', function(){
             debug('DELETE');
             group.remove();
             layer.draw();
-        });
+         });
+
 
         var scalerX = new Kinetic.Text({
             x:image.getX() + start_size.width,
@@ -424,10 +441,21 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         var startX;
         var startY;
 
+        // Set offsets to put image's x and y in center
         image.setOffsetX(start_size.width/2);
         image.setOffsetY(start_size.height/2);
+        
         rotate.setOffsetX(start_size.width/2);
         rotate.setOffsetY(start_size.height/2);
+
+        scalerX.setOffsetX(start_size.width/2);
+        scalerX.setOffsetY(start_size.height/2);
+
+        scalerY.setOffsetX(start_size.width/2);
+        scalerY.setOffsetY(start_size.height/2);
+
+        delete_icon.setOffsetX(start_size.width/2);
+        delete_icon.setOffsetY(start_size.height/2);
 
         rotate.on('mouseenter', function(e){
             startX = parseInt(e.clientX - offsetX);
@@ -483,10 +511,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
           var x = image.getAbsolutePosition().x;
           var y = image.getAbsolutePosition().y;
 
-          // debug("x: " + x + " y: " + y);
+          debug("x: " + x + " y: " + y);
 
           rotate.setAbsolutePosition(x - 10, y - 10);
-          scalerX.setAbsolutePosition(x + image.getWidth(),y + image.getHeight()/2);
+          scalerX.setAbsolutePosition(x + image.getWidth(), y + image.getHeight()/2);
           scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
           delete_icon.setAbsolutePosition(x + image.getWidth(), y);
 
@@ -495,64 +523,59 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     }); // End of drop listener
 
-    var collapse_last = function(){
-        if(previous_edit.image != null){
-            previous_edit.collapse();
-            previous_edit.image = null;
-        }    
-        layer.draw();
-    };
-   
-function email(pyuserid, emails, data){
-  var formData = {"pyuserid":pyuserid, "data":data};
-  $.ajax({
-    url: '/email',
-    type: 'POST',
-    data: formData,
-    success: function(){        
-      send_email(pyuserid, emails);
-    }
-  });
-}
 
-function send_email(pyuserid, emails){
-    
-    $scope.loading = true;
-    $scope.$apply();
+   // TODO do we need to have these in Scenario?
 
-    var formData = {"pyuserid":pyuserid, "emails":emails};
-    $.ajax({
-    url: '/send_email',
-    type: 'POST',
-    data: formData,
-    success: function(){
-        $scope.loading = false;
-        $scope.$apply();
-      $( "#dialog-confirm-email" ).dialog({
-        resizable: false,
-        // height:140,
-        // width: 70,
-        modal: true,
-        draggable:false,
-        closeOnEscape:false,
-        dialogClass: 'email-dialog no-close',
-        buttons: {
-          "Start over": function() {
-            window.location = "/";
-          },
-          "Continue": function() {
-            $( this ).dialog( "close" );
-          }
+    function email(pyuserid, emails, data){
+      var formData = {"pyuserid":pyuserid, "data":data};
+      $.ajax({
+        url: '/email',
+        type: 'POST',
+        data: formData,
+        success: function(){        
+          send_email(pyuserid, emails);
         }
-    })
-      .position({of:'#container'});
-    },
-    error: function(){
-        $scope.loading = false;
-        $scope.$apply();  
+      });
     }
-    });
-}
+
+    function send_email(pyuserid, emails){
+        
+        $scope.loading = true;
+        $scope.$apply();
+
+        var formData = {"pyuserid":pyuserid, "emails":emails};
+        $.ajax({
+        url: '/send_email',
+        type: 'POST',
+        data: formData,
+        success: function(){
+            $scope.loading = false;
+            $scope.$apply();
+          $( "#dialog-confirm-email" ).dialog({
+            resizable: false,
+            // height:140,
+            // width: 70,
+            modal: true,
+            draggable:false,
+            closeOnEscape:false,
+            dialogClass: 'email-dialog no-close',
+            buttons: {
+              "Start over": function() {
+                window.location = "/";
+              },
+              "Continue": function() {
+                $( this ).dialog( "close" );
+              }
+            }
+        })
+          .position({of:'#container'});
+        },
+        error: function(){
+            $scope.loading = false;
+            $scope.$apply();  
+        }
+        });
+    }
 
 } // End of Scenario Controller
 

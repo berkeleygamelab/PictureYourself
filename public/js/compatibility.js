@@ -47,7 +47,10 @@ function alertUser() {
 	var width = $(window).width();
 	var height = $( window ).height();
 	if (width < 800) {
-		alert("Your browser window is too small for this app. Please maximize it.");
+		
+		// TODO removing this for now since it's really annoying
+
+		// alert("Your browser window is too small for this app. Please maximize it.");
 	}
 };
 
