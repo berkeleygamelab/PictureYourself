@@ -333,8 +333,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
           height:25,
           image:deleteObj,
           x:x+image.getWidth() - 10,
-          y:y//,
-          //offset:[image.getWidth()/2,image.getHeight()/2]
+          y:y
         })
 
         delete_icon.on('click', function(){
@@ -370,7 +369,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
           stroke:'black',
           draggable:true,
           visible:false,
-          //offset:[image.getWidth()/2,image.getHeight()/2],
           dragBoundFunc: function(pos){
               return{
                 x: this.getAbsolutePosition().x,
@@ -458,27 +456,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         })
 
-        //Mouse events for hover over
-        /*
-        image.on('mouseenter', function(){
-                scalerX.setVisible(true);
-                scalerY.setVisible(true);
-                delete_icon.setVisible(true);
-                rotate.setVisible(true);
-                layer.draw();
-        });
-
-        image.on('mouseleave', function(){
-
-                scalerX.setVisible(false);
-                scalerY.setVisible(false);
-                delete_icon.setVisible(false);
-                rotate.setVisible(false);
-                layer.draw();
-        })
-
-        */
-
         //construct group to drop after image loads
         imageObj.onload = function(){
             group.add(image);
@@ -500,13 +477,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
           scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
           delete_icon.setAbsolutePosition(x + image.getWidth(), y);
 
-          //Position for hover over
-          /**
-          rotate.setAbsolutePosition(x + rotate.getWidth(), y + rotate.getHeight());
-          scalerX.setAbsolutePosition(x + image.getWidth() - scalerX.getWidth(), y + image.getHeight()/2);
-          scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight() - scalerY.getHeight());
-          delete_icon.setAbsolutePosition(x + image.getWidth() - delete_icon.getWidth(), y + delete_icon.getHeight());
-          **/
 
         } //End of reposition
 
@@ -519,7 +489,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         }    
         layer.draw();
     } 
-   
+ 
+// TODO Can we move this  
 function email(pyuserid, emails, data){
   var formData = {"pyuserid":pyuserid, "data":data};
   $.ajax({
@@ -574,31 +545,6 @@ function send_email(pyuserid, emails){
 } // End of Scenario Controller
 
 
-
-//layer.getChildren()[0].attrs.image.src
-//layer.getChildren()[0].attrs.x
-// $(window).on('beforeunload', function(){
-//     stickers = [];
-//     stickers.push($('#container').css('background-image'));
-//     $.each(layer.getChildren(), function(index, value){
-//         var sticker = {
-//             src: value.attrs.image.src,
-//             x: value.attrs.x,
-//             y: value.attrs.y
-//         }
-//         stickers.push(JSON.stringify(sticker));
-//     // stickers[index] = sticker;
-//     })
-//     var formData = new FormData();
-//     //var filename = $scope.pyuserid;
-//     //formData.append("name", name);
-
-//     formData.append("stickers", stickers);
-//     var xhr2 = new XMLHttpRequest();
-//     xhr2.open('POST', '/session');
-
-//     xhr2.send(formData);
-// });
 
 //Used to make it easy to turn on and off console.log
 function debug(msg){
