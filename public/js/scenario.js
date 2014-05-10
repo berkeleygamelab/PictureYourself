@@ -2,7 +2,7 @@
 
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
-var debug_flag = false;
+var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 // TODO 
@@ -136,7 +136,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         $scope.backgroundObj.src = e.target.src;
     };
 
-    // Grab backgrounds from server
+    // Grab stickers from server
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
@@ -302,17 +302,22 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         var has_chroma_green = $scope.chroma_green;
 
+        // Used to determine if both background and foreground have loaded
+        var image_load_count = 0;
+
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
 
         if (has_chroma_green){
             var sources = $scope.image_sources[$scope.dragSrcEl.name];
 
-            imageObjBack = new Image();
+            var imageObjBack = new Image();
             imageObjBack.src = sources['back'];
 
-            imageObjFore = new Image();
+            var imageObjFore = new Image();
             imageObjFore.src = sources['fore'];
+
+            $scope.selected_background = imageObjBack;
         }
 
         //stop Firefox from opening image
@@ -379,7 +384,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         delete_icon.on('click', function(){
             debug('DELETE');
-            group.remove();
+            debug(layer);
+
+            group.destroy();
+            $scope.selected_background = null;
             $('#modal').hide();
 
             layer.draw();
@@ -487,7 +495,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             draggable:true,
             visible:true,
             name: 'rotate',
-           // offset://[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos) {
                 var x = image.getAbsolutePosition().x + start_size.width/2;
                 var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
@@ -543,6 +550,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             var angle = Math.atan2(dy, dx);
             image.setRotation(angle);
 
+            if(has_chroma_green)
+                imageBack.setRotation(angle);
+
             layer.draw();
 
         });
@@ -567,7 +577,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             var xAdjust = image.getWidth() + image.getOffsetX();
             var yAdjust = image.getHeight() + image.getOffsetY();    
-            $("")
+
             $("#modal").css({left: x - xAdjust, top: y + yAdjust});
             $("#modal").show();
         }
@@ -575,26 +585,28 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         // function that changes color of image
         $scope.change_color = function(color){
     
-            $scope.previous_color = color;
 
             var canvas = document.getElementById('color_change_canvas');
             var context = canvas.getContext('2d');
 
+            canvas.width = $scope.selected_background.width;
+            canvas.height = $scope.selected_background.height;
+
             // clears canvas 
             context.clearRect(0, 0, canvas.width, canvas.height);
 
-            context.drawImage(imageObjBack, 0,0,start_size.width, start_size.height);
+            context.drawImage($scope.selected_background, 0,0, canvas.width, canvas.height);
 
             var imageX = 0;
             var imageY = 0;
-            var imageWidth = image.getWidth();
-            var imageHeight = image.getHeight();
+            var imageWidth = $scope.selected_background.width;
+            var imageHeight = $scope.selected_background.height;
 
             var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
             var data = imageData.data;
 
             // Color picker returns hex, call function in helpertools.js
-            // to convert to RGB
+            // to convert to
             var rgb = hexToRgb(color);
 
             // iterate over all pixels
@@ -605,10 +617,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             }
 
             context.putImageData(imageData,0,0);
+            $scope.selected_background.onload = null;
 
-            imageObjBack.src = canvas.toDataURL("image/png");
+            $scope.selected_background.src = canvas.toDataURL("image/png");
+
             layer.draw();
-
     }
 
 
@@ -617,11 +630,13 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         image.on('click',function(e){
             if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
                 closeTools();
+                $scope.selected_background = null;
             } else{
                 closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
                 //to determine the if condition 
                 if(has_chroma_green){
                     move_color();
+                    $scope.selected_background = imageObjBack;
                 }
                 scalerX.setVisible(true);
                 scalerY.setVisible(true);
@@ -632,8 +647,38 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         });
 
 
+
         //construct group to drop after image loads
-        imageObj.onload = function(){
+
+        if(has_chroma_green){
+            // Using image_load_count as a counter to make sure
+            // both the background and foreground are loaded.
+
+            imageObjBack.onload = function(){
+                if(image_load_count > 0){
+                    return load();
+                }
+
+                image_load_count++;
+            };
+
+            imageObjFore.onload = function(){
+                if(image_load_count > 0){
+                    return load();
+                };
+
+                image_load_count++;
+            };
+
+        }
+        else{
+            imageObj.onload = function(){
+                return load();
+            };
+        }
+
+
+        var load = function(){
             
             if(has_chroma_green){
                 group.add(imageBack);
@@ -650,8 +695,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             
             reposition();
             layer.draw();
-        };
-
+        }
 
         var reposition = function(){
           var x = image.getAbsolutePosition().x;
