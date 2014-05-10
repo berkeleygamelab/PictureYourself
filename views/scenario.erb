@@ -1,146 +1,115 @@
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
 <link rel="stylesheet" type="text/css" href="/css/scenario.css">
-<meta charset=utf-8 />
-</head> -->
-<!-- <body
- -->
+<script type="text/javascript" src='/js/helpertools.js'></script>
+<script type="text/javascript" src='/js/timeout.js'></script>
+<script type="text/javascript" src='/js/tabs.js'></script>
+<script type="text/javascript" src='/js/scenario.js'></script>
+
+<div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
+
+    <div class="row" id='framecontainer'>
+
+        <div id='toolbox'>
+            <div ng-controller='TabsCtrl'>
+
+                <div class="tabs">
+                    <ul class="nav nav-tabs" id='toolicon'>
+                        <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
+                        <li class = 'tab' ng-click='show_tab("backgrounds")'> <img src="/images/img/backgrounds.png" ></li>
+                        <li class = 'tab' ng-click='show_tab("filters")'> <img src="/images/img/filters.png"></li>
+                        <li class = 'tab' ng-click='show_tab("frames")'> <img src="/images/img/borders.png" ></li>
+                    </ul>
+                </div> <!-- Tabs -->
+
+                <div class='tabContent' id='toolboxbody'>
+
+                    <div id="sticker_tab" ng-show='tabs.stickers'>
+                        <div id='selfie_div'>
+                            <p class="toolbox_text" id ="selfie_text"> Your Selfie</p>
+                                    <img class='sticker' id='selfie' src='' >
+                        </div>
+                        <p class="toolbox_text">Stickers</p>
+                    </div> <!-- #sticker_tab -->
+
+                    <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
+                        <h3 class="toolbox_text">Backgrounds</h3>
+                    </div>  <!-- backgrounds_tab -->
+
+                    <div id="tab3" ng-show='tabs.filters'>
+                        <div id='filter_div'>
+                                <h3 class="toolbox_text">Filters are coming soon!</h3>
+        <!--           <table>
+                                <tr> -->
 
 
-    <link rel="stylesheet" type="text/css" href="/css/scenario.css">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <script type="text/javascript" src='/js/helpertools.js'></script>
-    <script type="text/javascript" src='/js/timeout.js'></script>
-    <script type="text/javascript" src='/js/tabs.js'></script>
-    <script type="text/javascript" src='/js/scenario.js'></script>
+                                 <!--  <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
+                                    <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
+                                    <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
+                                    <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
+                                    <input class = 'filter' id = 'invert' type='button' value = 'Invert'>
+                                    <input class = 'filter' id = 'opacity' type='button' value = 'Opacity'>
+                                    <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
+                                    <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
+                                    <input class = 'filter' id = 'reset' type='button' value = 'Reset'> -->
+        <!-- 
+                            <td>Blur:</td><td><input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                        </tr><tr>
+                            <td>Grey:</td><td><input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                            <td>Sepia:</td><td><input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                            <td>Saturate:</td><td><input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                            <td>Invert:</td><td><input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                            <td>Opacity:</td><td><input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                            <td>Bright:</td><td><input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                            <td>Contrast:</td><td><input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
+                            </tr><tr>
+                        </table>
+         -->
+                        </div> <!-- filter_div -->
+
+                        <div id='reset_div'>
+        <!--           <input class = 'filter' id = 'reset_plus' type='button' value = '-'>Reset<input id='reset_minus' type='button' value='+'>
+         -->           </div> <!-- reset_div -->
+
+                    </div> <!-- Tab3 -->
+
+                    <!-- <div id="frames_tab" ng-show='tabs.frames'> 
+                        <div><h3>Frames</h3> <button id='remove_frame_button' ng-click='remove_frame()'>Remove</button></div>
+
+                    </div>  --><!--tab4-->
+
+                    <div ng-show='tabs.frames'>  <!-- temporary for now -->
+                        <h3 class="toolbox_text">Frames are coming soon!</h3>
+                    </div>
+
+                </div><!--  Toolbox body -->
+            </div> <!-- Tabs Ctrl-->
+
+            <div id="email_div">
+                <input type='button' id='email' class='button' ng-click='call_email()' value = "EMAIL">
+            </div>
+
+        </div> <!-- Toolbox -->
 
 
- <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
-
-  <div class="row" id='framecontainer'>
-
-  <div class='col-md-3 col-sm-3 col-xs-3 col-md-offset-1 col-sm-offset-1 col-xs-offset-1' id='toolbox'>
-<!--   <div class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
- -->
-  <div ng-controller='TabsCtrl'>
-    <div class="tabs">
-
-      <ul class="nav nav-tabs" id='toolicon' style=' width: 100% ! important'>
-        <li class="active" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
-        <li ng-click='show_tab("backgrounds")'> <img src="/images/img/backgrounds.png" ></li>
-        <li ng-click='show_tab("filters")'> <img src="/images/img/filters.png"></li>
-        <li ng-click='show_tab("frames")'> <img src="/images/img/borders.png" ></li>
-      </ul>
-
-    </div> <!-- Tabs -->
-
-    <div class='tabContent' id='toolboxbody'>
-      <div id="sticker_tab" ng-show='tabs.stickers'>
-        <div id='selfie_div'>
-          <h3 class="toolbox_text" id ="selfie_text"> Your Selfie</h3>
-              <img class='sticker' id='selfie' src='' >
-
+        <div id = "scenario_canvas">
+            <div id = "container" ></div><!-- KineticJS Canvas -->
         </div>
-        <h3 class="toolbox_text">Stickers</h3>
 
-      </div> <!-- #sticker_tab -->
-      <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
-        <h3 class="toolbox_text">Backgrounds</h3>
+        <div id="dialog-confirm-email" title="E-mail sent!"></div>
 
-      </div>  <!-- Tab2 -->
+        <!-- <div title="Your session will expire soon." id="sessionTimeout-dialog"></div> -->
 
-      <div id="tab3" ng-show='tabs.filters'>
+    </div> <!-- Framecontainer -->
 
-        <div id='filter_div'>
-
-            <h3 class="toolbox_text">Filters are coming soon!</h3>
-<!--           <table>
-            <tr> -->
-
-
-             <!--  <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
-              <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
-              <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
-              <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
-              <input class = 'filter' id = 'invert' type='button' value = 'Invert'>
-              <input class = 'filter' id = 'opacity' type='button' value = 'Opacity'>
-              <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
-              <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
-              <input class = 'filter' id = 'reset' type='button' value = 'Reset'> -->
-<!-- 
-          <td>Blur:</td><td><input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-        </tr><tr>
-          <td>Grey:</td><td><input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-          <td>Sepia:</td><td><input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-          <td>Saturate:</td><td><input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-          <td>Invert:</td><td><input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-          <td>Opacity:</td><td><input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-          <td>Bright:</td><td><input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-          <td>Contrast:</td><td><input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-          </tr><tr>
-        </table>
- -->
-        </div> <!-- filter_div -->
-
-        <div id='reset_div'>
-<!--           <input class = 'filter' id = 'reset_plus' type='button' value = '-'>Reset<input id='reset_minus' type='button' value='+'>
- -->        </div> <!-- reset_div -->
-
-      </div> <!-- Tab3 -->
-
-      <!-- <div id="frames_tab" ng-show='tabs.frames'> 
-        <div><h3>Frames</h3> <button id='remove_frame_button' ng-click='remove_frame()'>Remove</button></div>
-
-      </div>  --><!--tab4-->
-
-      <div ng-show='tabs.frames'>  <!-- temporary for now -->
-        <h3 class="toolbox_text">Frames are coming soon!</h3>
-      </div>
-
-    </div><!--  Toolbox body -->
-  </div> <!-- Tabs Ctrl-->
-
-  </div> <!-- Toolbox -->
-
-  <div id = "container" class='col-md-7 col-sm-7 col-xs-7' style='width: 800px; height:550px;'>
-  </div><!-- KineticJS Canvas -->
-
-  <div id="dialog-confirm-email" title="E-mail sent!">
-  <!-- <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p> -->
-</div>
-
-  <div title="Your session will expire soon." id="sessionTimeout-dialog">
-     
-  </div>
-
-
-</div> <!-- Framecontainer -->
-
-  <div id="save_email">
-    <div id='save_div' >
-      <input type='button' id='save' class='clicker' ng-click='create_image()' value = "SAVE">
-    </div>   <!--save_div -->
-
-     <div id='email_div'>
-      <input type='button' id='email' class='clicker' ng-click='call_email()' value = "EMAIL">
-    </div>   <!--email_div -->
-   </div>
-
-    <div id='loader' ng-show='loading' class='centered loader_scenario'>
-            <img src='images/loader.gif' id='loader_img'>
+    <div ng-show='loading' class='loader'>
+        <span class="loader_helper"></span>
+        <img src='images/loader.gif' class='loader_img'>
     </div>
 
-
 </div> <!-- ScenarioCtrl -->
-
-
-
 

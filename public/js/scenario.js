@@ -3,12 +3,10 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 
-var debug_flag = false;
+var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
 
 $(document).ready(function() {
-    // $(".tabs a").html5jTabs();
-
     /*
     * Gets user selfie
     */
@@ -61,14 +59,11 @@ $(document).ready(function() {
 * And stores data about the images on the canvas into the stickers array
 */
 
-//try to wrap this all in a function somehow? ScenarioCtrl is preventing that from happening
-
-
 function ScenarioCtrl($scope, $resource, $http, $compile){
     var stage_width = 800;
     var stage_height = 550;
     $scope.loading = false;
-    var previous_edit = {'image':null,'collapse':null};
+    var previous_edit = {'image':null,'collapse':null, 'on': true};
 
     var stage = new Kinetic.Stage({
         container: 'container',
@@ -97,33 +92,36 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 var link = document.createElement('a');
                 angular.element(link)
                 .attr('href', dataUrl)
-                .attr('download', 'test.jpg') // Pretty much only works in chrome
+                .attr('download', 'test.jpg'); // Pretty much only works in chrome
                 link.click();
-                debug('click?')
+                debug('click?');
             }
-        })
+        });
     };
 
     $scope.call_email = function(){
+        //first remove any tool circles if they exist
+        closeTools();
+        stage.draw();
 
         var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
         //check if input is correct
-        if(emails != null) {                      
+        if(emails !== null) {                      
           debug('calling email');
           //remove spaces to have one long string as argv for python
           emails = emails.replace(/\s+/g, '');        
           debug(emails);
           //change to use scope variable instead
-          pyuserid = getCookie('pyuserid')
+          pyuserid = getCookie('pyuserid');
           stage.toDataURL({
             callback: function(dataUrl) {
                 debug('callback');
                 //from helpertools
                 email(pyuserid, emails, dataUrl);
             }
-          })          
+          }) ;         
         }
-    }
+    };
 
     //Background selection
     $scope.backgroundObj = new Image();
@@ -141,30 +139,28 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         layer.add(background);
         background.setZIndex(1);
         layer.draw();
-    }
-
-
+    };
 
     background.on('click', function(){
-        debug('background click')
-        collapse_last()
-    })
+        debug('background click');
+        // collapse_last()
+    });
 
     $scope.background_update = function(e){
-        $scope.backgroundObj.src = e.target.src
-    }
+        $scope.backgroundObj.src = e.target.src;
+    };
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
             angular.forEach(data,
                 function(source,name)
                 {
-                    html = "<img src='/" +  source + "' class='background' ng-click=\"background_update($event)\" alt='"+name+"'>"
+                    html = "<img src='/" +  source + "' class='background' ng-click=\"background_update($event)\" alt='"+name+"'>";
                     compiledElement = $compile(html)($scope);
-                    $("#backgrounds_tab").append(compiledElement)
-                })
+                    $("#backgrounds_tab").append(compiledElement);
+                });
 
-        }) //success
+        }) ;//success
 
 
     //frame selection
@@ -179,19 +175,19 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     layer.add(frame);
 
     $scope.frameObj.onload = function(){
-        debug('frame onload')
+        debug('frame onload');
         layer.add(frame);
         layer.draw();
-    }
+    };
 
     $('.frames').click(function(){
-        collapse_last()
-    })
+        // collapse_last()
+    });
 
     $scope.frame_update = function(e){
-        debug('frame update')
-        $scope.frameObj.src = e.target.src
-    }
+        debug('frame update');
+        $scope.frameObj.src = e.target.src;
+    };
 
 
     //TEMPORARY SO WE CAN HAVE IT SAY COMING SOON FOR FRAMES!!!!!!
@@ -210,11 +206,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     // }) //success
 
     $scope.remove_frame = function(){
-        debug('remove frame')
+        debug('remove frame');
         $scope.frameObj.src = "";
         
         layer.draw();
-    }
+    };
 
     // Grab stickers
     $http.get('/stickers').success(
@@ -238,20 +234,20 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 angular.forEach(stickers,
                     function(path,name){
                          $("#"+category+"_content").append('<img class=\'sticker\' src="/' + path + '" name="/' + name + '"/>');
-                })
-            })
+                });
+            });
         $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
             $scope.dragSrcEl = this;
         });
 
 
 
-    })//success
+    });//success
 
 
     $scope.toggle = function(category){
         $scope.visible[category] = !$scope.visible[category];
-    }
+    };
 
 
     // Drag and drop stickers start
@@ -260,21 +256,26 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         e.preventDefault(); //@important
     });
 
+    var closeTools = function(){
+        a = $(stage.find('.y, .x, .delete, .rotate'));
+        a.each(function(index){
+            a[index].setVisible(false);
+        });
+    };
+
     //insert image to stage
     var count = 0;
     con.addEventListener('drop',function(e){
-        collapse_last();
+        // collapse_last();
         //set up imageObj before creating other items that
         //may be reliant on its dimensions
+
+        //this removes the tool circles around all existing stickers when a new one is dropped
+        closeTools();
 
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
 
-        rotateObj = new Image();
-        rotateObj.src = '/images/rotate.png';
-
-        deleteObj = new Image();
-        deleteObj.src = '/images/delete_button.png';
         //stop Firefox from opening image
         e.preventDefault();
 
@@ -292,25 +293,29 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
            image:imageObj,
            width: 120,  //this makes the image lower quality for some reason
            height: 120,
-           x: x - size_offset,
-           y: y - size_offset//,
+           x: x ,//+ size_offset,
+           y: y// + size_offset//,
 		   //filter: Kinetic.Filters.Blur,
            //offset:[60,60] //size determined by width, height input
         });
+
 
         //may not need, but may need to refactor code
         var start_size = {"width":120,"height":120};
         var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
-        //icon for rotation
-        var rotate = new Kinetic.Circle({
-            x:image.getX(),
-            y:image.getY(),// + start_size.height/2,
-            radius:10,
-            fill: 'green',
-            stroke:'black',
+        var rotate = new Kinetic.Text({
+            x: 0,// image.getX(),
+            y: 0,// image.getY() + start_size.height/2,
+            text: '',  //leave this it won't render correctly here but will on the canvas
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
             draggable:true,
-            visible:false,
+            visible:true,
+            name: 'rotate',
            // offset://[image.getWidth()/2,image.getHeight()/2],
             dragBoundFunc: function(pos) {
                 var x = image.getAbsolutePosition().x + start_size.width/2;
@@ -326,85 +331,91 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
               }
         });
 
+        //there is a reposition function that sets all the positions
+        var delete_icon = new Kinetic.Text({
+            visible:true,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            name: 'delete', 
+            x:0,
+            y:0//,
+            //offset:[image.getWidth()/2,image.getHeight()/2]
+            });
 
-        var delete_icon = new Kinetic.Image({
-          visible:false,
-          width:25,
-          height:25,
-          image:deleteObj,
-          x:x+image.getWidth() - 10,
-          y:y
-        })
+            delete_icon.on('click', function(){
+            debug('DELETE');
+            group.remove();
+            layer.draw();
+        });
 
-        delete_icon.on('click', function(){
-          debug('DELETE')
-          group.remove();
-          layer.draw();
-        })
-
-
-        //object to drag to scale image on X axis
-        var scalerX = new Kinetic.Circle({
+        var scalerX = new Kinetic.Text({
             x:image.getX() + start_size.width,
             y:image.getY() + start_size.height/2,
-            radius:10,
-            fill: 'yellow',
-            stroke:'black',
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
             draggable:true,
-            visible:false,
+            visible:true,
+            name: 'x',
             dragBoundFunc: function(pos){
                 return{
                     x: pos.x,
                     y: this.getAbsolutePosition().y
-                }
+                };
             }
-        })
+        });
 
-        //object to drag to scale image on Y axis
-        var scalerY = new Kinetic.Circle({
-          x:image.getX() + start_size.width/2,
-          y:image.getY() + start_size.height,
-          radius:10,
-          fill: 'yellow',
-          stroke:'black',
-          draggable:true,
-          visible:false,
-          dragBoundFunc: function(pos){
+        var scalerY = new Kinetic.Text({
+            x:image.getX() + start_size.width/2,
+            y:image.getY() + start_size.height,
+            text: '',
+            fontFamily: 'FontAwesome',
+            fontSize: 30,
+            fill: '#eee',
+            stroke: "#222",
+            strokeWidth: 2,
+            draggable:true,
+            visible:true,
+            name: 'y',
+            //offset:[image.getWidth()/2,image.getHeight()/2],
+            dragBoundFunc: function(pos){
               return{
                 x: this.getAbsolutePosition().x,
                 y: pos.y
-              }
+              };
             }
-        })
+        });
 
 
         //hide and show resize and scaler
         image.on('click',function(){
-            debug('image click') 
-            if (previous_edit.image != null)
-                previous_edit.collapse();
-
-            if(previous_edit.image == image)
-                previous_edit.image = null;
-            else
-            {
+            if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
+                closeTools();
+            } else{
+                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                //to determine the if condition 
                 scalerX.setVisible(true);
                 scalerY.setVisible(true);
                 delete_icon.setVisible(true);
                 rotate.setVisible(true);
-                previous_edit.image = image;
-                previous_edit.collapse = function()
-                {
-                    scalerX.setVisible(false);
-                    scalerY.setVisible(false);
-                    delete_icon.setVisible(false);
-                    rotate.setVisible(false);
-                }
             }
-
             layer.draw();
+        });
 
-        })
+        image.on('drop', function(){
+            debug("dropped~");
+            scalerX.setVisible(true);
+            scalerY.setVisible(true);
+            delete_icon.setVisible(true);
+            rotate.setVisible(true);
+        });
 
         //set rotation
         var canvasOffset = $("#container").offset();
@@ -421,7 +432,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         rotate.on('mouseenter', function(e){
             startX = parseInt(e.clientX - offsetX);
             startY = parseInt(e.clientY - offsetY);
-        })
+        });
 
         rotate.on('dragmove touchmove', function(e){ //dragmove
             // debug(mouseX + " " + mouseY);
@@ -435,26 +446,26 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             layer.draw();
 
-        })
+        });
 
         //set horizontal height of image
         scalerX.on('dragmove touchmove',function(){
             var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
-            image.setWidth(image.getWidth() + diff * 2)
-            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y)
+            image.setWidth(image.getWidth() + diff * 2);
+            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
             reposition();
             layer.draw();
-        })
+        });
 
         //set vertical height of image
         scalerY.on('dragmove touchmove',function(){
             var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
-            image.setHeight(image.getHeight() + diff * 2)
+            image.setHeight(image.getHeight() + diff * 2);
             image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
             reposition();
             layer.draw();
 
-        })
+        });
 
         //construct group to drop after image loads
         imageObj.onload = function(){
@@ -465,22 +476,24 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             group.add(rotate);
             layer.add(group);
             reposition();
-            layer.draw()
+            layer.draw();
         };
 
         var reposition = function(){
           var x = image.getAbsolutePosition().x;
           var y = image.getAbsolutePosition().y;
 
-          rotate.setAbsolutePosition(x,y);
+          // debug("x: " + x + " y: " + y);
+
+          rotate.setAbsolutePosition(x - 10, y - 10);
           scalerX.setAbsolutePosition(x + image.getWidth(),y + image.getHeight()/2);
           scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
           delete_icon.setAbsolutePosition(x + image.getWidth(), y);
 
 
-        } //End of reposition
+        };//End of reposition
 
-    }) // End of drop listener
+    }); // End of drop listener
 
     var collapse_last = function(){
         if(previous_edit.image != null){
@@ -488,9 +501,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             previous_edit.image = null;
         }    
         layer.draw();
-    } 
- 
-// TODO Can we move this  
+    };
+   
 function email(pyuserid, emails, data){
   var formData = {"pyuserid":pyuserid, "data":data};
   $.ajax({
@@ -500,7 +512,7 @@ function email(pyuserid, emails, data){
     success: function(){        
       send_email(pyuserid, emails);
     }
-  })
+  });
 }
 
 function send_email(pyuserid, emails){
@@ -526,7 +538,7 @@ function send_email(pyuserid, emails){
         dialogClass: 'email-dialog no-close',
         buttons: {
           "Start over": function() {
-            window.location = "/"
+            window.location = "/";
           },
           "Continue": function() {
             $( this ).dialog( "close" );
@@ -539,7 +551,7 @@ function send_email(pyuserid, emails){
         $scope.loading = false;
         $scope.$apply();  
     }
-    })
+    });
 }
 
 } // End of Scenario Controller
