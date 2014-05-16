@@ -50,7 +50,7 @@ $(document).ready(function() {
         });
 
     //fixes positioning issue with kineticJS canvas
-   $(".kineticjs-content").css('position',''); 
+    $(".kineticjs-content").css('position',''); 
     
     $("#modal").hide();
 
@@ -72,9 +72,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     // flags
     $scope.loading = false;
     $scope.chroma_green = false;
-
-    var previous_edit = {'image':null,'collapse':null, 'on': true};
-
+    
     $scope.image_sources = {};
 
 
@@ -100,6 +98,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         $scope.change_color(newValue); 
         } 
     });
+
+
 
     // Background ///////////////////////////////////////////////////////////////
     
@@ -302,6 +302,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         //this removes the tool circles around all existing stickers when a new one is dropped
         closeTools();
 
+        // Assign a local variable with chroma green flag value
         var has_chroma_green = $scope.chroma_green;
 
         // Used to determine if both background and foreground have loaded
@@ -309,6 +310,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
+
 
         if (has_chroma_green){
             var sources = $scope.image_sources[$scope.dragSrcEl.name];
@@ -584,7 +586,14 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             $("#modal").show();
         }
 
-        // function that changes color of image
+        // Update the color of a background image
+        // Basic operation:
+        // 1 - Draw image on hidden canvas
+        // 2 - Export canvas image pixel data to variable
+        // 3 - Traverse image pixel and change colors
+        // 4 - Put new colored image back on canvas
+        // 5 - Export canvas as image and assign to source of background image
+
         $scope.change_color = function(color){
     
 
