@@ -299,6 +299,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         //set up imageObj before creating other items that
         //may be reliant on its dimensions
 
+        //stop Firefox from opening image
+        e.preventDefault();
+
         //this removes the tool circles around all existing stickers when a new one is dropped
         closeTools();
 
@@ -323,9 +326,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             $scope.selected_background = imageObjBack;
         }
-
-        //stop Firefox from opening image
-        e.preventDefault();
 
         //get position relative to the container and page
         x = e.pageX - $('#container').offset().left;
@@ -576,13 +576,18 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         // Move color picker to correct spot in reference to image
         function move_color(){
-            var x = image.getAbsolutePosition().x + $('#container').offset().left;
-            var y = image.getAbsolutePosition().y - $('#container').offset().top;
 
-            var xAdjust = image.getWidth() + image.getOffsetX();
-            var yAdjust = image.getHeight() + image.getOffsetY();    
 
-            $("#modal").css({left: x - xAdjust, top: y + yAdjust});
+            // var diffX = $("#modal").position().left - image.getAbsolutePosition().x - image.getWidth();
+            // var diffY = $("#modal").position().top - image.getAbsolutePosition().y - image.getHeight();
+
+            // var x = image.getAbsolutePosition().x + $('#container').offset().left - diffX/2;// image.getOffsetX();
+            // var y = image.getAbsolutePosition().y + $('#container').offset().top + diffY/2;// image.getOffsetY();
+
+            var y = scalerY.getAbsolutePosition().y;
+            var x = scalerX.getAbsolutePosition().x  + $('#container').offset().left - image.getWidth() - image.getOffsetX() - $('#modal').width();
+
+            $("#modal").css({left: x, top: y});
             $("#modal").show();
         }
 
