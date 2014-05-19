@@ -8,6 +8,7 @@ app.factory('Sticker', function(){
 									image : null,
 									imageBack : null,
 									move_color : null,
+									previous_color : null,
 									rotate : null,
 									scalerX : null,
 									scalerY : null, 

@@ -303,6 +303,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack);
 
+        $scope.selected_sticker = sticker;
         // ---- TODO ---------------------------------------------------------------
         // Move finished events into factory. 
 
@@ -311,6 +312,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
             sticker.group.destroy();
             $scope.selected_background = null;
+            $scope.selected_sticker = null;
             $('#modal').hide();
 
             layer.draw();
@@ -400,10 +402,15 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
             if(sticker.scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
                 closeTools();
                 $scope.selected_background = null;
-                $scope.selected_image = null;
+                $scope.selected_sticker = null;
             } else{
                 closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
-                //to determine the if condition 
+                
+                $scope.selected_sticker = sticker;  
+
+                if($scope.selected_sticker.previous_color != null)
+                    $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+
                 if(has_chroma_green){
                     sticker.move_color();
                     $scope.selected_background = imageObjBack;
@@ -529,6 +536,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     // 5 - Export canvas as image and assign to source of background image
 
     function change_color(color){
+
+        if($scope.selected_sticker)
+            $scope.selected_sticker.previous_color = color;
 
         var canvas = document.getElementById('color_change_canvas');
         var context = canvas.getContext('2d');
