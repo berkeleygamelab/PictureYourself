@@ -224,3 +224,11 @@ height: 100%;
 .loader_scenario{
   margin-top: -1%;
 }
+
+/*--------------------------------------------- Color Picker ---------------------------------------------*/
+.simplecolorpicker.icon{
+  border:solid;
+  border-color:black;
+  border-radius: 5px;
+  border-width: 2px;
+}

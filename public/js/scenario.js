@@ -73,8 +73,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     $scope.loading = false;
     $scope.chroma_green = false;
     
-    $scope.image_sources = {};
 
+
+    $scope.image_sources = {};
+    $scope.previous_color = {};
+    $scope.selected_image = null;
 
     // KineticJS Setup ///////////////////////////////////////////////////////////////
 
@@ -94,10 +97,15 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     var stickers = []; //will store information about stickers
 
     // Sets the color picker object
-    $('#color1').colorPicker({ onColorChange : function(id, newValue) { 
-        $scope.change_color(newValue); 
-        } 
-    });
+    // $('#color1').colorPicker({ onColorChange : function(id, newValue) { 
+    //     $scope.change_color(newValue); 
+    //     } 
+    // });
+
+    $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
+        on('change', function(){
+            $scope.change_color($('select[name="colorpicker"]').val());    
+        });
 
 
 
@@ -255,6 +263,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
                 $scope.dragSrcEl = this;
+                $scope.image_id_count++;
 
                 // Flag so color change tool is added to sticker
                 debug($(this).data('chroma_green'));
@@ -308,11 +317,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         // Assign a local variable with chroma green flag value
         var has_chroma_green = $scope.chroma_green;
 
-        // Used to determine if both background and foreground have loaded
+        // Used to make sure both background and foreground are loaded together
         var image_load_count = 0;
 
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
+        
 
 
         if (has_chroma_green){
@@ -333,8 +343,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         size_offset = 60;
 
         var group = new Kinetic.Group({
-            draggable: true
+            draggable: true,
         });
+
 
         if (has_chroma_green){
             var imageBack = new Kinetic.Image({
@@ -365,6 +376,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             });
 
         }
+
+        $scope.selected_image = image;
+        console.log("id?",$scope.selected_image.getId());
+                console.log("id?",image.getId());
+
 
         // Start size for dropped images. Used in code to set sizes
         var start_size = {"width":120,"height":120};
@@ -566,8 +582,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         // Color picker //////
 
-        $scope.previous_color = null;
-
         // Used to move color picker with drag
         group.on('dragmove', function(){
             if(scalerX.isVisible() && has_chroma_green)
@@ -577,15 +591,12 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         // Move color picker to correct spot in reference to image
         function move_color(){
 
-
-            // var diffX = $("#modal").position().left - image.getAbsolutePosition().x - image.getWidth();
-            // var diffY = $("#modal").position().top - image.getAbsolutePosition().y - image.getHeight();
-
-            // var x = image.getAbsolutePosition().x + $('#container').offset().left - diffX/2;// image.getOffsetX();
-            // var y = image.getAbsolutePosition().y + $('#container').offset().top + diffY/2;// image.getOffsetY();
-
             var y = scalerY.getAbsolutePosition().y;
-            var x = scalerX.getAbsolutePosition().x  + $('#container').offset().left - image.getWidth() - image.getOffsetX() - $('#modal').width();
+            var x = scalerX.getAbsolutePosition().x  
+                 + $('#container').offset().left
+                 - image.getWidth() 
+                 - image.getOffsetX() 
+                 - $('#modal').width();
 
             $("#modal").css({left: x, top: y});
             $("#modal").show();
@@ -600,7 +611,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         // 5 - Export canvas as image and assign to source of background image
 
         $scope.change_color = function(color){
-    
+
+            $scope.previous_color[$scope.selected_image.getId()] = color;
+            console.log('change color for image', $scope.selected_image.getId());
+            console.log('changed to', $scope.previous_color[$scope.selected_image.getId()]);
 
             var canvas = document.getElementById('color_change_canvas');
             var context = canvas.getContext('2d');
@@ -647,12 +661,18 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
                 closeTools();
                 $scope.selected_background = null;
+                $scope.selected_image = null;
             } else{
                 closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
                 //to determine the if condition 
                 if(has_chroma_green){
                     move_color();
+
+                    $scope.selected_image = image;
                     $scope.selected_background = imageObjBack;
+                    console.log('click on image', $scope.selected_image.getId());
+                    console.log('previous color',$scope.previous_color[$scope.selected_image.getId()]);
+                    $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.previous_color[$scope.selected_image.getId()]);
                 }
                 scalerX.setVisible(true);
                 scalerY.setVisible(true);
