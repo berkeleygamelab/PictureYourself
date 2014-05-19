@@ -7,7 +7,7 @@
 <script type="text/javascript" src='/js/tabs.js'></script>
 <script type="text/javascript" src='/js/jquery.colorPicker.min.js'></script>
 <script src="/js/jquery.simplecolorpicker.js"></script>
-
+<script type="text/javascript" src="/js/factories.js"></script>
 <script type="text/javascript" src='/js/scenario.js'></script>
 
 <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
@@ -119,26 +119,47 @@
 
     <!-- Color picker -->
       <div id='modal'>
-        <!-- Old Picker Delet -->
-        <!-- <div class="controlset">
-          <label for="color1">Select Color</label> 
-          <input id="color1" type="text" name="color1" value="#333399" />
-        </div> -->
-
+        
+        <!-- TODO These need to update from the server -->
         <select name="colorpicker">
-          <option value="#7bd148">Green</option>
-          <option value="#5484ed">Bold blue</option>
-          <option value="#a4bdfc">Blue</option>
-          <option value="#46d6db">Turquoise</option>
-          <option value="#7ae7bf">Light green</option>
-          <option value="#51b749">Bold green</option>
-          <option value="#fbd75b">Yellow</option>
-          <option value="#ffb878">Orange</option>
-          <option value="#ff887c">Red</option>
-          <option value="#dc2127">Bold red</option>
-          <option value="#dbadff">Purple</option>
-          <option value="#e1e1e1">Gray</option>
+            <option value="#ffdcb1"></option>
+            <option value="#e5c298"></option>
+            <option value="#e4b98e"></option>
+            <option value="#e2b98f"></option>
+            <option value="#e3a173"></option>
+            <option value="#d99164"></option>
+            <option value="#cc8443"></option>
+            <option value="#c77a58"></option>
+            <option value="#a53900"></option>
+            <option value="#880400"></option>
+            <option value="#710200"></option>
+            <option value="#440000"></option>
+            <option value="#ffe0c4"></option>
+            <option value="#eecfb4"></option>
+            <option value="#deab7f"></option>
+            <option value="#e0b184"></option>
+            <option value="#dfa675"></option>
+            <option value="#be723c"></option>
+            <option value="#a01900"></option>
+            <option value="#5b0000"></option>
+            <option value="#000000"></option>
+            <option value="#ede4c8"></option>
+            <option value="#efd6bd"></option>
+            <option value="#eabd9d"></option>
+            <option value="#e3c2ae"></option>
+            <option value="#dfb997"></option>
+            <option value="#d0926e"></option>
+            <option value="#bd9778"></option>
+            <option value="#bb6d4a"></option>
+            <option value="#940a00"></option>
+            <option value="#e1ada4"></option>
+            <option value="#a58869"></option>
+            <option value="#7b0000"></option>
+            <option value="#720000"></option>
+            <option value="#380000"></option>
+
         </select>
+
 
       <!-- Canvas to update color -->
       <!-- TODO possibly change width and height if images change -->

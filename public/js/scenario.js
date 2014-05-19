@@ -1,12 +1,11 @@
 //http://angular-ui.github.io/bootstrap/
 
+//COLOR PICKER - https://github.com/tkrotoff/jquery-simplecolorpicker
+
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
-var debug_flag = true;
+var debug_flag = false;
 var default_background = '/images/stickers/0-backgrounds/Asproul.png';
-
-// TODO 
-// 1 - Rotate and color picker position break when scaled, look into why
 
 $(document).ready(function() {
     /*
@@ -21,33 +20,6 @@ $(document).ready(function() {
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
     });
-
-    var filter = '';
-
-    $('.filter').on('click', function(){
-
-        var filterVal =  $(this).attr('id');
-            if(filterVal == 'gray'){
-                filter += ' grayscale(0.5)';
-            } else if (filterVal == 'blur'){
-                filter += ' blur(5px)';
-            } else if (filterVal == 'sepia'){
-                filter += ' sepia(0.5)';
-            } else if (filterVal == 'saturate'){
-                filter += ' saturate(0.5)';
-            } else if (filterVal == 'invert'){
-                filter += ' invert(100%)';
-            } else if (filterVal == 'opacity'){
-                filter += ' opacity(0.5)';
-            } else if (filterVal == 'bright'){
-                filter += ' brightness(2)';
-            } else if (filterVal == 'contrast'){
-                filter += ' contrast(0.5)';
-            } else if(filterVal == 'reset'){
-                filter = 'blur(0px)';
-            }
-            $('#container').css('-webkit-filter', filter);
-        });
 
     //fixes positioning issue with kineticJS canvas
     $(".kineticjs-content").css('position',''); 
@@ -65,26 +37,23 @@ $(document).ready(function() {
 * And stores data about the images on the canvas into the stickers array
 */
 
-function ScenarioCtrl($scope, $resource, $http, $compile){
+function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     var stage_width = 800;
     var stage_height = 550;
     
     // flags
     $scope.loading = false;
     $scope.chroma_green = false;
-    
-
 
     $scope.image_sources = {};
-    $scope.previous_color = {};
     $scope.selected_image = null;
 
     // KineticJS Setup ///////////////////////////////////////////////////////////////
 
     var stage = new Kinetic.Stage({
         container: 'container',
-        width: stage_width,//$('#container').width(),
-        height: stage_height//$('#container').height()
+        width: stage_width,
+        height: stage_height
     });
 
     var layer = new Kinetic.Layer();
@@ -96,15 +65,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     $scope.image_download = 'test.jpg';
     var stickers = []; //will store information about stickers
 
-    // Sets the color picker object
-    // $('#color1').colorPicker({ onColorChange : function(id, newValue) { 
-    //     $scope.change_color(newValue); 
-    //     } 
-    // });
-
     $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
         on('change', function(){
-            $scope.change_color($('select[name="colorpicker"]').val());    
+            change_color($('select[name="colorpicker"]').val());    
         });
 
 
@@ -215,10 +178,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     // Stickers ///////////////////////////////////////////////////////////////
 
     var default_category = "shoes_and_pants";
-
-    // TODO used to determine if object is part of chromagreen
-    // most likely change if more categories have chromagreen
-    var chromagreen_category = "shirts";
     
     // Grab stickers from server and append them to category
     $http.get('/stickers').success(
@@ -263,7 +222,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
             $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
                 $scope.dragSrcEl = this;
-                $scope.image_id_count++;
 
                 // Flag so color change tool is added to sticker
                 debug($(this).data('chroma_green'));
@@ -305,8 +263,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     // Add sticker to stage via drop action
     con.addEventListener('drop',function(e){
-        //set up imageObj before creating other items that
-        //may be reliant on its dimensions
 
         //stop Firefox from opening image
         e.preventDefault();
@@ -317,22 +273,19 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         // Assign a local variable with chroma green flag value
         var has_chroma_green = $scope.chroma_green;
 
-        // Used to make sure both background and foreground are loaded together
-        var image_load_count = 0;
-
         imageObj = new Image();
         imageObj.src = $scope.dragSrcEl.src;
         
+        var imageObjBack = null;
 
-
+        // If chroma green set background object and foreground object appropriately 
         if (has_chroma_green){
             var sources = $scope.image_sources[$scope.dragSrcEl.name];
 
-            var imageObjBack = new Image();
+            imageObjBack = new Image();
             imageObjBack.src = sources['back'];
 
-            var imageObjFore = new Image();
-            imageObjFore.src = sources['fore'];
+            imageObj.src = sources['fore'];
 
             $scope.selected_background = imageObjBack;
         }
@@ -340,73 +293,23 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         //get position relative to the container and page
         x = e.pageX - $('#container').offset().left;
         y = e.pageY - $('#container').offset().top;
-        size_offset = 60;
-
-        var group = new Kinetic.Group({
-            draggable: true,
-        });
-
-
-        if (has_chroma_green){
-            var imageBack = new Kinetic.Image({
-               image:imageObjBack,
-               width: 120,  //this makes the image lower quality for some reason
-               height: 120,
-               x: x,
-               y: y 
-            });
-
-            var image = new Kinetic.Image({
-               image:imageObjFore,
-               width: 120,  //this makes the image lower quality for some reason
-               height: 120,
-               x: x,
-               y: y
-            });
-
-        }
-        else{
-
-            var image = new Kinetic.Image({
-               image:imageObj,
-               width: 120,  //this makes the image lower quality for some reason
-               height: 120,
-               x: x,
-               y: y
-            });
-
-        }
-
-        $scope.selected_image = image;
-        console.log("id?",$scope.selected_image.getId());
-                console.log("id?",image.getId());
-
 
         // Start size for dropped images. Used in code to set sizes
         var start_size = {"width":120,"height":120};
-        var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
+        // Sticker.new(Image, {'x':,'y':}, {'width':,'height':'}, Kinetic.Layer, Image)
+        // Creates a new sticker object from factory in factories.js
+        // Returns a dictionary with sticker objects and needed functions.
 
+        var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack);
 
-        // Delete //////
-        var delete_icon = new Kinetic.Text({
-            visible:true,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            name: 'delete', 
-            x:0,
-            y:0
-            });
+        // ---- TODO ---------------------------------------------------------------
+        // Move finished events into factory. 
 
-        delete_icon.on('click', function(){
+        sticker.delete_icon.on('click', function(){
             debug('DELETE');
-            debug(layer);
 
-            group.destroy();
+            sticker.group.destroy();
             $scope.selected_background = null;
             $('#modal').hide();
 
@@ -414,251 +317,87 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
          });
 
 
-
- 
-        // Scale X-axis //////
-        var scalerX = new Kinetic.Text({
-            x:image.getX() + start_size.width,
-            y:image.getY() + start_size.height/2,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'x',
-            dragBoundFunc: function(pos){
-                return{
-                    x: pos.x,
-                    y: this.getAbsolutePosition().y
-                };
-            }
-        });
-
         // set horizontal height of image
-        scalerX.on('dragmove touchmove',function(){
+        sticker.scalerX.on('dragmove touchmove',function(){
             
-            var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
+            var diff = this.getAbsolutePosition().x - sticker.image.getAbsolutePosition().x - sticker.image.getWidth();
             
-            image.setWidth(image.getWidth() + diff * 2);
-            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
+            sticker.image.setWidth(sticker.image.getWidth() + diff * 2);
+            sticker.image.setAbsolutePosition(sticker.image.getAbsolutePosition().x - diff/2, sticker.image.getAbsolutePosition().y);
             
             if(has_chroma_green)
             {
-                imageBack.setWidth(image.getWidth());
-                imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+                sticker.imageBack.setWidth(sticker.image.getWidth());
+                sticker.imageBack.setAbsolutePosition(sticker.image.getAbsolutePosition().x, sticker.image.getAbsolutePosition().y);
             }
 
-            reposition();
+            sticker.reposition();
             layer.draw();
         });
 
-
-
-
-        // Scale Y-axis //////
-        var scalerY = new Kinetic.Text({
-            x:image.getX() + start_size.width/2,
-            y:image.getY() + start_size.height,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'y',
-            //offset:[image.getWidth()/2,image.getHeight()/2],
-            dragBoundFunc: function(pos){
-              return{
-                x: this.getAbsolutePosition().x,
-                y: pos.y
-              };
-            }
-        });
 
         //set vertical height of image
-        scalerY.on('dragmove touchmove',function(){
+        sticker.scalerY.on('dragmove touchmove',function(){
             
-            var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
+            var diff = this.getAbsolutePosition().y - sticker.image.getAbsolutePosition().y - sticker.image.getHeight();
             
-            image.setHeight(image.getHeight() + diff * 2);
-            image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
+            sticker.image.setHeight(sticker.image.getHeight() + diff * 2);
+            sticker.image.setAbsolutePosition(sticker.image.getAbsolutePosition().x, sticker.image.getAbsolutePosition().y - diff/2);
             
             if(has_chroma_green)
             {
-                imageBack.setHeight(image.getHeight());
-                imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+                sticker.imageBack.setHeight(sticker.image.getHeight());
+                sticker.imageBack.setAbsolutePosition(sticker.image.getAbsolutePosition().x, sticker.image.getAbsolutePosition().y);
             }
 
-            reposition();   
+            sticker.reposition();   
             layer.draw();
 
         });
-
-
-
-
-        // Rotation //////
-        var rotate = new Kinetic.Text({
-            x: 0,// image.getX(),
-            y: 0,// image.getY() + start_size.height/2,
-            text: '',  //leave this it won't render correctly here but will on the canvas
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'rotate',
-            dragBoundFunc: function(pos) {
-                var x = image.getAbsolutePosition().x + start_size.width/2;
-                var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
-                var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
-                var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
-                debug(scale);
-                debug("x,y: " + x + ',' + y);
-                  return {
-                    y: Math.round((pos.y - y) * scale + y),
-                    x: Math.round((pos.x - x) * scale + x)
-                  };
-              }
-        });
-        var canvasOffset = $("#container").offset();
-        var offsetX = canvasOffset.left;
-        var offsetY = canvasOffset.top;
-        var startX;
-        var startY;
-
-        // Set offsets to put image's x and y in center
-        image.setOffsetX(start_size.width/2);
-        image.setOffsetY(start_size.height/2);
         
-        rotate.setOffsetX(start_size.width/2);
-        rotate.setOffsetY(start_size.height/2);
+        // ▼▼ BROKEN ROTATE ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
-        scalerX.setOffsetX(start_size.width/2);
-        scalerX.setOffsetY(start_size.height/2);
+        // var canvasOffset = $("#container").offset();
+        // var offsetX = canvasOffset.left;
+        // var offsetY = canvasOffset.top;
+        // var startX;
+        // var startY;
 
-        scalerY.setOffsetX(start_size.width/2);
-        scalerY.setOffsetY(start_size.height/2);
+        // sticker.rotate.on('mouseenter', function(e){
+        //     startX = parseInt(e.clientX - offsetX);
+        //     startY = parseInt(e.clientY - offsetY);
+        // });
 
-        delete_icon.setOffsetX(start_size.width/2);
-        delete_icon.setOffsetY(start_size.height/2);
+        // sticker.rotate.on('dragmove touchmove', function(e){ //dragmove
+        //     start_position = {"x":sticker.image.getAbsolutePosition().x, "y": sticker.image.getAbsolutePosition().y};
+        //     rotate_position = {"x":sticker.image.getAbsolutePosition().x + start_size.width/2,"y": sticker.image.getAbsolutePosition().y + start_size.height/2};
 
-        if (has_chroma_green){
-            imageBack.setOffsetX(start_size.width/2);
-            imageBack.setOffsetY(start_size.height/2);
-        }
+        //     var dx = startX - parseInt(e.clientX - offsetX);
+        //     var dy = startY - parseInt(e.clientY - offsetY);
+        //     var angle = Math.atan2(dy, dx);
+        //     sticker.image.setRotation(angle);
 
-        rotate.on('mouseenter', function(e){
-            startX = parseInt(e.clientX - offsetX);
-            startY = parseInt(e.clientY - offsetY);
-        });
+        //     if(has_chroma_green)
+        //         sticker.imageBack.setRotation(angle);
 
-        rotate.on('dragmove touchmove', function(e){ //dragmove
-            // debug(mouseX + " " + mouseY);
-            start_position = {"x":image.getAbsolutePosition().x, "y": image.getAbsolutePosition().y};
-            rotate_position = {"x":image.getAbsolutePosition().x + start_size.width/2,"y": image.getAbsolutePosition().y + start_size.height/2};
-
-            var dx = startX - parseInt(e.clientX - offsetX);
-            var dy = startY - parseInt(e.clientY - offsetY);
-            var angle = Math.atan2(dy, dx);
-            image.setRotation(angle);
-
-            if(has_chroma_green)
-                imageBack.setRotation(angle);
-
-            layer.draw();
-
-        });
-
+        //     layer.draw();
+        // });
         
+        // ▲▲ BROKEN ROTATE ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 
-        // Color picker //////
+        //---- Color Picker------------------------------------------------------------------------------
 
         // Used to move color picker with drag
-        group.on('dragmove', function(){
-            if(scalerX.isVisible() && has_chroma_green)
-                move_color();   
+        sticker.group.on('dragmove', function(){
+            if(sticker.scalerX.isVisible() && has_chroma_green)
+                sticker.move_color();   
         });
-
-        // Move color picker to correct spot in reference to image
-        function move_color(){
-
-            var y = scalerY.getAbsolutePosition().y;
-            var x = scalerX.getAbsolutePosition().x  
-                 + $('#container').offset().left
-                 - image.getWidth() 
-                 - image.getOffsetX() 
-                 - $('#modal').width();
-
-            $("#modal").css({left: x, top: y});
-            $("#modal").show();
-        }
-
-        // Update the color of a background image
-        // Basic operation:
-        // 1 - Draw image on hidden canvas
-        // 2 - Export canvas image pixel data to variable
-        // 3 - Traverse image pixel and change colors
-        // 4 - Put new colored image back on canvas
-        // 5 - Export canvas as image and assign to source of background image
-
-        $scope.change_color = function(color){
-
-            $scope.previous_color[$scope.selected_image.getId()] = color;
-            console.log('change color for image', $scope.selected_image.getId());
-            console.log('changed to', $scope.previous_color[$scope.selected_image.getId()]);
-
-            var canvas = document.getElementById('color_change_canvas');
-            var context = canvas.getContext('2d');
-
-            canvas.width = $scope.selected_background.width;
-            canvas.height = $scope.selected_background.height;
-
-            // clears canvas 
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.drawImage($scope.selected_background, 0,0, canvas.width, canvas.height);
-
-            var imageX = 0;
-            var imageY = 0;
-            var imageWidth = $scope.selected_background.width;
-            var imageHeight = $scope.selected_background.height;
-
-            var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
-            var data = imageData.data;
-
-            // Color picker returns hex, call function in helpertools.js
-            // to convert to
-            var rgb = hexToRgb(color);
-
-            // iterate over all pixels
-            for(var i = 0, n = data.length; i < n; i += 4) {
-              data[i] = rgb['r'];
-              data[i+1] = rgb['g'];
-              data[i+2] = rgb['b'];
-            }
-
-            context.putImageData(imageData,0,0);
-            $scope.selected_background.onload = null;
-
-            $scope.selected_background.src = canvas.toDataURL("image/png");
-
-            layer.draw();
-    }
-
 
 
         //hide and show resize and scaler
-        image.on('click',function(e){
-            if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
+        sticker.image.on('click',function(e){
+            if(sticker.scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
                 closeTools();
                 $scope.selected_background = null;
                 $scope.selected_image = null;
@@ -666,86 +405,20 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
                 //to determine the if condition 
                 if(has_chroma_green){
-                    move_color();
-
-                    $scope.selected_image = image;
+                    sticker.move_color();
                     $scope.selected_background = imageObjBack;
-                    console.log('click on image', $scope.selected_image.getId());
-                    console.log('previous color',$scope.previous_color[$scope.selected_image.getId()]);
-                    $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.previous_color[$scope.selected_image.getId()]);
                 }
-                scalerX.setVisible(true);
-                scalerY.setVisible(true);
-                delete_icon.setVisible(true);
-                rotate.setVisible(true);
+                sticker.scalerX.setVisible(true);
+                sticker.scalerY.setVisible(true);
+                sticker.delete_icon.setVisible(true);
+                // ▼▼ UNCOMMENT WHEN ROTATE IS COMPELTED ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                // sticker.rotate.setVisible(true);
+                // ▲▲ UNCOMMENT WHEN ROTATE IS COMPELTED ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
             }
             layer.draw();
         });
 
 
-
-        //construct group to drop after image loads
-
-        if(has_chroma_green){
-            // Using image_load_count as a counter to make sure
-            // both the background and foreground are loaded.
-
-            imageObjBack.onload = function(){
-                if(image_load_count > 0){
-                    return load();
-                }
-
-                image_load_count++;
-            };
-
-            imageObjFore.onload = function(){
-                if(image_load_count > 0){
-                    return load();
-                };
-
-                image_load_count++;
-            };
-
-        }
-        else{
-            imageObj.onload = function(){
-                return load();
-            };
-        }
-
-
-        var load = function(){
-            
-            if(has_chroma_green){
-                group.add(imageBack);
-                move_color();
-            }
-
-            group.add(image);
-            group.add(scalerX);
-            group.add(scalerY);
-            group.add(delete_icon);
-            group.add(rotate);
-            
-            layer.add(group);
-            
-            reposition();
-            layer.draw();
-        }
-
-        var reposition = function(){
-          var x = image.getAbsolutePosition().x;
-          var y = image.getAbsolutePosition().y;
-
-          debug("x: " + x + " y: " + y);
-
-          rotate.setAbsolutePosition(x - 10, y - 10);
-          
-          scalerX.setAbsolutePosition(x + image.getWidth(), y + image.getHeight()/2);
-          scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
-          delete_icon.setAbsolutePosition(x + image.getWidth(), y);
-
-        };
 
     }); // End of drop listener
 
@@ -845,6 +518,55 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             }
         });
     };
+
+
+    // Update the color of a background image
+    // Basic operation:
+    // 1 - Draw image on hidden canvas
+    // 2 - Export canvas image pixel data to variable
+    // 3 - Traverse image pixel and change colors
+    // 4 - Put new colored image back on canvas
+    // 5 - Export canvas as image and assign to source of background image
+
+    function change_color(color){
+
+        var canvas = document.getElementById('color_change_canvas');
+        var context = canvas.getContext('2d');
+
+        canvas.width = $scope.selected_background.width;
+        canvas.height = $scope.selected_background.height;
+
+        // clears canvas 
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        context.drawImage($scope.selected_background, 0,0, canvas.width, canvas.height);
+
+        var imageX = 0;
+        var imageY = 0;
+        var imageWidth = $scope.selected_background.width;
+        var imageHeight = $scope.selected_background.height;
+
+        var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
+        var data = imageData.data;
+
+        // Color picker returns hex, call function in helpertools.js
+        // to convert to
+        var rgb = hexToRgb(color);
+
+        // iterate over all pixels
+        for(var i = 0, n = data.length; i < n; i += 4) {
+          data[i] = rgb['r'];
+          data[i+1] = rgb['g'];
+          data[i+2] = rgb['b'];
+        }
+
+        context.putImageData(imageData,0,0);
+        $scope.selected_background.onload = null;
+
+        $scope.selected_background.src = canvas.toDataURL("image/png");
+
+        layer.draw();
+    }
 
 
     
