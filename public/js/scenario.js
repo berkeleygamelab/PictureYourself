@@ -265,6 +265,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                     $scope.chroma_green = false;
             });
 
+            $('.background').bind('dragstart', function(e){
+                $scope.dragSrcEl = this;
+            });
+
     });
 
     // Toggle sticker category
@@ -300,427 +304,429 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         //may be reliant on its dimensions
 
         //this removes the tool circles around all existing stickers when a new one is dropped
-        closeTools();
+        if(!$($scope.dragSrcEl).hasClass('background')){
+            closeTools();
 
-        // Assign a local variable with chroma green flag value
-        var has_chroma_green = $scope.chroma_green;
+            // Assign a local variable with chroma green flag value
+            var has_chroma_green = $scope.chroma_green;
 
-        // Used to determine if both background and foreground have loaded
-        var image_load_count = 0;
+            // Used to determine if both background and foreground have loaded
+            var image_load_count = 0;
 
-        imageObj = new Image();
-        imageObj.src = $scope.dragSrcEl.src;
+            imageObj = new Image();
+            imageObj.src = $scope.dragSrcEl.src;
 
 
-        if (has_chroma_green){
-            var sources = $scope.image_sources[$scope.dragSrcEl.name];
+            if (has_chroma_green){
+                var sources = $scope.image_sources[$scope.dragSrcEl.name];
 
-            var imageObjBack = new Image();
-            imageObjBack.src = sources['back'];
+                var imageObjBack = new Image();
+                imageObjBack.src = sources['back'];
 
-            var imageObjFore = new Image();
-            imageObjFore.src = sources['fore'];
+                var imageObjFore = new Image();
+                imageObjFore.src = sources['fore'];
 
-            $scope.selected_background = imageObjBack;
-        }
+                $scope.selected_background = imageObjBack;
+            }
 
-        //stop Firefox from opening image
-        e.preventDefault();
+            //stop Firefox from opening image
+            e.preventDefault();
 
-        //get position relative to the container and page
-        x = e.pageX - $('#container').offset().left;
-        y = e.pageY - $('#container').offset().top;
-        size_offset = 60;
+            //get position relative to the container and page
+            x = e.pageX - $('#container').offset().left;
+            y = e.pageY - $('#container').offset().top;
+            size_offset = 60;
 
-        var group = new Kinetic.Group({
-            draggable: true
-        });
-
-        if (has_chroma_green){
-            var imageBack = new Kinetic.Image({
-               image:imageObjBack,
-               width: 120,  //this makes the image lower quality for some reason
-               height: 120,
-               x: x,
-               y: y 
+            var group = new Kinetic.Group({
+                draggable: true
             });
 
-            var image = new Kinetic.Image({
-               image:imageObjFore,
-               width: 120,  //this makes the image lower quality for some reason
-               height: 120,
-               x: x,
-               y: y
-            });
+            if (has_chroma_green){
+                var imageBack = new Kinetic.Image({
+                   image:imageObjBack,
+                   width: 120,  //this makes the image lower quality for some reason
+                   height: 120,
+                   x: x,
+                   y: y 
+                });
 
-        }
-        else{
+                var image = new Kinetic.Image({
+                   image:imageObjFore,
+                   width: 120,  //this makes the image lower quality for some reason
+                   height: 120,
+                   x: x,
+                   y: y
+                });
 
-            var image = new Kinetic.Image({
-               image:imageObj,
-               width: 120,  //this makes the image lower quality for some reason
-               height: 120,
-               x: x,
-               y: y
-            });
-
-        }
-
-        // Start size for dropped images. Used in code to set sizes
-        var start_size = {"width":120,"height":120};
-        var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
-
-
-
-        // Delete //////
-        var delete_icon = new Kinetic.Text({
-            visible:true,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            name: 'delete', 
-            x:0,
-            y:0
-            });
-
-        delete_icon.on('click', function(){
-            debug('DELETE');
-            debug(layer);
-
-            group.destroy();
-            $scope.selected_background = null;
-            $('#modal').hide();
-
-            layer.draw();
-         });
-
-
-
- 
-        // Scale X-axis //////
-        var scalerX = new Kinetic.Text({
-            x:image.getX() + start_size.width,
-            y:image.getY() + start_size.height/2,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'x',
-            dragBoundFunc: function(pos){
-                return{
-                    x: pos.x,
-                    y: this.getAbsolutePosition().y
-                };
             }
-        });
+            else{
 
-        // set horizontal height of image
-        scalerX.on('dragmove touchmove',function(){
-            
-            var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
-            
-            image.setWidth(image.getWidth() + diff * 2);
-            image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
-            
-            if(has_chroma_green)
-            {
-                imageBack.setWidth(image.getWidth());
-                imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+                var image = new Kinetic.Image({
+                   image:imageObj,
+                   width: 120,  //this makes the image lower quality for some reason
+                   height: 120,
+                   x: x,
+                   y: y
+                });
+
             }
 
-            reposition();
-            layer.draw();
-        });
+            // Start size for dropped images. Used in code to set sizes
+            var start_size = {"width":120,"height":120};
+            var scaler_start = {"x":image.getX() + start_size.width,"y":image.getY() + start_size.height};
 
 
 
+            // Delete //////
+            var delete_icon = new Kinetic.Text({
+                visible:true,
+                text: '',
+                fontFamily: 'FontAwesome',
+                fontSize: 30,
+                fill: '#eee',
+                stroke: "#222",
+                strokeWidth: 2,
+                name: 'delete', 
+                x:0,
+                y:0
+                });
 
-        // Scale Y-axis //////
-        var scalerY = new Kinetic.Text({
-            x:image.getX() + start_size.width/2,
-            y:image.getY() + start_size.height,
-            text: '',
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'y',
-            //offset:[image.getWidth()/2,image.getHeight()/2],
-            dragBoundFunc: function(pos){
-              return{
-                x: this.getAbsolutePosition().x,
-                y: pos.y
-              };
-            }
-        });
+            delete_icon.on('click', function(){
+                debug('DELETE');
+                debug(layer);
 
-        //set vertical height of image
-        scalerY.on('dragmove touchmove',function(){
-            
-            var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
-            
-            image.setHeight(image.getHeight() + diff * 2);
-            image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
-            
-            if(has_chroma_green)
-            {
-                imageBack.setHeight(image.getHeight());
-                imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
-            }
-
-            reposition();   
-            layer.draw();
-
-        });
-
-
-
-
-        // Rotation //////
-        var rotate = new Kinetic.Text({
-            x: 0,// image.getX(),
-            y: 0,// image.getY() + start_size.height/2,
-            text: '',  //leave this it won't render correctly here but will on the canvas
-            fontFamily: 'FontAwesome',
-            fontSize: 30,
-            fill: '#eee',
-            stroke: "#222",
-            strokeWidth: 2,
-            draggable:true,
-            visible:true,
-            name: 'rotate',
-            dragBoundFunc: function(pos) {
-                var x = image.getAbsolutePosition().x + start_size.width/2;
-                var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
-                var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
-                var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
-                debug(scale);
-                debug("x,y: " + x + ',' + y);
-                  return {
-                    y: Math.round((pos.y - y) * scale + y),
-                    x: Math.round((pos.x - x) * scale + x)
-                  };
-              }
-        });
-        var canvasOffset = $("#container").offset();
-        var offsetX = canvasOffset.left;
-        var offsetY = canvasOffset.top;
-        var startX;
-        var startY;
-
-        // Set offsets to put image's x and y in center
-        image.setOffsetX(start_size.width/2);
-        image.setOffsetY(start_size.height/2);
-        
-        rotate.setOffsetX(start_size.width/2);
-        rotate.setOffsetY(start_size.height/2);
-
-        scalerX.setOffsetX(start_size.width/2);
-        scalerX.setOffsetY(start_size.height/2);
-
-        scalerY.setOffsetX(start_size.width/2);
-        scalerY.setOffsetY(start_size.height/2);
-
-        delete_icon.setOffsetX(start_size.width/2);
-        delete_icon.setOffsetY(start_size.height/2);
-
-        if (has_chroma_green){
-            imageBack.setOffsetX(start_size.width/2);
-            imageBack.setOffsetY(start_size.height/2);
-        }
-
-        rotate.on('mouseenter', function(e){
-            startX = parseInt(e.clientX - offsetX);
-            startY = parseInt(e.clientY - offsetY);
-        });
-
-        rotate.on('dragmove touchmove', function(e){ //dragmove
-            // debug(mouseX + " " + mouseY);
-            start_position = {"x":image.getAbsolutePosition().x, "y": image.getAbsolutePosition().y};
-            rotate_position = {"x":image.getAbsolutePosition().x + start_size.width/2,"y": image.getAbsolutePosition().y + start_size.height/2};
-
-            var dx = startX - parseInt(e.clientX - offsetX);
-            var dy = startY - parseInt(e.clientY - offsetY);
-            var angle = Math.atan2(dy, dx);
-            image.setRotation(angle);
-
-            if(has_chroma_green)
-                imageBack.setRotation(angle);
-
-            layer.draw();
-
-        });
-
-        
-
-
-        // Color picker //////
-
-        $scope.previous_color = null;
-
-        // Used to move color picker with drag
-        group.on('dragmove', function(){
-            if(scalerX.isVisible() && has_chroma_green)
-                move_color();   
-        });
-
-        // Move color picker to correct spot in reference to image
-        function move_color(){
-            var x = image.getAbsolutePosition().x + $('#container').offset().left;
-            var y = image.getAbsolutePosition().y - $('#container').offset().top;
-
-            var xAdjust = image.getWidth() + image.getOffsetX();
-            var yAdjust = image.getHeight() + image.getOffsetY();    
-
-            $("#modal").css({left: x - xAdjust, top: y + yAdjust});
-            $("#modal").show();
-        }
-
-        // Update the color of a background image
-        // Basic operation:
-        // 1 - Draw image on hidden canvas
-        // 2 - Export canvas image pixel data to variable
-        // 3 - Traverse image pixel and change colors
-        // 4 - Put new colored image back on canvas
-        // 5 - Export canvas as image and assign to source of background image
-
-        $scope.change_color = function(color){
-    
-
-            var canvas = document.getElementById('color_change_canvas');
-            var context = canvas.getContext('2d');
-
-            canvas.width = $scope.selected_background.width;
-            canvas.height = $scope.selected_background.height;
-
-            // clears canvas 
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.drawImage($scope.selected_background, 0,0, canvas.width, canvas.height);
-
-            var imageX = 0;
-            var imageY = 0;
-            var imageWidth = $scope.selected_background.width;
-            var imageHeight = $scope.selected_background.height;
-
-            var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
-            var data = imageData.data;
-
-            // Color picker returns hex, call function in helpertools.js
-            // to convert to
-            var rgb = hexToRgb(color);
-
-            // iterate over all pixels
-            for(var i = 0, n = data.length; i < n; i += 4) {
-              data[i] = rgb['r'];
-              data[i+1] = rgb['g'];
-              data[i+2] = rgb['b'];
-            }
-
-            context.putImageData(imageData,0,0);
-            $scope.selected_background.onload = null;
-
-            $scope.selected_background.src = canvas.toDataURL("image/png");
-
-            layer.draw();
-    }
-
-
-
-        //hide and show resize and scaler
-        image.on('click',function(e){
-            if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
-                closeTools();
+                group.destroy();
                 $scope.selected_background = null;
-            } else{
-                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
-                //to determine the if condition 
-                if(has_chroma_green){
-                    move_color();
-                    $scope.selected_background = imageObjBack;
+                $('#modal').hide();
+
+                layer.draw();
+             });
+
+
+
+     
+            // Scale X-axis //////
+            var scalerX = new Kinetic.Text({
+                x:image.getX() + start_size.width,
+                y:image.getY() + start_size.height/2,
+                text: '',
+                fontFamily: 'FontAwesome',
+                fontSize: 30,
+                fill: '#eee',
+                stroke: "#222",
+                strokeWidth: 2,
+                draggable:true,
+                visible:true,
+                name: 'x',
+                dragBoundFunc: function(pos){
+                    return{
+                        x: pos.x,
+                        y: this.getAbsolutePosition().y
+                    };
                 }
-                scalerX.setVisible(true);
-                scalerY.setVisible(true);
-                delete_icon.setVisible(true);
-                rotate.setVisible(true);
+            });
+
+            // set horizontal height of image
+            scalerX.on('dragmove touchmove',function(){
+                
+                var diff = this.getAbsolutePosition().x - image.getAbsolutePosition().x - image.getWidth();
+                
+                image.setWidth(image.getWidth() + diff * 2);
+                image.setAbsolutePosition(image.getAbsolutePosition().x - diff/2, image.getAbsolutePosition().y);
+                
+                if(has_chroma_green)
+                {
+                    imageBack.setWidth(image.getWidth());
+                    imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+                }
+
+                reposition();
+                layer.draw();
+            });
+
+
+
+
+            // Scale Y-axis //////
+            var scalerY = new Kinetic.Text({
+                x:image.getX() + start_size.width/2,
+                y:image.getY() + start_size.height,
+                text: '',
+                fontFamily: 'FontAwesome',
+                fontSize: 30,
+                fill: '#eee',
+                stroke: "#222",
+                strokeWidth: 2,
+                draggable:true,
+                visible:true,
+                name: 'y',
+                //offset:[image.getWidth()/2,image.getHeight()/2],
+                dragBoundFunc: function(pos){
+                  return{
+                    x: this.getAbsolutePosition().x,
+                    y: pos.y
+                  };
+                }
+            });
+
+            //set vertical height of image
+            scalerY.on('dragmove touchmove',function(){
+                
+                var diff = this.getAbsolutePosition().y - image.getAbsolutePosition().y - image.getHeight();
+                
+                image.setHeight(image.getHeight() + diff * 2);
+                image.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y - diff/2);
+                
+                if(has_chroma_green)
+                {
+                    imageBack.setHeight(image.getHeight());
+                    imageBack.setAbsolutePosition(image.getAbsolutePosition().x, image.getAbsolutePosition().y);
+                }
+
+                reposition();   
+                layer.draw();
+
+            });
+
+
+
+
+            // Rotation //////
+            var rotate = new Kinetic.Text({
+                x: 0,// image.getX(),
+                y: 0,// image.getY() + start_size.height/2,
+                text: '',  //leave this it won't render correctly here but will on the canvas
+                fontFamily: 'FontAwesome',
+                fontSize: 30,
+                fill: '#eee',
+                stroke: "#222",
+                strokeWidth: 2,
+                draggable:true,
+                visible:true,
+                name: 'rotate',
+                dragBoundFunc: function(pos) {
+                    var x = image.getAbsolutePosition().x + start_size.width/2;
+                    var y = image.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
+                    var radius = Math.sqrt(Math.pow(image.getWidth()/2,2) + Math.pow(image.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
+                    var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
+                    debug(scale);
+                    debug("x,y: " + x + ',' + y);
+                      return {
+                        y: Math.round((pos.y - y) * scale + y),
+                        x: Math.round((pos.x - x) * scale + x)
+                      };
+                  }
+            });
+            var canvasOffset = $("#container").offset();
+            var offsetX = canvasOffset.left;
+            var offsetY = canvasOffset.top;
+            var startX;
+            var startY;
+
+            // Set offsets to put image's x and y in center
+            image.setOffsetX(start_size.width/2);
+            image.setOffsetY(start_size.height/2);
+            
+            rotate.setOffsetX(start_size.width/2);
+            rotate.setOffsetY(start_size.height/2);
+
+            scalerX.setOffsetX(start_size.width/2);
+            scalerX.setOffsetY(start_size.height/2);
+
+            scalerY.setOffsetX(start_size.width/2);
+            scalerY.setOffsetY(start_size.height/2);
+
+            delete_icon.setOffsetX(start_size.width/2);
+            delete_icon.setOffsetY(start_size.height/2);
+
+            if (has_chroma_green){
+                imageBack.setOffsetX(start_size.width/2);
+                imageBack.setOffsetY(start_size.height/2);
             }
-            layer.draw();
-        });
+
+            rotate.on('mouseenter', function(e){
+                startX = parseInt(e.clientX - offsetX);
+                startY = parseInt(e.clientY - offsetY);
+            });
+
+            rotate.on('dragmove touchmove', function(e){ //dragmove
+                // debug(mouseX + " " + mouseY);
+                start_position = {"x":image.getAbsolutePosition().x, "y": image.getAbsolutePosition().y};
+                rotate_position = {"x":image.getAbsolutePosition().x + start_size.width/2,"y": image.getAbsolutePosition().y + start_size.height/2};
+
+                var dx = startX - parseInt(e.clientX - offsetX);
+                var dy = startY - parseInt(e.clientY - offsetY);
+                var angle = Math.atan2(dy, dx);
+                image.setRotation(angle);
+
+                if(has_chroma_green)
+                    imageBack.setRotation(angle);
+
+                layer.draw();
+
+            });
+
+            
 
 
+            // Color picker //////
 
-        //construct group to drop after image loads
+            $scope.previous_color = null;
 
-        if(has_chroma_green){
-            // Using image_load_count as a counter to make sure
-            // both the background and foreground are loaded.
+            // Used to move color picker with drag
+            group.on('dragmove', function(){
+                if(scalerX.isVisible() && has_chroma_green)
+                    move_color();   
+            });
 
-            imageObjBack.onload = function(){
-                if(image_load_count > 0){
-                    return load();
+            // Move color picker to correct spot in reference to image
+            function move_color(){
+                var x = image.getAbsolutePosition().x + $('#container').offset().left;
+                var y = image.getAbsolutePosition().y - $('#container').offset().top;
+
+                var xAdjust = image.getWidth() + image.getOffsetX();
+                var yAdjust = image.getHeight() + image.getOffsetY();    
+
+                $("#modal").css({left: x - xAdjust, top: y + yAdjust});
+                $("#modal").show();
+            }
+
+            // Update the color of a background image
+            // Basic operation:
+            // 1 - Draw image on hidden canvas
+            // 2 - Export canvas image pixel data to variable
+            // 3 - Traverse image pixel and change colors
+            // 4 - Put new colored image back on canvas
+            // 5 - Export canvas as image and assign to source of background image
+
+            $scope.change_color = function(color){
+        
+
+                var canvas = document.getElementById('color_change_canvas');
+                var context = canvas.getContext('2d');
+
+                canvas.width = $scope.selected_background.width;
+                canvas.height = $scope.selected_background.height;
+
+                // clears canvas 
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                context.drawImage($scope.selected_background, 0,0, canvas.width, canvas.height);
+
+                var imageX = 0;
+                var imageY = 0;
+                var imageWidth = $scope.selected_background.width;
+                var imageHeight = $scope.selected_background.height;
+
+                var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
+                var data = imageData.data;
+
+                // Color picker returns hex, call function in helpertools.js
+                // to convert to
+                var rgb = hexToRgb(color);
+
+                // iterate over all pixels
+                for(var i = 0, n = data.length; i < n; i += 4) {
+                  data[i] = rgb['r'];
+                  data[i+1] = rgb['g'];
+                  data[i+2] = rgb['b'];
                 }
 
-                image_load_count++;
-            };
+                context.putImageData(imageData,0,0);
+                $scope.selected_background.onload = null;
 
-            imageObjFore.onload = function(){
-                if(image_load_count > 0){
-                    return load();
+                $scope.selected_background.src = canvas.toDataURL("image/png");
+
+                layer.draw();
+        }
+
+
+
+            //hide and show resize and scaler
+            image.on('click',function(e){
+                if(scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
+                    closeTools();
+                    $scope.selected_background = null;
+                } else{
+                    closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                    //to determine the if condition 
+                    if(has_chroma_green){
+                        move_color();
+                        $scope.selected_background = imageObjBack;
+                    }
+                    scalerX.setVisible(true);
+                    scalerY.setVisible(true);
+                    delete_icon.setVisible(true);
+                    rotate.setVisible(true);
+                }
+                layer.draw();
+            });
+
+
+
+            //construct group to drop after image loads
+
+            if(has_chroma_green){
+                // Using image_load_count as a counter to make sure
+                // both the background and foreground are loaded.
+
+                imageObjBack.onload = function(){
+                    if(image_load_count > 0){
+                        return load();
+                    }
+
+                    image_load_count++;
                 };
 
-                image_load_count++;
-            };
+                imageObjFore.onload = function(){
+                    if(image_load_count > 0){
+                        return load();
+                    };
 
-        }
-        else{
-            imageObj.onload = function(){
-                return load();
-            };
-        }
+                    image_load_count++;
+                };
 
-
-        var load = function(){
-            
-            if(has_chroma_green){
-                group.add(imageBack);
-                move_color();
+            }
+            else{
+                imageObj.onload = function(){
+                    return load();
+                };
             }
 
-            group.add(image);
-            group.add(scalerX);
-            group.add(scalerY);
-            group.add(delete_icon);
-            group.add(rotate);
-            
-            layer.add(group);
-            
-            reposition();
-            layer.draw();
+
+            var load = function(){
+                
+                if(has_chroma_green){
+                    group.add(imageBack);
+                    move_color();
+                }
+
+                group.add(image);
+                group.add(scalerX);
+                group.add(scalerY);
+                group.add(delete_icon);
+                group.add(rotate);
+                
+                layer.add(group);
+                
+                reposition();
+                layer.draw();
+            };
+
+            var reposition = function(){
+              var x = image.getAbsolutePosition().x;
+              var y = image.getAbsolutePosition().y;
+
+              debug("x: " + x + " y: " + y);
+
+              rotate.setAbsolutePosition(x - 10, y - 10);
+              
+              scalerX.setAbsolutePosition(x + image.getWidth(), y + image.getHeight()/2);
+              scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
+              delete_icon.setAbsolutePosition(x + image.getWidth(), y);
+
+            };
         }
-
-        var reposition = function(){
-          var x = image.getAbsolutePosition().x;
-          var y = image.getAbsolutePosition().y;
-
-          debug("x: " + x + " y: " + y);
-
-          rotate.setAbsolutePosition(x - 10, y - 10);
-          
-          scalerX.setAbsolutePosition(x + image.getWidth(), y + image.getHeight()/2);
-          scalerY.setAbsolutePosition(x + image.getWidth()/2, y + image.getHeight());
-          delete_icon.setAbsolutePosition(x + image.getWidth(), y);
-
-        };
 
     }); // End of drop listener
 
