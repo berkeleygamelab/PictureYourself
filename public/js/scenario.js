@@ -3,7 +3,7 @@
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 var debug_flag = true;
-var default_background = '/images/stickers/0-backgrounds/ASproul.jpg';
+var default_background = '/images/stickers/0-backgrounds/Asproul.jpg';
 
 // TODO 
 // 1 - Rotate and color picker position break when scaled, look into why
