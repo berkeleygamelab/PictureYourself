@@ -51,12 +51,12 @@ function ChromaCtrl($scope){
         height: stage_height,
         opacity: 0
 
-    })
+    });
 
     backgroundRect.on('click', function(){
         $scope.selected_image = null;
         $("#modal").hide();
-    })
+    });
 
     layer.add(backgroundRect);
 
@@ -82,10 +82,10 @@ function ChromaCtrl($scope){
     backgroundImg.src = '/images/stickers/2-shirts/zSweaterWomanPink_back.png';
 
     f2 = new Image();
-    f2.src = "images/stickers/2-shirts/zSweaterGuyBlue.png"
+    f2.src = "images/stickers/2-shirts/zSweaterGuyBlue.png";
 
     f2b = new Image();
-    f2b.src = "images/stickers/2-shirts/zSweaterGuyBlue_back.png"
+    f2b.src = "images/stickers/2-shirts/zSweaterGuyBlue_back.png";
 
 
     // Group 1
@@ -101,7 +101,7 @@ function ChromaCtrl($scope){
 
         group.add(foreground);
         layer.draw();
-    }
+    };
 
     // load background and setup color changing 
     backgroundImg.onload = function(){    
@@ -120,11 +120,11 @@ function ChromaCtrl($scope){
         group.add(background);
         layer.draw();
         
-    }
+    };
     function move_color(selected_group, e){
         var canvas = document.getElementById('container');
         $("#modal").css({left: e.pageX, top: e.pageY});
-        $("#modal").show()
+        $("#modal").show();
         console.log($("#modal").offset());
     }
 
@@ -138,12 +138,12 @@ function ChromaCtrl($scope){
         else{
             $scope.selected_image = backgroundImg;
             move_color(this,e);
-        };
-    })
+        }
+    });
 
     group.on('dragmove', function(e){
         $("#modal").offset({left: e.pageX, top: e.pageY});
-    })
+    });
 
     // Group 2
     f2.onload = function(){    
@@ -158,7 +158,7 @@ function ChromaCtrl($scope){
 
         group2.add(foreground);
         layer.draw();
-    }
+    };
 
     // load background and setup color changing 
     f2b.onload = function(){    
@@ -173,7 +173,7 @@ function ChromaCtrl($scope){
         group2.add(background);
         layer.draw();
         
-    }
+    };
 
         // on click select this image
     group2.on('click', function(e){
@@ -186,11 +186,11 @@ function ChromaCtrl($scope){
             $scope.selected_image = f2b;
             move_color(this, e);
         }
-    })
+    });
 
     group2.on('dragmove', function(e){
         $("#modal").offset({left: e.pageX - this.getChildren()[0].getWidth()/2, top: e.pageY - this.getChildren()[0].getHeight()});
-    })
+    });
 
     // function that changes
     $scope.change_color = function(color){
@@ -225,7 +225,7 @@ function ChromaCtrl($scope){
         $scope.selected_image.src = canvas.toDataURL("image/png");
         layer.draw();
 
-    }
+    };
 
 
 
@@ -251,5 +251,5 @@ function hexToRgb(hex) {
 }
 
 
-
+ChromaCtrl['$inject'] = ['$scope'];
 

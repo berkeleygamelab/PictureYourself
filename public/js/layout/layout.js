@@ -36,3 +36,5 @@ $(document).ready(function () {
 function LayoutCtrl($scope){
   
 }
+
+LayoutCtrl.$inject = ['$scope'];

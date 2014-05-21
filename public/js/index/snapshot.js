@@ -167,3 +167,5 @@ function debug(msg){
         console.log(msg);
     }
 }
+
+// SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout'];

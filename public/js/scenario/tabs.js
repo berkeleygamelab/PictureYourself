@@ -1,6 +1,6 @@
 debug = true;
 function TabsCtrl($scope, $http, $compile){
-	$scope.tabs = {'stickers':true,'backgrounds':false,'filters':false,'frames':false}
+	$scope.tabs = {'stickers':true,'backgrounds':false,'filters':false,'frames':false};
 	
 	$scope.show_tab = function(category){
 		//console.log("category: " + category)
@@ -13,9 +13,9 @@ function TabsCtrl($scope, $http, $compile){
 			}
 			// console.log(tab + ' == ' + category + " is " + (tab == category))
 			// console.log('tab: ' + tab + " = " + value)
-		})
-	}//show_tab
-
-
+		});
+	};//show_tab
 	
 }
+
+TabsCtrl.$inject = ['$scope', '$http', '$compile']; //for minifier

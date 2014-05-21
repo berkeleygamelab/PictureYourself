@@ -1,5 +1,8 @@
 //http://angular-ui.github.io/bootstrap/
 
+//command for minifying is: juicer merge -i public/js/scenario/scenario.js --force
+//-i ignores warnings; --force forces it to overwrite old files
+
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
 var debug_flag = true;
@@ -135,7 +138,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         $scope.backgroundObj.src = e.target.src;
     };
 
-    // Grab stickers from server
+    // Grab backgrounds from server
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
@@ -200,9 +203,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     };
 
 
-
-
-
     // Stickers ///////////////////////////////////////////////////////////////
 
     var default_category = "shoes_and_pants";
@@ -216,8 +216,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
         function(data){
             data = angular.fromJson(data);
             $scope.visible = {};
-            $scope.stickers = data['stickers'];
-            $scope.categories = data['categories'];
+            $scope.stickers = data.stickers;
+            $scope.categories = data.categories;
 
             angular.forEach($scope.stickers,
 
@@ -320,10 +320,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 var sources = $scope.image_sources[$scope.dragSrcEl.name];
 
                 var imageObjBack = new Image();
-                imageObjBack.src = sources['back'];
+                imageObjBack.src = sources.back;
 
                 var imageObjFore = new Image();
-                imageObjFore.src = sources['fore'];
+                imageObjFore.src = sources.fore;
 
                 $scope.selected_background = imageObjBack;
             }
@@ -626,9 +626,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
                 // iterate over all pixels
                 for(var i = 0, n = data.length; i < n; i += 4) {
-                  data[i] = rgb['r'];
-                  data[i+1] = rgb['g'];
-                  data[i+2] = rgb['b'];
+                  data[i] = rgb.r;
+                  data[i+1] = rgb.g;
+                  data[i+2] = rgb.b;
                 }
 
                 context.putImageData(imageData,0,0);
@@ -637,7 +637,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 $scope.selected_background.src = canvas.toDataURL("image/png");
 
                 layer.draw();
-        }
+        };
 
 
 
@@ -827,15 +827,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                 debug('click?');
             }
         });
-    };
-
-
-    
+    };    
 
 } // End of Scenario Controller
 
-
-
+ScenarioCtrl.$inject = ['$scope', '$resource', '$http', '$compile']; //required for minifier
 
 //Used to make it easy to turn on and off console.log
 function debug(msg){
