@@ -731,17 +731,20 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
 
    // TODO do we need to have these in Scenario?
+   //Probably not, although some things rely on the Kinetic stuff, and I don't know how to get it to work in another file (Alex)
+
+    
 
     function email(pyuserid, emails, data){
-      var formData = {"pyuserid":pyuserid, "data":data};
-      $.ajax({
-        url: '/email',
-        type: 'POST',
-        data: formData,
-        success: function(){        
-          send_email(pyuserid, emails);
-        }
-      });
+        var formData = {"pyuserid":pyuserid, "data":data};
+        $.ajax({
+            url: '/email',
+            type: 'POST',
+            data: formData,
+            success: function(){        
+              send_email(pyuserid, emails);
+            }
+        });
     }
 
     function send_email(pyuserid, emails){
@@ -751,35 +754,35 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         var formData = {"pyuserid":pyuserid, "emails":emails};
         $.ajax({
-        url: '/send_email',
-        type: 'POST',
-        data: formData,
-        success: function(){
-            $scope.loading = false;
-            $scope.$apply();
-          $( "#dialog-confirm-email" ).dialog({
-            resizable: false,
-            // height:140,
-            // width: 70,
-            modal: true,
-            draggable:false,
-            closeOnEscape:false,
-            dialogClass: 'email-dialog no-close',
-            buttons: {
-              "Start over": function() {
-                window.location = "/";
-              },
-              "Continue": function() {
-                $( this ).dialog( "close" );
-              }
+            url: '/send_email',
+            type: 'POST',
+            data: formData,
+            success: function(){
+                $scope.loading = false;
+                $scope.$apply();
+                $( "#dialog-confirm-email" ).dialog({
+                    resizable: false,
+                    // height:140,
+                    // width: 70,
+                    modal: true,
+                    draggable:false,
+                    closeOnEscape:false,
+                    dialogClass: 'email-dialog no-close',
+                    buttons: {
+                        "Start over": function() {
+                        window.location = "/";
+                        },
+                        "Continue": function() {
+                        $( this ).dialog( "close" );
+                        }
+                    }
+                })
+                .position({of:'#container'});
+            },
+            error: function(){
+                $scope.loading = false;
+                $scope.$apply();  
             }
-        })
-          .position({of:'#container'});
-        },
-        error: function(){
-            $scope.loading = false;
-            $scope.$apply();  
-        }
         });
     }
 
