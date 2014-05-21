@@ -36,6 +36,10 @@ a{outline:none; text-decoration:none;}
     float: left;
 }
 
+.outside{
+    width: 100%;
+}
+
 /* --------------------------------------------- Navbar ---------------------------------------------*/
 
 .navbar{
@@ -47,6 +51,7 @@ a{outline:none; text-decoration:none;}
     right: 0;
     left: 0;
     z-index: 1030;
+    width: 100%;
 }
 
 #dropdown {
