@@ -115,7 +115,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
     $scope.backgroundObj.src = default_background;
 
-
     $scope.backgroundObj.onload = function(){
         debug("Bacground onload");
         
@@ -248,7 +247,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
                             if(sticker.chroma_green){
                                 $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
                                                                      'back': sticker.back_source};
-                            };
+                            }
 
                     });
                 });
@@ -258,7 +257,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
                 // Flag so color change tool is added to sticker
                 debug($(this).data('chroma_green'));
-                if($(this).data('chroma_green') == true){
+                if($(this).data('chroma_green') === true){
                     $scope.chroma_green = true;
                 }
                 else
