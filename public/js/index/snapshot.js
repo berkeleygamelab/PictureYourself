@@ -42,8 +42,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     };
 
 	//Call grabcut with coordinates
-	// fix - Make it so users can drag from bottom right
-
 	$scope.cut = function(){
 		var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
 		console.log(coord);
@@ -53,11 +51,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 		formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
 		console.log(formData['coords']);
 		formData['pyuserid'] = $scope.pyuserid;
-
-		// Display loading
-		$scope.loading = true;
-		$scope.cutDisabled = true;
-		$scope.$apply();
 
 		$.ajax({
 			url: '/grabcut',
@@ -69,6 +62,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			error: function(){
 				$scope.loading = false;
 				$scope.cutDisabled = true;
+				alert ("There was an issue cropping the image.");
 			}
 		});
 		// // fix - Need to implement code that fires on success
@@ -104,6 +98,11 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
 	$scope.upload_webcam = function(){
 		if (cropObj.getSelectionRectangle()) {
+
+			// Display loading; will display regardless of success or failure
+			$scope.loading = true;
+			$scope.cutDisabled = true;
+
 			var name = $scope.pyuserid;
 			var formData = {"name":name, "data":canvas.toDataURL('image/png')};
 			$.ajax({
@@ -112,12 +111,14 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 				data: formData,
 				success: function(){
 					$scope.cut();
+				},
+				error: function(){
+					$scope.loading = false;
+					$scope.cutDisabled = true;
+					alert("There was an issue uploading the image.");
 				}
 			});
-		} else {
-			alert("You must select a cut");
-		}
-
+		} 
 	};
 
 
@@ -168,4 +169,4 @@ function debug(msg){
     }
 }
 
-// SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout'];
+SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout'];

@@ -5,7 +5,7 @@
 
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
-var debug_flag = true;
+var debug_flag = false;
 var default_background = '/images/stickers/0-backgrounds/Asproul.jpg';
 
 // TODO 
@@ -748,10 +748,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
     }
 
     function send_email(pyuserid, emails){
-        
-        $scope.loading = true;
-        $scope.$apply();
-
         var formData = {"pyuserid":pyuserid, "emails":emails};
         $.ajax({
             url: '/send_email',
@@ -759,7 +755,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             data: formData,
             success: function(){
                 $scope.loading = false;
-                $scope.$apply();
+                $scope.$apply();  
                 $( "#dialog-confirm-email" ).dialog({
                     resizable: false,
                     // height:140,
@@ -782,6 +778,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
             error: function(){
                 $scope.loading = false;
                 $scope.$apply();  
+                alert("There was an issue sending the email.");
+
             }
         });
     }
@@ -794,7 +792,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile){
 
         var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
         //check if input is correct
-        if(emails !== null) {                      
+        if(emails !== null) {               
+          //show loading
+          $scope.loading = true;   
+
           debug('calling email');
           //remove spaces to have one long string as argv for python
           emails = emails.replace(/\s+/g, '');        
