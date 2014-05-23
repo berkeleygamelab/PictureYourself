@@ -1,8 +1,13 @@
-<link rel="stylesheet" type="text/css" href="/css/scenario.css">
-<script type="text/javascript" src='/js/helpertools.js'></script>
-<script type="text/javascript" src='/js/timeout.js'></script>
-<script type="text/javascript" src='/js/tabs.js'></script>
-<script type="text/javascript" src='/js/scenario.js'></script>
+<link rel="stylesheet" type="text/css" href="/css/scenario.min.css">
+<link rel="stylesheet" href="/css/colorPicker.css" type="text/css" />
+<link rel="stylesheet" href="/css/chroma.css" type="text/css" />
+
+<script type="text/javascript" src='/js/scenario/timeout.min.js'></script>
+<script type="text/javascript" src='/js/scenario/tabs.min.js'></script>
+<script type="text/javascript" src='/js/libraries/jquery/jquery.colorPicker.min.js'></script>
+<script type="text/javascript" src='/js/scenario/scenario.min.js'></script>
+<script type="text/javascript" src='/js/scenario/email.js'></script>
+
 
 <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
 
@@ -89,9 +94,11 @@
                 </div><!--  Toolbox body -->
             </div> <!-- Tabs Ctrl-->
 
+        
             <div id="email_div">
                 <input type='button' id='email' class='button' ng-click='call_email()' value = "EMAIL">
             </div>
+          
 
         </div> <!-- Toolbox -->
 
@@ -108,7 +115,20 @@
 
     <div ng-show='loading' class='loader'>
         <span class="loader_helper"></span>
-        <img src='images/loader.gif' class='loader_img'>
+        <img src='images/img/loader.gif' class='loader_img'>
+    </div>
+
+    <!-- Color picker -->
+      <div id='modal'>
+        <div class="controlset">
+          <label for="color1">Select Color</label> 
+          <input id="color1" type="text" name="color1" value="#333399" />
+        </div>
+
+      <!-- Canvas to update color -->
+      <!-- TODO possibly change width and height if images change -->
+      <canvas id="color_change_canvas" width="120", height="120"></canvas>
+
     </div>
 
 </div> <!-- ScenarioCtrl -->

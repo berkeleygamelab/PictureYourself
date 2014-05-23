@@ -14,7 +14,7 @@ get '/stickers' do
 	Sticker.all(:order=>:name.asc).each do |sticker|
 		unless isBackground?(sticker.category)
 			if Sticker_Category.first(:folder => sticker.category)
-				stickers[sticker.category][sticker.name] = sticker.source
+				stickers[sticker.category][sticker.name] = sticker
 			end
 		end
 	end
@@ -42,7 +42,6 @@ get '/test/stickers' do
   Sticker.all.each do |sticker|
     images << sticker.source
   end
-  puts images
 
   return images.to_json
 end

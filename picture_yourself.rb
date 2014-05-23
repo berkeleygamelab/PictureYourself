@@ -162,3 +162,4 @@ end
 get '/scenario' do
   erb :scenario
 end
+
