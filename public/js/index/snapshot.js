@@ -1,3 +1,4 @@
+//Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	//create proper login methods etc...
 	var mouse = 'up';
@@ -29,17 +30,17 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var imageObj = new Image();
 
 	// Button functions
-
-    $scope.retake = function(){
-    		$scope.snapshot_button.retake = false;
-    		$scope.snapshot_button.snap_it = true;
-    		$scope.snapshot_button.cut = false;
-			$scope.show_camera = true;
-			$scope.show_capture = false;
-			$scope.loading = false;
-			width = 0;
-			height = 0;
-    };
+	//Handles retaking an image. Currently unused
+	$scope.retake = function(){
+		$scope.snapshot_button.retake = false;
+		$scope.snapshot_button.snap_it = true;
+		$scope.snapshot_button.cut = false;
+		$scope.show_camera = true;
+		$scope.show_capture = false;
+		$scope.loading = false;
+		width = 0;
+		height = 0;
+	};
 
 	//Call grabcut with coordinates
 	$scope.cut = function(){
@@ -128,21 +129,21 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 	var kinetic = function(result) {
 		imageObj.src = result;
 		imageObj.onload = function() {
-		// CropJS set up
-		cropObj = new CropJS({
-			cropEdges: new EdgeList({
-				topY: 160,
-				bottomY: 320,
-				leftX: 213,
-				rightX: 426,
-			}),
-			image: imageObj,
-			imageContainerID: "container",
-		});
-		//snapshot effect
-		$('#container').addClass('animated fadeInUp');
+			// CropJS set up
+			cropObj = new CropJS({
+				cropEdges: new EdgeList({
+					topY: 160,
+					bottomY: 320,
+					leftX: 213,
+					rightX: 426,
+				}),
+				image: imageObj,
+				imageContainerID: "container",
+			});
+			//snapshot effect
+			$('#container').addClass('animated fadeInUp');
 
-      	}; // end of imageObj.onload
+	      	}; // end of imageObj.onload
 	    
 	}; // End of kinetic Function
 
@@ -169,4 +170,4 @@ function debug(msg){
     }
 }
 
-SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout']; //required for minimising angular
+SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout']; //required for minifying angular

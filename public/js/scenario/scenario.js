@@ -11,10 +11,10 @@ $(document).ready(function() {
     /*
     * Gets user selfie
     */
-    //also have to refresh page to get changes, why?
+    //also have to refresh page to get changes, why? probably a caching thing?
     //set pyuserid as global variable to easily access it
 
-    $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png'); //users/ed39cd11-86cd-4faf-7b12-2cd9df6fc706/
+    $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png');
 
     $("#toolicon li").on("click", function(){
         $(this).parent().children().removeClass("active");
@@ -26,7 +26,7 @@ $(document).ready(function() {
     
     $("#modal").hide();
 
-    // Cavas were color changing occurs. Should always be hidden
+    // Canvas where color changing occurs. Should always be hidden
     $("#color_change_canvas").hide();
 });
 
@@ -107,7 +107,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         $scope.backgroundObj.src = e.target.src;
     };
 
-    // Grab stickers from server
+    // Grab backgrounds from server
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
@@ -122,7 +122,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         }) ;
 
 
-    // Frames ///////////////////////////////////////////////////////////////
+    // Frames (Currently disabled)///////////////////////////////////////////////////////////////
 
     $scope.frameObj = new Image();
 
@@ -170,9 +170,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         $scope.frameObj.src = "";
         layer.draw();
     };
-
-
-
 
 
     // Stickers ///////////////////////////////////////////////////////////////
@@ -431,6 +428,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
 
    // TODO do we need to have these in Scenario?
+   //Probably not, but there dependencies on things defined in this file, such as the stage. 
 
     function email(pyuserid, emails, data){
       var formData = {"pyuserid":pyuserid, "data":data};
@@ -577,12 +575,9 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         layer.draw();
     }
-
-
     
 
 } // End of Scenario Controller
-
 
 
 
@@ -592,5 +587,3 @@ function debug(msg){
         console.log(msg);
     }
 }
-
-

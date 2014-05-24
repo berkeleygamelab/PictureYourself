@@ -4,13 +4,9 @@ $(document).ready(function () {
     var visible = false;
     document.getElementById("dropdown").style.width = (document.getElementById("hamburger").width - parseInt(document.getElementById("dropdown").style.left)).toString + 'px';
 
-    $("#hamburger").hover(
-        function(){
-            $('#dropdown').show();
-        }, function(){
-            $('#dropdown').hide();
-        }
-    );
+    $("#hamburger").hover( function(){
+            $('#dropdown').toggle();
+    });
 });
 
 function LayoutCtrl($scope){

@@ -1,3 +1,4 @@
+//Handles timing the user out on inactivity (for kiosks)
 $.sessionTimeout = function( options ) {
     var defaults = {
         message      : 'Your session is about to expire.',

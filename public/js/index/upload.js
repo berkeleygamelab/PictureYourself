@@ -1,3 +1,4 @@
+//Handles uploading a user uploaded image. Currently unused.
 (function (module) {
      
     var fileReader = function ($q, $log) {
