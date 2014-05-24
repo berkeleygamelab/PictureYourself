@@ -4,13 +4,8 @@
 
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
-<<<<<<< HEAD:public/js/scenario.js
-var debug_flag = true;
-var default_background = '/images/stickers/0-backgrounds/Asproul.png';
-=======
 var debug_flag = false;
 var default_background = '/images/stickers/0-backgrounds/Asproul.jpg';
->>>>>>> dfef2bdef21ef14d4307907bb9d001995269831f:public/js/scenario/scenario.js
 
 $(document).ready(function() {
     /*
@@ -424,7 +419,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
                 sticker.scalerY.setVisible(true);
                 sticker.delete_icon.setVisible(true);
                 // ▼▼ UNCOMMENT WHEN ROTATE IS COMPELTED ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                sticker.rotate.setVisible(true);
+                // sticker.rotate.setVisible(true);
                 // ▲▲ UNCOMMENT WHEN ROTATE IS COMPELTED ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
             }
             layer.draw();
