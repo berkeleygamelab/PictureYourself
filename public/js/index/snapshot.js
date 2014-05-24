@@ -169,4 +169,4 @@ function debug(msg){
     }
 }
 
-SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout'];
+SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout']; //required for minimising angular

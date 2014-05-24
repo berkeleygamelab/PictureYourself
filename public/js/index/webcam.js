@@ -4,10 +4,8 @@ function hasGetUserMedia() {
             navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
 
-if (hasGetUserMedia()) {
-  // Good to go!
-} else {
-  alert('Accessing user webcam is unsupported by the browser. Please manually upload a picture.');
+if (!hasGetUserMedia()) {
+  alert('Accessing user webcam is unsupported by the browser. Please use a supported browser (e.g. Chrome).');
 }
 
 

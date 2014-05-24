@@ -1,4 +1,3 @@
-
 #writes scenario image to server
 post '/email' do
   data = params[:data].split(',')[1]

@@ -1,3 +1,4 @@
+//I'm not sure what this checks
 function checkCompatibility() {
 	
 	var features = {};
@@ -58,4 +59,8 @@ var resizeTimer;
 $(window).resize(function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(alertUser, 2000);
+});
+
+$(document).ready(function(){
+        checkCompatibility();
 });

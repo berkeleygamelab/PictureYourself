@@ -132,6 +132,3 @@ class Sticker_Category
   property :folder, Text
   property :display_order, Integer
 end
-
-
-

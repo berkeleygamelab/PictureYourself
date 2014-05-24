@@ -1,5 +1,3 @@
-<!-- THERE IS INLINE CSS IN THIS FILE THAT FOR SOME REASON BREAKS THINGS WHEN I TAKE IT OUTSO I'M LEAVING IT IN FOR NOW -->
-
 <link rel="stylesheet" href="/css/animate.min.css">
 <link rel="stylesheet" href="/css/index.min.css">
 <script src="/js/index/snapshot.min.js"></script>
@@ -11,7 +9,7 @@
     <!-- Should probably set a height for this and adjust the rest -->
     <div id='snapshot_div'>
 
-        <!-- Placeholder Imager -->
+        <!-- Placeholder Image -->
         <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
             <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_camera()'>
         </div>
@@ -19,18 +17,12 @@
         <!-- Webcam Input -->
         <div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
             <video autoplay id='video'></video>
-            <canvas id='cam_canvas' style="display:none;" width = "640px" height = "480px"></canvas>
+            <canvas id='cam_canvas' width = "640px" height = "480px"></canvas>
         </div>
 
         <!-- KineticJS Stage -->
         <div id='capture' ng-show='show_capture' class='centered'>
             <div id="container" ng-show='show_capture' class='index_container'></div>
-
-            <div ng-show='loading' class='loader'>
-                <span class="loader_helper"></span>
-                <img src='images/img/loader.gif' class='loader_img'>
-            </div>
-
         </div>
 
         <!-- snapshot_buttons -->
@@ -42,21 +34,10 @@
 
     </div> <!-- snapshot_div -->
 
+    <!-- Loading overlay -->
     <div ng-show='loading' class='loader'>
         <span class="loader_helper"></span>
         <img src='images/img/loader.gif' class='loader_img'>
     </div>
-
-<!--    <div ng-hide='true'>
-        IMAGE SRC:<br>
-        <img src="" id='capture_src'>
-    </div> -->
-       <!-- END OF CLICK FILE UPLOAD -->
-
-    <!--</div> --> <!-- UploadController -->
-
-    <script>
-        hasGetUserMedia()
-    </script>
 
 </div> <!-- Snapshot Controller -->

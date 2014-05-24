@@ -1,11 +1,14 @@
+<!-- Template that gets loaded on every page. Currently just the navigation bar -->
 <!DOCTYPE html>
 <html ng-app='PictureYourselfApp' no-js>
     <head>
+
         <title>P.I.C. Your Future</title>
 
         <link rel="stylesheet" type="text/css" href="/css/PictureYourself.min.css"/>
         <link rel="stylesheet" type="text/css" href="/css/layout.min.css"/>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
         <script src='/js/libraries/modernizr/modernizr-latest.js'></script>
         <script src='/js/libraries/jquery/jquery-2.0.3.min.js'> </script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -23,16 +26,12 @@
         <script src="/js/layout/layout.min.js"></script>
         <script src='/js/compatibility.min.js'></script>
 
-        <script type="text/javascript">
-            checkCompatibility();
-        </script>
-        
     </head>
 
     <body>
         <div id="compatibility"></div>
         <div ng-controller='LayoutCtrl'>
-            <div class="outside"> <!--container-->
+            <div class="outside"> 
                 <nav class="navbar" role="navigation">
 
                     <a href="/" class="navbar-link"><img class='navbariconleft' alt='Home' src='/images/img/new_home.png'></a>
@@ -66,7 +65,7 @@
                                 </li>
                                 </ul>
                             </div> <!--dropdown-->
-                        </div> <!--navtoleft-->
+                        </div> <!--hamburger-->
                     </div> <!--navright-->
                 </nav>
             </div> <!--outside-->
