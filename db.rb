@@ -10,12 +10,30 @@ def seed_stickers
   Sticker_Category.all.each do |category|
     dir = "images/stickers/" + category.display_order.to_s + "-" + category.folder + "/"
     files = Dir.entries("public/"+dir)
+
     #remove things that don't end in jpg/png
     files.delete_if {|a| not (a.include? ".jpg" or a.include? ".png")}
 
     files.each do |file|
+      
       unless Sticker.first(:name=>file.split('.').first)
-        Sticker.create(name: file.split('.').first, source: dir + file, category: category.folder)
+        name, display = file.split('.').first.split('_')
+        
+        # Skip files ending in fore or back
+        unless display == 'fore' || display == 'back'
+          sticker = Sticker.create(name: name, source: dir + file, category: category.folder)
+
+          # If sticker is a display sticker assign background and foreground properties
+          if display == 'display'
+            file_extension = file[file.length - 4...file.length]
+            sticker.chroma_green = true
+            sticker.fore_source = dir + name + "_fore" +  file_extension
+            sticker.back_source = dir + name + "_back" +  file_extension
+            sticker.save
+          end
+        
+        end
+     
       end
     end
 
@@ -30,7 +48,7 @@ def seed_categories
   #entries format "<display_order>-<folder>" e.g. 0-backgrounds
   categories.each do |entry|
     display_order,cat = entry.split('-')
-    unless Sticker_Category.first(:folder => cat)
+    unless Sticker_Category.first(:folder => cat) || cat.nil? || display_order.nil?
       Sticker_Category.create(title: cat.split('_').map(&:capitalize)*' ', folder:cat, display_order:display_order)
     end
   end
@@ -81,6 +99,10 @@ class Sticker
   property :name, Text
   property :source, Text
   property :category, Text
+  property :chroma_green, Boolean, :default => false 
+  property :back_source, Text, :default => ""
+  property :fore_source, Text, :default => ""
+
   
 end
 

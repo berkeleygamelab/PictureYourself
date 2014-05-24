@@ -1,7 +1,13 @@
+<link rel="stylesheet" href="/css/jquery.simplecolorpicker.css">
 <link rel="stylesheet" type="text/css" href="/css/scenario.css">
+<link rel="stylesheet" href="/css/chroma.css" type="text/css" />
+
 <script type="text/javascript" src='/js/helpertools.js'></script>
 <script type="text/javascript" src='/js/timeout.js'></script>
 <script type="text/javascript" src='/js/tabs.js'></script>
+<script type="text/javascript" src='/js/jquery.colorPicker.min.js'></script>
+<script src="/js/jquery.simplecolorpicker.js"></script>
+<script type="text/javascript" src="/js/factories.js"></script>
 <script type="text/javascript" src='/js/scenario.js'></script>
 
 <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
@@ -109,6 +115,56 @@
     <div ng-show='loading' class='loader'>
         <span class="loader_helper"></span>
         <img src='images/loader.gif' class='loader_img'>
+    </div>
+
+    <!-- Color picker -->
+      <div id='modal'>
+        
+        <!-- TODO These need to update from the server -->
+        <select name="colorpicker">
+            <option value="#ffdcb1"></option>
+            <option value="#e5c298"></option>
+            <option value="#e4b98e"></option>
+            <option value="#e2b98f"></option>
+            <option value="#e3a173"></option>
+            <option value="#d99164"></option>
+            <option value="#cc8443"></option>
+            <option value="#c77a58"></option>
+            <option value="#a53900"></option>
+            <option value="#880400"></option>
+            <option value="#710200"></option>
+            <option value="#440000"></option>
+            <option value="#ffe0c4"></option>
+            <option value="#eecfb4"></option>
+            <option value="#deab7f"></option>
+            <option value="#e0b184"></option>
+            <option value="#dfa675"></option>
+            <option value="#be723c"></option>
+            <option value="#a01900"></option>
+            <option value="#5b0000"></option>
+            <option value="#000000"></option>
+            <option value="#ede4c8"></option>
+            <option value="#efd6bd"></option>
+            <option value="#eabd9d"></option>
+            <option value="#e3c2ae"></option>
+            <option value="#dfb997"></option>
+            <option value="#d0926e"></option>
+            <option value="#bd9778"></option>
+            <option value="#bb6d4a"></option>
+            <option value="#940a00"></option>
+            <option value="#e1ada4"></option>
+            <option value="#a58869"></option>
+            <option value="#7b0000"></option>
+            <option value="#720000"></option>
+            <option value="#380000"></option>
+
+        </select>
+
+
+      <!-- Canvas to update color -->
+      <!-- TODO possibly change width and height if images change -->
+      <canvas id="color_change_canvas" width="120", height="120"></canvas>
+
     </div>
 
 </div> <!-- ScenarioCtrl -->
