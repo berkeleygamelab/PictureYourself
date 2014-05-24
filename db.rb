@@ -1,9 +1,17 @@
+#This is essentially the model that deals with saving information to the database
+#Currently, it just handles stickers 
 
 get '/seed' do
   #sticker folders and category names
   seed_categories
   seed_stickers
   redirect to '/selfie'
+end
+
+#completely resets all the stickers and reseeds the database
+get '/reset_stickers' do  
+  Sticker.destroy
+  redirect to '/seed' 
 end
 
 def seed_stickers
@@ -19,7 +27,7 @@ def seed_stickers
       unless Sticker.first(:name=>file.split('.').first)
         name, display = file.split('.').first.split('_')
         
-        # Skip files ending in fore or back
+        # Skip files ending in fore or back (for chroma green)
         unless display == 'fore' || display == 'back'
           sticker = Sticker.create(name: name, source: dir + file, category: category.folder)
 
@@ -43,7 +51,7 @@ end
 
 def seed_categories
   categories = Dir["public/images/stickers/**/"].each{|cat| cat.gsub!('public/images/stickers/','').slice!('/')}
-  categories.delete_at(0) #gets ride of empty element
+  categories.delete_at(0) #gets rid of empty element
   
   #entries format "<display_order>-<folder>" e.g. 0-backgrounds
   categories.each do |entry|

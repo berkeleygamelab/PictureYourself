@@ -1,3 +1,5 @@
+#Main file to be executed
+
 require 'sinatra'
 require 'base64'
 require 'data_mapper'
@@ -18,6 +20,7 @@ set :lock, true
 
 require_relative 'apis'
 require_relative 'db'
+require_relative 'email'
 
 DataMapper.finalize.auto_upgrade!
 
@@ -35,6 +38,8 @@ Mail.defaults do
   delivery_method :smtp, options
 end
 
+
+#handles OS detection for openCV
 module OS
   def OS.windows?
     (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
@@ -53,6 +58,7 @@ module OS
   end
 end
 
+
 get '/' do
   cookie = request.cookies["pyuserid"]
   
@@ -67,29 +73,19 @@ get '/' do
   erb :index
 end
 
-# get '/sticker' do
-#   puts params
-# end
-
 post '/fileupload' do
     data = params[:data].split(',')[1]
     dirname = 'uploads/'+params[:name]
-    # puts 'Params[:name] ' + params[:name]
-    # puts 'dirname: ' + dirname
-    # puts 'data'
+
     unless File.directory?(dirname)
       Dir.mkdir(dirname)
-      # puts 'Directory should have been written'
-    else
-      # puts 'Directory already exits'
     end
 
     # fix - fix to have dynamic png numbers - or naming
     File.open(dirname+'/1.png', 'wb') do |f|
-      # puts "write"
       f.write(Base64.decode64(data))
     end
-    # Needs to be updated to account for erros
+    # Needs to be updated to account for errors
     status 200
 end
 
@@ -97,23 +93,26 @@ post '/grabcut' do
   if OS.mac?
     system('./opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   elsif OS.unix?
-    puts 'Filename: ' + params[:filename]
-    puts 'Coords: ' + params[:coords]
-    puts 'ID: ' + params[:pyuserid]
     system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   end
 end
 
+#currently this link
 get '/selfie' do
   erb :scenario
 end
 
+#should switch over to this one
+get '/scenario' do
+  erb :scenario
+end
+
+
+#currently unused 
 post '/session' do
-  puts "CLOSED"
   #sticker src, left & top (location) are properly passed
   #rotation information is also passed, but as a matrix transformation (i think)
   #can be extended to additional sticker data, as long as that information is accessible from the html
-  puts params
   # left = params[:leftArr].split(',')
   # top = params[:topArr].split(',')
   # src = params[:srcArr].split(',')
@@ -127,39 +126,5 @@ post '/session' do
     puts "write\n "
       f.write(params)
   end
-end
-
-#write email behaviour (save image, attach to email)
-post '/email' do
-  data = params[:data].split(',')[1]
-  #how about... pyuserid
-  dirname = 'email/' + params[:pyuserid]
-  unless File.directory?(dirname)
-    Dir.mkdir(dirname)
-  end
-  # fix - fix to have dynamic png numbers - or naming (pic_index.filetype)
-  File.open(dirname+'/1.png', 'wb') do |f|
-    f.write(Base64.decode64(data))
-  end
-  status 200
-end
-
-post '/send_email' do
-  pyuserid = params[:pyuserid]
-  filepath = 'email/'+pyuserid+'/1.png'  
-  emails = params[:emails]
-
-  Mail.deliver do
-    to emails
-    from 'picyourfuture@gmail.com'
-    subject "PIC YOUR FUTURE"
-    body 'PIC Your Future at Berkeley\nwww.py-bcnm.berkeley.edu\n;)'
-    add_file filepath
-  end
-end
-
-
-get '/scenario' do
-  erb :scenario
 end
 

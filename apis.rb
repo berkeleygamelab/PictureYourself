@@ -1,3 +1,5 @@
+#This handles all requests for the actual stickers, backgrounds, frames, etc
+
 #all stickers
 get '/stickers' do
 
@@ -22,7 +24,7 @@ get '/stickers' do
 	"{\"stickers\":"+stickers.to_json+", \"categories\":"+categories.to_json+"}"
 end
 
-#get categories, good for backgrounds and frames
+#get categories e.g. backgrounds or frames
 get '/stickers/:category' do
 	stickers = {}
 
