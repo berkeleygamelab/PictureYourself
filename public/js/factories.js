@@ -2,46 +2,65 @@
 app.factory('Sticker', function(){
 	return{
 		new : function(imageObj, pos, start_size, layer, imageObjBack){
-    		var sticker = {background : null,
-							delete_icon : null,
-							group : null,
-							image : null,
-							imageBack : null,
-							move_color : null,
-							previous_color : null,
-							rotate : null,
-							scalerX : null,
-							scalerY : null, 
-							reposition : null}
+    		var sticker = {
+    			background : null,
+				delete_icon : null,
+				group : null,
+				image : null,
+				imageBack : null,
+				move_color : null,
+				previous_color : null,
+				rotate : null,
+				scalerX : null,
+				scalerY : null, 
+				reposition : null
+			}
 
 	        // Used to make sure both background and foreground are loaded together
 			var image_load_count = 0;
-
-			// Keep track of size of tools to sync scaling and positioning of tools
+			// Used to make sure that scaling and positioning of controls are synced
 			var tool_size = 30;
 
 	        sticker.group = new Kinetic.Group({
 	            draggable: true,
+	            x: pos.x + start_size.width/2,
+	            y: pos.y + start_size.height/2
 	        });
 
             sticker.image = new Kinetic.Image({
-               image:imageObj,
-               width: start_size.width,  //this makes the image lower quality for some reason
-               height: start_size.height,
-               stroke: 'green',
-               x: pos.x,
-               y: pos.y
+	            image:imageObj,
+	            width: start_size.width,  //this makes the image lower quality for some reason
+	            height: start_size.height,
+	            x: 0, // pos.x + start_size.width/2,
+	            y: 0, // pos.y + start_size.height/2,
+	            offsetX: start_size.width/2,
+	            offsetY: start_size.height/2,
             });
 
 		   	if (imageObjBack != null){
-	            sticker.imageBack = new Kinetic.Image({
-	               image:imageObjBack,
-	               width: start_size.width,  //this makes the image lower quality for some reason
-	               height: start_size.height,
-	               x: pos.x,
-	               y: pos.y 
+		        sticker.imageBack = new Kinetic.Image({
+		            image:imageObjBack,
+		            width: start_size.width,  //this makes the image lower quality for some reason
+		            height: start_size.height,
+		            offsetX: start_size.width/2,
+	               	offsetY: start_size.height/2,
+		            x: 0, // pos.x + start_size.width/2,
+		            y: 0, // pos.y + start_size.height/2,
 	        	});
 	        }
+
+	        sticker.background = new Kinetic.Rect({
+	        	width: start_size.width,
+	        	height: start_size.height,
+	        	x: 0,
+	        	y: 0,
+	        	offsetX: start_size.width/2,
+	        	offsetY: start_size.height/2,
+            	fill: '#00cdcd',
+            	visible: true,
+            	opacity: 0.2,
+            	name: 'background'
+	        });
 
 	       	sticker.delete_icon = new Kinetic.Text({
 	            visible:true,
@@ -50,102 +69,82 @@ app.factory('Sticker', function(){
 	            fontSize: tool_size,
 	            fill: '#eee',
 	            stroke: "#222",
-	            strokeWidth: 2,
+	            strokeWidth: 0.75,
 	            name: 'delete', 
-	            x:0,
-	            y:0
+	            x: start_size.width/2,
+	            y: -start_size.height/2,
+	            offsetX: tool_size/2,
+	            offsetY: tool_size/2
 			});
 
 			sticker.scalerX = new Kinetic.Text({
-	            x : sticker.image.getX() + start_size.width,
-	            y : sticker.image.getY() + start_size.height/2,
+	            x : start_size.width/2, // sticker.image.x() + start_size.width/2,
+	            y : 0, // sticker.image.y(),
+	            offsetX: tool_size/2,
+	            offsetY: tool_size/2,
 	            text: '',
 	            fontFamily: 'FontAwesome',
 	            fontSize: tool_size,
 	            fill: '#eee',
 	            stroke: "#222",
-	            strokeWidth: 2,
+	            strokeWidth: 0.75,
 	            draggable:true,
 	            visible:true,
 	            name: 'x',
-	            dragBoundFunc: function(pos){
-	            	debug(start_size);
-	                return{
-	                    x: pos.x,
-	                    y: this.getAbsolutePosition().y
-	                };
-	            }
 	        });
 
             sticker.scalerY = new Kinetic.Text({
-	            x : sticker.image.getX() + start_size.width/2,
-	            y : sticker.image.getY() + start_size.height,
+	            x : 0, // sticker.image.x(),
+	            y : start_size.height/2, // sticker.image.y() + start_size.height/2,
+	            offsetY: tool_size/2,
+	            offsetX: tool_size * 13 / 60,
 	            text: '',
 	            fontFamily: 'FontAwesome',
 	            fontSize: tool_size,
 	            fill: '#eee',
 	            stroke: "#222",
-	            strokeWidth: 2,
+	            strokeWidth: 0.75,
 	            draggable:true,
 	            visible:true,
 	            name: 'y',
-	            //offset:[image.getWidth()/2,image.getHeight()/2],
-	            dragBoundFunc: function(pos){
-	            	debug(this);
-	              return{
-	                x: this.getAbsolutePosition().x,
-	                y: pos.y
-	              };
-	            }
 	        });
+            
 
             sticker.rotate = new Kinetic.Text({
-	            x: 0,
-	            y: 0,
+	            x : - start_size.width/2, // sticker.image.x() - start_size.width/2,
+	            y : - start_size.height/2, // sticker.image.y() - start_size.height/2,
+	            offsetX: tool_size/2,
+	            offsetY: tool_size/2,
 	            text: '',  //leave this it won't render correctly here but will on the canvas
 	            fontFamily: 'FontAwesome',
 	            fontSize: tool_size,
 	            fill: '#eee',
 	            stroke: "#222",
-	            strokeWidth: 2,
+	            strokeWidth: 0.75,
 	            draggable:true,
 	            visible:true,
 	            name: 'rotate',
-	            dragBoundFunc: function(pos) {
-	                var x = this.getAbsolutePosition().x + start_size.width/2;
-	                var y = this.getAbsolutePosition().y + start_size.height/2;//100;  // your center point
-	                var radius = Math.sqrt(Math.pow(this.getWidth()/2,2) + Math.pow(this.getWidth()/2,2));//60;//Math.min(image.getWidth() / 2 , image.getHeight() / 2);//60;
-	                var scale = radius / Math.sqrt(Math.pow(pos.x - x, 2) + Math.pow(pos.y - y, 2)); // distance formula ratio
-	                  return {
-	                    y: Math.round((pos.y - y) * scale + y),
-	                    x: Math.round((pos.x - x) * scale + x)
-	                  };
-	            }
 	        });
 
-			// ▼▼ REMOVE WHEN ROTATE IS COMPLETED ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			// sticker.rotate.setVisible(false);
-			// ▲▲ REMOVE WHEN ROTATE IS COMPLETED ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
-	        // Set offsets to put image's x and y in center
-	        sticker.image.setOffsetX(start_size.width/2);
-	        sticker.image.setOffsetY(start_size.height/2);
-	        
-	        sticker.rotate.setOffsetX(start_size.width/2);
-	        sticker.rotate.setOffsetY(start_size.height/2);
-
-	        sticker.scalerX.setOffsetX(start_size.width/2);
-	        sticker.scalerX.setOffsetY(start_size.height/2);
-
-	        sticker.scalerY.setOffsetX(start_size.width/2);
-	        sticker.scalerY.setOffsetY(start_size.height/2);
-
-	        sticker.delete_icon.setOffsetX(start_size.width/2);
-	        sticker.delete_icon.setOffsetY(start_size.height/2);
+            /* Unsuccessful delete image try
+	        var delete_img = new Image();
+	        delete_img.src = "images/img/close-button.png";
+	        delete_img.onload = function() {
+	        	sticker.delete_icon = new Kinetic.Image({
+	        		visible: true,
+	        		height: tool_size,
+	        		width: tool_size,
+	        		name: 'delete',
+	        		x: start_size.width/2,
+	        		y: -start_size.height/2,
+	        		offsetX: tool_size/2,
+	        		offsetY: tool_size/2
+	        	})
+	        } */
 
 	        if (imageObjBack != null){
-	            sticker.imageBack.setOffsetX(start_size.width/2);
-	            sticker.imageBack.setOffsetY(start_size.height/2);
+	            sticker.imageBack.offsetX(start_size.width/2);
+	            sticker.imageBack.offsetY(start_size.height/2);
 	        }
 
 	        if(imageObjBack != null){
@@ -169,7 +168,7 @@ app.factory('Sticker', function(){
 
 	        }
 
-	        else{
+	        else {
 	            imageObj.onload = function(){
 	                return load();
 	            };
@@ -182,13 +181,13 @@ app.factory('Sticker', function(){
 	                sticker.group.add(sticker.imageBack);
 	                sticker.move_color();
 	            }
-	            console.log(sticker.group);
+	            sticker.group.add(sticker.background);
 	            sticker.group.add(sticker.image);
 	            sticker.group.add(sticker.scalerX);
 	            sticker.group.add(sticker.scalerY);
 	            sticker.group.add(sticker.delete_icon);
 	            sticker.group.add(sticker.rotate);
-	            
+
 	            layer.add(sticker.group);
 	            
 	            sticker.reposition();
@@ -196,32 +195,50 @@ app.factory('Sticker', function(){
 	        }
 
 			sticker.reposition = function(){
-	          var x = sticker.image.getAbsolutePosition().x;
-	          var y = sticker.image.getAbsolutePosition().y;
 
-	          sticker.rotate.setAbsolutePosition(x - tool_size/2, y - tool_size/2);
-	          
-	          sticker.scalerX.setAbsolutePosition(x + sticker.image.getWidth() - tool_size/2, y + sticker.image.getHeight()/2 - tool_size/2);
-	          sticker.scalerY.setAbsolutePosition(x + sticker.image.getWidth()/2 - tool_size*13/60, y + sticker.image.getHeight() - tool_size/2);
-	          sticker.delete_icon.setAbsolutePosition(x + sticker.image.getWidth() - tool_size/2, y - tool_size/2);
+				var half_width = sticker.image.width()/2;
+				var half_height = sticker.image.height()/2;
+
+		        sticker.rotate.x(-half_width);
+		        sticker.rotate.y(-half_height);
+
+		        sticker.scalerX.x(half_width);
+		        sticker.scalerX.y(0);
+
+		        sticker.scalerY.x(0);
+		        sticker.scalerY.y(half_height);
+
+		        sticker.delete_icon.x(half_width);
+		        sticker.delete_icon.y(-half_height);
+
+		        sticker.background.x(0);
+		        sticker.background.y(0);
+		        sticker.background.width(half_width*2);
+		        sticker.background.height(half_height*2);
+		        sticker.background.offsetX(half_width);
+		        sticker.background.offsetY(half_height);
+
 
 	        };
 
 	        sticker.move_color = function(){
 
-	            var y = sticker.scalerY.getAbsolutePosition().y;
-	            var x = sticker.scalerX.getAbsolutePosition().x  
-	                 + $('#container').offset().left
-	                 - sticker.image.getWidth() 
-	                 - sticker.image.getOffsetX() 
-	                 - $('#modal').width();
+	            // var y = sticker.scalerY.getAbsolutePosition().y - sticker.image.height()/2;
+	            // var x = sticker.scalerX.getAbsolutePosition().x  
+	            //      + $('#container').offset().left
+	            //      - sticker.image.getWidth() 
+	            //      - sticker.image.offsetX() 
+	            //      - $('#modal').width();
+
+	            var y = sticker.scalerX.getAbsolutePosition().y;
+	            var x = sticker.scalerY.getAbsolutePosition().x;
 
 	            $("#modal").css({left: x, top: y});
 	            $("#modal").show();
 	        }
 
 	 		return sticker;
-			     
+	     
 		}
 	}
 });
