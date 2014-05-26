@@ -4,7 +4,7 @@
 
 //This flag is used to determine if you want console output or not.
 //Don't use console.log, instead use debug("some thing you want to send to console")
-var debug_flag = false;
+var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/Asproul.jpg';
 
 $(document).ready(function() {
@@ -59,7 +59,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     var layer = new Kinetic.Layer();
     stage.add(layer);
 
-    var con = stage.getContainer();
+    var con = stage.container();
     var dragSrcEl = null;
 
     $scope.image_download = 'test.jpg';
@@ -245,10 +245,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     // Used to close tools for all stickers
     var closeTools = function(){
-        a = $(stage.find('.y, .x, .delete, .rotate'));
+        a = $(stage.find('.y, .x, .delete, .rotate, .background'));
 
         a.each(function(index){
-            a[index].setVisible(false);
+            a[index].visible(false);
         });
 
         $("#modal").hide();
@@ -318,35 +318,33 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         // set horizontal height of image
         sticker.scalerX.on('dragmove touchmove',function(){
+                
+            var half_width = this.x() - sticker.image.x()
+            sticker.image.width(half_width * 2);
+            sticker.image.offsetX(half_width);
             
-            var diff = this.getAbsolutePosition().x - sticker.image.getAbsolutePosition().x - sticker.image.getWidth();
-            
-            sticker.image.setWidth(sticker.image.getWidth() + diff * 2);
-            sticker.image.setAbsolutePosition(sticker.image.getAbsolutePosition().x - diff/2, sticker.image.getAbsolutePosition().y);
-            
-            if(has_chroma_green)
-            {
-                sticker.imageBack.setWidth(sticker.image.getWidth());
-                sticker.imageBack.setAbsolutePosition(sticker.image.getAbsolutePosition().x, sticker.image.getAbsolutePosition().y);
+            if(has_chroma_green) {
+                sticker.imageBack.width(sticker.image.width());
+                sticker.imageBack.offsetX(half_width);
+                // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
             }
 
             sticker.reposition();
-            layer.draw();
         });
 
 
         //set vertical height of image
         sticker.scalerY.on('dragmove touchmove',function(){
             
-            var diff = this.getAbsolutePosition().y - sticker.image.getAbsolutePosition().y - sticker.image.getHeight();
-            
-            sticker.image.setHeight(sticker.image.getHeight() + diff * 2);
-            sticker.image.setAbsolutePosition(sticker.image.getAbsolutePosition().x, sticker.image.getAbsolutePosition().y - diff/2);
-            
+            var half_height = this.y() - sticker.image.y();
+            sticker.image.height(half_height * 2);
+            sticker.image.offsetY(half_height);
+
             if(has_chroma_green)
             {
-                sticker.imageBack.setHeight(sticker.image.getHeight());
-                sticker.imageBack.setAbsolutePosition(sticker.image.getAbsolutePosition().x, sticker.image.getAbsolutePosition().y);
+                sticker.imageBack.height(sticker.image.height());
+                sticker.imageBack.offsetY(half_height);
+                // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
             }
 
             sticker.reposition();   
@@ -354,36 +352,38 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         });
         
-        // ▼▼ BROKEN ROTATE ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        var startX;
+        var startY;
+        var half_width = sticker.image.getWidth()/2
+        var half_height = sticker.image.getHeight()/2
+        var start_angle, end_angle;
+        var start_rotation;
 
-        // var canvasOffset = $("#container").offset();
-        // var offsetX = canvasOffset.left;
-        // var offsetY = canvasOffset.top;
-        // var startX;
-        // var startY;
+        function angle(rad) {
+            if (rad > Math.PI) {
+                rad = rad - 2*Math.PI;
+            }
+            return rad * 180 / Math.PI;
+        }
 
-        // sticker.rotate.on('mouseenter', function(e){
-        //     startX = parseInt(e.clientX - offsetX);
-        //     startY = parseInt(e.clientY - offsetY);
-        // });
+        sticker.rotate.on('dragstart', function(e) {
+            startX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
+            startY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
+            start_angle = Math.atan2(startY, startX);
+            start_rotation = sticker.image.rotation();
+        });
 
-        // sticker.rotate.on('dragmove touchmove', function(e){ //dragmove
-        //     start_position = {"x":sticker.image.getAbsolutePosition().x, "y": sticker.image.getAbsolutePosition().y};
-        //     rotate_position = {"x":sticker.image.getAbsolutePosition().x + start_size.width/2,"y": sticker.image.getAbsolutePosition().y + start_size.height/2};
+        sticker.rotate.on('dragmove touchmove', function(e){ //dragmove
 
-        //     var dx = startX - parseInt(e.clientX - offsetX);
-        //     var dy = startY - parseInt(e.clientY - offsetY);
-        //     var angle = Math.atan2(dy, dx);
-        //     sticker.image.setRotation(angle);
+            endX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
+            endY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
+            end_angle = Math.atan2(endY, endX);
+            sticker.group.rotation(start_rotation + angle(end_angle - start_angle));
 
-        //     if(has_chroma_green)
-        //         sticker.imageBack.setRotation(angle);
-
-        //     layer.draw();
-        // });
+            sticker.reposition();   
+            layer.draw();
+        });
         
-        // ▲▲ BROKEN ROTATE ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
 
         //---- Color Picker------------------------------------------------------------------------------
 
@@ -396,28 +396,30 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         //hide and show resize and scaler
         sticker.image.on('click',function(e){
+            debug("Sticker click");
             if(sticker.scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
                 closeTools();
                 $scope.selected_background = null;
                 $scope.selected_sticker = null;
             } else{
-                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                closeTools(); //closes all other tools
                 
                 $scope.selected_sticker = sticker;  
 
-                if($scope.selected_sticker.previous_color != null)
+                if($scope.selected_sticker.previous_color != null){
                     $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                }
 
                 if(has_chroma_green){
+                    debug("Has Chroma green")
                     sticker.move_color();
                     $scope.selected_background = imageObjBack;
                 }
-                sticker.scalerX.setVisible(true);
-                sticker.scalerY.setVisible(true);
-                sticker.delete_icon.setVisible(true);
-                // ▼▼ UNCOMMENT WHEN ROTATE IS COMPELTED ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                // sticker.rotate.setVisible(true);
-                // ▲▲ UNCOMMENT WHEN ROTATE IS COMPELTED ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+                sticker.scalerX.visible(true);
+                sticker.scalerY.visible(true);
+                sticker.delete_icon.visible(true);
+                sticker.rotate.visible(true);
+                sticker.background.visible(true);
             }
             layer.draw();
         });
@@ -490,7 +492,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
         //check if input is correct
         if(emails !== null) {                      
-          debug('calling email');
           //remove spaces to have one long string as argv for python
           emails = emails.replace(/\s+/g, '');        
           debug(emails);
@@ -507,13 +508,11 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     };
 
     $scope.create_image = function(){
-        debug('called');
         $scope.image_download = 'somethingelse.jpg';
         stage.toDataURL({
             mimeType: 'image/jpg',
             quality: 1,
             callback: function(dataUrl) {
-                debug('callback');
                 var link = document.createElement('a');
                 angular.element(link)
                 .attr('href', dataUrl)
