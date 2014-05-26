@@ -1,4 +1,3 @@
-//Used by scenario.js; this file instantiates all the tools around the stickers 
 // This might not factory (possibly a service or just a function)
 app.factory('Sticker', function(){
     return{
@@ -226,16 +225,10 @@ app.factory('Sticker', function(){
 
             sticker.move_color = function(){
 
-                // var y = sticker.scalerY.getAbsolutePosition().y - sticker.image.height()/2;
-                // var x = sticker.scalerX.getAbsolutePosition().x  
-                //      + $('#container').offset().left
-                //      - sticker.image.getWidth() 
-                //      - sticker.image.offsetX() 
-                //      - $('#modal').width();
                 var stagex = $('.kineticjs-content').position().left;
                 var stagey = $('.kineticjs-content').position().top;
-                var x = sticker.background.getAbsolutePosition().x - sticker.background.offsetX();
-                var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY();
+                var x = sticker.background.getAbsolutePosition().x - sticker.background.offsetX() - tool_size/2;
+                var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY() - tool_size/2;
                 $("#modal").css({left: x + stagex, top: y + stagey});
                 $("#modal").show();
             }
@@ -245,3 +238,4 @@ app.factory('Sticker', function(){
         }
     }
 });
+
