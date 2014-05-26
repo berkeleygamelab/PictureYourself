@@ -407,14 +407,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
                 $scope.selected_background = null;
                 $scope.selected_sticker = null;
             } else{
-                closeTools(); //refactor? this is done because this removes all buttons, but the existance of the button is necessary 
+                closeTools(); //closes all other tools
                 
                 $scope.selected_sticker = sticker;  
 
-                if($scope.selected_sticker.previous_color != null)
+                if($scope.selected_sticker.previous_color != null){
                     $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                }
 
                 if(has_chroma_green){
+                    debug("Has Chroma green")
                     sticker.move_color();
                     $scope.selected_background = imageObjBack;
                 }
