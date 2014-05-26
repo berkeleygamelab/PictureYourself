@@ -233,10 +233,8 @@ app.factory('Sticker', function(){
                 //      - $('#modal').width();
                 var stagex = $('.kineticjs-content').position().left;
                 var stagey = $('.kineticjs-content').position().top;
-                var x = sticker.background.getAbsolutePosition().x + sticker.background.offsetX;
-                var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY;
-                console.log("x: " + sticker.background.getAbsolutePosition().x);
-                console.log("y: " + sticker.background.getAbsolutePosition().y);
+                var x = sticker.background.getAbsolutePosition().x - sticker.background.offsetX();
+                var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY();
                 $("#modal").css({left: x + stagex, top: y + stagey});
                 $("#modal").show();
             }
