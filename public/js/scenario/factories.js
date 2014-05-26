@@ -1,3 +1,4 @@
+//Used by scenario.js; this file instantiates all the tools around the stickers 
 // This might not factory (possibly a service or just a function)
 app.factory('Sticker', function(){
     return{
