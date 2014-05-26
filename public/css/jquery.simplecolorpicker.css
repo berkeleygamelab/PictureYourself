@@ -22,7 +22,7 @@
   float: left;
 
   min-width: 160px;
-  max-width: 283px; /* @popover-max-width = 276px + 7 */
+  max-width: 255px; /* @popover-max-width = 276px + 7 */
 
   padding: 5px 0 0 5px;
   margin: 2px 0 0;
@@ -58,6 +58,9 @@
 .simplecolorpicker span.color {
   display: inline-block;
 
+  width: 30px;
+  height: 30px;
+  
   cursor: pointer;
   border: 1px solid transparent;
 }
