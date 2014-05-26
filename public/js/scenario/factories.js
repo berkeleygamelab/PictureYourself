@@ -176,6 +176,9 @@ app.factory('Sticker', function(){
 
             //construct group to drop after image loads
             var load = function(){
+                if(imageObjBack != null){
+                    sticker.group.add(sticker.imageBack);
+                }
                 sticker.group.add(sticker.background);
                 sticker.group.add(sticker.image);
                 sticker.group.add(sticker.scalerX);
@@ -183,9 +186,9 @@ app.factory('Sticker', function(){
                 sticker.group.add(sticker.delete_icon);
                 sticker.group.add(sticker.rotate);
                 if(imageObjBack != null){
-                    sticker.group.add(sticker.imageBack);
                     sticker.move_color();
                 }
+
 
                 layer.add(sticker.group);
                 
@@ -233,7 +236,7 @@ app.factory('Sticker', function(){
                 var x = sticker.rotate.getAbsolutePosition().x;
                 var y = sticker.scalerY.getAbsolutePosition().y;
                 console.log("move color");
-                $("#modal").css({left: x + stagex - 10, top: y + stagey - 10});
+                $("#modal").css({left: x + stagex, top: y + stagey});
                 $("#modal").show();
             }
 

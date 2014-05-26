@@ -402,6 +402,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         //hide and show resize and scaler
         sticker.image.on('click',function(e){
+            debug("Sticker click");
             if(sticker.scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
                 closeTools();
                 $scope.selected_background = null;
