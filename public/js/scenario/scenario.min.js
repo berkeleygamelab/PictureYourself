@@ -383,9 +383,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
             end_angle = Math.atan2(endY, endX);
             sticker.group.rotation(start_rotation + angle(end_angle - start_angle));
 
-            if(has_chroma_green)
-                sticker.imageBack.rotation(start_rotation + angle(end_angle - start_angle));
-
             sticker.reposition();   
             layer.draw();
         });

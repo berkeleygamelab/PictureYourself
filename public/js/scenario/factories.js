@@ -233,9 +233,10 @@ app.factory('Sticker', function(){
                 //      - $('#modal').width();
                 var stagex = $('.kineticjs-content').position().left;
                 var stagey = $('.kineticjs-content').position().top;
-                var x = sticker.rotate.getAbsolutePosition().x;
-                var y = sticker.scalerY.getAbsolutePosition().y;
-                console.log("move color");
+                var x = sticker.background.getAbsolutePosition().x + sticker.background.offsetX;
+                var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY;
+                console.log("x: " + sticker.background.getAbsolutePosition().x);
+                console.log("y: " + sticker.background.getAbsolutePosition().y);
                 $("#modal").css({left: x + stagex, top: y + stagey});
                 $("#modal").show();
             }
