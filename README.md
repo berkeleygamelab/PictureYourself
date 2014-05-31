@@ -6,6 +6,8 @@ Project Description: The Picture Yourself application uses visual storytelling p
 
 To run this app locally: 
 
+gem install shotgun
+
 
 To contribute to this app:
 
