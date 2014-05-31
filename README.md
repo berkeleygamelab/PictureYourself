@@ -5,8 +5,8 @@ Project Description: The Picture Yourself application uses visual storytelling p
 
 
 To run this app locally: 
-
 Make sure Ruby is installed 
+bundle install
 
 Open terminal and navigate to the PictureYourself root folder.
 
