@@ -27,13 +27,13 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
 
 ### Orientation:
 
-- Project uses is built with Sinatra, Angular.js and Ruby
-- DataMapper.js is used as an ORM
-- Kinetic.js is used for the image manipulation functionality
+#### Frameworks / tools used
+  - Project uses Sinatra, Angular.js and Ruby
+  - DataMapper.js is used as an ORM
+  - Kinetic.js is used for the image manipulation functionality
 
 
-
-- File structure and organization:
+#### File structure and organization:
 
   - public/js/index  : all JS files used for the homepage
   - public/js/scenarios : all JS files used for main interactive page
