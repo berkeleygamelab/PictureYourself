@@ -24,3 +24,6 @@ Occasionally, closing shotgun (Control-C) will hang, causing the port to be unus
 To fix this, just run shotgun -p <port number> picture_yourself.rb
 
 
+Form:
+-use spaces for indentation
+-write descriptive commit messages
