@@ -4,8 +4,6 @@ PictureYourself
 ## Project Description
 The Picture Yourself application uses visual storytelling practices like the "selfie" to help improve college access and provide students with a tool for navigate the college process. 
 
-## Setup
-
 ### To run this app locally: 
 
 - Make sure Ruby is installed 
@@ -13,23 +11,33 @@ The Picture Yourself application uses visual storytelling practices like the "se
 - Run: 'bundle install'
 - When gems are all installed, run: 'shotgun picture_yourself.rb'
 
-## To contribute to this app:
+### To contribute to this app:
 
 - Create a branch with 'git checkout -b <name of branch>'
 - Then submit a pull request with 'git push origin <name of branch>'
 - Have another team member review your code before either of you merge with the master branch
 
-## Troubleshooting: 
+### Troubleshooting: 
 Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future.
 To fix this, run shotgun -p <port number> picture_yourself.rb
 
-## Form:
+### Form:
 - use spaces (!not tabs!) for indentation
 - write descriptive commit messages
 
 ## Orientation:
 
--
+- Project uses is built with Sinatra, Angular.js and Ruby
+
+- File structure and organization:
+
+  - public/js/index  : all JS files used for the homepage
+  - public/js/scenarios : all JS files used for main interactive page
+  - public/js/layout : JS file used to make the navigation bar interactive
+  - users/minifier.rb: minifies JS and CSS files before they're run 
+  - db.rb : seeds new images loaded into 'public/images' folder into the database
+  - scenario.js : HTTP request is made to /stickers. Sticker table is queried, data turned into JSON
+  
 
 
 
