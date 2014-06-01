@@ -25,7 +25,7 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
 - use spaces (!not tabs!) for indentation
 - write descriptive commit messages
 
-## Orientation:
+### Orientation:
 
 - Project uses is built with Sinatra, Angular.js and Ruby
 - DataMapper.js is used as an ORM
