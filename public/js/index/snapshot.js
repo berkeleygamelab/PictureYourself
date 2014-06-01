@@ -58,7 +58,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 			type: 'POST',
 			data: formData,
 			success: function() {
-				window.location = '/selfie';
+				window.location = '/scenario';
 			},
 			error: function(){
 				$scope.loading = false;
