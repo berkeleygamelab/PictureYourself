@@ -18,15 +18,15 @@ The Picture Yourself application uses visual storytelling practices like the "se
 - Submit a pull request with 'git push origin <name of branch>'
 - Have another team member review your code before either of you merge with the master branch
 
-### Troubleshooting: 
+### Troubleshooting
 Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future.
 To fix this, run shotgun -p <port number> picture_yourself.rb
 
-### Form:
+### Form
 - use spaces (!not tabs!) for indentation
 - write descriptive commit messages
 
-### Orientation:
+### Orientation
 
 #### Frameworks / tools used
   - Project uses Sinatra, Angular.js and Ruby
@@ -34,7 +34,7 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
   - Kinetic.js is used for the image manipulation functionality
 
 
-#### File structure and organization:
+#### File structure and organization
 
   - public/js/index  : all JS files used for the homepage
   - public/js/scenarios : all JS files used for main interactive page
