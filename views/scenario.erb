@@ -43,7 +43,10 @@
                     <div id="tab3" ng-show='tabs.filters'>
                         <div id='filter_div'>
                                 <h3 class="toolbox_text">Filters are coming soon!</h3>
-        <!--         <table>
+
+                    <!-- Commented out section handles CSS filters, which do not work with KineticJS, which is why 
+                          it is commented out -->
+                    <!-- <table>
                                 <tr> -->
 
 
@@ -56,7 +59,7 @@
                                     <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
                                     <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
                                     <input class = 'filter' id = 'reset' type='button' value = 'Reset'> -->
-        <!-- 
+                        <!-- 
                             <td>Blur:</td><td><input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
                         </tr><tr>
                             <td>Grey:</td><td><input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
@@ -109,9 +112,6 @@
         </div>
 
         <div id="dialog-confirm-email" title="E-mail sent!"></div>
-
-        <!-- <div title="Your session will expire soon." id="sessionTimeout-dialog"></div> -->
-
     </div> <!-- Framecontainer -->
 
     <div ng-show='loading' class='loader'>
