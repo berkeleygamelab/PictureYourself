@@ -28,15 +28,21 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
 ## Orientation:
 
 - Project uses is built with Sinatra, Angular.js and Ruby
+- DataMapper.js is used as an ORM
+- Kinetic.js is used for the image manipulation functionality
+
+
 
 - File structure and organization:
 
   - public/js/index  : all JS files used for the homepage
   - public/js/scenarios : all JS files used for main interactive page
+      - handles stickers being dropped onto image, sends data to kinetic.js   
   - public/js/layout : JS file used to make the navigation bar interactive
   - users/minifier.rb: minifies JS and CSS files before they're run 
   - db.rb : seeds new images loaded into 'public/images' folder into the database
   - scenario.js : HTTP request is made to /stickers. Sticker table is queried, data turned into JSON
+  - factories.js : manipulates transparent buttons on images
   
 
 
