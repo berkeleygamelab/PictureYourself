@@ -45,12 +45,11 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
   - scenario.js : HTTP request is made to /stickers. Sticker table is queried, data turned into JSON
   - factories.js : manipulates transparent buttons on images
   
+#### Making and Testing Changes
 
-After making changes to JavaScript or CSS files, don't forget to minify them before running.
-Instructions for minifying: 
-For all JS/CSS files: ruby /public/minifier.rb
-For one file: juicer merge -i <name of file> --force 
+- After making changes to JavaScript or CSS files, don't forget to minify them before running. Instructions for minifying:
+    - For all JS/CSS files: ruby /public/minifier.rb
+    - For one file: juicer merge -i <name of file> --force 
 
 
-When making changes locally, just refreshing the page will register the new changes (shotgun does not need to be restarted).
-Shotgun does have to be restarted when installing new gems, though.
+- When making changes locally, just refreshing the page will register the new changes (Shotgun does NOT need to be restarted). However, Shotgun DOES have to be restarted when installing new gems.
