@@ -319,7 +319,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         // set horizontal height of image
         sticker.scalerX.on('dragmove touchmove',function(){
                 
-            var half_width = this.x() - sticker.image.x()
+            var half_width = Math.abs(this.x() - sticker.image.x());
             sticker.image.width(half_width * 2);
             sticker.image.offsetX(half_width);
             
@@ -336,7 +336,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         //set vertical height of image
         sticker.scalerY.on('dragmove touchmove',function(){
             
-            var half_height = this.y() - sticker.image.y();
+            var half_height = Math.abs(this.y() - sticker.image.y());
             sticker.image.height(half_height * 2);
             sticker.image.offsetY(half_height);
 
