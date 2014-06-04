@@ -14,6 +14,7 @@ get '/reset_stickers' do
   redirect to '/seed' 
 end
 
+#
 def seed_stickers
   Sticker_Category.all.each do |category|
     dir = "images/stickers/" + category.display_order.to_s + "-" + category.folder + "/"
