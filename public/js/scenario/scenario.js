@@ -65,6 +65,18 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
             change_color($('select[name="colorpicker"]').val());    
         });
 
+    // Used to close tools for all stickers
+    var closeTools = function(){
+        a = $(stage.find('.y, .x, .delete, .rotate, .background'));
+
+        a.each(function(index){
+            a[index].visible(false);
+        });
+
+        $("#modal").hide();
+
+        layer.draw();
+    };
 
 
     // Background ///////////////////////////////////////////////////////////////
@@ -75,6 +87,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     $scope.background_update = function(e){
         $scope.background.getImage().src = e.target.src;
     };
+
 
     // Load background images via ajax call
     grabBackgroundImages($scope, $http, $compile);
@@ -93,19 +106,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         e.preventDefault(); //@important
     });
 
-
-    // Used to close tools for all stickers
-    var closeTools = function(){
-        a = $(stage.find('.y, .x, .delete, .rotate, .background'));
-
-        a.each(function(index){
-            a[index].visible(false);
-        });
-
-        $("#modal").hide();
-
-        layer.draw();
-    };
 
     // STAGE ///////////////////////////////////////////////////////////////
 
@@ -155,86 +155,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         // ---- TODO ---------------------------------------------------------------
         // Move finished events into factory. 
 
-        sticker.delete_icon.on('click', function(){
-            debug('DELETE');
-
-            sticker.group.destroy();
-            $scope.selected_background = null;
-            $scope.selected_sticker = null;
-            $('#modal').hide();
-
-            layer.draw();
-         });
-
-
-        // set horizontal height of image
-        sticker.scalerX.on('dragmove touchmove',function(){
-                
-            var half_width = Math.abs(this.x() - sticker.image.x());
-            sticker.image.width(half_width * 2);
-            sticker.image.offsetX(half_width);
-            
-            if(has_chroma_green) {
-                sticker.imageBack.width(sticker.image.width());
-                sticker.imageBack.offsetX(half_width);
-                // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
-            }
-
-            sticker.reposition();
-        });
-
-
-        //set vertical height of image
-        sticker.scalerY.on('dragmove touchmove',function(){
-            
-            var half_height = Math.abs(this.y() - sticker.image.y());
-            sticker.image.height(half_height * 2);
-            sticker.image.offsetY(half_height);
-
-            if(has_chroma_green)
-            {
-                sticker.imageBack.height(sticker.image.height());
-                sticker.imageBack.offsetY(half_height);
-                // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
-            }
-
-            sticker.reposition();   
-            layer.draw();
-
-        });
-        
-        var startX;
-        var startY;
-        var half_width = sticker.image.getWidth()/2
-        var half_height = sticker.image.getHeight()/2
-        var start_angle, end_angle;
-        var start_rotation;
-
-        function angle(rad) {
-            if (rad > Math.PI) {
-                rad = rad - 2*Math.PI;
-            }
-            return rad * 180 / Math.PI;
-        }
-
-        sticker.rotate.on('dragstart', function(e) {
-            startX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
-            startY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
-            start_angle = Math.atan2(startY, startX);
-            start_rotation = sticker.image.rotation();
-        });
-
-        sticker.rotate.on('dragmove touchmove', function(e){ //dragmove
-
-            endX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
-            endY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
-            end_angle = Math.atan2(endY, endX);
-            sticker.group.rotation(start_rotation + angle(end_angle - start_angle));
-
-            sticker.reposition();   
-            layer.draw();
-        });
-        
 
         //---- Color Picker------------------------------------------------------------------------------
 
