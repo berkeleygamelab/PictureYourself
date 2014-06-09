@@ -78,7 +78,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     // Load background images via ajax call
     grabBackgroundImages($scope, $http, $compile);
-    
+
     // Stickers ///////////////////////////////////////////////////////////////
     grabStickerImages($scope, $http, $compile);
 

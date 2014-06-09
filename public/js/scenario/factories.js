@@ -79,8 +79,8 @@ app.factory('Sticker', function(){
             });
 
             sticker.scalerX = new Kinetic.Text({
-                x : start_size.width/2, // sticker.image.x() + start_size.width/2,
-                y : 0, // sticker.image.y(),
+                x : start_size.width/2,
+                y : start_size.height/2,
                 offsetX: tool_size/2,
                 offsetY: tool_size/2,
                 text: '',
@@ -95,8 +95,8 @@ app.factory('Sticker', function(){
             });
 
             sticker.scalerY = new Kinetic.Text({
-                x : 0, // sticker.image.x(),
-                y : start_size.height/2, // sticker.image.y() + start_size.height/2,
+                x : - start_size.width/2,
+                y : - start_size.height/2,
                 offsetY: tool_size/2,
                 offsetX: tool_size * 13 / 60,
                 text: '',
@@ -113,7 +113,7 @@ app.factory('Sticker', function(){
 
             sticker.rotate = new Kinetic.Text({
                 x : - start_size.width/2, // sticker.image.x() - start_size.width/2,
-                y : - start_size.height/2, // sticker.image.y() - start_size.height/2,
+                y : start_size.height/2, // sticker.image.y() - start_size.height/2,
                 offsetX: tool_size/2,
                 offsetY: tool_size/2,
                 text: '',  //leave this it won't render correctly here but will on the canvas
@@ -126,22 +126,6 @@ app.factory('Sticker', function(){
                 visible:true,
                 name: 'rotate',
             });
-
-            /* Unsuccessful delete image try
-            var delete_img = new Image();
-            delete_img.src = "images/img/close-button.png";
-            delete_img.onload = function() {
-                sticker.delete_icon = new Kinetic.Image({
-                    visible: true,
-                    height: tool_size,
-                    width: tool_size,
-                    name: 'delete',
-                    x: start_size.width/2,
-                    y: -start_size.height/2,
-                    offsetX: tool_size/2,
-                    offsetY: tool_size/2
-                })
-            } */
 
             if (imageObjBack != null){
                 sticker.imageBack.offsetX(start_size.width/2);
@@ -186,14 +170,14 @@ app.factory('Sticker', function(){
                 sticker.group.add(sticker.scalerY);
                 sticker.group.add(sticker.delete_icon);
                 sticker.group.add(sticker.rotate);
-                if(imageObjBack != null){
-                    sticker.move_color();
-                }
-
-
+                
                 layer.add(sticker.group);
                 
                 sticker.reposition();
+                
+                if(imageObjBack != null){
+                    sticker.move_color();
+                }
                 layer.draw();
             }
 
@@ -202,13 +186,16 @@ app.factory('Sticker', function(){
                 var half_width = sticker.image.width()/2;
                 var half_height = sticker.image.height()/2;
 
+                var stagex = $('.kineticjs-content').position().left;
+                var stagey = $('.kineticjs-content').position().top;
+
                 sticker.rotate.x(-half_width);
-                sticker.rotate.y(-half_height);
+                sticker.rotate.y(half_height);
 
-                sticker.scalerX.x(half_width);
-                sticker.scalerX.y(0);
+                sticker.scalerX.x(-half_width);
+                sticker.scalerX.y(-half_height);
 
-                sticker.scalerY.x(0);
+                sticker.scalerY.x(half_width);
                 sticker.scalerY.y(half_height);
 
                 sticker.delete_icon.x(half_width);
@@ -220,17 +207,21 @@ app.factory('Sticker', function(){
                 sticker.background.height(half_height*2);
                 sticker.background.offsetX(half_width);
                 sticker.background.offsetY(half_height);
-
-
             };
 
             sticker.move_color = function(){
 
-                var stagex = $('.kineticjs-content').position().left;
-                var stagey = $('.kineticjs-content').position().top;
-                var x = sticker.background.getAbsolutePosition().x - sticker.background.offsetX() - tool_size/2;
-                var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY() - tool_size/2;
-                $("#modal").css({left: x + stagex, top: y + stagey});
+                // var stagex = $('.kineticjs-content').position().left;
+                // var stagey = $('.kineticjs-content').position().top;
+                // var x = sticker.background.getAbsolutePosition().x - sticker.background.offsetX() - tool_size/2;
+                // var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY() - tool_size/2;
+                // $("#modal").css({left: x + stagex, top: y + stagey});
+                $("#modal").css({
+                    left: $('.kineticjs-content').position().left + (sticker.rotate.getAbsolutePosition().x
+                        + sticker.scalerY.getAbsolutePosition().x)/2 - tool_size/2,
+                    top: $('.kineticjs-content').position().top + (sticker.rotate.getAbsolutePosition().y
+                        + sticker.scalerY.getAbsolutePosition().y)/2 - tool_size/2
+                });
                 $("#modal").show();
             }
 
@@ -239,4 +230,3 @@ app.factory('Sticker', function(){
         }
     }
 });
-
