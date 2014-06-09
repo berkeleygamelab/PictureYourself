@@ -121,8 +121,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
         }) ;
 
-
-    // Frames (Currently disabled)///////////////////////////////////////////////////////////////
+     // Frames (Currently disabled)///////////////////////////////////////////////////////////////
 
     $scope.frameObj = new Image();
 
@@ -136,40 +135,24 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     layer.add(frame);
 
-    $scope.frameObj.onload = function(){
-        debug('frame onload');
+    // $scope.frameObj.onload = function(){
+    //     debug('frame onload');
 
-        layer.add(frame);
-        layer.draw();
-    };
+    //     layer.add(frame);
+    //     layer.draw();
+    // };
 
-    $scope.frame_update = function(e){
-        debug('frame update');
-        $scope.frameObj.src = e.target.src;
-    };
+    // $scope.frame_update = function(e){
+    //     debug('frame update');
+    //     $scope.frameObj.src = e.target.src;
+    // };
 
+    // $scope.remove_frame = function(){
+    //     debug('remove frame');
 
-    //TEMPORARY SO WE CAN HAVE IT SAY COMING SOON FOR FRAMES!!!!!!
-    
-    // $http.get('/stickers/frames').success(
-    //     function(data)
-    //     {
-    //         angular.forEach(data,
-    //             function(source,name)
-    //             {
-    //                 html = "<img src='/" +  source + "' class='frames' ng-click=\"frame_update($event)\" alt='"+name+"'>"
-    //                 compiledElement = $compile(html)($scope);
-    //                 $("#frames_tab").append(compiledElement)
-    //             })
-
-    // }) //success
-
-    $scope.remove_frame = function(){
-        debug('remove frame');
-
-        $scope.frameObj.src = "";
-        layer.draw();
-    };
+    //     $scope.frameObj.src = "";
+    //     layer.draw();
+    // };
 
 
     // Stickers ///////////////////////////////////////////////////////////////
@@ -298,7 +281,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         // Creates a new sticker object from factory in factories.js
         // Returns a dictionary with sticker objects and needed functions.
 
-        var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack);
+        var sticker = Sticker.newSticker(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack);
 
         $scope.selected_sticker = sticker;
         // ---- TODO ---------------------------------------------------------------
@@ -587,3 +570,4 @@ function debug(msg){
     }
 }
 
+ScenarioCtrl.$inject = ['$scope', '$resource', '$http', '$compile', 'Sticker']; //required for minifying angular
