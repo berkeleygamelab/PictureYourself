@@ -2,7 +2,7 @@
 $.sessionTimeout = function( options ) {
     var defaults = {
         message      : 'Your session is about to expire.',
-        keepAliveUrl : '/selfie',
+        keepAliveUrl : '/scenario',
         redirUrl     : '/',
         logoutUrl    : '/',
         warnAfter    : 180000, // 3 minutes
