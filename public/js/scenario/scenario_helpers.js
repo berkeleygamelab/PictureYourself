@@ -58,11 +58,6 @@ function grabBackgroundImages($scope, $http, $compile){
 }
 
 function grabStickerImages($scope, $http, $compile){
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> d494e146a3d8322650281dbfcac020583e0598da
 	var default_category = "shoes_and_pants";
     
     // Grab stickers from server and append them to category
