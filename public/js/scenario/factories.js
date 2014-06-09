@@ -1,7 +1,7 @@
 // This might not factory (possibly a service or just a function)            
-app.factory('Sticker', function(){
+app.service('Sticker', function(){
     return{
-        new : function(imageObj, pos, start_size, layer, imageObjBack){
+        new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage){
             var sticker = {
                 background : null,
                 delete_icon : null,
@@ -126,6 +126,86 @@ app.factory('Sticker', function(){
                 name: 'rotate',
             });
 
+
+        sticker.delete_icon.on('click', function(){
+            sticker.group.destroy();
+            $scope.selected_background = null;
+            $scope.selected_sticker = null;
+            $('#modal').hide();
+
+            layer.draw();
+         });
+
+
+        // set horizontal height of image
+        sticker.scalerX.on('dragmove touchmove',function(){
+                
+            var half_width = Math.abs(this.x() - sticker.image.x());
+            sticker.image.width(half_width * 2);
+            sticker.image.offsetX(half_width);
+            
+            if(imageObjBack != null) {
+                sticker.imageBack.width(sticker.image.width());
+                sticker.imageBack.offsetX(half_width);
+                // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
+            }
+
+            sticker.reposition();
+        });
+
+
+        //set vertical height of image
+        sticker.scalerY.on('dragmove touchmove',function(){
+            
+            var half_height = Math.abs(this.y - sticker.image.y());
+            sticker.image.height(half_height * 2);
+            sticker.image.offsetY(half_height);
+
+            if(imageObjBack != null)
+            {
+                sticker.imageBack.height(sticker.image.height());
+                sticker.imageBack.offsetY(half_height);
+                // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
+            }
+
+            sticker.reposition();   
+            layer.draw();
+
+        });
+        
+        var startX;
+        var startY;
+        var half_width = sticker.image.getWidth()/2
+        var half_height = sticker.image.getHeight()/2
+        var start_angle, end_angle;
+        var start_rotation;
+
+        function angle(rad) {
+            if (rad > Math.PI) {
+                rad = rad - 2*Math.PI;
+            }
+            return rad * 180 / Math.PI;
+        }
+
+        sticker.rotate.on('dragstart', function(e) {
+            startX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
+            startY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
+            start_angle = Math.atan2(startY, startX);
+            start_rotation = sticker.image.rotation();
+        });
+
+        sticker.rotate.on('dragmove touchmove', function(e){ //dragmove
+
+            endX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
+            endY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
+            end_angle = Math.atan2(endY, endX);
+            sticker.group.rotation(start_rotation + angle(end_angle - start_angle));
+
+            sticker.reposition();   
+            layer.draw();
+        });
+        
+
             if (imageObjBack != null){
                 sticker.imageBack.offsetX(start_size.width/2);
                 sticker.imageBack.offsetY(start_size.height/2);
@@ -211,11 +291,6 @@ app.factory('Sticker', function(){
 
             sticker.move_color = function(){
 
-                // var stagex = $('.kineticjs-content').position().left;
-                // var stagey = $('.kineticjs-content').position().top;
-                // var x = sticker.background.getAbsolutePosition().x - sticker.background.offsetX() - tool_size/2;
-                // var y = sticker.background.getAbsolutePosition().y + sticker.background.offsetY() - tool_size/2;
-                // $("#modal").css({left: x + stagex, top: y + stagey});
                 $("#modal").css({
                     left: $('.kineticjs-content').position().left + (sticker.rotate.getAbsolutePosition().x
                         + sticker.scalerY.getAbsolutePosition().x)/2 - tool_size/2,
@@ -224,6 +299,8 @@ app.factory('Sticker', function(){
                 });
                 $("#modal").show();
             }
+
+
 
             return sticker;
          
