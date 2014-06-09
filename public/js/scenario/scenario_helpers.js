@@ -41,7 +41,7 @@ function backgroundSetup(closeTools, default_backgroud, layer, stage){
     return background;
 }
 
-function grabBackgroundImages($scope){
+function grabBackgroundImages($scope, $http, $compile){
 	// Grab backgrounds from server
     $http.get('/stickers/backgrounds').success(
         function(data)
@@ -57,50 +57,51 @@ function grabBackgroundImages($scope){
         }) ;
 }
 
-function grabStickerImages($scope){
-	
+function grabStickerImages($scope, $http, $compile){
+
 	var default_category = "shoes_and_pants";
     
     // Grab stickers from server and append them to category
-    $http.get('/stickers').success(
-        function(data){
-            data = angular.fromJson(data);
-            $scope.visible = {};
-            $scope.stickers = data['stickers'];
-            $scope.categories = data['categories'];
+    $http.get('/stickers').
+    	success(
+	        function(data){
+	            data = angular.fromJson(data);
+	            $scope.visible = {};
+	            $scope.stickers = data['stickers'];
+	            $scope.categories = data['categories'];
 
-            angular.forEach($scope.stickers,
+	            angular.forEach($scope.stickers,
 
-                function(stickers,category){
+	                function(stickers,category){
 
-                    // Category is open on page load if it's the default category
-                    $scope.visible[category] = (category == default_category);
+	                    // Category is open on page load if it's the default category
+	                    $scope.visible[category] = (category == default_category);
 
-                    //create the dynamic html
-                    html= "<div id="+category+"_subtab class='subtab_title' "+
-                        "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
-                        "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
-                    
-                    //compile it with angular so functions work
-                    compiledElement = $compile(html)($scope);
-                    $("#sticker_tab").append(compiledElement);
-                    
-                    //add stickers
-                    angular.forEach(stickers,
-                        function(sticker){
-                            $("#"+category+"_content").
-                            append('<img class=\'sticker ' + category + 
-                                '\' src="/' + sticker.source + '" name="' + sticker.name +
-                                 '" data-chroma_green="' + sticker.chroma_green.toString() +'"/>');
+	                    //create the dynamic html
+	                    html= "<div id="+category+"_subtab class='subtab_title' "+
+	                        "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
+	                        "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
+	                    
+	                    //compile it with angular so functions work
+	                    compiledElement = $compile(html)($scope);
+	                    $("#sticker_tab").append(compiledElement);
+	                    
+	                    //add stickers
+	                    angular.forEach(stickers,
+	                        function(sticker){
+	                            $("#"+category+"_content").
+	                            append('<img class=\'sticker ' + category + 
+	                                '\' src="/' + sticker.source + '" name="' + sticker.name +
+	                                 '" data-chroma_green="' + sticker.chroma_green.toString() +'"/>');
 
 
-                            if(sticker.chroma_green){
-                                $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
-                                                                     'back': sticker.back_source};
-                            };
+	                            if(sticker.chroma_green){
+	                                $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
+	                                                                     'back': sticker.back_source};
+	                            };
 
-                    });
-                });
+	                    });
+	                });
 
             $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
                 $scope.dragSrcEl = this;

@@ -49,7 +49,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     $scope.selected_image = null;
 
     // KineticJS Setup ///////////////////////////////////////////////////////////////
-    kinetic = kineticSetup(stage_width,stage_heigth);
+    kinetic = kineticSetup(stage_width,stage_height);
 
     var layer = kinetic.layer;
     var stage = kinetic.stage;
@@ -73,14 +73,14 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     // Called when user selects a background
     $scope.background_update = function(e){
-        $scope.background.image.src = e.target.src;
+        $scope.background.getImage().src = e.target.src;
     };
 
     // Load background images via ajax call
-    grabBackgroundImages($scope);
+    grabBackgroundImages($scope, $http, $compile);
 
     // Stickers ///////////////////////////////////////////////////////////////
-    grabStickerImages($scope);
+    grabStickerImages($scope, $http, $compile);
 
     // Toggle sticker category
     $scope.toggle = function(category){
