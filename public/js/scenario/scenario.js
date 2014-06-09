@@ -49,15 +49,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     $scope.selected_image = null;
 
     // KineticJS Setup ///////////////////////////////////////////////////////////////
+    kinetic = kineticSetup(stage_width,stage_heigth);
 
-    var stage = new Kinetic.Stage({
-        container: 'container',
-        width: stage_width,
-        height: stage_height
-    });
-
-    var layer = new Kinetic.Layer();
-    stage.add(layer);
+    var layer = kinetic.layer;
+    var stage = kinetic.stage;
 
     var con = stage.container();
     var dragSrcEl = null;
@@ -74,52 +69,16 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     // Background ///////////////////////////////////////////////////////////////
     
-    $scope.backgroundObj = new Image();
-    
-    var background = new Kinetic.Image({
-        image:$scope.backgroundObj,
-        x:0,
-        y:0,
-        width:stage_width,
-        height:stage_height
-    });
-
-    $scope.backgroundObj.src = default_background;
-
-
-    $scope.backgroundObj.onload = function(){
-        debug("Bacground onload");
-        
-        layer.add(background);
-        background.setZIndex(1);
-
-        layer.draw();
-    };
-
-    // Remove sticker tools when background is clicked
-    background.on('click', function(){
-        debug('background click');
-        closeTools();
-    });
+    $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
 
     // Called when user selects a background
     $scope.background_update = function(e){
-        $scope.backgroundObj.src = e.target.src;
+        $scope.background.image.src = e.target.src;
     };
 
-    // Grab backgrounds from server
-    $http.get('/stickers/backgrounds').success(
-        function(data)
-        {
-            angular.forEach(data,
-                function(source,name)
-                {
-                    html = "<img src='/" +  source + "' class='background' ng-click=\"background_update($event)\" alt='"+name+"'>";
-                    compiledElement = $compile(html)($scope);
-                    $("#backgrounds_tab").append(compiledElement);
-                });
+    
 
-        }) ;
+    
 
 
     // Frames (Currently disabled)///////////////////////////////////////////////////////////////
@@ -148,21 +107,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         $scope.frameObj.src = e.target.src;
     };
 
-
-    //TEMPORARY SO WE CAN HAVE IT SAY COMING SOON FOR FRAMES!!!!!!
-    
-    // $http.get('/stickers/frames').success(
-    //     function(data)
-    //     {
-    //         angular.forEach(data,
-    //             function(source,name)
-    //             {
-    //                 html = "<img src='/" +  source + "' class='frames' ng-click=\"frame_update($event)\" alt='"+name+"'>"
-    //                 compiledElement = $compile(html)($scope);
-    //                 $("#frames_tab").append(compiledElement)
-    //             })
-
-    // }) //success
 
     $scope.remove_frame = function(){
         debug('remove frame');

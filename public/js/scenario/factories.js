@@ -1,31 +1,4 @@
-// This might not factory (possibly a service or just a function)
-app.factory('Sticker', function(){
-    return{
-        new : function(imageObj, pos, start_size, layer, imageObjBack){
-            var sticker = {
-                background : null,
-                delete_icon : null,
-                group : null,
-                image : null,
-                imageBack : null,
-                move_color : null,
-                previous_color : null,
-                rotate : null,
-                scalerX : null,
-                scalerY : null, 
-                reposition : null
-            }
-
-            // Used to make sure both background and foreground are loaded together
-            var image_load_count = 0;
-            // Used to make sure that scaling and positioning of controls are synced
-            var tool_size = 30;
-
-            sticker.group = new Kinetic.Group({
-                draggable: true,
-                x: pos.x + start_size.width/2,
-                y: pos.y + start_size.height/2
-            });// This might not factory (possibly a service or just a function)
+// This might not factory (possibly a service or just a function)            
 app.factory('Sticker', function(){
     return{
         new : function(imageObj, pos, start_size, layer, imageObjBack){
