@@ -49,15 +49,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     $scope.selected_image = null;
 
     // KineticJS Setup ///////////////////////////////////////////////////////////////
+    kinetic = kineticSetup(stage_width,stage_height);
 
-    var stage = new Kinetic.Stage({
-        container: 'container',
-        width: stage_width,
-        height: stage_height
-    });
-
-    var layer = new Kinetic.Layer();
-    stage.add(layer);
+    var layer = kinetic.layer;
+    var stage = kinetic.stage;
 
     var con = stage.container();
     var dragSrcEl = null;
@@ -74,145 +69,17 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     // Background ///////////////////////////////////////////////////////////////
     
-    $scope.backgroundObj = new Image();
-    
-    var background = new Kinetic.Image({
-        image:$scope.backgroundObj,
-        x:0,
-        y:0,
-        width:stage_width,
-        height:stage_height
-    });
-
-    $scope.backgroundObj.src = default_background;
-
-
-    $scope.backgroundObj.onload = function(){
-        debug("Bacground onload");
-        
-        layer.add(background);
-        background.setZIndex(1);
-
-        layer.draw();
-    };
-
-    // Remove sticker tools when background is clicked
-    background.on('click', function(){
-        debug('background click');
-        closeTools();
-    });
+    $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
 
     // Called when user selects a background
     $scope.background_update = function(e){
-        $scope.backgroundObj.src = e.target.src;
+        $scope.background.getImage().src = e.target.src;
     };
 
-    // Grab backgrounds from server
-    $http.get('/stickers/backgrounds').success(
-        function(data)
-        {
-            angular.forEach(data,
-                function(source,name)
-                {
-                    html = "<img src='/" +  source + "' class='background' ng-click=\"background_update($event)\" alt='"+name+"'>";
-                    compiledElement = $compile(html)($scope);
-                    $("#backgrounds_tab").append(compiledElement);
-                });
-
-        }) ;
-
-     // Frames (Currently disabled)///////////////////////////////////////////////////////////////
-
-    $scope.frameObj = new Image();
-
-    var frame = new Kinetic.Image({
-        image:$scope.frameObj,
-        x:0,
-        y:0,
-        width:stage_width,//$('#container').width(),
-        height:stage_height,//$('#container').height()
-    });
-
-    layer.add(frame);
-
-    // $scope.frameObj.onload = function(){
-    //     debug('frame onload');
-
-    //     layer.add(frame);
-    //     layer.draw();
-    // };
-
-    // $scope.frame_update = function(e){
-    //     debug('frame update');
-    //     $scope.frameObj.src = e.target.src;
-    // };
-
-    // $scope.remove_frame = function(){
-    //     debug('remove frame');
-
-    //     $scope.frameObj.src = "";
-    //     layer.draw();
-    // };
-
-
+    // Load background images via ajax call
+    grabBackgroundImages($scope, $http, $compile);
     // Stickers ///////////////////////////////////////////////////////////////
-
-    var default_category = "shoes_and_pants";
-    
-    // Grab stickers from server and append them to category
-    $http.get('/stickers').success(
-        function(data){
-            data = angular.fromJson(data);
-            $scope.visible = {};
-            $scope.stickers = data['stickers'];
-            $scope.categories = data['categories'];
-
-            angular.forEach($scope.stickers,
-
-                function(stickers,category){
-
-                    // Category is open on page load if it's the default category
-                    $scope.visible[category] = (category == default_category);
-
-                    //create the dynamic html
-                    html= "<div id="+category+"_subtab class='subtab_title' "+
-                        "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
-                        "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
-                    
-                    //compile it with angular so functions work
-                    compiledElement = $compile(html)($scope);
-                    $("#sticker_tab").append(compiledElement);
-                    
-                    //add stickers
-                    angular.forEach(stickers,
-                        function(sticker){
-                            $("#"+category+"_content").
-                            append('<img class=\'sticker ' + category + 
-                                '\' src="/' + sticker.source + '" name="' + sticker.name +
-                                 '" data-chroma_green="' + sticker.chroma_green.toString() +'"/>');
-
-
-                            if(sticker.chroma_green){
-                                $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
-                                                                     'back': sticker.back_source};
-                            };
-
-                    });
-                });
-
-            $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
-                $scope.dragSrcEl = this;
-
-                // Flag so color change tool is added to sticker
-                debug($(this).data('chroma_green'));
-                if($(this).data('chroma_green') == true){
-                    $scope.chroma_green = true;
-                }
-                else
-                    $scope.chroma_green = false;
-            });
-
-    });
+    grabStickerImages($scope, $http, $compile);
 
     // Toggle sticker category
     $scope.toggle = function(category){
