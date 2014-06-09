@@ -20,7 +20,7 @@ function backgroundSetup(closeTools, default_backgroud, layer, stage){
         image: background_obj,
         x:0,
         y:0,
-        width:  stage.getWidth(),
+        width: stage.getWidth(),
         height: stage.getHeight()
     });
 
@@ -28,7 +28,7 @@ function backgroundSetup(closeTools, default_backgroud, layer, stage){
 
     background_obj.onload = function(){
         layer.add(background);
-        background.setZIndex(1);
+        background.setZIndex(0);
 
         layer.draw();
     };
