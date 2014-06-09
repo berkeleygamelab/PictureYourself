@@ -28,7 +28,7 @@ function backgroundSetup(closeTools, default_backgroud, layer, stage){
 
     background_obj.onload = function(){
         layer.add(background);
-        background.setZIndex(1);
+        background.setZIndex(0);
 
         layer.draw();
     };
