@@ -192,13 +192,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     }); // End of drop listener
 
 
-   // TODO do we need to have these in Scenario?
-   //Probably not, but there dependencies on things defined in this file, such as the stage. 
-
-    
-
-
-
     $scope.call_email = function(){
         // Show loading overlay
         $(".loader").show();

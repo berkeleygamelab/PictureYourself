@@ -128,14 +128,14 @@ function grabStickerImages($scope, $http, $compile){
 	                    // Category is open on page load if it's the default category
 	                    $scope.visible[category] = (category == default_category);
 
-	                    //create the dynamic html
-	                    html= "<div id="+category+"_subtab class='subtab_title' "+
-	                        "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
-	                        "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
+	                    // //create the dynamic html
+	                    // html= "<div id="+category+"_subtab class='subtab_title' "+
+	                    //     "ng-click=\"toggle('"+category+"')\">"+$scope.categories[category]+"</div>"+
+	                    //     "<div ng-show='visible."+category+"' id='"+category+"_content' class='subtab_content'></div>";
 	                    
-	                    //compile it with angular so functions work
-	                    compiledElement = $compile(html)($scope);
-	                    $("#sticker_tab").append(compiledElement);
+	                    // //compile it with angular so functions work
+	                    // compiledElement = $compile(html)($scope);
+	                    // $("#sticker_tab").append(compiledElement);
 	                    
 	                    //add stickers
 	                    angular.forEach(stickers,

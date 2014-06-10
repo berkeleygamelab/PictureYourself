@@ -43,63 +43,34 @@
                                     <img class='sticker' id='selfie' src='' >
                         </div>
                         <p class="toolbox_text">Stickers</p>
+                        CATEGORIES : {{categories}}
+                        
+                        <div ng-repeat-start='(key, title) in categories' id="{{key}}" class='subtab_title' ng-click="toggle(key)"> 
+                            {{title}} 
+                        </div>
+
+                        <div ng-repeat-end >{{title}}</div>
+
                     </div> <!-- #sticker_tab -->
 
+                    
                     <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
                         <h3 class="toolbox_text">Backgrounds</h3>
                     </div>  <!-- backgrounds_tab -->
 
+                    
                     <div id="tab3" ng-show='tabs.filters'>
                         <div id='filter_div'>
                                 <h3 class="toolbox_text">Filters are coming soon!</h3>
-
-                    <!-- Commented out section handles CSS filters, which do not work with KineticJS, which is why 
-                          it is commented out -->
-                    <!-- <table>
-                                <tr> -->
-
-
-                                 <!--  <input class = 'filter' id = 'blur' type='button' value = 'Blur'>
-                                    <input class = 'filter' id = 'gray' type='button' value = 'Grayscale'>
-                                    <input class = 'filter' id = 'sepia' type='button' value = 'Sepia'>
-                                    <input class = 'filter' id = 'saturate' type='button' value = 'Saturate'>
-                                    <input class = 'filter' id = 'invert' type='button' value = 'Invert'>
-                                    <input class = 'filter' id = 'opacity' type='button' value = 'Opacity'>
-                                    <input class = 'filter' id = 'bright' type='button' value = 'Brightness'>
-                                    <input class = 'filter' id = 'contrast' type='button' value = 'Contrast'>
-                                    <input class = 'filter' id = 'reset' type='button' value = 'Reset'> -->
-                        <!-- 
-                            <td>Blur:</td><td><input id="blur_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                        </tr><tr>
-                            <td>Grey:</td><td><input id="grey_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                            <td>Sepia:</td><td><input id="sepia_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                            <td>Saturate:</td><td><input id="saturate_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                            <td>Invert:</td><td><input id="invert_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                            <td>Opacity:</td><td><input id="opacity_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                            <td>Bright:</td><td><input id="bright_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                            <td>Contrast:</td><td><input id="contrast_slider" type="range" min="0" max="40" step="1" value="0" class='slider'></td>
-                            </tr><tr>
-                        </table>
-         -->
                         </div> <!-- filter_div -->
 
                         <div id='reset_div'>
-        <!--           <input class = 'filter' id = 'reset_plus' type='button' value = '-'>Reset<input id='reset_minus' type='button' value='+'>
-         -->           </div> <!-- reset_div -->
+
+                       </div> <!-- reset_div -->
 
                     </div> <!-- Tab3 -->
 
-                    <!-- <div id="frames_tab" ng-show='tabs.frames'> 
-                        <div><h3>Frames</h3> <button id='remove_frame_button' ng-click='remove_frame()'>Remove</button></div>
-
-                    </div>  --><!--tab4-->
-
+                    
                     <div ng-show='tabs.frames'>  <!-- temporary for now -->
                         <h3 class="toolbox_text">Frames are coming soon!</h3>
                     </div>
