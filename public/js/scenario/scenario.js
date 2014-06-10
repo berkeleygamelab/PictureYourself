@@ -159,39 +159,39 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         //---- Color Picker------------------------------------------------------------------------------
 
         // Used to move color picker with drag
-        sticker.group.on('dragmove', function(){
-            if(sticker.scalerX.isVisible() && has_chroma_green)
-                sticker.move_color();   
-        });
 
 
-        //hide and show resize and scaler
+
+        //hide and show tools
         sticker.image.on('click',function(e){
-            debug("Sticker click");
-            if(sticker.scalerX.isVisible()){  //this should be enough to determine if all the other buttons are visible as well
-                closeTools();
+            var is_visible = sticker.scalerX.visible();
+
+            if(is_visible){ 
                 $scope.selected_background = null;
-                $scope.selected_sticker = null;
+                $scope.selected_sticker = null;    
+
             } else{
-                closeTools(); //closes all other tools
                 
+                // Close tools for previously selected sticker
+                if($scope.selected_sticker != null)
+                    $scope.selected_sticker.toggleTools(false);
+
                 $scope.selected_sticker = sticker;  
 
+                // Set previous selected color
                 if($scope.selected_sticker.previous_color != null){
                     $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
                 }
 
+                // Move color picker and assign background image object
                 if(has_chroma_green){
-                    debug("Has Chroma green")
                     sticker.move_color();
                     $scope.selected_background = imageObjBack;
                 }
-                sticker.scalerX.visible(true);
-                sticker.scalerY.visible(true);
-                sticker.delete_icon.visible(true);
-                sticker.rotate.visible(true);
-                sticker.background.visible(true);
             }
+            
+            sticker.toggleTools(!is_visible);
+
             layer.draw();
         });
 
