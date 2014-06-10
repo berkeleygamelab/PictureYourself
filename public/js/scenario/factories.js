@@ -161,7 +161,7 @@ app.service('Sticker', function(){
             //set vertical height of image
             sticker.scalerY.on('dragmove touchmove',function(){
                 
-                var half_height = Math.abs(this.y - sticker.image.y());
+                var half_height = Math.abs(this.y() - sticker.image.y());
                 sticker.image.height(half_height * 2);
                 sticker.image.offsetY(half_height);
 

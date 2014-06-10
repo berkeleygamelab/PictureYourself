@@ -67,10 +67,10 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
     // Used to close tools for all stickers
     var closeTools = function(){
-        a = $(stage.find('.y, .x, .delete, .rotate, .background'));
+        var tools = $(stage.find('.y, .x, .delete, .rotate, .background'));
 
-        a.each(function(index){
-            a[index].visible(false);
+        tools.each(function(index){
+            tools[index].visible(false);
         });
 
         $("#modal").hide();
@@ -200,32 +200,29 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
 
     $scope.call_email = function(){
-        //first remove any tool circles if they exist
+        // Show loading overlay
         $(".loader").show();
 
         closeTools();
         stage.draw();
 
-        var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+        var emails = prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
         
         //check if input is correct
         if(emails !== null) {  
 
-          // $scope.loading = true;
-
           //remove spaces to have one long string as argv for python
           emails = emails.replace(/\s+/g, '');        
-          debug(emails);
+
           //change to use scope variable instead
           pyuserid = getCookie('pyuserid');
           
           stage.toDataURL({
             callback: function(dataUrl) {
                 debug('callback');
-
                 email(pyuserid, emails, dataUrl);
-
             }
+
           }) ;         
         }
         // User clicked cancel, hide loading screen
