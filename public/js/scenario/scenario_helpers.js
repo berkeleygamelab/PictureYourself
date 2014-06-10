@@ -120,6 +120,7 @@ function grabStickerImages($scope, $http, $compile){
 	            $scope.visible = {};
 	            $scope.stickers = data['stickers'];
 	            $scope.categories = data['categories'];
+                $scope.sticker_keys = Object.keys($scope.categories);
 
 	            angular.forEach($scope.stickers,
 
@@ -135,7 +136,6 @@ function grabStickerImages($scope, $http, $compile){
 	                                $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
 	                                                                     'back': sticker.back_source};
 	                            };
-
 	                    });
 	                });
     });
