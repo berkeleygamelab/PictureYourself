@@ -54,7 +54,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     var layer = kinetic.layer;
     var stage = kinetic.stage;
 
-    var con = stage.container();
+    var stage_container = stage.container();
     var dragSrcEl = null;
 
     $scope.image_download = 'test.jpg';
@@ -115,8 +115,8 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         //stop Firefox from opening image
         e.preventDefault();
 
-        //this removes the tool circles around all existing stickers when a new one is dropped
-        closeTools();
+        // close tools of previously selected sticker 
+        if ($scope.selected_sticker != null) { $scope.selected_sticker.toggleTools(false) };
 
         // Assign a local variable with chroma green flag value
         var has_chroma_green = $scope.chroma_green;
@@ -152,14 +152,6 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
         var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
 
         $scope.selected_sticker = sticker;
-        // ---- TODO ---------------------------------------------------------------
-        // Move finished events into factory. 
-
-
-        //---- Color Picker------------------------------------------------------------------------------
-
-        // Used to move color picker with drag
-
 
 
         //hide and show tools
