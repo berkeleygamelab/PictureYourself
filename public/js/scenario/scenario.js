@@ -102,7 +102,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
 
 
     // Drag and drop stickers start
-    con.addEventListener('dragover',function(e){
+    stage_container.addEventListener('dragover',function(e){
         e.preventDefault(); //@important
     });
 
@@ -110,7 +110,7 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
     // STAGE ///////////////////////////////////////////////////////////////
 
     // Add sticker to stage via drop action
-    con.addEventListener('drop',function(e){
+    stage_container.addEventListener('drop',function(e){
 
         //stop Firefox from opening image
         e.preventDefault();
@@ -195,97 +195,45 @@ function ScenarioCtrl($scope, $resource, $http, $compile, Sticker){
    // TODO do we need to have these in Scenario?
    //Probably not, but there dependencies on things defined in this file, such as the stage. 
 
-    function email(pyuserid, emails, data){
-      var formData = {"pyuserid":pyuserid, "data":data};
-      $.ajax({
-        url: '/email',
-        type: 'POST',
-        data: formData,
-        success: function(){        
-          send_email(pyuserid, emails);
-        }
-      });
-    }
+    
 
-    function send_email(pyuserid, emails){
-        
-        $scope.loading = true;
-        $scope.$apply();
-
-        var formData = {"pyuserid":pyuserid, "emails":emails};
-        $.ajax({
-        url: '/send_email',
-        type: 'POST',
-        data: formData,
-        success: function(){
-            $scope.loading = false;
-            $scope.$apply();
-          $( "#dialog-confirm-email" ).dialog({
-            resizable: false,
-            // height:140,
-            // width: 70,
-            modal: true,
-            draggable:false,
-            closeOnEscape:false,
-            dialogClass: 'email-dialog no-close',
-            buttons: {
-              "Start over": function() {
-                window.location = "/";
-              },
-              "Continue": function() {
-                $( this ).dialog( "close" );
-              }
-            }
-        })
-          .position({of:'#container'});
-        },
-        error: function(){
-            $scope.loading = false;
-            $scope.$apply();  
-        }
-        });
-    }
 
 
     $scope.call_email = function(){
         //first remove any tool circles if they exist
+        $(".loader").show();
+
         closeTools();
         stage.draw();
 
         var emails=prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+        
         //check if input is correct
-        if(emails !== null) {                      
+        if(emails !== null) {  
+
+          // $scope.loading = true;
+
           //remove spaces to have one long string as argv for python
           emails = emails.replace(/\s+/g, '');        
           debug(emails);
           //change to use scope variable instead
           pyuserid = getCookie('pyuserid');
+          
           stage.toDataURL({
             callback: function(dataUrl) {
                 debug('callback');
-                //from helpertools
+
                 email(pyuserid, emails, dataUrl);
+
             }
           }) ;         
         }
-    };
+        // User clicked cancel, hide loading screen
+        else{
+            $(".loader").hide();
+        }
 
-    $scope.create_image = function(){
-        $scope.image_download = 'somethingelse.jpg';
-        stage.toDataURL({
-            mimeType: 'image/jpg',
-            quality: 1,
-            callback: function(dataUrl) {
-                var link = document.createElement('a');
-                angular.element(link)
-                .attr('href', dataUrl)
-                .attr('download', 'test.jpg'); // Pretty much only works in chrome
-                link.click();
-                debug('click?');
-            }
-        });
     };
-
 
     // Update the color of a background image
     // Basic operation:

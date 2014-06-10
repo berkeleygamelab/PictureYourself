@@ -10,7 +10,9 @@ post '/email' do
   File.open(dirname+'/1.png', 'wb') do |f|
     f.write(Base64.decode64(data))
   end
+  
   status 200
+
 end
 
 #sends email and attaches user's scenario to email
