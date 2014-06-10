@@ -43,13 +43,16 @@
                                     <img class='sticker' id='selfie' src='' >
                         </div>
                         <p class="toolbox_text">Stickers</p>
-                        CATEGORIES : {{categories}}
-                        
-                        <div ng-repeat-start='(key, title) in categories' id="{{key}}" class='subtab_title' ng-click="toggle(key)"> 
-                            {{title}} 
+                            
+                        <!-- Sticker category titles -->
+                        <div ng-repeat-start='(key, title) in categories' id="{{key}}" class='subtab_title' ng-click="toggle(key)" end-of-adding-stickers>
+                            {{title}}
                         </div>
-
-                        <div ng-repeat-end >{{title}}</div>
+                        
+                        <!-- Sticker category content -->
+                        <div ng-repeat-end id='{{key}}_content'>
+                            <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
+                        </div>
 
                     </div> <!-- #sticker_tab -->
 
