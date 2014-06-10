@@ -97,14 +97,7 @@ function grabBackgroundImages($scope, $http, $compile){
     $http.get('/stickers/backgrounds').success(
         function(data)
         {
-            angular.forEach(data,
-                function(source,name)
-                {
-                    html = "<img src='/" +  source + "' class='background' ng-click=\"background_update($event)\" alt='"+name+"'>";
-                    compiledElement = $compile(html)($scope);
-                    $("#backgrounds_tab").append(compiledElement);
-                });
-
+            $scope.background_images = data;
         }) ;
 }
 
