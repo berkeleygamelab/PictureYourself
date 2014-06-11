@@ -51,17 +51,18 @@
                         
                         <!-- Sticker category content -->
                         <div ng-repeat-end id='{{key}}_content' ng-show='visible[key]'>
-                            
                             <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
 
                         </div>
 
                     </div> <!-- #sticker_tab -->
 
-                    
+                    <!-- Backgrounds 2-->
                     <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
                         <h3 class="toolbox_text">Backgrounds</h3>
-                        <img ng-repeat= '(name, source) in background_images' src='{{source}}' class='background'   ng-click="background_update($event)" alt='{{name}}'>
+                        
+                        <img ng-repeat= 'background in background_images' src='{{background.source}}' class='background'   ng-click="background_update($event)" alt='{{background.name}}' />
+
                     </div>  <!-- backgrounds_tab -->
 
                     

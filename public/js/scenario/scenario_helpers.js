@@ -104,6 +104,27 @@ function grabBackgroundImages($scope, $http, $compile){
 function grabStickerImages($scope, $http, $compile){
 
 	var default_category = "shoes_and_pants";
+
+    /*
+        
+        // Start of code for implimenting ajax call for single sticker category
+        
+         $scope.categories = {};
+         $scope.stickers = {};
+         $scope.sticker_keys = [];
+         $scope.visible = {};
+
+        $http.get('/stickers/' + default_category)
+            .success(function(data){
+             $scope.categories[default_category] = "Shoes and Pants";
+             $scope.visible[default_category] = true;
+             $scope.stickers[default_category] = data;  
+             $scope.sticker_keys.push(default_category);
+     
+            });
+
+    */
+
     
     // Grab stickers from server and append them to category
     $http.get('/stickers').

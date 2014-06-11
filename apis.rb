@@ -30,10 +30,9 @@ get '/stickers/:category' do
 
 	if cat = Sticker_Category.first(:folder=>params[:category])
 		Sticker.all(:category=>cat.folder).each do |sticker|
-			stickers[sticker.name] = sticker.source
+			stickers[sticker.name] = sticker
 		end
 	end
-
 	stickers.to_json
 end
 

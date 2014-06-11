@@ -44,8 +44,11 @@ $(document).ready(function() {
     without $injector
 */
 
-app.
-controller('ScenarioCtrl', 
+
+
+app // Need this for .controller and .directive
+
+    .controller('ScenarioCtrl', 
     function($scope, $resource, $http, $compile, Sticker){
         var stage_width = 800;
         var stage_height = 550;
@@ -64,7 +67,7 @@ controller('ScenarioCtrl',
         var stage = kinetic.stage;
 
         var stage_container = stage.container();
-        var dragSrcEl = null;
+        var dragged_image = null;
 
         $scope.image_download = 'test.jpg';
         var stickers = []; //will store information about stickers
@@ -106,7 +109,7 @@ controller('ScenarioCtrl',
 
         $scope.addDrag = function(){
             $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
-                $scope.dragSrcEl = this;
+                $scope.dragged_image = this;
 
                 // Flag so color change tool is added to sticker
                 if($(this).data('chroma_green') == true){
@@ -144,13 +147,13 @@ controller('ScenarioCtrl',
             var has_chroma_green = $scope.chroma_green;
 
             imageObj = new Image();
-            imageObj.src = $scope.dragSrcEl.src;
+            imageObj.src = $scope.dragged_image.src;
             
             var imageObjBack = null;
 
             // If chroma green set background object and foreground object appropriately 
             if (has_chroma_green){
-                var sources = $scope.image_sources[$scope.dragSrcEl.name];
+                var sources = $scope.image_sources[$scope.dragged_image.name];
 
                 imageObjBack = new Image();
                 imageObjBack.src = sources['back'];
