@@ -25,7 +25,7 @@ function backgroundSetup(closeTools, default_backgroud, layer, stage){
         image: background_obj,
         x:0,
         y:0,
-        width:  stage.getWidth(),
+        width: stage.getWidth(),
         height: stage.getHeight()
     });
 
@@ -115,7 +115,6 @@ function grabBackgroundImages($scope, $http, $compile){
 //    categories - dictionary of categories id name and display title (e.g. {'shirts_and_shoes' : 'Shirts And Shoes'})
 //    sticker_keys - array of category id names used for keys in stickers dictionary. Perserves order
 function grabStickerImages($scope, $http, $compile){
-
 	var default_category = "shoes_and_pants";
 
     /*

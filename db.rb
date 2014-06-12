@@ -5,7 +5,7 @@ get '/seed' do
   #sticker folders and category names
   seed_categories
   seed_stickers
-  redirect to '/selfie'
+  redirect to '/scenario'
 end
 
 #completely resets all the stickers and reseeds the database
