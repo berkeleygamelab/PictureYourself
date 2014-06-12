@@ -1,0 +1,157 @@
+<link rel="stylesheet" type="text/css" href="/css/jquery.simplecolorpicker.css">
+<link rel="stylesheet" type="text/css" href="/css/scenario.min.css">
+
+<script type="text/javascript" src='/js/scenario/timeout.min.js'></script>
+<script type="text/javascript" src='/js/scenario/tabs.min.js'></script>
+<script type="text/javascript" src='/js/libraries/jquery/jquery.colorPicker.min.js'></script>
+<script type="text/javascript" src="/js/libraries/jquery/jquery.simplecolorpicker.js"></script>
+<script type="text/javascript" src="/js/scenario/factories.min.js"></script>
+<<<<<<< HEAD
+<script type="text/javascript" src="/js/scenario/scenario_helpers.min.js"></script>
+<script type="text/javascript" src='/js/scenario/email.min.js'></script>
+<script type="text/javascript" src='/js/scenario/scenario.min.js'></script>
+=======
+<script type="text/javascript" src='/js/scenario/scenario_helpers.min.js'></script>
+<script type="text/javascript" src='/js/scenario/scenario.min.js'></script>
+<script type="text/javascript" src='/js/scenario/email.min.js'></script>
+>>>>>>> 6c179ca7b1e5758b73cad7bc25bab9a0e6435267
+
+<div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
+
+    <div class="row" id='framecontainer'>
+
+        <div id='toolbox'>
+            <div ng-controller='TabsCtrl'>
+
+                <div class="tabs">
+                    <ul class="nav nav-tabs" id='toolicon'>
+                        <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
+                        <li class = 'tab' ng-click='show_tab("backgrounds")'> <img src="/images/img/backgrounds.png" ></li>
+                        <li class = 'tab' ng-click='show_tab("filters")'> <img src="/images/img/filters.png"></li>
+                        <li class = 'tab' ng-click='show_tab("frames")'> <img src="/images/img/borders.png" ></li>
+                    </ul>
+                </div> <!-- Tabs -->
+
+                <div class='tabContent' id='toolboxbody'>
+
+                    <div id="sticker_tab" ng-show='tabs.stickers'>
+                        <div id='selfie_div'>
+                            <p class="toolbox_text" id ="selfie_text"> Your Selfie</p>
+                                    <img class='sticker' id='selfie' src='' >
+                        </div>
+                        <p class="toolbox_text">Stickers</p>
+
+                        <!-- Sticker category titles -->
+                        <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>
+                            {{categories[key]}}
+                        </div>
+                        
+                        <!-- Sticker category content -->
+                        <div ng-repeat-end id='{{key}}_content' ng-show='visible[key]'>
+                            <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
+
+                        </div>
+
+                    </div> <!-- #sticker_tab -->
+
+                    <!-- Backgrounds 2-->
+                    <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
+                        <h3 class="toolbox_text">Backgrounds</h3>
+                        
+                        <img ng-repeat= 'background in background_images' src='{{background.source}}' class='background'   ng-click="background_update($event)" alt='{{background.name}}' />
+
+                    </div>  <!-- backgrounds_tab -->
+
+                    
+                    <div id="tab3" ng-show='tabs.filters'>
+                        <div id='filter_div'>
+                                <h3 class="toolbox_text">Filters are coming soon!</h3>
+                        </div> <!-- filter_div -->
+
+                        <div id='reset_div'>
+
+                       </div> <!-- reset_div -->
+
+                    </div> <!-- Tab3 -->
+
+                    
+                    <div ng-show='tabs.frames'>  <!-- temporary for now -->
+                        <h3 class="toolbox_text">Frames are coming soon!</h3>
+                    </div>
+
+                </div><!--  Toolbox body -->
+            </div> <!-- Tabs Ctrl-->
+
+        
+            <div id="email_div">
+                <input type='button' id='email' class='button' ng-click='call_email()' value = "EMAIL">
+            </div>
+          
+
+        </div> <!-- Toolbox -->
+
+
+        <div id = "scenario_canvas">
+            <div id = "container" ></div><!-- KineticJS Canvas -->
+        </div>
+
+        <div id="dialog-confirm-email" title="E-mail sent!"></div>
+    </div> <!-- Framecontainer -->
+
+    <div ng-show='loading' class='loader'>
+        <span class="loader_helper"></span>
+        <img src='images/img/loader.gif' class='loader_img'>
+    </div>
+
+    <!-- Color picker -->
+      <div id='modal'>
+        
+        <!-- TODO These need to update from the server -->
+        <select name="colorpicker">
+            <option value="#ffdcb1"></option>
+            <option value="#e5c298"></option>
+            <option value="#e4b98e"></option>
+            <option value="#e2b98f"></option>
+            <option value="#e3a173"></option>
+            <option value="#d99164"></option>
+            <option value="#cc8443"></option>
+            <option value="#c77a58"></option>
+            <option value="#a53900"></option>
+            <option value="#880400"></option>
+            <option value="#710200"></option>
+            <option value="#440000"></option>
+            <option value="#ffe0c4"></option>
+            <option value="#eecfb4"></option>
+            <option value="#deab7f"></option>
+            <option value="#e0b184"></option>
+            <option value="#dfa675"></option>
+            <option value="#be723c"></option>
+            <option value="#a01900"></option>
+            <option value="#5b0000"></option>
+            <option value="#000000"></option>
+            <option value="#ede4c8"></option>
+            <option value="#efd6bd"></option>
+            <option value="#eabd9d"></option>
+            <option value="#e3c2ae"></option>
+            <option value="#dfb997"></option>
+            <option value="#d0926e"></option>
+            <option value="#bd9778"></option>
+            <option value="#bb6d4a"></option>
+            <option value="#940a00"></option>
+            <option value="#e1ada4"></option>
+            <option value="#a58869"></option>
+            <option value="#7b0000"></option>
+            <option value="#720000"></option>
+            <option value="#380000"></option>
+
+        </select>
+
+
+      <!-- Canvas to update color -->
+      <!-- TODO possibly change width and height if images change -->
+      <canvas id="color_change_canvas" width="120", height="120"></canvas>
+
+    </div>
+
+</div> <!-- ScenarioCtrl -->
+
