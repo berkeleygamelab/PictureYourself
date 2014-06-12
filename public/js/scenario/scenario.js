@@ -47,211 +47,200 @@ $(document).ready(function() {
 
 
 app // Need this for .controller and .directive
-
     .controller('ScenarioCtrl', 
-    function($scope, $resource, $http, $compile, Sticker){
-        var stage_width = 800;
-        var stage_height = 550;
-        
-        // flags
-        $scope.loading = false;
-        $scope.chroma_green = false;
+        function($scope, $resource, $http, $compile, Sticker){
+            var stage_width = 800;
+            var stage_height = 550;
 
-        $scope.image_sources = {};
-        $scope.selected_image = null;
+            $scope.loading = false;
+            $scope.chroma_green = false;
 
-        // KineticJS Setup ///////////////////////////////////////////////////////////////
-        kinetic = kineticSetup(stage_width,stage_height);
+            $scope.image_sources = {};
+            $scope.selected_image = null;
 
-        var layer = kinetic.layer;
-        var stage = kinetic.stage;
+            // KineticJS stage and layer setup
+            kinetic = kineticSetup(stage_width,stage_height);
 
-        var stage_container = stage.container();
-        var dragged_image = null;
+            var layer = kinetic.layer;
+            var stage = kinetic.stage;
 
-        $scope.image_download = 'test.jpg';
-        var stickers = []; //will store information about stickers
-
-        $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
-            on('change', function(){
-                change_color($('select[name="colorpicker"]').val(), layer, $scope);   
-            });
-
-        // Used to close tools for all stickers
-        var closeTools = function(){
-            var tools = $(stage.find('.y, .x, .delete, .rotate, .background'));
-
-            tools.each(function(index){
-                tools[index].visible(false);
-            });
-
-            $("#modal").hide();
-
-            layer.draw();
-        };
+            var stage_container = stage.container();
+            var dragged_image = null;
 
 
-        // Background ///////////////////////////////////////////////////////////////
-        
-        $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
-
-        // Called when user selects a background
-        $scope.background_update = function(e){
-            $scope.background.getImage().src = e.target.src;
-        };
+            // Setup color picker
+            $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
+                on('change', function(){
+                    change_color($('select[name="colorpicker"]').val(), layer, $scope);   
+                });
 
 
-        // Load background images via ajax call
-        grabBackgroundImages($scope, $http, $compile);
+            // Used to close tools for all stickers
+            var closeTools = function(){
+                var tools = $(stage.find('.y, .x, .delete, .rotate, .background'));
 
-        // Stickers ///////////////////////////////////////////////////////////////
-        grabStickerImages($scope, $http, $compile);
+                tools.each(function(index){
+                    tools[index].visible(false);
+                });
 
-        $scope.addDrag = function(){
-            $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
-                $scope.dragged_image = this;
-
-                // Flag so color change tool is added to sticker
-                if($(this).data('chroma_green') == true){
-                    $scope.chroma_green = true;
-                }
-                else
-                    $scope.chroma_green = false;
-            });
-        };
-
-        // Toggle sticker category
-        $scope.toggle = function(category){
-            $scope.visible[category] = !$scope.visible[category];
-        };
-
-
-        // Drag and drop stickers start
-        stage_container.addEventListener('dragover',function(e){
-            e.preventDefault(); //@important
-        });
-
-
-        // STAGE ///////////////////////////////////////////////////////////////
-
-        // Add sticker to stage via drop action
-        stage_container.addEventListener('drop',function(e){
-
-            //stop Firefox from opening image
-            e.preventDefault();
-
-            // close tools of previously selected sticker 
-            if ($scope.selected_sticker != null) { $scope.selected_sticker.toggleTools(false) };
-
-            // Assign a local variable with chroma green flag value
-            var has_chroma_green = $scope.chroma_green;
-
-            imageObj = new Image();
-            imageObj.src = $scope.dragged_image.src;
-            
-            var imageObjBack = null;
-
-            // If chroma green set background object and foreground object appropriately 
-            if (has_chroma_green){
-                var sources = $scope.image_sources[$scope.dragged_image.name];
-
-                imageObjBack = new Image();
-                imageObjBack.src = sources['back'];
-
-                imageObj.src = sources['fore'];
-
-                $scope.selected_background = imageObjBack;
-            }
-
-            //get position relative to the container and page
-            x = e.pageX - $('#container').offset().left;
-            y = e.pageY - $('#container').offset().top;
-
-            // Start size for dropped images. Used in code to set sizes
-            var start_size = {"width":120,"height":120};
-
-            // Sticker.new(Image, {'x':,'y':}, {'width':,'height':'}, Kinetic.Layer, Image)
-            // Creates a new sticker object from factory in factories.js
-            // Returns a dictionary with sticker objects and needed functions.
-
-            var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
-
-            $scope.selected_sticker = sticker;
-
-
-            //hide and show tools
-            sticker.image.on('click',function(e){
-                var is_visible = sticker.scalerX.visible();
-
-                if(is_visible){ 
-                    $scope.selected_background = null;
-                    $scope.selected_sticker = null;    
-
-                } else{
-                    
-                    // Close tools for previously selected sticker
-                    if($scope.selected_sticker != null)
-                        $scope.selected_sticker.toggleTools(false);
-
-                    $scope.selected_sticker = sticker;  
-
-                    // Set previous selected color
-                    if($scope.selected_sticker.previous_color != null){
-                        $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
-                    }
-
-                    // Move color picker and assign background image object
-                    if(has_chroma_green){
-                        sticker.move_color();
-                        $scope.selected_background = imageObjBack;
-                    }
-                }
-                
-                sticker.toggleTools(!is_visible);
+                $("#modal").hide();
 
                 layer.draw();
-            });
+            };
 
 
 
-        }); // End of drop listener
+            // Setup and assign background Kinetic.Image object          
+            $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
 
+            // Called when user selects a background
+            $scope.background_update = function(e){
+                $scope.background.getImage().src = e.target.src;
+            };
 
-        $scope.call_email = function(){
-            // Show loading overlay
-            $(".loader").show();
+            // Ajax call to load background images and stickers
+            grabBackgroundImages($scope, $http, $compile);
+            grabStickerImages($scope, $http, $compile);
 
-            closeTools();
-            stage.draw();
+            // Called by custom directive to add event to start start of sticker drag
+            $scope.addDrag = function(){
+                $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
+                    $scope.dragged_image = this;
 
-            var emails = prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
-            
-            //check if input is correct
-            if(emails !== null) {  
+                    // Flag so color change tool is added to sticker
+                    if($(this).data('chroma_green') == true){
+                        $scope.chroma_green = true;
+                    }
+                    else
+                        $scope.chroma_green = false;
+                });
+            };
 
-              //remove spaces to have one long string as argv for python
-              emails = emails.replace(/\s+/g, '');        
+            // Add sticker to stage via drop action
+            stage_container.addEventListener('drop',function(e){
 
-              //change to use scope variable instead
-              pyuserid = getCookie('pyuserid');
-              
-              stage.toDataURL({
-                callback: function(dataUrl) {
-                    debug('callback');
-                    email(pyuserid, emails, dataUrl);
+                //stop Firefox from opening image
+                e.preventDefault();
+
+                // close tools of previously selected sticker 
+                if ($scope.selected_sticker != null) { $scope.selected_sticker.toggleTools(false) };
+
+                // Assign a local variable with chroma green flag value.
+                var has_chroma_green = $scope.chroma_green;
+
+                imageObj = new Image();
+                imageObj.src = $scope.dragged_image.src;
+                
+                var imageObjBack = null;
+
+                // If chroma green set background and foreground sticker source appropriately 
+                if (has_chroma_green){
+                    var sources = $scope.image_sources[$scope.dragged_image.name];
+
+                    imageObjBack = new Image();
+                    imageObjBack.src = sources['back'];
+
+                    imageObj.src = sources['fore'];
+
+                    $scope.selected_background = imageObjBack;
                 }
 
-              }) ;         
-            }
-            // User clicked cancel, hide loading screen
-            else{
-                $(".loader").hide();
-            }
+                //get position relative to the container and page
+                x = e.pageX - $('#container').offset().left;
+                y = e.pageY - $('#container').offset().top;
 
-        };       
+                // Start size for dropped images. Used in code to set sizes
+                var start_size = {"width":120,"height":120};
 
-    })// End of Scenario Controller
+                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
 
+                $scope.selected_sticker = sticker;
+
+
+                // Event to hide and show tools
+                sticker.image.on('click',function(e){
+                    var is_visible = sticker.scalerX.visible();
+
+                    // Tools for sticker are displayed
+                    if(is_visible){ 
+                        $scope.selected_background = null;
+                        $scope.selected_sticker = null;    
+
+                    }
+
+                    // Tools for sticker are not displayed
+                    else{
+                        
+                        // Close tools for previously selected sticker
+                        if($scope.selected_sticker != null)
+                            $scope.selected_sticker.toggleTools(false);
+
+                        $scope.selected_sticker = sticker;  
+
+                        // Set previous selected color
+                        if($scope.selected_sticker.previous_color != null){
+                            $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                        }
+
+                        // Move color picker and assign background image object
+                        if(has_chroma_green){
+                            sticker.move_color();
+                            $scope.selected_background = imageObjBack;
+                        }
+                    }
+                    
+                    sticker.toggleTools(!is_visible);
+
+                    layer.draw();
+                });
+
+
+                }); // End of drop listener
+
+
+
+            // Initiate email process
+            $scope.call_email = function(){
+                    // Show loading overlay
+                    $(".loader").show();
+
+                    closeTools();
+                    stage.draw();
+
+                    var emails = prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+                    
+                    //check if input exists
+                    if(emails !== null) {  
+
+                      //remove spaces to have one long string as argv for python
+                      emails = emails.replace(/\s+/g, '');        
+
+                      //change to use scope variable instead
+                      pyuserid = getCookie('pyuserid');
+                      
+                      // Create image from stage and send to email function in email.js
+                      stage.toDataURL({
+                        callback: function(dataUrl) {
+                            debug('callback');
+                            email(pyuserid, emails, dataUrl);
+                        }
+
+                      }) ;         
+                    }
+
+                    // User clicked cancel, hide loading screen
+                    else{
+                        $(".loader").hide();
+                    }};       
+
+            // Prevent default action for stage drag over
+            stage_container.addEventListener('dragover',function(e){
+                e.preventDefault(); //@important
+            });
+        })// End of Scenario Controller
+    
+    // custom directive, calls when sticker image is created during ng-repeat in view
+    // addDrag binds drag event to image object
     .directive('addDrag', function(){
         return function($scope, element, attrs){
             $scope.$eval('addDrag()');

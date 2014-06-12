@@ -45,7 +45,7 @@
                         <p class="toolbox_text">Stickers</p>
 
                         <!-- Sticker category titles -->
-                        <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="toggle(key)" end-of-adding-stickers>
+                        <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>
                             {{categories[key]}}
                         </div>
                         

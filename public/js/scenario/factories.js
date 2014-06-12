@@ -1,4 +1,7 @@
-// This might not factory (possibly a service or just a function)            
+// Sticker.new(Image, {'x':,'y':}, {'width':,'height':'}, Kinetic.Layer, Image)
+// Creates a new sticker object from factory in factories.js
+// Returns a dictionary with sticker objects and needed event functions
+
 app.service('Sticker', function(){
     return{
         new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage){

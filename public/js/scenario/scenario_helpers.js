@@ -1,3 +1,6 @@
+
+// Setups stage (Kinetic.Stage) and layer (Kinetic.Layer)
+// returns - { 'stage' : Kinetic.Stage, 'layer' : Kinetic.Layer }
 function kineticSetup(stage_width, stage_height){
 
     var stage = new Kinetic.Stage({
@@ -12,6 +15,8 @@ function kineticSetup(stage_width, stage_height){
     return {'stage' : stage, 'layer' : layer};
 }
 
+// Creates background object (Kinetic.Image) with image source and events
+// returns - Kinetic.Image
 function backgroundSetup(closeTools, default_backgroud, layer, stage){
     
     var background_obj = new Image();
@@ -92,6 +97,8 @@ function change_color(color, layer, $scope){
     layer.draw();
 }
 
+// Ajax call to server for background images
+//  assigns image data to $scope.background_images
 function grabBackgroundImages($scope, $http, $compile){
 	// Grab backgrounds from server
     $http.get('/stickers/backgrounds').success(
@@ -101,6 +108,12 @@ function grabBackgroundImages($scope, $http, $compile){
         }) ;
 }
 
+// Ajax call to server for sticker images
+//  creates $scope variables :
+//    visible - dictionary of categories and if their stickers are visible
+//    stickers - dictionary of stickers by category
+//    categories - dictionary of categories id name and display title (e.g. {'shirts_and_shoes' : 'Shirts And Shoes'})
+//    sticker_keys - array of category id names used for keys in stickers dictionary. Perserves order
 function grabStickerImages($scope, $http, $compile){
 
 	var default_category = "shoes_and_pants";
@@ -108,7 +121,7 @@ function grabStickerImages($scope, $http, $compile){
     /*
         
         // Start of code for implimenting ajax call for single sticker category
-        
+
          $scope.categories = {};
          $scope.stickers = {};
          $scope.sticker_keys = [];
@@ -155,6 +168,8 @@ function grabStickerImages($scope, $http, $compile){
     });
 }
 
+// Changes hex code to rgb values
+//  returns - { 'r' : int, 'g' : int, 'b' : int}
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
