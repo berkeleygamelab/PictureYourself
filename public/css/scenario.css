@@ -21,6 +21,7 @@
   border: solid;
   border-width: 0.2em;
   border-color: rgb(232, 232, 231);
+  cursor: pointer;
 }
 
 /* This allows scrollbars to always be shown on macs */
