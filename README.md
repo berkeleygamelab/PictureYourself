@@ -34,7 +34,30 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
   - Kinetic.js is used for the image manipulation functionality
 
 
-#### File structure and organization
+#### (! NEW !) File structure and logic
+ 
+  - Controllers:
+    - handles user interaction
+    - writes / updates scope variables for the view
+    - connects view with services and other data objects
+    
+  - Services
+    - like Class functions or "pseudo model" for the stage
+    - group together functions and variable that share a common theme
+        - eg. Camera service controlls all variables that deal with taking a picture
+  
+  - Factories
+    - like "constructors"
+    - create instances of objects
+  
+  - Helpers
+    - functions that deal with setup, independent processes, etc. that don't necessarily relate directly to user interaction
+    - don't logically map to abstract entity (e.g. Camera, Sticker)
+  
+  - Directives
+  
+
+#### (! OLD !) File structure and logic
 
   - public/js/index  : all JS files used for the homepage
   - public/js/scenarios : all JS files used for main interactive page
