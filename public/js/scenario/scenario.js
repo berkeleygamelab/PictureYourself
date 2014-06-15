@@ -102,13 +102,13 @@ app // Need this for .controller and .directive
             grabBackgroundImages($scope, $http, $compile);
             grabStickerImages($scope, $http, $compile);
 
-            // Called by custom directive to add event to start start of sticker drag
+            // Called by custom directive to add event to start of sticker drag
             $scope.addDrag = function(){
                 $('.sticker').bind('dragstart',function(e){  //!!!!!ALL STICKERS MUST HAVE CLASS 'sticker'
                     $scope.dragged_image = this;
 
                     // Flag so color change tool is added to sticker
-                    if($(this).data('chroma_green') == true){
+                    if($(this).data('chroma_green')){
                         $scope.chroma_green = true;
                     }
                     else
@@ -152,7 +152,7 @@ app // Need this for .controller and .directive
                 // Start size for dropped images. Used in code to set sizes
                 var start_size = {"width":120,"height":120};
 
-                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
+                var sticker = Sticker.newSticker(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
 
                 $scope.selected_sticker = sticker;
 

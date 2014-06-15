@@ -1,5 +1,4 @@
 #Main file to be executed
-
 require 'sinatra'
 require 'base64'
 require 'data_mapper'
