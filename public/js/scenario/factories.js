@@ -4,7 +4,7 @@
 
 app.service('Sticker', function(){
     return{
-        newSticker : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage){
+        new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage){
             var sticker = {
                 background : null,
                 delete_icon : null,
@@ -17,8 +17,8 @@ app.service('Sticker', function(){
                 scalerX : null,
                 scalerY : null, 
                 reposition : null,
-                toggleTools : null
-            };
+                toggleTools : null,
+            }
 
             // Used to make sure both background and foreground are loaded together
             var image_load_count = 0;
@@ -182,8 +182,8 @@ app.service('Sticker', function(){
             
             var startX;
             var startY;
-            var half_width = sticker.image.getWidth()/2;
-            var half_height = sticker.image.getHeight()/2;
+            var half_width = sticker.image.getWidth()/2
+            var half_height = sticker.image.getHeight()/2
             var start_angle, end_angle;
             var start_rotation;
 
@@ -233,7 +233,7 @@ app.service('Sticker', function(){
                 imageObj.onload = function(){
                     if(image_load_count > 0){
                         return load();
-                    }
+                    };
                     image_load_count++;
                 };
 
@@ -266,18 +266,18 @@ app.service('Sticker', function(){
                 }
 
                 layer.draw();
-            };
+            }
 
             sticker.move_color = function(){
 
                 $("#modal").css({
-                    left: $('.kineticjs-content').position().left + (sticker.rotate.getAbsolutePosition().x + 
-                        sticker.scalerY.getAbsolutePosition().x)/2 - tool_size/2,
-                    top: $('.kineticjs-content').position().top + (sticker.rotate.getAbsolutePosition().y +
-                        sticker.scalerY.getAbsolutePosition().y)/2 - tool_size/2
+                    left: $('.kineticjs-content').position().left + (sticker.rotate.getAbsolutePosition().x
+                        + sticker.scalerY.getAbsolutePosition().x)/2 - tool_size/2,
+                    top: $('.kineticjs-content').position().top + (sticker.rotate.getAbsolutePosition().y
+                        + sticker.scalerY.getAbsolutePosition().y)/2 - tool_size/2
                 });
                 $("#modal").show();
-            };
+            }
 
             sticker.reposition = function(){
 
@@ -316,8 +316,9 @@ app.service('Sticker', function(){
             
                 // Toggle color picker            
                 is_visible && has_background_sticker ? $("#modal").show() : $("#modal").hide();
+                
 
-            };
+            }
 
             sticker.group.on('dragmove', function(){
                 if(sticker.scalerX.isVisible() && has_background_sticker)
@@ -329,5 +330,5 @@ app.service('Sticker', function(){
             return sticker;
              
             }
-    };
+    }
 });
