@@ -1,4 +1,3 @@
-
 // Setups stage (Kinetic.Stage) and layer (Kinetic.Layer)
 // returns - { 'stage' : Kinetic.Stage, 'layer' : Kinetic.Layer }
 function kineticSetup(stage_width, stage_height){
@@ -101,7 +100,7 @@ function change_color(color, layer, $scope){
 //  assigns image data to $scope.background_images
 function grabBackgroundImages($scope, $http, $compile){
 	// Grab backgrounds from server
-    $http.get('/stickers/backgrounds').success(
+    $http.get('/global_json/backgrounds.json').success(
         function(data)
         {
             $scope.background_images = data;
@@ -139,7 +138,7 @@ function grabStickerImages($scope, $http, $compile){
 
     
     // Grab stickers from server and append them to category
-    $http.get('/stickers').
+    $http.get('/global_json/stickers.json').
     	success(
 	        function(data){
 	            data = angular.fromJson(data);

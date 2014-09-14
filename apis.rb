@@ -1,42 +1,5 @@
 #This handles all requests for the actual stickers, backgrounds, frames, etc
 
-#all stickers
-get '/stickers' do
-
-	categories = {}
-	stickers = {}
-
-	Sticker_Category.all(:order=>:display_order.asc).each do |cat|
-		unless cat.display_order == 0
-			categories[cat.folder] = cat.title
-			stickers[cat.folder] = {}
-		end
-	end
-
-	Sticker.all(:order=>:name.asc).each do |sticker|
-		unless isBackground?(sticker.category)
-			if Sticker_Category.first(:folder => sticker.category)
-				stickers[sticker.category][sticker.name] = sticker
-			end
-		end
-	end
-
-	"{\"stickers\":"+stickers.to_json+", \"categories\":"+categories.to_json+"}"
-end
-
-#get categories e.g. backgrounds or frames
-get '/stickers/:category' do
-	stickers = {}
-
-	if cat = Sticker_Category.first(:folder=>params[:category])
-		Sticker.all(:category=>cat.folder).each do |sticker|
-			stickers[sticker.name] = sticker
-		end
-	end
-	stickers.to_json
-end
-
-
 get '/test/stickers' do
   images  = []
 
@@ -47,6 +10,13 @@ get '/test/stickers' do
   return images.to_json
 end
 
+post '/save_canvas' do
+    # All the canvas's JSON data
+    # We have to do this because Angular does not like 'params'
+    data = request.body.read
+    File.open("public/js/scenario/test.json", "w" ){|f| f.write(data) }
+end
+
 def isBackground? (category)
-	['backgrounds','frames'].include? category
+    ['backgrounds','frames'].include? category
 end

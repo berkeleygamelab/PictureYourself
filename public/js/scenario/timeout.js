@@ -5,8 +5,8 @@ $.sessionTimeout = function( options ) {
         keepAliveUrl : '/scenario',
         redirUrl     : '/',
         logoutUrl    : '/',
-        warnAfter    : 180000, // 3 minutes
-        redirAfter   : 60000 // 1 minute
+        warnAfter    : 600000, // 3 minutes
+        redirAfter   : 300000 // 1 minute
     };
 
     // Extend user-set options over defaults
@@ -87,7 +87,7 @@ $.sessionTimeout = function( options ) {
 
 $(document).ready(function() {
     $.sessionTimeout({
-        warnAfter: 100000,
+        warnAfter: 600000,
         redirAfter: 300000
     });
 });

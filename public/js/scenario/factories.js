@@ -71,7 +71,7 @@ app.service('Sticker', function(){
 
             sticker.delete_icon = new Kinetic.Text({
                 visible:true,
-                text: '',
+                text: '', 
                 fontFamily: 'FontAwesome',
                 fontSize: tool_size,
                 fill: '#eee',

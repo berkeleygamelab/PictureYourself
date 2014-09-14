@@ -231,12 +231,31 @@ app // Need this for .controller and .directive
                     // User clicked cancel, hide loading screen
                     else{
                         $(".loader").hide();
-                    }};       
+                    }}; 
+
+            $scope.save = function(){
+                var formData = stage.toJSON();
+
+                console.log( formData );
+                $http.post('/save_canvas', formData).success(
+                    function( data ){
+                        console.log("SUCCESS!");
+                    })
+            }      
+
+            $scope.load = function(){
+                $http.get('/js/scenario/test.json').success(
+                    function( data ){
+                        console.log( data );
+                        Kinetic.Node.create( JSON.stringify( data), "container")
+                    })
+            }
 
             // Prevent default action for stage drag over
             stage_container.addEventListener('dragover',function(e){
                 e.preventDefault(); //@important
             });
+
         })// End of Scenario Controller
     
     // custom directive, calls when sticker image is created during ng-repeat in view
