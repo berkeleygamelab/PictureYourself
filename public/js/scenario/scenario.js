@@ -8,6 +8,7 @@ var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/ASproul.jpg';
 
 $(document).ready(function() {
+    var formData;
     /*
     * Gets user selfie
     */
@@ -152,10 +153,12 @@ app // Need this for .controller and .directive
                 // Start size for dropped images. Used in code to set sizes
                 var start_size = {"width":120,"height":120};
 
+                // Creates a new sticker object. See factories.js
                 var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
 
-                $scope.selected_sticker = sticker;
+                console.log( sticker );
 
+                $scope.selected_sticker = sticker;
 
                 // Event to hide and show tools
                 sticker.image.on('click',function(e){
@@ -234,19 +237,21 @@ app // Need this for .controller and .directive
                     }}; 
 
             $scope.save = function(){
-                var formData = stage.toJSON();
+                formData = stage.toJSON();
 
-                console.log( formData );
+
+
+                debug( formData );
                 $http.post('/save_canvas', formData).success(
                     function( data ){
-                        console.log("SUCCESS!");
+                        debug("SUCCESS!");
                     })
             }      
 
             $scope.load = function(){
                 $http.get('/js/scenario/test.json').success(
                     function( data ){
-                        console.log( data );
+                        debug( data );
                         Kinetic.Node.create( JSON.stringify( data), "container")
                     })
             }
