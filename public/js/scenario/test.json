@@ -12,15 +12,17 @@
         {
           "attrs": {
             "width": 800,
-            "height": 550
+            "height": 550,
+            "id": "background"
           },
-          "className": "Image"
+          "className": "Image",
+          "src": "http://localhost:9393/images/stickers/0-backgrounds/Hcafe.jpg"
         },
         {
           "attrs": {
             "draggable": true,
-            "x": 313.84375,
-            "y": 373
+            "x": 316.84375,
+            "y": 286
           },
           "className": "Group",
           "children": [
@@ -29,10 +31,113 @@
                 "width": 120,
                 "height": 120,
                 "offsetX": 60,
-                "offsetY": 60
+                "offsetY": 60,
+                "fill": "#00cdcd",
+                "visible": false,
+                "opacity": 0.2,
+                "name": "background"
+              },
+              "className": "Rect"
+            },
+            {
+              "attrs": {
+                "width": 120,
+                "height": 120,
+                "offsetX": 60,
+                "offsetY": 60,
+                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Gslipper.png"
               },
               "className": "Image"
             },
+            {
+              "attrs": {
+                "x": -60,
+                "y": -60,
+                "offsetX": 15,
+                "offsetY": 15,
+                "text": "",
+                "fontFamily": "FontAwesome",
+                "fontSize": 30,
+                "fill": "#eee",
+                "stroke": "#222",
+                "strokeWidth": 0.75,
+                "draggable": true,
+                "visible": false,
+                "name": "x",
+                "width": "auto",
+                "height": "auto"
+              },
+              "className": "Text"
+            },
+            {
+              "attrs": {
+                "x": 60,
+                "y": 60,
+                "offsetY": 15,
+                "offsetX": 6.5,
+                "text": "",
+                "fontFamily": "FontAwesome",
+                "fontSize": 30,
+                "fill": "#eee",
+                "stroke": "#222",
+                "strokeWidth": 0.75,
+                "draggable": true,
+                "visible": false,
+                "name": "y",
+                "width": "auto",
+                "height": "auto"
+              },
+              "className": "Text"
+            },
+            {
+              "attrs": {
+                "visible": false,
+                "text": "",
+                "fontFamily": "FontAwesome",
+                "fontSize": 30,
+                "fill": "#eee",
+                "stroke": "#222",
+                "strokeWidth": 0.75,
+                "name": "delete",
+                "x": 60,
+                "y": -60,
+                "offsetX": 15,
+                "offsetY": 15,
+                "width": "auto",
+                "height": "auto"
+              },
+              "className": "Text"
+            },
+            {
+              "attrs": {
+                "x": -60,
+                "y": 60,
+                "offsetX": 15,
+                "offsetY": 15,
+                "text": "",
+                "fontFamily": "FontAwesome",
+                "fontSize": 30,
+                "fill": "#eee",
+                "stroke": "#222",
+                "strokeWidth": 0.75,
+                "draggable": true,
+                "visible": false,
+                "name": "rotate",
+                "width": "auto",
+                "height": "auto"
+              },
+              "className": "Text"
+            }
+          ]
+        },
+        {
+          "attrs": {
+            "draggable": true,
+            "x": 346.84375,
+            "y": 229
+          },
+          "className": "Group",
+          "children": [
             {
               "attrs": {
                 "width": 120,
@@ -51,7 +156,8 @@
                 "width": 120,
                 "height": 120,
                 "offsetX": 60,
-                "offsetY": 60
+                "offsetY": 60,
+                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/FsnakerBlue.png"
               },
               "className": "Image"
             },

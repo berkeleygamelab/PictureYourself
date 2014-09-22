@@ -34,17 +34,31 @@ app.service('Sticker', function(){
                 y: pos.y + start_size.height/2
             });
 
-            sticker.image = new Kinetic.Image({
-                image:imageObj,
-                width: start_size.width,  //this makes the image lower quality for some reason
-                height: start_size.height,
-                x: 0, // pos.x + start_size.width/2,
-                y: 0, // pos.y + start_size.height/2,
-                offsetX: start_size.width/2,
-                offsetY: start_size.height/2,
-            });
+            if(!has_background_sticker) {
+                sticker.image = new Kinetic.Image({
+                    image:imageObj,
+                    width: start_size.width,  //this makes the image lower quality for some reason
+                    height: start_size.height,
+                    x: 0, // pos.x + start_size.width/2,
+                    y: 0, // pos.y + start_size.height/2,
+                    offsetX: start_size.width/2,
+                    offsetY: start_size.height/2,
+                    src: imageObj.src
+                });
+            }
 
             if (has_background_sticker){
+                sticker.image = new Kinetic.Image({
+                    image:imageObj,
+                    width: start_size.width,  //this makes the image lower quality for some reason
+                    height: start_size.height,
+                    x: 0, // pos.x + start_size.width/2,
+                    y: 0, // pos.y + start_size.height/2,
+                    offsetX: start_size.width/2,
+                    offsetY: start_size.height/2,
+                    src: imageObj.src,
+                    back: imageObjBack.src
+                });
                 sticker.imageBack = new Kinetic.Image({
                     image:imageObjBack,
                     width: start_size.width,  //this makes the image lower quality for some reason

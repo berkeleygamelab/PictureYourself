@@ -25,7 +25,8 @@ function backgroundSetup(closeTools, default_backgroud, layer, stage){
         x:0,
         y:0,
         width: stage.getWidth(),
-        height: stage.getHeight()
+        height: stage.getHeight(),
+        id: 'background',
     });
 
     background_obj.src = default_background;

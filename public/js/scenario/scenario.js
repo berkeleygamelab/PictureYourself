@@ -237,7 +237,9 @@ app // Need this for .controller and .directive
                     }}; 
 
             $scope.save = function(){
-                formData = stage.toJSON();
+                formData = JSON.parse(stage.toJSON());
+
+                formData.children[0].children[0].src = $scope.background.getImage().src;
 
 
 
@@ -252,7 +254,8 @@ app // Need this for .controller and .directive
                 $http.get('/js/scenario/test.json').success(
                     function( data ){
                         debug( data );
-                        Kinetic.Node.create( JSON.stringify( data), "container")
+                        // Kinetic.Node.create( JSON.stringify( data), "container")
+                        $scope.background.getImage().src = data.children[0].children[0].src;
                     })
             }
 
