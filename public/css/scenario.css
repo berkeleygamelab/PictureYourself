@@ -5,6 +5,7 @@
 .sticker{
   width: 25%;
   height: 25%;
+  transition: background 0.15s linear;
 }
 
 .sticker:hover{
@@ -37,6 +38,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 0.5em;
+    background-color: #d3d3d3;
+    border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 4px;
@@ -49,6 +52,11 @@
 /*---------------------------------------------Tool box and Tabs--------------------------------------------*/
 .tabs{
   cursor: pointer;
+}
+
+.tab{
+  float: left;
+  width: 25%;
 }
 
 #toolbox {
@@ -69,6 +77,7 @@
   height: 4em;
   background: white;
   padding: 0;
+  transition: background-color 0.1s linear;
 }
 
 #toolicon li img {
@@ -88,7 +97,29 @@
 }
 
 #toolicon li:hover {
- background: #d8d8d8;
+  background-color: #d8d8d8;
+}
+
+
+/*--------------------------------------------- Accordian Tabs --------------------------------------------- */
+
+.subtab_title{
+  text-align: center;
+  font-size: large;
+  font-family: Arial;
+  width:100%;
+  height:40px;
+  background-color:#242941; 
+  color:white;
+  border-bottom: solid;
+  border-width: 1px;
+  padding-top: 0.4em;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.subtab_title:hover {
+  background-color:rgba(36, 41, 65, 0.93);
 }
 
 /*--------------------------------------------- Body of tool box--------------------------------------------- */
@@ -109,10 +140,6 @@
   margin: 5%;
 }
 
-.tab{
-  float: left;
-  width: 25%;
-}
 
 /* ---------------------------------------------Content frame on the right side---------------------------------------------*/
 
@@ -133,24 +160,6 @@
 
 .kineticjs-content canvas{
   position: relative !important;
-}
-
-.subtab_title{
-  text-align: center;
-  font-size: large;
-  font-family: Arial;
-  width:100%;
-  height:40px;
-  background-color:#242941; 
-  color:white;
-  border-bottom: solid;
-  border-width: 1px;
-  padding-top: 0.4em;
-  cursor: pointer;
-}
-
-.subtab_title:hover {
-    background-color:rgba(36, 41, 65, 0.93);
 }
 
 /*--------------------------------------------- Email div ---------------------------------------------*/
@@ -251,3 +260,5 @@ height: 100%;
   top:0;
   left:0;
 }
+
+

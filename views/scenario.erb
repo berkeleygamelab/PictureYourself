@@ -42,7 +42,7 @@
                         </div>
                         
                         <!-- Sticker category content -->
-                        <div ng-repeat-end id='{{key}}_content' ng-show='visible[key]'>
+                        <div ng-repeat-end id='{{key}}_content' class = 'animate-content content' ng-show='visible[key]'>
                             <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
 
                         </div>
