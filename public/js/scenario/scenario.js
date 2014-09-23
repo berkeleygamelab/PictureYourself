@@ -255,7 +255,30 @@ app // Need this for .controller and .directive
                     function( data ){
                         debug( data );
                         // Kinetic.Node.create( JSON.stringify( data), "container")
+                        closeTools();
                         $scope.background.getImage().src = data.children[0].children[0].src;
+                        var stickers = $(stage.find('.sticker'));
+
+                        stickers.each(function(index){
+                            stickers[index].visible(false);
+                        });
+
+                        layer.draw();
+                        var imageObj = new Image();
+                        imageObj.src = data.children[0].children[1].children[0].attrs.src;               
+                        debug(imageObj.src);         
+                        var imageObjBack = data.children[0].children[1].children[0].attrs.back;
+                        debug(imageObjBack);      
+                        var x = data.children[0].children[1].attrs.x;
+                        debug(x);      
+                        var y = data.children[0].children[1].attrs.y;
+                        debug(y);
+
+                        var start_size = {"width":data.children[0].children[1].children[0].attrs.width,
+                                                   "height":data.children[0].children[1].children[0].attrs.height};
+
+                        Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
+
                     })
             }
 

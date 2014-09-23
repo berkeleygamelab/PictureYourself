@@ -43,7 +43,8 @@ app.service('Sticker', function(){
                     y: 0, // pos.y + start_size.height/2,
                     offsetX: start_size.width/2,
                     offsetY: start_size.height/2,
-                    src: imageObj.src
+                    src: imageObj.src,
+                    name: 'sticker',
                 });
             }
 
@@ -57,7 +58,8 @@ app.service('Sticker', function(){
                     offsetX: start_size.width/2,
                     offsetY: start_size.height/2,
                     src: imageObj.src,
-                    back: imageObjBack.src
+                    back: imageObjBack.src,
+                    name: 'sticker',
                 });
                 sticker.imageBack = new Kinetic.Image({
                     image:imageObjBack,
@@ -67,6 +69,7 @@ app.service('Sticker', function(){
                     offsetY: start_size.height/2,
                     x: 0, // pos.x + start_size.width/2,
                     y: 0, // pos.y + start_size.height/2,
+                    name: 'sticker',
                 });
             }
 
@@ -155,6 +158,7 @@ app.service('Sticker', function(){
                 $('#modal').hide();
 
                 layer.draw();
+                stage.remove( layer );
              });
 
 
