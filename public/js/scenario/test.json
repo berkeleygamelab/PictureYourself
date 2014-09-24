@@ -1,215 +1,27 @@
 {
-  "attrs": {
-    "width": 800,
-    "height": 550
+  "background": {
+    "src": "http://localhost:9393/images/stickers/0-backgrounds/ASproul.jpg"
   },
-  "className": "Stage",
-  "children": [
+  "stickers": [
     {
-      "attrs": {},
-      "className": "Layer",
-      "children": [
-        {
-          "attrs": {
-            "width": 800,
-            "height": 550,
-            "id": "background"
-          },
-          "className": "Image",
-          "src": "http://localhost:9393/images/stickers/0-backgrounds/Ibikes.jpg"
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 604.84375,
-            "y": 217
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 120,
-                "height": 120,
-                "offsetX": 60,
-                "offsetY": 60,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 178.84375,
-            "y": 209,
-            "rotation": 36.93053796897818
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 363.59436002512825,
-                "height": 198,
-                "offsetX": 181.79718001256413,
-                "offsetY": 99,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 377.84375,
-            "y": 426
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 14,
-                "height": 56,
-                "offsetX": 7,
-                "offsetY": 28,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 368.84375,
-            "y": 133,
-            "rotation": -303.39869463022904
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 120,
-                "height": 353.21005937742973,
-                "offsetX": 60,
-                "offsetY": 176.60502968871486,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Pyellowpajamas.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 615.84375,
-            "y": 206,
-            "rotation": -179.67501701321933
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 499.5287839626042,
-                "height": 324,
-                "offsetX": 249.7643919813021,
-                "offsetY": 162,
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            },
-            {
-              "attrs": {
-                "width": 499.5287839626042,
-                "height": 324,
-                "offsetX": 249.7643919813021,
-                "offsetY": 162,
-                "src": "http://localhost:9393/images/stickers/2-shirts/zSweaterGuyBlue_fore.png",
-                "back": "http://localhost:9393/images/stickers/2-shirts/zSweaterGuyBlue_back.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 230.84375,
-            "y": 352,
-            "rotation": -279.5103979346965
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 71.75987997203748,
-                "height": 392,
-                "offsetX": 35.87993998601874,
-                "offsetY": 196,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 442.84375,
-            "y": 215
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 120,
-                "height": 120,
-                "offsetX": 60,
-                "offsetY": 60,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
-                "name": "sticker",
-                "visible": false
-              },
-              "className": "Image"
-            }
-          ]
-        },
-        {
-          "attrs": {
-            "draggable": true,
-            "x": 181.84375,
-            "y": 282
-          },
-          "className": "Group",
-          "children": [
-            {
-              "attrs": {
-                "width": 120,
-                "height": 120,
-                "offsetX": 60,
-                "offsetY": 60,
-                "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
-                "name": "sticker"
-              },
-              "className": "Image"
-            }
-          ]
-        }
-      ]
+      "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
+      "height": 248,
+      "width": 316,
+      "offsetX": 158,
+      "offsetY": 124,
+      "x": 290.84375,
+      "y": 157,
+      "rotation": 30.535065276657708
+    },
+    {
+      "src": "http://localhost:9393/images/stickers/1-shoes_and_pants/Hslipper.png",
+      "height": 242.29130949089495,
+      "width": 220.6336106034729,
+      "offsetX": 110.31680530173645,
+      "offsetY": 121.14565474544747,
+      "x": 629.84375,
+      "y": 394,
+      "rotation": -164.07268379186084
     }
   ]
 }

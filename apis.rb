@@ -19,15 +19,15 @@ end
 post '/save_canvas' do
     begin
         # We have to do this because Angular does not like 'params'
-        data = JSON.parse request.body.read
+        data = request.body.read
 
         # This digs into the parsed JSON deep enough to hit sticker data
         # We want to remove extraneous JSON data, such as data for the tools
-        data["children"][0]["children"].each do |x|
-            x["children"].select! { |h| h["className"].eql? "Image" } if x["children"]
-        end
+        # data["children"][0]["children"].each do |x|
+        #     x["children"].select! { |h| h["className"].eql? "Image" } if x["children"]
+        # end
 
-        File.open("public/js/scenario/test.json", "w" ){|f| f.write(data.to_json) }
+        File.open("public/js/scenario/test.json", "w" ){|f| f.write data }
         status 200
     rescue
         status 500

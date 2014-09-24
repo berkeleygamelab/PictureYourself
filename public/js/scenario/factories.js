@@ -4,7 +4,7 @@
 
 app.service('Sticker', function(){
     return{
-        new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage){
+        new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage, offset){
             var sticker = {
                 background : null,
                 delete_icon : null,
@@ -41,8 +41,8 @@ app.service('Sticker', function(){
                     height: start_size.height,
                     x: 0, // pos.x + start_size.width/2,
                     y: 0, // pos.y + start_size.height/2,
-                    offsetX: start_size.width/2,
-                    offsetY: start_size.height/2,
+                    offsetX: offset.offsetX || start_size.width/2,
+                    offsetY: offset.offsetY || start_size.height/2,
                     src: imageObj.src,
                     name: 'sticker',
                 });
@@ -55,8 +55,8 @@ app.service('Sticker', function(){
                     height: start_size.height,
                     x: 0, // pos.x + start_size.width/2,
                     y: 0, // pos.y + start_size.height/2,
-                    offsetX: start_size.width/2,
-                    offsetY: start_size.height/2,
+                    offsetX: offset.offsetX || start_size.width/2,
+                    offsetY: offset.offsetY || start_size.height/2,
                     src: imageObj.src,
                     back: imageObjBack.src,
                     name: 'sticker',
@@ -65,8 +65,8 @@ app.service('Sticker', function(){
                     image:imageObjBack,
                     width: start_size.width,  //this makes the image lower quality for some reason
                     height: start_size.height,
-                    offsetX: start_size.width/2,
-                    offsetY: start_size.height/2,
+                    offsetX: offset.offsetX || start_size.width/2,
+                    offsetY: offset.offsetY || start_size.height/2,
                     x: 0, // pos.x + start_size.width/2,
                     y: 0, // pos.y + start_size.height/2,
                     name: 'sticker',

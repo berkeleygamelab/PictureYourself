@@ -153,54 +153,59 @@ app // Need this for .controller and .directive
                 // Start size for dropped images. Used in code to set sizes
                 var start_size = {"width":120,"height":120};
 
+                var offset = {};
+
                 // Creates a new sticker object. See factories.js
-                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
+                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
 
                 console.log( sticker );
 
                 $scope.selected_sticker = sticker;
 
+                show_tools(sticker);
+            }); // End of drop listener
+
+
+            var show_tools = function(sticker) {
                 // Event to hide and show tools
                 sticker.image.on('click',function(e){
-                    var is_visible = sticker.scalerX.visible();
+                var is_visible = sticker.scalerX.visible();
 
-                    // Tools for sticker are displayed
-                    if(is_visible){ 
-                        $scope.selected_background = null;
-                        $scope.selected_sticker = null;    
+                // Tools for sticker are displayed
+                if(is_visible){ 
+                    $scope.selected_background = null;
+                    $scope.selected_sticker = null;    
+                }
 
-                    }
-
-                    // Tools for sticker are not displayed
-                    else{
-                        
-                        // Close tools for previously selected sticker
-                        if($scope.selected_sticker != null)
-                            $scope.selected_sticker.toggleTools(false);
-
-                        $scope.selected_sticker = sticker;  
-
-                        // Set previous selected color
-                        if($scope.selected_sticker.previous_color != null){
-                            $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
-                        }
-
-                        // Move color picker and assign background image object
-                        if(has_chroma_green){
-                            sticker.move_color();
-                            $scope.selected_background = imageObjBack;
-                        }
-                    }
+                // Tools for sticker are not displayed
+                else{
                     
-                    sticker.toggleTools(!is_visible);
+                    // Close tools for previously selected sticker
+                    if($scope.selected_sticker != null)
+                        $scope.selected_sticker.toggleTools(false);
 
-                    layer.draw();
+                    $scope.selected_sticker = sticker;  
+
+                    // Set previous selected color
+                    if($scope.selected_sticker.previous_color != null){
+                        $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                    }
+
+                    // Assign a local variable with chroma green flag value.
+                    var has_chroma_green = $scope.chroma_green;
+
+                    // Move color picker and assign background image object
+                    if(has_chroma_green){
+                        sticker.move_color();
+                        $scope.selected_background = imageObjBack;
+                    }
+                }
+    
+                sticker.toggleTools(!is_visible);
+                layer.draw();
                 });
 
-
-                }); // End of drop listener
-
-
+            }
 
             // Initiate email process
             $scope.call_email = function(){
@@ -237,11 +242,30 @@ app // Need this for .controller and .directive
                     }}; 
 
             $scope.save = function(){
-                formData = JSON.parse(stage.toJSON());
+                // formData = JSON.parse(stage.toJSON());
+                // formData.children[0].children[0].src = $scope.background.getImage().src;
 
-                formData.children[0].children[0].src = $scope.background.getImage().src;
+                formData = {}
+                formData.background = {}
+                formData.background.src = $scope.background.getImage().src;
+                formData.stickers = []
 
+                var stickers = $(stage.find('.sticker'));
+                console.log(stickers);
 
+                stickers.each(function(index, sticker) {
+                    stickerDict = {};
+                    console.log(sticker);
+                    stickerDict.src = sticker.attrs.src;
+                    stickerDict.height = sticker.attrs.height;
+                    stickerDict.width = sticker.attrs.width;
+                    stickerDict.offsetX = sticker.attrs.offsetX;
+                    stickerDict.offsetY = sticker.attrs.offsetY;
+                    stickerDict.x = sticker.parent.attrs.x;
+                    stickerDict.y = sticker.parent.attrs.y;
+                    stickerDict.rotation = sticker.parent.attrs.rotation;
+                    formData.stickers.push(stickerDict);
+                })
 
                 debug( formData );
                 $http.post('/save_canvas', formData).success(
@@ -253,31 +277,40 @@ app // Need this for .controller and .directive
             $scope.load = function(){
                 $http.get('/js/scenario/test.json').success(
                     function( data ){
-                        debug( data );
-                        // Kinetic.Node.create( JSON.stringify( data), "container")
+                        // Close any open tools
                         closeTools();
-                        $scope.background.getImage().src = data.children[0].children[0].src;
+                        // Set the background
+                        $scope.background.getImage().src = data.background.src;
+
+                        // Remove all existing stickers
                         var stickers = $(stage.find('.sticker'));
-
                         stickers.each(function(index){
-                            stickers[index].visible(false);
+                            stickers[index].remove();
                         });
-
                         layer.draw();
-                        var imageObj = new Image();
-                        imageObj.src = data.children[0].children[1].children[0].attrs.src;               
-                        debug(imageObj.src);         
-                        var imageObjBack = data.children[0].children[1].children[0].attrs.back;
-                        debug(imageObjBack);      
-                        var x = data.children[0].children[1].attrs.x;
-                        debug(x);      
-                        var y = data.children[0].children[1].attrs.y;
-                        debug(y);
 
-                        var start_size = {"width":data.children[0].children[1].children[0].attrs.width,
-                                                   "height":data.children[0].children[1].children[0].attrs.height};
+                        // Get all the image data
+                        $(data.stickers).each(function(index, sticker) {
+                            var imageObj = new Image();
+                            imageObj.src = sticker.src;           
+                            var imageObjBack = sticker.back;
 
-                        Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage);
+                            var offset = {"offsetX": sticker.offsetX, 
+                                                "offsetY": sticker.offsetY}
+                            var start_size = {"width":sticker.width,
+                                                       "height":sticker.height};
+
+                            var x = sticker.x - start_size.width / 2;
+                            var y = sticker.y - start_size.height / 2;
+
+                            // Create a new sticker with the information
+                            var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
+                            // Rotate image
+                            sticker.group.rotate(sticker.rotation);
+                            // Set the tool popup event
+                            show_tools(sticker);
+                        })
+
 
                     })
             }
