@@ -80,6 +80,8 @@ app // Need this for .controller and .directive
             var closeTools = function(){
                 var tools = $(stage.find('.y, .x, .delete, .rotate, .background'));
 
+                console.log( tools );
+
                 tools.each(function(index){
                     tools[index].visible(false);
                 });
@@ -290,28 +292,28 @@ app // Need this for .controller and .directive
                         layer.draw();
 
                         // Get all the image data
-                        $(data.stickers).each(function(index, sticker) {
+                        $(data.stickers).each(function(index, s) {
+                            console.log(s);
                             var imageObj = new Image();
-                            imageObj.src = sticker.src;           
-                            var imageObjBack = sticker.back;
+                            imageObj.src = s.src;           
+                            var imageObjBack = s.back;
 
-                            var offset = {"offsetX": sticker.offsetX, 
-                                                "offsetY": sticker.offsetY}
-                            var start_size = {"width":sticker.width,
-                                                       "height":sticker.height};
+                            var offset = {"offsetX": s.offsetX, 
+                                                "offsetY": s.offsetY}
+                            var start_size = {"width":s.width,
+                                                       "height":s.height};
 
-                            var x = sticker.x - start_size.width / 2;
-                            var y = sticker.y - start_size.height / 2;
+                            var x = s.x - start_size.width / 2;
+                            var y = s.y - start_size.height / 2;
 
                             // Create a new sticker with the information
                             var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
                             // Rotate image
-                            sticker.group.rotate(sticker.rotation);
+                            sticker.group.rotate(s.rotation);
                             // Set the tool popup event
                             show_tools(sticker);
                         })
-
-
+                
                     })
             }
 
