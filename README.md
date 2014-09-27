@@ -12,7 +12,7 @@ The Picture Yourself application uses visual storytelling practices like the "se
 - In the terminal, navigate to the PictureYourself root folder
 - Run: 'bundle install'
 - When gems are all installed, run: 'shotgun picture_yourself.rb'
-- Open localhost: <port number given in terminal> in your browser
+- Open 'localhost: <port number given in terminal>' in your browser
 
 ### To contribute to this app:
 
