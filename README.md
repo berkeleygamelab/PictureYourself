@@ -6,8 +6,10 @@ The Picture Yourself application uses visual storytelling practices like the "se
 
 ### To run this app locally: 
 
-- Make sure Ruby is installed 
-- Open terminal and navigate to the PictureYourself root folder
+- Make sure Ruby is installed. 
+  - check by running 'which Ruby' in your terminal. This will tell you the path to the installation if Ruby is installed
+  - if Ruby is not installed, download the latest version here: https://www.ruby-lang.org/en/downloads/
+- In the terminal, navigate to the PictureYourself root folder
 - Run: 'bundle install'
 - When gems are all installed, run: 'shotgun picture_yourself.rb'
 - Open localhost: <port number given in terminal> in your browser
