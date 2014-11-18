@@ -34,7 +34,7 @@
                             <p class="toolbox_text" id ="selfie_text"> Your Selfie</p>
                                     <img class='sticker' id='selfie' src='' >
                         </div>
-                        <p class="toolbox_text">Stickers</p>
+                        <input type='button' id='add_selfie' class='button' ng-click='add_selfie()' value = "ADD ANOTHER SELFIE">
 
                         <!-- Sticker category titles -->
                         <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>

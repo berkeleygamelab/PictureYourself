@@ -200,6 +200,9 @@ app // Need this for .controller and .directive
 
                 }); // End of drop listener
 
+            $scope.add_selfie = function(){
+                window.location = '/'
+            }
 
 
             // Initiate email process
