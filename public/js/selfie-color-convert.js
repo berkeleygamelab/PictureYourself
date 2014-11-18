@@ -35,9 +35,6 @@ var skin_color_converter = function(imageSource, color) {
 
 
 
-
-
-
 /*
 
 var image = new Image();

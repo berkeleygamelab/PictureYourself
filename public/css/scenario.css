@@ -24,6 +24,12 @@
   margin-right: auto;
  }
 
+ #another_selfie_button{
+    width: 200px;
+    margin: 20px;
+    margin-left: 55px;
+ }
+
 .background, .frames{
   width: 50%;
   height: 50%;
