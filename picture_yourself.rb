@@ -7,6 +7,7 @@ require 'dm-timestamps'
 require 'json'
 require 'sinatra/contrib/all'
 require 'mail'
+require 'fileutils'
 
 set :port, 80
 set :bind, '128.32.189.148'
@@ -78,7 +79,7 @@ post '/fileupload' do
     dirname = 'uploads/'+params[:name]
 
     unless File.directory?(dirname)
-      Dir.mkdir(dirname)
+      FileUtils.mkpath dirname
     end
 
     # fix - fix to have dynamic png numbers - or naming
