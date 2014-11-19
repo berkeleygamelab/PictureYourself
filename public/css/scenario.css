@@ -24,6 +24,12 @@
   margin-right: auto;
  }
 
+ #another_selfie_button{
+    width: 200px;
+    margin: 20px;
+    margin-left: 55px;
+ }
+
 .background, .frames{
   width: 50%;
   height: 50%;
@@ -47,6 +53,16 @@
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     -moz-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+/*--------------------------------------------Title--------------------------------------------*/
+.title{
+  padding: 1em 25%;
+}
+
+.title_text{
+  height: 3em;
+  width: 100%;
 }
 
 /*---------------------------------------------Tool box and Tabs--------------------------------------------*/

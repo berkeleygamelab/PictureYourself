@@ -255,6 +255,7 @@ app // Need this for .controller and .directive
 
                 formData = {}
                 formData.pyuserid = getCookie('pyuserid');
+                formData.title = $scope.title;
                 formData.background = {}
                 formData.background.src = $scope.background.getImage().src;
                 formData.stickers = []
@@ -284,9 +285,13 @@ app // Need this for .controller and .directive
             }      
 
             $scope.load = function(){
-                $http.get('').success(
+                pyuserid = getCookie('pyuserid');
+                title = $scope.requested_scenario
+                formData = {'pyuserid': pyuserid, 'title': title}
+                $http.post('load_canvas', formData).success(
                     function( data ){
                         // Close any open tools
+                        console.log(data);
                         closeTools();
                         // Set the background
                         $scope.background.getImage().src = data.background.src;
@@ -322,6 +327,10 @@ app // Need this for .controller and .directive
                         })
                 
                     })
+                    .error(
+                           function(){
+                                console.log()
+                           })
             }
 
             // Prevent default action for stage drag over

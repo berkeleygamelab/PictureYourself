@@ -20,8 +20,9 @@ post '/save_canvas' do
     begin
         # We have to do this because Angular does not like 'params'
         data = request.body.read
-        pyuserid = JSON.parse(data)["pyuserid"]
-        puts pyuserid
+        parsed = JSON.parse data
+        pyuserid = parsed["pyuserid"]
+        title = parsed["title"]
 
         # This digs into the parsed JSON deep enough to hit sticker data
         # We want to remove extraneous JSON data, such as data for the tools
@@ -34,12 +35,33 @@ post '/save_canvas' do
           Dir.mkdir filedir
         end
 
-        File.open("public/users/#{pyuserid}/test.json", "w" ){|f| f.write data }
+        File.open("#{filedir}/#{title}.json", "w" ){|f| f.write data }
         status 200
     rescue => exception
         puts exception.inspect
         status 500
     end
+
+end
+
+post '/load_canvas' do
+  begin
+      # We have to do this because Angular does not like 'params'
+      data = request.body.read
+      parsed = JSON.parse data
+      pyuserid = parsed["pyuserid"]
+      title = parsed["title"]
+
+      file = File.open("public/users/#{pyuserid}/#{title}.json", "r" )
+      file.read
+      
+  rescue Errno::ENOENT 
+      status 404
+  rescue => e
+      puts e.inspect
+      status 500
+  end
+
 end
 
 def isBackground? (category)
