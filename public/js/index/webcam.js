@@ -9,6 +9,8 @@ if (!hasGetUserMedia()) {
     alert('Accessing user webcam is unsupported by the browser. Please use a supported browser (e.g. Chrome).');
 }
 
+var stream;
+
 function getUserMedia(){
     var video = document.querySelector('video');
     var canvas = document.querySelector('canvas');
@@ -34,7 +36,8 @@ function getUserMedia(){
 
             // successCallback
             function(localMediaStream) {
-                var video = document.querySelector('video');
+                stream = localMediaStream;
+                video = document.querySelector('video');
                 video.src = window.URL.createObjectURL(localMediaStream);
                 video.onloadedmetadata = function(e) {
                 // Do something with the video here.
@@ -51,3 +54,6 @@ function getUserMedia(){
     return true;
 }
 
+function stop_webcam(){
+    stream.stop();
+}

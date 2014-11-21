@@ -77,6 +77,12 @@
     color: #eaeaea;
 }
 
+
+/* Global Kinetic stuff */
+.kineticjs-content{
+    position: relative; !important
+}
+
 /* Nothing below this is currently used */
 /* ----------------------------------------------Wrapper-------------------------------------*/
 

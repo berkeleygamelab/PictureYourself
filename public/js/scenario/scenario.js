@@ -209,9 +209,14 @@ app // Need this for .controller and .directive
             }
 
             $scope.add_selfie = function(){
-                $scope.save()
-                window.location = '/'
-                $scope.load()
+                console.log($scope.$parent)
+                // console.log($scope.snapshot_view)
+                // $scope.$emit('toggle_scenario', true)
+                // $scope.$apply(function(){
+                //     $scope.snapshow_view != $scope.snapshow_view
+                // })
+                $scope.views.snapshot = !$scope.views.snapshot;
+                $scope.views.scenario = !$scope.views.scenario;
             }
 
 

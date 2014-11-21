@@ -98,14 +98,12 @@ post '/grabcut' do
   end
 end
 
-#currently this link
-get '/selfie' do
+get '/scenario' do
   erb :scenario
 end
 
-#should switch over to this one
-get '/scenario' do
-  erb :scenario
+get '/snapshot' do
+  erb :snapshot
 end
 
 

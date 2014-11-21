@@ -173,16 +173,11 @@
   height:550px;
 }
 
-.kineticjs-content{
-}
 
 #scenario_canvas{
   float: left;
 }
 
-.kineticjs-content canvas{
-  position: relative !important;
-}
 
 /*--------------------------------------------- Email div ---------------------------------------------*/
 
