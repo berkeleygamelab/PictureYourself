@@ -77,13 +77,14 @@ end
 post '/fileupload' do
     data = params[:data].split(',')[1]
     dirname = 'uploads/'+params[:name]
+    dirNumber = params[:count]
 
     unless File.directory?(dirname)
       FileUtils.mkpath dirname
     end
 
     # fix - fix to have dynamic png numbers - or naming
-    File.open(dirname+'/1.png', 'wb') do |f|
+    File.open("#{dirname}/#{dirNumber}.png", 'wb') do |f|
       f.write(Base64.decode64(data))
     end
     # Needs to be updated to account for errors
@@ -112,10 +113,6 @@ post '/session' do
   #sticker src, left & top (location) are properly passed
   #rotation information is also passed, but as a matrix transformation (i think)
   #can be extended to additional sticker data, as long as that information is accessible from the html
-  # left = params[:leftArr].split(',')
-  # top = params[:topArr].split(',')
-  # src = params[:srcArr].split(',')
-  # rot = params[:rotArr].split(',')
   dirname = 'session/'
   unless File.directory?(dirname)
     Dir.mkdir(dirname)

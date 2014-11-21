@@ -26,6 +26,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     //create proper login methods etc...
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
+    var selfieCount = 1; 
     console.log($scope.$parent)
     //console.log(pyuserid);   // Dev
     checkCookie(pyuserid);
@@ -70,7 +71,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
         var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
         console.log(coord);
         var formData = {};
-        var filename = $scope.pyuserid + "/1.png";
+        var filename = $scope.pyuserid + "/" + selfieCount +  ".png";
         formData["filename"] = filename;
         formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
         console.log(formData['coords']);
@@ -82,6 +83,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
             data: formData,
             success: function() {
                 // window.location = '/scenario';
+                selfieCount += 1 
                 console.log("Grabcut success!")
                 $scope.$emit('toggle_scenario', true)
                 // $scope.views.snapshot = !$scope.views.snapshot;
@@ -147,7 +149,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
             $scope.cutDisabled = true;
 
             var name = $scope.pyuserid;
-            var formData = {"name":name, "data":canvas.toDataURL('image/png')};
+            var formData = {"name":name, "data":canvas.toDataURL('image/png'), "count": selfieCount};
             $.ajax({
                 url: '/fileupload',
                 type: 'POST',
