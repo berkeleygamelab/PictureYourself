@@ -77,43 +77,33 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
         console.log(formData['coords']);
         formData['pyuserid'] = $scope.pyuserid;
 
-        $.ajax({
-            url: '/grabcut',
-            type: 'POST',
-            data: formData,
-            success: function() {
-                // window.location = '/scenario';
-                selfieCount += 1 
-                console.log("Grabcut success!")
-                $scope.$emit('toggle_scenario', true)
-                // $scope.views.snapshot = !$scope.views.snapshot;
-                // $scope.views.scenario = !$scope.views.scenario;
-                $scope.camera = false;
-                $scope.show_camera = true;
-                $scope.show_capture = false;
-                $scope.camera_loaded = false;
-                $scope.loading = false;
-                $scope.cutDisabled = false;
-                $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+        $http.post('/grabcut', formData).success(function(data){
+            // window.location = '/scenario';
+            selfieCount += 1 
+            console.log("Grabcut success!")
+            // $scope.$emit('toggle_scenario', true)
+            $scope.views.snapshot = !$scope.views.snapshot;
+            $scope.views.scenario = !$scope.views.scenario;
+            $scope.camera = false;
+            $scope.show_camera = true;
+            $scope.show_capture = false;
+            $scope.camera_loaded = false;
+            $scope.loading = false;
+            $scope.cutDisabled = false;
+            $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
-                // $scope.$apply(function(){
-                // $scope.$parent.snapshot_view = !$scope.$parent.snapshot_view;
-                    // $scope.scenario_view = !$scope.scenario_view;
-                // })
-                // $scope.toggle_scenario();
-                // Turn off webcam. Function defined in webcam.js
-                stop_webcam()
-            },
-            error: function(){
-                $scope.loading = false;
-                $scope.cutDisabled = true;
-                alert ("There was an issue cropping the image.");
-            }
-        });
-        // // fix - Need to implement code that fires on success
-        // $timeout(function(){
+            // $scope.$apply(function(){
+            // $scope.$parent.snapshot_view = !$scope.$parent.snapshot_view;
+                // $scope.scenario_view = !$scope.scenario_view;
+            // })
+            // $scope.toggle_scenario();
 
-        // },1000);
+        })
+        .error(function(){
+            $scope.loading = false;
+            $scope.cutDisabled = true;
+            alert ("There was an issue cropping the image.");
+        })
     };
 
     $scope.send_snapshot = function(){
@@ -139,6 +129,8 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
         $scope.snapshot_button.cut = true;
         $scope.snapshot_button.snap_it = false;
+        // Turn off webcam. Function defined in webcam.js
+        stop_webcam()
     };
 
     $scope.upload_webcam = function(){

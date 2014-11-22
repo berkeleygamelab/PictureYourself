@@ -158,6 +158,7 @@ app // Need this for .controller and .directive
                 var offset = {};
 
                 // Creates a new sticker object. See factories.js
+                console.log(imageObjBack)
                 var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
 
                 console.log( sticker );
@@ -195,11 +196,13 @@ app // Need this for .controller and .directive
 
                     // Assign a local variable with chroma green flag value.
                     var has_chroma_green = $scope.chroma_green;
+                    console.log(has_chroma_green);
 
                     // Move color picker and assign background image object
                     if(has_chroma_green){
                         sticker.move_color();
-                        $scope.selected_background = imageObjBack;
+                        console.log(sticker.image);
+                        $scope.selected_background = sticker.image.back;
                     }
                 }
     

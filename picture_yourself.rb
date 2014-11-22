@@ -92,6 +92,8 @@ post '/fileupload' do
 end
 
 post '/grabcut' do
+  params = JSON.parse request.body.read, :symbolize_names => true
+  puts params
   if OS.mac?
     system('opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
   elsif OS.unix?
