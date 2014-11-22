@@ -289,9 +289,9 @@ app.service('Sticker', function(){
             sticker.move_color = function(){
 
                 $("#modal").css({
-                    left: $('.kineticjs-content').position().left + (sticker.rotate.getAbsolutePosition().x
+                    left: $('#container').offset().left + (sticker.rotate.getAbsolutePosition().x
                         + sticker.scalerY.getAbsolutePosition().x)/2 - tool_size/2,
-                    top: $('.kineticjs-content').position().top + (sticker.rotate.getAbsolutePosition().y
+                    top: $('#container').offset().top + (sticker.rotate.getAbsolutePosition().y
                         + sticker.scalerY.getAbsolutePosition().y)/2 - tool_size/2
                 });
                 $("#modal").show();

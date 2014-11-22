@@ -91,6 +91,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
             $scope.loading = false;
             $scope.cutDisabled = false;
             $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+            $('#video').attr('src', '')
 
             // $scope.$apply(function(){
             // $scope.$parent.snapshot_view = !$scope.$parent.snapshot_view;

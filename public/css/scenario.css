@@ -166,7 +166,6 @@
 /* ---------------------------------------------Content frame on the right side---------------------------------------------*/
 
 #container {
-  margin-left: 4em;
   background: white;
   box-shadow: 0 8px 5.6px rgba(119,116,117,0.6);
   width: 800px; 
@@ -176,6 +175,7 @@
 
 #scenario_canvas{
   float: left;
+  margin-left: 4em;
 }
 
 

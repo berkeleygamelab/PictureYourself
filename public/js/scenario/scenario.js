@@ -72,6 +72,7 @@ app // Need this for .controller and .directive
             // Setup color picker
             $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
                 on('change', function(){
+                    console.log($('select[name="colorpicker"]').val());
                     change_color($('select[name="colorpicker"]').val(), layer, $scope);   
                 });
 
@@ -165,51 +166,49 @@ app // Need this for .controller and .directive
 
                 $scope.selected_sticker = sticker;
 
-                show_tools(sticker);
-            }); // End of drop listener
-
-
-            var show_tools = function(sticker) {
                 // Event to hide and show tools
                 sticker.image.on('click',function(e){
-                var is_visible = sticker.scalerX.visible();
+                    var is_visible = sticker.scalerX.visible();
 
-                // Tools for sticker are displayed
-                if(is_visible){ 
-                    $scope.selected_background = null;
-                    $scope.selected_sticker = null;    
-                }
-
-                // Tools for sticker are not displayed
-                else{
-                    
-                    // Close tools for previously selected sticker
-                    if($scope.selected_sticker != null)
-                        $scope.selected_sticker.toggleTools(false);
-
-                    $scope.selected_sticker = sticker;  
-
-                    // Set previous selected color
-                    if($scope.selected_sticker.previous_color != null){
-                        $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                    // Tools for sticker are displayed
+                    if(is_visible){ 
+                        $scope.selected_background = null;
+                        $scope.selected_sticker = null;    
                     }
 
-                    // Assign a local variable with chroma green flag value.
-                    var has_chroma_green = $scope.chroma_green;
-                    console.log(has_chroma_green);
+                    // Tools for sticker are not displayed
+                    else{
+                        
+                        // Close tools for previously selected sticker
+                        if($scope.selected_sticker != null)
+                            $scope.selected_sticker.toggleTools(false);
 
-                    // Move color picker and assign background image object
-                    if(has_chroma_green){
-                        sticker.move_color();
-                        console.log(sticker.image);
-                        $scope.selected_background = sticker.image.back;
+                        $scope.selected_sticker = sticker;  
+
+                        // Set previous selected color
+                        if($scope.selected_sticker.previous_color != null){
+                            $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                        }
+
+                        // Assign a local variable with chroma green flag value.
+                        var has_chroma_green = $scope.chroma_green;
+                        console.log(has_chroma_green);
+
+                        // Move color picker and assign background image object
+                        if(has_chroma_green){
+                            sticker.move_color();
+                            // var sources = $scope.image_sources[$scope.dragged_image.name];
+                            // var imageObjBack = new Image();
+                            // imageObjBack.src = sources['back'];   
+                            // console.log(imageObjBack);                         
+                            $scope.selected_background = imageObjBack;
+                        }
                     }
-                }
-    
-                sticker.toggleTools(!is_visible);
-                layer.draw();
+        
+                    sticker.toggleTools(!is_visible);
+                    layer.draw();
                 });
-            }
+            })
 
             $scope.add_selfie = function(){
                 console.log($scope.$parent)
