@@ -208,7 +208,8 @@ app // Need this for .controller and .directive
             // Initiate email process
             $scope.call_email = function(){
                     // Show loading overlay
-                    $(".loader").show();
+                    $scope.loading = true;
+                    // $(".loader").show();
 
                     closeTools();
                     stage.draw();
@@ -228,7 +229,7 @@ app // Need this for .controller and .directive
                       stage.toDataURL({
                         callback: function(dataUrl) {
                             debug('callback');
-                            email(pyuserid, emails, dataUrl);
+                            email(pyuserid, emails, dataUrl, $scope);
                         }
 
                       }) ;         
@@ -236,7 +237,8 @@ app // Need this for .controller and .directive
 
                     // User clicked cancel, hide loading screen
                     else{
-                        $(".loader").hide();
+                        // $(".loader").hide();
+                        $scope.loading = false;
                     }}; 
 
             $scope.save = function(){
