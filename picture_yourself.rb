@@ -115,9 +115,11 @@ post '/grabcut' do
       status 500
     end
   end
-  status 200
+  "users/#{params[:pyuserid]}/#{params[:count]}.png"
 end
 
+
+# Going to eventually deprecate
 get '/scenario' do
   erb :scenario
 end

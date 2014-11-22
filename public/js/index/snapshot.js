@@ -1,11 +1,12 @@
 // Handles what view we see
 function ViewCtrl($scope){
     $scope.views = {snapshot: true, scenario: false}
-    $scope.$on('toggle_scenario', function(event, data){
-        if (data){
-            $scope.views.snapshot = !$scope.views.snapshot;
-            $scope.views.scenario = !$scope.views.scenario;
+    $scope.$on('toggle_scenario', function(event, data, selfieCount){
+        if(selfieCount != null){
+            $scope.$broadcast('load_selfies', data, selfieCount);
         }
+        $scope.views.snapshot = !$scope.views.snapshot;
+        $scope.views.scenario = !$scope.views.scenario;
     })
 }
 
@@ -65,10 +66,9 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
         $http.post('/grabcut', formData).success(function(data){
             // window.location = '/scenario';
-            selfieCount += 1 
             console.log("Grabcut success!")
             // Swap views
-            $scope.$emit('toggle_scenario', true)
+            $scope.$emit('toggle_scenario', data, selfieCount);
             // Reset snapshot page
             $scope.camera = false;
             $scope.show_camera = true;
@@ -78,6 +78,8 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
             $scope.cutDisabled = false;
             $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
             $('#video').attr('src', '')
+            selfieCount += 1 
+            console.log(data);
         })
         .error(function(){
             $scope.loading = false;

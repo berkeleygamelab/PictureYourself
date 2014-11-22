@@ -16,19 +16,18 @@
   border-color: transparent;
 }
 
- #selfie{
+.selfie{
   width: 50%;
   height: 50%;
-  display: block;
   margin-left: auto;
   margin-right: auto;
- }
+}
 
- #another_selfie_button{
-    width: 200px;
-    margin: 20px;
-    margin-left: 55px;
- }
+#another_selfie_button{
+  width: 200px;
+  margin: 20px;
+  margin-left: 55px;
+}
 
 .background, .frames{
   width: 50%;
@@ -124,6 +123,14 @@
 
 
 /*--------------------------------------------- Accordian Tabs --------------------------------------------- */
+
+#faces{
+  cursor: default;
+  margin-bottom: 2%;
+}
+#faces:hover{
+  background-color:#242941; 
+}
 
 .subtab_title{
   text-align: center;

@@ -22,11 +22,11 @@
 
                     <div id="sticker_tab" ng-show='tabs.stickers'>
                         <div id='selfie_div'>
-                            <p class="toolbox_text" id ="selfie_text"> Your Selfie</p>
-                                    <img class='sticker' id='selfie' src='' >
+                            <div class="subtab_title" id="faces">Faces</div>
+                                <img ng-repeat='selfie in selfies' id='selfie{{selfie.count}}' class="sticker selfie" ng-src="/{{selfie.source}}" add-drag/>
 
-                         <!-- Take another selfie button -->    
-                                     <input class='button' type='button' id='another_selfie_button' class='button' ng-click='add_selfie()' value = "Take Another Selfie">
+                                <!-- Take another selfie button -->    
+                                <input class='button' type='button' id='another_selfie_button' class='button' ng-click='add_selfie()' value = "Take Another Selfie">
                         </div>
 
                         <!-- Sticker category titles -->

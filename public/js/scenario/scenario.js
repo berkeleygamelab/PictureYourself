@@ -14,9 +14,6 @@ $(document).ready(function() {
     */
     //also have to refresh page to get changes, why? probably a caching thing?
     //set pyuserid as global variable to easily access it
-
-    $('#selfie').attr('src', '../users/'+getCookie('pyuserid')+'/1_sticker.png');
-
     $("#toolicon li").on("click", function(){
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
@@ -49,7 +46,7 @@ $(document).ready(function() {
 
 app // Need this for .controller and .directive
     .controller('ScenarioCtrl', 
-        function($scope, $resource, $http, $compile, Sticker){
+        function($scope, $resource, $http, $compile, $timeout, Sticker){
             var stage_width = 800;
             var stage_height = 550;
 
@@ -72,16 +69,12 @@ app // Need this for .controller and .directive
             // Setup color picker
             $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
                 on('change', function(){
-                    console.log($('select[name="colorpicker"]').val());
                     change_color($('select[name="colorpicker"]').val(), layer, $scope);   
                 });
-
 
             // Used to close tools for all stickers
             var closeTools = function(){
                 var tools = $(stage.find('.y, .x, .delete, .rotate, .background'));
-
-                console.log( tools );
 
                 tools.each(function(index){
                     tools[index].visible(false);
@@ -92,6 +85,11 @@ app // Need this for .controller and .directive
                 layer.draw();
             };
 
+
+            $scope.selfies = [];
+            $scope.$on('load_selfies', function(event, data, selfieCount){
+                $scope.selfies.push({source: data, count: selfieCount});
+            })
 
 
             // Setup and assign background Kinetic.Image object          
@@ -159,10 +157,7 @@ app // Need this for .controller and .directive
                 var offset = {};
 
                 // Creates a new sticker object. See factories.js
-                console.log(imageObjBack)
                 var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
-
-                console.log( sticker );
 
                 $scope.selected_sticker = sticker;
 
@@ -192,15 +187,10 @@ app // Need this for .controller and .directive
 
                         // Assign a local variable with chroma green flag value.
                         var has_chroma_green = $scope.chroma_green;
-                        console.log(has_chroma_green);
 
                         // Move color picker and assign background image object
                         if(has_chroma_green){
                             sticker.move_color();
-                            // var sources = $scope.image_sources[$scope.dragged_image.name];
-                            // var imageObjBack = new Image();
-                            // imageObjBack.src = sources['back'];   
-                            // console.log(imageObjBack);                         
                             $scope.selected_background = imageObjBack;
                         }
                     }
