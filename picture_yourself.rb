@@ -93,12 +93,29 @@ end
 
 post '/grabcut' do
   params = JSON.parse request.body.read, :symbolize_names => true
-  puts params
-  if OS.mac?
-    system('opencv_trans_MAC ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
-  elsif OS.unix?
-    system('./opencv_trans_UNIX ' + 'uploads/' + params[:filename] + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  filename = "#{params[:pyuserid]}/#{params[:count]}.png"
+
+  if File.exist? "public/users/#{params[:pyuserid]}/1_sticker.png"
+    puts "Previous 1_sticker.png file did not get renamed"
   end
+
+  if OS.mac?
+    system("./opencv_trans_MAC uploads/#{filename} #{params[:coords]} #{params[:pyuserid]}")
+  elsif OS.unix?
+    system("./opencv_trans_UNIX uploads/" + filename + ' ' + params[:coords] + ' ' + params[:pyuserid])
+  end
+
+  # '1_sticker.png' is a hardcoded value in opencv. Hacky workaround because I don't have opencv source
+  outputName = "public/users/#{params[:pyuserid]}/1_sticker.png"
+  if File.exist? outputName
+    begin
+      File.rename outputName, "public/users/#{params[:pyuserid]}/#{params[:count]}.png"
+    rescue SystemCallError
+      puts "1_sticker.png could not be renamed"
+      status 500
+    end
+  end
+  status 200
 end
 
 get '/scenario' do

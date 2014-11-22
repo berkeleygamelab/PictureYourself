@@ -211,14 +211,7 @@ app // Need this for .controller and .directive
             })
 
             $scope.add_selfie = function(){
-                console.log($scope.$parent)
-                // console.log($scope.snapshot_view)
-                // $scope.$emit('toggle_scenario', true)
-                // $scope.$apply(function(){
-                //     $scope.snapshow_view != $scope.snapshow_view
-                // })
-                $scope.views.snapshot = !$scope.views.snapshot;
-                $scope.views.scenario = !$scope.views.scenario;
+                $scope.$emit('toggle_scenario', true)
             }
 
 
@@ -291,54 +284,54 @@ app // Need this for .controller and .directive
                     })
             }      
 
-            $scope.load = function(){
-                pyuserid = getCookie('pyuserid');
-                title = $scope.requested_scenario
-                formData = {'pyuserid': pyuserid, 'title': title}
-                $http.post('load_canvas', formData).success(
-                    function( data ){
-                        // Close any open tools
-                        console.log(data);
-                        closeTools();
-                        // Set the background
-                        $scope.background.getImage().src = data.background.src;
+            // $scope.load = function(){
+            //     pyuserid = getCookie('pyuserid');
+            //     title = $scope.requested_scenario
+            //     formData = {'pyuserid': pyuserid, 'title': title}
+            //     $http.post('load_canvas', formData).success(
+            //         function( data ){
+            //             // Close any open tools
+            //             console.log(data);
+            //             closeTools();
+            //             // Set the background
+            //             $scope.background.getImage().src = data.background.src;
 
-                        // Remove all existing stickers
-                        var stickers = $(stage.find('.sticker'));
-                        stickers.each(function(index){
-                            stickers[index].remove();
-                        });
-                        layer.draw();
+            //             // Remove all existing stickers
+            //             var stickers = $(stage.find('.sticker'));
+            //             stickers.each(function(index){
+            //                 stickers[index].remove();
+            //             });
+            //             layer.draw();
 
-                        // Get all the image data
-                        $(data.stickers).each(function(index, s) {
-                            console.log(s);
-                            var imageObj = new Image();
-                            imageObj.src = s.src;           
-                            var imageObjBack = s.back;
+            //             // Get all the image data
+            //             $(data.stickers).each(function(index, s) {
+            //                 console.log(s);
+            //                 var imageObj = new Image();
+            //                 imageObj.src = s.src;           
+            //                 var imageObjBack = s.back;
 
-                            var offset = {"offsetX": s.offsetX, 
-                                                "offsetY": s.offsetY}
-                            var start_size = {"width":s.width,
-                                                       "height":s.height};
+            //                 var offset = {"offsetX": s.offsetX, 
+            //                                     "offsetY": s.offsetY}
+            //                 var start_size = {"width":s.width,
+            //                                            "height":s.height};
 
-                            var x = s.x - start_size.width / 2;
-                            var y = s.y - start_size.height / 2;
+            //                 var x = s.x - start_size.width / 2;
+            //                 var y = s.y - start_size.height / 2;
 
-                            // Create a new sticker with the information
-                            var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
-                            // Rotate image
-                            sticker.group.rotate(s.rotation);
-                            // Set the tool popup event
-                            show_tools(sticker);
-                        })
+            //                 // Create a new sticker with the information
+            //                 var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset);
+            //                 // Rotate image
+            //                 sticker.group.rotate(s.rotation);
+            //                 // Set the tool popup event
+            //                 show_tools(sticker);
+            //             })
                 
-                    })
-                    .error(
-                           function(){
-                                console.log()
-                           })
-            }
+            //         })
+            //         .error(
+            //                function(){
+            //                     console.log()
+            //                })
+            // }
 
             // Prevent default action for stage drag over
             stage_container.addEventListener('dragover',function(e){

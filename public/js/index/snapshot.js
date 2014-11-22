@@ -3,23 +3,11 @@ function ViewCtrl($scope){
     $scope.views = {snapshot: true, scenario: false}
     $scope.$on('toggle_scenario', function(event, data){
         if (data){
-            $scope.$apply(function(){
-                $scope.views.snapshot = !$scope.views.snapshot;
-                $scope.views.scenario = !$scope.views.scenario;
-            })
+            $scope.views.snapshot = !$scope.views.snapshot;
+            $scope.views.scenario = !$scope.views.scenario;
         }
     })
-    // $scope.toggle_scenario = function(){
-    //     $scope.views.snapshot = !$scope.views.snapshot;
-    //     $scope.views.scenario = !$scope.views.scenario;
-    //     console.log($scope.views.snapshot);
-    //     console.log($scope.views.scenario);
-    //     // $scope.scenario_view = !$scope.scenario_view;
-    // }
-    
 }
-
-
 
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 function SnapshotCtrl($scope, fileReader, $http, $timeout){
@@ -27,7 +15,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
     var selfieCount = 1; 
-    console.log($scope.$parent)
     //console.log(pyuserid);   // Dev
     checkCookie(pyuserid);
 
@@ -69,21 +56,20 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
     //Call grabcut with coordinates
     $scope.cut = function(){
         var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
-        console.log(coord);
         var formData = {};
-        var filename = $scope.pyuserid + "/" + selfieCount +  ".png";
-        formData["filename"] = filename;
+        // var filename = $scope.pyuserid + "/" + selfieCount +  ".png";
+        // formData["filename"] = filename;
         formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
-        console.log(formData['coords']);
         formData['pyuserid'] = $scope.pyuserid;
+        formData['count'] = selfieCount;
 
         $http.post('/grabcut', formData).success(function(data){
             // window.location = '/scenario';
             selfieCount += 1 
             console.log("Grabcut success!")
-            // $scope.$emit('toggle_scenario', true)
-            $scope.views.snapshot = !$scope.views.snapshot;
-            $scope.views.scenario = !$scope.views.scenario;
+            // Swap views
+            $scope.$emit('toggle_scenario', true)
+            // Reset snapshot page
             $scope.camera = false;
             $scope.show_camera = true;
             $scope.show_capture = false;
@@ -92,13 +78,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
             $scope.cutDisabled = false;
             $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
             $('#video').attr('src', '')
-
-            // $scope.$apply(function(){
-            // $scope.$parent.snapshot_view = !$scope.$parent.snapshot_view;
-                // $scope.scenario_view = !$scope.scenario_view;
-            // })
-            // $scope.toggle_scenario();
-
         })
         .error(function(){
             $scope.loading = false;
