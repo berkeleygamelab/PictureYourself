@@ -177,33 +177,34 @@ app.service('Sticker', function(){
                 layer.draw();
                 stage.remove( layer );
              });
+            if(text){
+                sticker.txt.on('click', function(){
+                    var input = prompt("Enter your text:")
+                    if(input.length > 100){
+                        input = input.substring(0,99);
+                    };
 
-            sticker.txt.on('click', function(){
-                var input = prompt("Enter your text:")
-                if(input.length > 100){
-                    input = input.substring(0,99);
-                };
-
-                sticker.user_text = new Kinetic.Text({
-                    x : -start_size.width/2, // sticker.image.x() - start_size.width/2,
-                    y : -start_size.height/2, // sticker.image.y() - start_size.height/2,
-                    offsetX: tool_size/2,
-                    offsetY: tool_size/2,
-                    text: input,
-                    fontFamily: 'FontAwesome',
-                    fontSize: tool_size,
-                    fill: 'black',
-                    stroke: "#222",
-                    strokeWidth: 0.75,
-                    visible:true,
-                    name: 'user_text',
-                    align: 'center',
-                    width:sticker.image.width()/2,
-                });
-                sticker.group.add(sticker.user_text);
-                layer.add(sticker.group);
-                layer.draw();
-             });
+                    sticker.user_text = new Kinetic.Text({
+                        x : -sticker.image.width()/4, // sticker.image.x() - start_size.width/2,
+                        y : -sticker.image.height()/4, // sticker.image.y() - start_size.height/2,
+                        offsetX: tool_size/2,
+                        offsetY: tool_size/2,
+                        text: input,
+                        fontFamily: 'FontAwesome',
+                        fontSize: tool_size,
+                        fill: 'black',
+                        stroke: "#222",
+                        strokeWidth: 0.75,
+                        visible:true,
+                        name: 'user_text',
+                        align: 'center',
+                        width:sticker.image.width()/2,
+                    });
+                    sticker.group.add(sticker.user_text);
+                    layer.add(sticker.group);
+                    layer.draw();
+                 });
+            }
 
             
 
