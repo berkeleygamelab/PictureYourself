@@ -4,7 +4,7 @@
 
 app.service('Sticker', function(){
     return{
-        new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage, offset){
+        new : function(imageObj, pos, start_size, layer, imageObjBack, $scope, stage, offset, text){
             var sticker = {
                 background : null,
                 delete_icon : null,
@@ -150,6 +150,23 @@ app.service('Sticker', function(){
                 name: 'rotate',
             });
 
+            if(text){
+                sticker.txt = new Kinetic.Text({
+                    x : start_size.width/4, // sticker.image.x() - start_size.width/2,
+                    y : start_size.height/2, // sticker.image.y() - start_size.height/2,
+                    offsetX: tool_size/2,
+                    offsetY: tool_size/2,
+                    text: 'T',  //leave this it won't render correctly here but will on the canvas
+                    fontFamily: 'Serif',
+                    fontSize: tool_size,
+                    fill: '#eee',
+                    stroke: "#222",
+                    strokeWidth: 0.75,
+                    visible:true,
+                    name: 'txt',
+                });
+            }
+
 
             sticker.delete_icon.on('click', function(){
                 sticker.group.destroy();
@@ -160,6 +177,38 @@ app.service('Sticker', function(){
                 layer.draw();
                 stage.remove( layer );
              });
+
+            sticker.txt.on('click', function(){
+                var input = prompt("Enter your text:")
+                if(input.length > 100){
+                    input = input.substring(0,99);
+                };
+
+                sticker.user_text = new Kinetic.Text({
+                    x : -start_size.width/2, // sticker.image.x() - start_size.width/2,
+                    y : -start_size.height/2, // sticker.image.y() - start_size.height/2,
+                    offsetX: tool_size/2,
+                    offsetY: tool_size/2,
+                    text: input,
+                    fontFamily: 'FontAwesome',
+                    fontSize: tool_size,
+                    fill: 'black',
+                    stroke: "#222",
+                    strokeWidth: 0.75,
+                    visible:true,
+                    name: 'user_text',
+                    align: 'center',
+                    width:sticker.image.width()/2,
+                });
+                sticker.group.add(sticker.user_text);
+                layer.add(sticker.group);
+                layer.draw();
+             });
+
+            
+
+
+
 
 
             // set horizontal height of image
@@ -274,6 +323,9 @@ app.service('Sticker', function(){
                 sticker.group.add(sticker.scalerY);
                 sticker.group.add(sticker.delete_icon);
                 sticker.group.add(sticker.rotate);
+                if(text){
+                    sticker.group.add(sticker.txt);
+                }
                 
                 layer.add(sticker.group);
                 
@@ -315,6 +367,18 @@ app.service('Sticker', function(){
 
                 sticker.delete_icon.x(half_width);
                 sticker.delete_icon.y(-half_height);
+
+                if(text){
+                    sticker.txt.x(half_width/4);
+                    sticker.txt.y(half_height);
+                    if(sticker.user_text){   
+                        sticker.user_text.x(-half_width/2);
+                        sticker.user_text.y(-half_height/2);
+                        sticker.user_text.width(half_width);
+                    }
+                };
+
+                
 
                 sticker.background.x(0);
                 sticker.background.y(0);

@@ -135,6 +135,9 @@ function grabStickerImages($scope, $http, $compile){
                                 $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
                                                                      'back': sticker.back_source};
                             };
+                            if(sticker.text){
+                                $scope.sticker_text[sticker.name] = true;
+                            };
                     });
                 });
         });
