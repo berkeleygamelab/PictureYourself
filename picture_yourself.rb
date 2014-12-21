@@ -100,21 +100,21 @@ post '/grabcut' do
   end
 
   if OS.mac?
-    system("./opencv_trans_MAC uploads/#{filename} #{params[:coords]} #{params[:pyuserid]}")
+    system("./grabcut uploads/#{filename} #{params[:coords]} #{params[:pyuserid]}")
   elsif OS.unix?
     system("./opencv_trans_UNIX uploads/" + filename + ' ' + params[:coords] + ' ' + params[:pyuserid])
   end
 
   # '1_sticker.png' is a hardcoded value in opencv. Hacky workaround because I don't have opencv source
-  outputName = "public/users/#{params[:pyuserid]}/1_sticker.png"
-  if File.exist? outputName
-    begin
-      File.rename outputName, "public/users/#{params[:pyuserid]}/#{params[:count]}.png"
-    rescue SystemCallError
-      puts "1_sticker.png could not be renamed"
-      status 500
-    end
-  end
+  # outputName = "public/users/#{params[:pyuserid]}/1_sticker.png"
+  # if File.exist? outputName
+  #   begin
+  #     File.rename outputName, "public/users/#{params[:pyuserid]}/#{params[:count]}.png"
+  #   rescue SystemCallError
+  #     puts "1_sticker.png could not be renamed"
+  #     status 500
+  #   end
+  # end
   "users/#{params[:pyuserid]}/#{params[:count]}.png"
 end
 
