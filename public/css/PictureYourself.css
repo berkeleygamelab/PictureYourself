@@ -132,10 +132,16 @@ table { border-collapse: collapse; }
     text-align: center;
     text-transform:uppercase;
     cursor: pointer;
+    -webkit-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    transition: background-color 0.3s;
 }
 
 .button:hover {
         background-color:rgba(36, 41, 65, 0.89);
+        -webkit-transition: background-color 0.3s;
+        -o-transition: background-color 0.3s;
+        transition: background-color 0.3s;
 }
 
 /* main.css

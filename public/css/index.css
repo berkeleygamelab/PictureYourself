@@ -49,3 +49,21 @@
     width: 640px;
     height: 480px; 
 }
+
+#tos{
+    background: white;
+    -webkit-box-shadow: 0 0 8px #bbb;
+    box-shadow: 0 0 8px #bbb;
+    margin-top: 1.5%;
+    padding: 3% 12%;
+    width: 75%;
+}
+
+.accept_buttons{
+    margin-top: 15%;
+    text-align: center;
+}
+
+.accept_buttons>input:first-child{
+    margin-right: 100px;
+}

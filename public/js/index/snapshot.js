@@ -10,8 +10,10 @@ function ViewCtrl($scope){
     })
 }
 
+var scope;
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
-function SnapshotCtrl($scope, fileReader, $http, $timeout){
+function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
+    scope = $scope;
     //create proper login methods etc...
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
@@ -31,11 +33,14 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
 
     //site setup
     $scope.camera = false;
+    $scope.show_tos = false;
     $scope.show_camera = true;
     $scope.show_capture = false;
     $scope.camera_loaded = false;
     $scope.loading = false;
     $scope.cutDisabled = false;
+    $scope.show_buttons = true;
+    $scope.has_agreed = false;
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
     // //KineticJS setup
@@ -92,14 +97,36 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout){
         kinetic($('#snapshot').attr('src'));
     };
 
+    $scope.get_tos = function(){
+        if($scope.has_agreed){
+            $scope.get_camera();
+        } else{
+            // Parent is ViewCtrl, whose parent is LayoutCtrl
+            $scope.$parent.$parent.show_quit = true;
+            $scope.snapshot_button.start = false;
+            $scope.show_tos = true;
+            $scope.camera_loaded = true;
+            $scope.show_camera = false;
+            $scope.show_buttons = false;
+            $scope.has_agreed = true;
+        }
+    }
+
+    $scope.startover = function(){
+        $window.location.href = '/';
+    }
+
     $scope.get_camera = function(){
     /*if iPhone, do input...)
       else if no getUserMedia() do fileupload.
     */
+        $scope.show_buttons = true;
         $scope.camera = getUserMedia();
+        $scope.show_tos = false;
         $scope.snapshot_button.start = false;
         $scope.snapshot_button.snap_it = true;
         $scope.camera_loaded = true;
+        $scope.show_camera = true;
     };
 
     $scope.capture = function(){
@@ -188,5 +215,5 @@ function debug(msg){
     }
 }
 
-SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout']; //required for minifying angular
+SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout', '$window']; //required for minifying angular
 ViewCtrl.$inject = ['$scope']

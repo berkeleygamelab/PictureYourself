@@ -39,15 +39,18 @@
                     <a  class="navbar-link"><img class='navbariconleft' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a>
 
                     <div id="navright">
-                        <div class="navtoleft">
+                        <div id="quit_div" ng-show='show_quit'>
+                            <input type='button' id='quit' class='button' ng-click='quit()' value = "QUIT">
+                        </div>
+                       <!--  <div class="navtoleft">
                             <a  class="navbar-link" href="/"><i class="fa fa-camera navbariconright" id='navcam'></i></a>
-                        </div>
+                        </div> -->
 
-                        <div class="navtoleft">
+                       <!--  <div class="navtoleft">
                             <a  class="navbar-link"><i class="fa fa-bell navbariconright"></i></a>
-                        </div>
+                        </div> -->
 
-                        <div class="navtoleft" id='hamburger'>
+                        <!-- <div class="navtoleft" id='hamburger'>
                             <i class="fa fa-bars navbariconright"></i>
 
                             <div id="dropdown">
@@ -65,8 +68,8 @@
                                     </a>
                                 </li>
                                 </ul>
-                            </div> <!--dropdown-->
-                        </div> <!--hamburger-->
+                            </div> --> <!--dropdown-->
+                        <!-- </div> --> <!--hamburger-->
                     </div> <!--navright-->
                 </nav>
             </div> <!--outside-->

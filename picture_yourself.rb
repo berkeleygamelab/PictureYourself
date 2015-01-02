@@ -63,8 +63,9 @@ end
 get '/' do
   cookie = request.cookies["pyuserid"]
   
-  # Check if cookie exits, if it does delete picture associated with cookie
+  # Check if cookie exits, if it does delete pictures associated with cookie
   unless cookie.nil?
+    # TODO: Delete all pictures
     name = 'public/users/' + cookie + "/1_sticker.png"
     if File.file?(name)
         File.delete(name)
