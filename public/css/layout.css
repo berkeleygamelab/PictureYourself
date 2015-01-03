@@ -59,8 +59,18 @@
     color: black;
     text-decoration: none;
 }
+.navtitle{
+    font-family: 'Alegreya SC', serif;
+    text-transform: uppercase;
+    font-size: 27px;
+    color: #e8e8e7;
+    margin-left: 1.5%;
+    margin-top: 0.45%;
+}
 
-
+.navleft{
+    float: left;
+}
 #navright{
     float: right;
 }

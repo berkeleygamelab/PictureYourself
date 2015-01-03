@@ -16,6 +16,8 @@ THE HTML/ERB FILE.
     box-sizing: border-box;
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 body{
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);

@@ -4,7 +4,7 @@
     padding: 50px;
 }
 
-#camera, #camera_placeholder, #capture{
+#camera, #camera_placeholder, #capture, #check{
     width:640px;
     height:480px;
     padding-top: 3em;
@@ -18,8 +18,11 @@
     position:relative;
 }
 .centered{
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
+}
+.check_image{
+    display: block;
 }
 #retake_div{
     position:absolute;
@@ -66,4 +69,10 @@
 
 .accept_buttons>input:first-child{
     margin-right: 100px;
+}
+
+#face_select_blurb{
+    width: 15%;
+    float: left;
+    margin-top: -25%;
 }

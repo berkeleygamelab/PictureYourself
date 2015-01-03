@@ -28,8 +28,22 @@
 
         <!-- KineticJS Stage -->
         <div id='capture' ng-show='show_capture' class='centered'>
-            <div id="snapshot_container" ng-show='show_capture' class='index_container'></div>
+            <div id="snapshot_container" ng-show='show_capture' class='index_container' data-toggle="popover" title="Select Your Face" 
+                data-content="Drag the box to frame your face, then press select." data-placement='left' data-trigger='hover'>
+            </div>
         </div>
+
+        <div id="check" ng-show='check_face' class='centered'>
+            <img class='centered check_image' ng-src="/{{selfie}}" add-drag/>
+            <div class="accept_buttons">
+                <input type="button" class="button" ng-click = 'redo()' value = "Redo">
+                <input type="button" class="button" ng-click = 'keep()' value = "Keep">
+            </div>
+        </div>
+<!--         <div id="face_select_blurb" ng-show='show_capture' >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, distinctio, nesciunt. Nobis rerum quis eligendi saepe explicabo corrupti aliquid sint necessitatibus quam. Beatae expedita sunt ex, dignissimos dolores temporibus officiis!
+        </div> -->
+        <!-- <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" >Click to toggle popover</button> -->
 
         <!-- snapshot_buttons -->
         <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>

@@ -10,10 +10,8 @@ function ViewCtrl($scope){
     })
 }
 
-var scope;
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
-    scope = $scope;
     //create proper login methods etc...
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
@@ -41,6 +39,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
     $scope.cutDisabled = false;
     $scope.show_buttons = true;
     $scope.has_agreed = false;
+    $scope.check_face = false;
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
 
     // //KineticJS setup
@@ -70,21 +69,10 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
         formData['count'] = selfieCount;
 
         $http.post('/grabcut', formData).success(function(data){
-            // window.location = '/scenario';
-            console.log("Grabcut success!")
             // Swap views
-            $scope.$emit('toggle_scenario', data, selfieCount);
-            // Reset snapshot page
-            $scope.camera = false;
-            $scope.show_camera = true;
-            $scope.show_capture = false;
-            $scope.camera_loaded = false;
-            $scope.loading = false;
-            $scope.cutDisabled = false;
-            $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
-            $('#video').attr('src', '')
-            selfieCount += 1 
-            console.log(data);
+            $scope.selfie = data;
+            console.log($scope.selfie);
+            $scope.check();
         })
         .error(function(){
             $scope.loading = false;
@@ -92,6 +80,40 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
             alert ("There was an issue cropping the image.");
         })
     };
+
+    $scope.check = function(data){
+        $scope.check_face = true;
+        $scope.loading = false;
+        $scope.show_capture = false;
+        $scope.snapshot_button = {'start':false,'snap_it':false,'cut':false, 'retake':false};
+    }
+
+    $scope.redo = function(){
+        $scope.camera = false;
+        $scope.show_camera = true;
+        $scope.show_capture = false;
+        $scope.camera_loaded = false;
+        $scope.loading = false;
+        $scope.cutDisabled = false;
+        $scope.check_face = false;
+        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+        $('#video').attr('src', '')
+    }
+
+    $scope.keep = function(){
+        $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
+        // Reset snapshot page
+        $scope.camera = false;
+        $scope.show_camera = true;
+        $scope.show_capture = false;
+        $scope.camera_loaded = false;
+        $scope.loading = false;
+        $scope.cutDisabled = false;
+        $scope.check_face = false;
+        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+        $('#video').attr('src', '')
+        selfieCount += 1 
+    }
 
     $scope.send_snapshot = function(){
         kinetic($('#snapshot').attr('src'));
@@ -193,6 +215,10 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
     }; // End of kinetic Function
 
 }//End of new SnapshotCtrl
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 
 app.directive("ngFileSelect",function(){
   return {
