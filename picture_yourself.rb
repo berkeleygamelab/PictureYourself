@@ -116,7 +116,9 @@ post '/grabcut' do
   #     status 500
   #   end
   # end
+
   "users/#{params[:pyuserid]}/#{params[:count]}.png"
+  # Base64.encode64(open("public/users/#{params[:pyuserid]}/#{params[:count]}.png"){ |io| io.read })
 end
 
 

@@ -70,6 +70,9 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
 
         $http.post('/grabcut', formData).success(function(data){
             // Swap views
+            // $http.get('/' + data).success(function(d){
+            //     $scope.selfie = d;
+            // })
             $scope.selfie = data;
             console.log($scope.selfie);
             $scope.check();
