@@ -1,6 +1,7 @@
 #Main file to be executed
 
 require 'sinatra'
+require 'sinatra-websocket'
 require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
@@ -17,6 +18,10 @@ set :lock, true
 # set :categories, ["accessories","backgrounds","cal_day_pack",
 #                     "clothing","dorm_room_pack",
 #                     "football_game_pack","frames","misc"]
+set :server, 'thin'
+set :sockets, []
+# set :port, 9393
+# set :bind, 'localhost'
 
 
 require_relative 'apis'
@@ -129,6 +134,32 @@ end
 
 get '/snapshot' do
   erb :snapshot
+end
+
+get '/slideshow' do 
+  # files = Dir.glob("public/collages/*/**").each{|x| x.gsub!("public/", "")}.to_json
+  # if !request.websocket?
+  #   erb :slideshow
+  # else
+  #   request.websocket do |ws|
+  #     ws.onopen do
+  #       puts "Open"
+  #       ws.send(files)
+  #       settings.sockets << ws
+  #     end
+  #     ws.onmessage do |msg|
+  #       puts "Message received"
+  #       ws.send("Message received!")
+  #       EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
+  #     end
+  #     ws.onclose do
+  #       warn("websocket closed")
+  #       puts "Closed"
+  #       settings.sockets.delete(ws)
+  #     end
+  #   end
+  # end
+  erb :slideshow
 end
 
 

@@ -15,6 +15,37 @@ get '/test/stickers' do
 end
 
 
+post '/saveToGallery' do
+  begin
+    data = request.body.read
+    parsed = JSON.parse data
+    title = parsed["title"]
+    pyuserid = parsed["pyuserid"]
+    image = parsed["image"].split(',')[1]
+
+    dirname = "public/collages/#{pyuserid}"
+    unless File.directory?(dirname)
+      Dir.mkdir(dirname)
+    end
+
+    File.open("#{dirname}/#{title}.png", 'wb') do |f|
+      f.write(Base64.decode64(image))
+    end
+    
+    # status 200
+    "collages/#{pyuserid}/#{title}.png"
+  rescue => exception
+    puts exception.inspect
+    status 500
+  end
+end
+
+# Returns path to all collages
+get '/getCollages' do 
+  Dir.glob("public/collages/*/**").each{|x| x.gsub!("public/", "")}.to_json
+end
+
+
 # All the canvas's JSON data
 post '/save_canvas' do
     begin

@@ -1,0 +1,4 @@
+<script src="/js/slideshow/slideshow.js"></script>
+<div ng-controller="SlideshowCtrl" id='slideshow_ctrl'>
+    <img ng-repeat='collage in collages' ng-src="/{{collage}}?{{date}}" add-drag/>
+</div>

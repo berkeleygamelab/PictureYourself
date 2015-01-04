@@ -87,6 +87,7 @@ app // Need this for .controller and .directive
 
 
             $scope.selfies = [];
+            // Listens to load_selfies event broadcast from ViewCtrl
             $scope.$on('load_selfies', function(event, data, selfieCount){
                 $scope.selfies.push({source: data, count: selfieCount});
             })
@@ -207,39 +208,54 @@ app // Need this for .controller and .directive
 
             // Initiate email process
             $scope.call_email = function(){
-                    // Show loading overlay
-                    $scope.loading = true;
-                    // $(".loader").show();
+                // Show loading overlay
+                $scope.loading = true;
+                closeTools();
+                stage.draw();
 
-                    closeTools();
-                    stage.draw();
-
-                    var emails = prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
-                    
-                    //check if input exists
-                    if(emails !== null) {  
-
-                      //remove spaces to have one long string as argv for python
-                      emails = emails.replace(/\s+/g, '');        
-
-                      //change to use scope variable instead
-                      pyuserid = getCookie('pyuserid');
-                      
-                      // Create image from stage and send to email function in email.js
-                      stage.toDataURL({
-                        callback: function(dataUrl) {
-                            debug('callback');
-                            email(pyuserid, emails, dataUrl, $scope);
-                        }
-
-                      }) ;         
+                var emails = prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
+                //check if input exists
+                if(emails !== null) {  
+                  //remove spaces to have one long string as argv for python
+                  emails = emails.replace(/\s+/g, '');        
+                  //change to use scope variable instead
+                  pyuserid = getCookie('pyuserid');
+                  // Create image from stage and send to email function in email.js
+                  stage.toDataURL({
+                    callback: function(dataUrl) {
+                        debug('callback');
+                        email(pyuserid, emails, dataUrl, $scope);
                     }
+                  }) ;         
+                }
+                // User clicked cancel, hide loading screen
+                else{
+                    $scope.loading = false;
+                }
+            }; 
 
-                    // User clicked cancel, hide loading screen
-                    else{
-                        // $(".loader").hide();
+            $scope.saveToGallery = function(){
+                $scope.loading = true;
+                closeTools();
+                stage.draw();
+                stage.toDataURL({
+                    callback: function(dataUrl) {
+                        debug('saveToGallery');
+                        formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')}
+                        console.log(formData);
+                        $http.post('/saveToGallery', formData).success(function(data){
+                            debug("SAVETOGALLERY SUCCESS!");
+                            console.log(data);
+                            // Sent up to LayoutCtrl
+                            // $scope.$emit('collageToLayout', data);
+
+                        }).error(function(){
+                            alert("An error occured while saving the image")
+                        })
                         $scope.loading = false;
-                    }}; 
+                    }
+                });    
+            }
 
             $scope.save = function(){
                 // formData = JSON.parse(stage.toJSON());
@@ -273,7 +289,8 @@ app // Need this for .controller and .directive
                 $http.post('/save_canvas', formData).success(
                     function( data ){
                         debug("SUCCESS!");
-                    })
+                    }
+                )
             }      
 
             // $scope.load = function(){

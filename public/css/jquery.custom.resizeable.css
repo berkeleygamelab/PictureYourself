@@ -3,7 +3,7 @@
 	height: 20px;
 	width: 20px;
 	cursor: pointer;
-	background-image: url(../images/resize.png);
+	/*background-image: url(../images/resize.png);*/
 	background-size: 100%;
 	left: 2px;
 	bottom: 2px;

@@ -10,12 +10,18 @@
 // });
 
 function LayoutCtrl($scope, $window){
-    //Currently unused, but required because LayoutCtrl is defined in the erb
     $scope.show_quit = false;
 
     $scope.quit = function(){
         $window.location.href = '/';
     }
+
+    // // Received from ScenarioCtrl
+    // $scope.$on('collageToLayout', function(event, data){
+    //     console.log("Layout updateCollages");
+    //     // Send back down to SlideshowCtrl
+    //     $scope.$broadcast('updateCollages', data);
+    // });
 }
 
 LayoutCtrl.$inject = ['$scope', '$window'];  //for minifying angular

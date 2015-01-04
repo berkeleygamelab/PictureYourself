@@ -34,6 +34,7 @@
         </div>
 
         <div id="check" ng-show='check_face' class='centered'>
+            <!-- This line causes this warning: "Resource interpreted as Image but transferred with MIME type text/html:" -->
             <img class='centered check_image' ng-src="/{{selfie}}" add-drag/>
             <div class="accept_buttons">
                 <input type="button" class="button" ng-click = 'redo()' value = "Redo">
