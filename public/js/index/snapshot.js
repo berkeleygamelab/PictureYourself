@@ -27,8 +27,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
 
     var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
-
-
     //site setup
     $scope.camera = false;
     $scope.show_tos = false;
@@ -70,10 +68,12 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
 
         $http.post('/grabcut', formData).success(function(data){
             // Swap views
-            // $http.get('/' + data).success(function(d){
-            //     $scope.selfie = d;
-            // })
-            $scope.selfie = data;
+            if (!Date.now) {
+                Date.now = function() { return new Date().getTime(); }
+            }
+            $scope.selfie = data + "?" + Date.now();
+
+            $('.check_image').attr('src', data);
             console.log($scope.selfie);
             $scope.check();
         })
