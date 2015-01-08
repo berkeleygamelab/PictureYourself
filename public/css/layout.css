@@ -75,6 +75,10 @@
     float: right;
 }
 
+#quit{
+    height: 50px;
+}
+
 .navtoleft{
     float: left;
     margin-right:0.4em;

@@ -115,6 +115,15 @@
   background-color: #d8d8d8;
 }
 
+#toolicon li .fa{
+  font-size: 35px;
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 #add_selfie{
   width: 100%;
   margin: 1em 0;

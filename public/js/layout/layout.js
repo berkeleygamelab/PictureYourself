@@ -18,12 +18,9 @@ app.controller('LayoutCtrl', function($scope, $window){
         $window.location.href = '/';
     }
 
-    // // Received from ScenarioCtrl
-    // $scope.$on('collageToLayout', function(event, data){
-    //     console.log("Layout updateCollages");
-    //     // Send back down to SlideshowCtrl
-    //     $scope.$broadcast('updateCollages', data);
-    // });
+    $scope.$on('show_quit', function(){
+        $scope.show_quit = true;
+    });
 });
 
 // LayoutCtrl.$inject = ['$scope', '$window'];  //for minifying angular

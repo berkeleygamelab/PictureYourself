@@ -125,8 +125,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         if($scope.has_agreed){
             $scope.get_camera();
         } else{
-            // Parent is ViewCtrl, whose parent is LayoutCtrl
-            $scope.$parent.$parent.show_quit = true;
+            $scope.$emit('show_quit');//.$parent.show_quit = true;
             $scope.snapshot_button.start = false;
             $scope.show_tos = true;
             $scope.camera_loaded = true;

@@ -729,15 +729,6 @@
       }
     },
     "dorm_room": {
-      "DormBGRND": {
-        "id": 550,
-        "name": "DormBGRND",
-        "source": "images/stickers/5-dorm_room/DormBGRND.png",
-        "category": "dorm_room",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
       "bed": {
         "id": 543,
         "name": "bed",
