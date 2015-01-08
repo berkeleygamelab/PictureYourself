@@ -1,5 +1,5 @@
 // Handles what view we see
-function ViewCtrl($scope){
+app.controller('ViewCtrl', function($scope){
     $scope.views = {snapshot: true, scenario: false}
     $scope.$on('toggle_scenario', function(event, data, selfieCount){
         if(selfieCount != null){
@@ -7,11 +7,11 @@ function ViewCtrl($scope){
         }
         $scope.views.snapshot = !$scope.views.snapshot;
         $scope.views.scenario = !$scope.views.scenario;
-    })
-}
+    });
+});
 
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
-function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
+app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $window){
     //create proper login methods etc...
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
@@ -74,7 +74,6 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
             $scope.selfie = data + "?" + Date.now();
 
             $('.check_image').attr('src', data);
-            console.log($scope.selfie);
             $scope.check();
         })
         .error(function(){
@@ -217,7 +216,7 @@ function SnapshotCtrl($scope, fileReader, $http, $timeout, $window){
         
     }; // End of kinetic Function
 
-}//End of new SnapshotCtrl
+});//End of new SnapshotCtrl
 
 $(function () {
   $('[data-toggle="popover"]').popover()
@@ -244,5 +243,5 @@ function debug(msg){
     }
 }
 
-SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout', '$window']; //required for minifying angular
-ViewCtrl.$inject = ['$scope']
+// SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout', '$window']; //required for minifying angular
+// ViewCtrl.$inject = ['$scope']

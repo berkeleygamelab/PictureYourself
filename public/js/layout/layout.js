@@ -9,7 +9,9 @@
 //     });
 // });
 
-function LayoutCtrl($scope, $window){
+var app = angular.module('PictureYourselfApp', ['ngResource', 'ngAnimate']);
+
+app.controller('LayoutCtrl', function($scope, $window){
     $scope.show_quit = false;
 
     $scope.quit = function(){
@@ -22,6 +24,6 @@ function LayoutCtrl($scope, $window){
     //     // Send back down to SlideshowCtrl
     //     $scope.$broadcast('updateCollages', data);
     // });
-}
+});
 
-LayoutCtrl.$inject = ['$scope', '$window'];  //for minifying angular
+// LayoutCtrl.$inject = ['$scope', '$window'];  //for minifying angular

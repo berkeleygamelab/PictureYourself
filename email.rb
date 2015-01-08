@@ -2,7 +2,7 @@
 post '/email' do
   data = params[:data].split(',')[1]
   #how about... pyuserid
-  dirname = 'collages/' + params[:pyuserid]
+  dirname = 'public/collages/' + params[:pyuserid]
   unless File.directory?(dirname)
     Dir.mkdir(dirname)
   end
@@ -18,7 +18,7 @@ end
 #sends email and attaches user's scenario to email
 post '/send_email' do
   pyuserid = params[:pyuserid]
-  filepath = 'collages/'+pyuserid+'/1.png'  
+  filepath = 'public/collages/'+pyuserid+'/1.png'  
   emails = params[:emails]
 
   Mail.deliver do

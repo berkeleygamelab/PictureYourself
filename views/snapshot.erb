@@ -34,7 +34,10 @@
         </div>
 
         <div id="check" ng-show='check_face' class='centered'>
-            <!-- This line causes this warning: "Resource interpreted as Image but transferred with MIME type text/html:" -->
+            <!-- This line causes this warning: "Resource interpreted as Image but transferred with MIME type text/html:"
+                  This is because Angular attempts to resolve this immediately, but $scope.selfie doesn't get a value until after
+                  an image has been cropped. TODO: See if Angular can delay resolution of ng-src until after it exists.
+                  Note: An attempt to set $scope.selfie to '#' or something similar makes no difference. -->
             <img class='centered check_image' ng-src="/{{selfie}}" add-drag/>
             <div class="accept_buttons">
                 <input type="button" class="button" ng-click = 'redo()' value = "Redo">

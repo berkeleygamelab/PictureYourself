@@ -42,7 +42,12 @@ end
 
 # Returns path to all collages
 get '/getCollages' do 
-  Dir.glob("public/collages/*/**").each{|x| x.gsub!("public/", "")}.to_json
+  result = []
+  Dir.glob("public/collages/*/**").each do |x| 
+    x = x.gsub("public/", "") unless x.nil?
+    result << {source: x} 
+  end
+  result.to_json
 end
 
 
