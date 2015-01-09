@@ -51,9 +51,12 @@
 
         <!-- snapshot_buttons -->
         <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>
-            <input type="button" class="button" ng-click = 'get_tos()' value = "START" ng-show='snapshot_button.start'>
-            <input type="button" class="button" ng-click = 'capture()' value = "SNAP IT" id = "button" ng-show = 'snapshot_button.snap_it'>
-            <input type="button" class="button" ng-click = 'upload_webcam()' value='SELECT' ng-show = 'snapshot_button.cut' ng-disabled="cutDisabled">
+            <input type="button" class="button" ng-click='get_tos()' value="START" ng-show='snapshot_button.start'>
+            <input type="button" class="button" ng-click='capture()' value="SNAP IT" id='snap_it' ng-show='snapshot_button.snap_it'
+                data-content="Make sure to allow access to your webcam!" data-placement='top' data-trigger='manual'
+                disabled="disabled">
+            <input type="button" class="button" ng-click='upload_webcam()' value='SELECT' id='select' ng-show='snapshot_button.cut' 
+                ng-disabled="cutDisabled">
         </div>
 
     </div> <!-- snapshot_div -->

@@ -10,8 +10,10 @@ app.controller('ViewCtrl', function($scope){
     });
 });
 
+var scope;
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $window){
+    scope = $scope;
     //create proper login methods etc...
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
@@ -25,8 +27,9 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     var video = document.querySelector('video');
     var cropObj; // CropJS object set up in function kinetic()
 
-    var button = document.querySelector('#button'); // need this?
+    // var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
+
     //site setup
     $scope.camera = false;
     $scope.show_tos = false;
@@ -38,23 +41,13 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $scope.show_buttons = true;
     $scope.has_agreed = false;
     $scope.check_face = false;
-    $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+    $scope.webcam_accessed = true; //Disabled when true
+    $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
 
     // //KineticJS setup
     var imageObj = new Image();
 
     // Button functions
-    //Handles retaking an image. Currently unused
-    $scope.retake = function(){
-        $scope.snapshot_button.retake = false;
-        $scope.snapshot_button.snap_it = true;
-        $scope.snapshot_button.cut = false;
-        $scope.show_camera = true;
-        $scope.show_capture = false;
-        $scope.loading = false;
-        width = 0;
-        height = 0;
-    };
 
     //Call grabcut with coordinates
     $scope.cut = function(){
@@ -87,7 +80,8 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.check_face = true;
         $scope.loading = false;
         $scope.show_capture = false;
-        $scope.snapshot_button = {'start':false,'snap_it':false,'cut':false, 'retake':false};
+        $('#snap_it').attr("disabled", "disabled");
+        $scope.snapshot_button = {'start':false,'snap_it':false,'cut':false};
     }
 
     $scope.redo = function(){
@@ -98,7 +92,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.loading = false;
         $scope.cutDisabled = false;
         $scope.check_face = false;
-        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
         $('#video').attr('src', '')
     }
 
@@ -112,7 +106,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.loading = false;
         $scope.cutDisabled = false;
         $scope.check_face = false;
-        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false, 'retake':false};
+        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
         $('#video').attr('src', '')
         selfieCount += 1 
     }
@@ -122,6 +116,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     };
 
     $scope.get_tos = function(){
+        $('#tos').fadeIn();
         if($scope.has_agreed){
             $scope.get_camera();
         } else{
@@ -190,10 +185,8 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         } 
     };
 
-
     // Creates the kineticJS environment
     // Should be called by the change of img
-
     var kinetic = function(result) {
         imageObj.src = result;
         imageObj.onload = function() {
@@ -211,7 +204,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
             //snapshot effect
             $('#snapshot_container').addClass('animated fadeInUp');
 
-            }; // end of imageObj.onload
+        }; // end of imageObj.onload
         
     }; // End of kinetic Function
 
@@ -230,9 +223,7 @@ app.directive("ngFileSelect",function(){
         $scope.file = (e.srcElement || e.target).files[0];
         $scope.getFile();
       });
-
     }
-
   };
 });
 
