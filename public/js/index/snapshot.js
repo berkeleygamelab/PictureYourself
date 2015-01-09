@@ -185,27 +185,50 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         } 
     };
 
+    function rotateBase64Image(base64data) {
+
+
+    }
+
+
     // Creates the kineticJS environment
     // Should be called by the change of img
     var kinetic = function(result) {
-        imageObj.src = result;
-        imageObj.onload = function() {
-            // CropJS set up
-            cropObj = new CropJS({
-                cropEdges: new EdgeList({
-                    topY: 160,
-                    bottomY: 320,
-                    leftX: 213,
-                    rightX: 426,
-                }),
-                image: imageObj,
-                imageContainerID: "snapshot_container",
-            });
-            //snapshot effect
-            $('#snapshot_container').addClass('animated fadeInUp');
+        // Everything below to the imageObj.src line is to flip the saved image, so that it follows
+        // the flipped video, which mirrors the user, rather than move in the opposite direction
 
-        }; // end of imageObj.onload
-        
+        // Reuse the canvas to put the old flipped image on
+        var canvas = document.getElementById("cam_canvas");
+        var ctx = canvas.getContext("2d");
+        var image = new Image();
+        image.src = result;
+
+        // When the image is loaded
+        image.onload = function() {
+            // Flip the image and draw it so that we can get the Base64 representation
+            ctx.translate(image.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(image, 0, 0); 
+            // Now set the actual image of the canvas to the flipped image
+            imageObj.src = canvas.toDataURL('image/png');
+            
+            // This is nested to ensure the image was loaded and flipped before presenting it to the user (Async issues)
+            imageObj.onload = function() {
+                // CropJS set up
+                cropObj = new CropJS({
+                    cropEdges: new EdgeList({
+                        topY: 160,
+                        bottomY: 320,
+                        leftX: 213,
+                        rightX: 426,
+                    }),
+                    image: imageObj,
+                    imageContainerID: "snapshot_container",
+                });
+                //snapshot effect
+                $('#snapshot_container').addClass('animated fadeInUp');
+            }; // end of imageObj.onload
+        };
     }; // End of kinetic Function
 
 });//End of new SnapshotCtrl
