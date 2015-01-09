@@ -1,7 +1,5 @@
 // Slider code from http://www.sitepoint.com/creating-slide-show-plugin-angularjs/
-var scope;
 app.controller('SlideshowCtrl', function($scope, $http, $interval, $timeout){
-    scope = $scope;
     $scope.collages = null
     // $scope.showArrows = false;
 

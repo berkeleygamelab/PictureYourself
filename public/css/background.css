@@ -1,0 +1,26 @@
+#background_ctrl{
+    padding-top: 4.5%;
+}
+
+.multiple-items{
+    width: 40%;
+    margin: auto;
+    display: block;
+}
+.backgrounds{
+    width: 80%;
+    margin: auto;
+    display: block;
+    padding-bottom: 2%;
+}
+.slick-center{
+    /*background-color: white;*/
+}
+
+.slick-slide{
+    /*padding-right: 20px;*/
+}
+.centered{
+    margin: auto;
+    display: block;
+}

@@ -10,10 +10,8 @@ app.controller('ViewCtrl', function($scope){
     });
 });
 
-var scope;
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $window){
-    scope = $scope;
     //create proper login methods etc...
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
@@ -184,12 +182,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
             });
         } 
     };
-
-    function rotateBase64Image(base64data) {
-
-
-    }
-
 
     // Creates the kineticJS environment
     // Should be called by the change of img
