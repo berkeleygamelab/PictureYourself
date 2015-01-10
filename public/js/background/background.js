@@ -4,8 +4,9 @@ app.directive('slickSlider',function($timeout){
         link: function(scope,element,attrs) {
             $timeout(function() {
                 $('.backgrounds_div').slick({
+                    autoplaySpeed: 0,
                     centerMode: true,
-                    slidesToShow: 1,
+                    speed: 0,
                     swipeToSlide: true,
                     variableWidth: true,
                     responsive: [
@@ -48,6 +49,7 @@ app.directive('slickSlider',function($timeout){
         $scope.$emit('toggle_scenario', $scope.data, $scope.selfieCount, $scope.bg)
     }
 
+    // Recieved from ViewCtrl
     $scope.$on('send_selfie_to_background', function(event, data, selfieCount){
         $scope.data = data;
         $scope.selfieCount = selfieCount;

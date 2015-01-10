@@ -39,7 +39,7 @@ function getUserMedia(){
             stream = localMediaStream;
             video = document.querySelector('video');
             video.src = window.URL.createObjectURL(localMediaStream);
-            $('#snap_it').attr("disabled", false);
+            $('#snap_it').attr("disabled", false).popover('hide');
             video.onloadedmetadata = function(e) {
             // Do something with the video here.
             };

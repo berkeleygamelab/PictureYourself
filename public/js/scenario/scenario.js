@@ -65,6 +65,13 @@ app // Need this for .controller and .directive
             var stage_container = stage.container();
             var dragged_image = null;
 
+            // Setup title
+            $scope.title = "Enter title here!";
+            $scope.clearTitle = function(){
+                if($scope.title == "Enter title here!"){
+                    $scope.title = null;
+                }
+            }
 
             // Setup color picker
             $('select[name="colorpicker"]').simplecolorpicker({picker:true}).

@@ -61,6 +61,12 @@
     padding: 3% 12%;
     width: 75%;
 }
+#disagree{
+    background-color: #BB3B3B;
+}
+#disagree:hover{
+    background-color: #CF072D;
+}
 
 .accept_buttons{
     margin-top: 15%;

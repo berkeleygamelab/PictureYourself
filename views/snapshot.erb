@@ -4,6 +4,12 @@
     <div id='snapshot_div'>
         <!-- <canvas id="c" width = "640px" height = "480px"></canvas> -->
 
+        <!-- Placeholder Image -->
+        <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
+            <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_tos()'>
+        </div>
+
+        <!-- Terms of Service -->
         <div id="tos" class="centered" ng-show='show_tos'>
             <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque et qui id quidem sunt temporibus ullam laboriosam molestias iusto fugiat, amet quam provident nostrum sapiente facere consectetur nobis. Recusandae, sed?</div>
             <div>Earum quasi atque magnam nemo saepe ducimus eos vero quo, dignissimos dolores dolore ipsum! Veritatis ipsum provident voluptatum, ipsa impedit quos reiciendis? Aut ab, aspernatur, quia aperiam provident iusto sed.</div>
@@ -11,14 +17,9 @@
             <div>Impedit facere exercitationem voluptates quis! Eligendi harum nesciunt eveniet omnis eius reiciendis iusto ipsum quasi distinctio, vel aliquam ipsa assumenda debitis modi voluptatibus facere doloremque saepe illo excepturi libero amet?</div>
             <div>Magnam, fuga temporibus omnis optio consequuntur voluptatem ipsa culpa eveniet ipsum odio laboriosam at odit ipsam reiciendis porro sequi sit maiores libero nisi quod accusantium, tempora nesciunt itaque. Dolores, vel?</div>
             <div class="accept_buttons">
-                <input type="button" class="button" ng-click = 'startover()' value = "Disagree">
-                <input type="button" class="button" ng-click = 'get_camera()' value = "Agree">
+                <input type="button" class="button" id='disagree' ng-click='startover()' value="Disagree">
+                <input type="button" class="button" ng-click='get_camera()' value="Agree">
             </div>
-        </div>
-
-        <!-- Placeholder Image -->
-        <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
-            <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_camera()'>
         </div>
 
         <!-- Webcam Input -->
@@ -45,10 +46,6 @@
                 <input type="button" class="button" ng-click = 'keep()' value = "Keep">
             </div>
         </div>
-<!--         <div id="face_select_blurb" ng-show='show_capture' >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, distinctio, nesciunt. Nobis rerum quis eligendi saepe explicabo corrupti aliquid sint necessitatibus quam. Beatae expedita sunt ex, dignissimos dolores temporibus officiis!
-        </div> -->
-        <!-- <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" >Click to toggle popover</button> -->
 
         <!-- snapshot_buttons -->
         <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>

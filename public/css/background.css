@@ -44,6 +44,7 @@
 }
 .slick-slide img{
     padding: 1em 0;
+    cursor: pointer;
 }
 .centered{
     margin: auto;

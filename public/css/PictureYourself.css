@@ -147,6 +147,7 @@ table { border-collapse: collapse; }
 }
 .button:disabled{
     background-color: #5F5F5F;
+    cursor: not-allowed;
 }
 
 /* main.css

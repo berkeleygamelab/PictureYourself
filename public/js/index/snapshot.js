@@ -1,10 +1,11 @@
 // Handles what view we see
-app.controller('ViewCtrl', function($scope){
+app.controller('ViewCtrl', function($scope, $timeout){
     $scope.views = {snapshot: true, scenario: false, background: false}
+
+    // Received from either BackgroundCtrl (the first time) or SnapshotCtrl 
     $scope.$on('toggle_scenario', function(event, data, selfieCount, background){
-        console.log(background);
         if(selfieCount != null){
-            console.log("load_selfies");
+            // Sent to ScenarioCtrl
             $scope.$broadcast('load_selfies', data, selfieCount, background);
         }
         if(background != undefined){
@@ -14,14 +15,22 @@ app.controller('ViewCtrl', function($scope){
             $scope.views.snapshot = !$scope.views.snapshot;
             $scope.views.scenario = !$scope.views.scenario;
         }
-
         $scope.views.background = false;
     });
+
+    // Received from SnapshotCtrl 
     $scope.$on('goto_background', function(event, data, selfieCount){
+        // Super hacky fix for carousel width issues due to angular hiding (I think)
+        $('.backgrounds_div').slickPlay();
+        $timeout(function(){
+            $('.backgrounds_div').slickPause().slickSetOption('speed', 300);
+        }, 1);
+
+        // Sent to BackgroundCtrl
+        $scope.$broadcast('send_selfie_to_background', data, selfieCount);
         $scope.views.snapshot = false;
         $scope.views.background = true;
-        $scope.$broadcast('send_selfie_to_background', data, selfieCount);
-    })
+    });
 });
 
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
@@ -30,7 +39,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
     var selfieCount = 1; 
-    //console.log(pyuserid);   // Dev
     checkCookie(pyuserid);
 
     //canvas setup
@@ -44,17 +52,28 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
 
     //site setup
     $scope.camera = false;
+
+    // ng-show/ng-hide expressions for which divs are shown
+    $scope.camera_loaded = false;
     $scope.show_tos = false;
     $scope.show_camera = true;
     $scope.show_capture = false;
-    $scope.camera_loaded = false;
+    $scope.check_face = false;
+
+    // Loading overlay
     $scope.loading = false;
-    $scope.cutDisabled = false;
+
+    // Controls disability and visibility of buttons
     $scope.show_buttons = true;
+    $scope.cutDisabled = false;
+    $scope.webcam_accessed = true; //Disabled when true
+
+    // Controls whether the user has already agreed to the TOS and chosen a background. 
+    // Once, true, should stay true.
     $scope.has_agreed = false;
     $scope.has_background = false;
-    $scope.check_face = false;
-    $scope.webcam_accessed = true; //Disabled when true
+
+    // Controls which snapshot button is shown
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
 
     // //KineticJS setup
@@ -62,83 +81,13 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
 
     // Button functions
 
-    //Call grabcut with coordinates
-    $scope.cut = function(){
-        var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
-        var formData = {};
-        // var filename = $scope.pyuserid + "/" + selfieCount +  ".png";
-        // formData["filename"] = filename;
-        formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
-        formData['pyuserid'] = $scope.pyuserid;
-        formData['count'] = selfieCount;
-
-        $http.post('/grabcut', formData).success(function(data){
-            // Swap views
-            if (!Date.now) {
-                Date.now = function() { return new Date().getTime(); }
-            }
-            $scope.selfie = data + "?" + Date.now();
-
-            $('.check_image').attr('src', data);
-            $scope.check();
-        })
-        .error(function(){
-            $scope.loading = false;
-            $scope.cutDisabled = true;
-            alert ("There was an issue cropping the image.");
-        })
-    };
-
-    $scope.check = function(data){
-        $scope.check_face = true;
-        $scope.loading = false;
-        $scope.show_capture = false;
-        $('#snap_it').attr("disabled", "disabled");
-        $scope.snapshot_button = {'start':false,'snap_it':false,'cut':false};
-    }
-
-    $scope.redo = function(){
-        $scope.camera = false;
-        $scope.show_camera = true;
-        $scope.show_capture = false;
-        $scope.camera_loaded = false;
-        $scope.loading = false;
-        $scope.cutDisabled = false;
-        $scope.check_face = false;
-        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
-        $('#video').attr('src', '')
-    }
-
-    $scope.keep = function(){
-        if($scope.has_background){
-            $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
-        } else {
-            $scope.$emit('goto_background', $scope.selfie, selfieCount);
-            $scope.has_background = true;
-        }
-        // Reset snapshot page
-        $scope.camera = false;
-        $scope.show_camera = true;
-        $scope.show_capture = false;
-        $scope.camera_loaded = false;
-        $scope.loading = false;
-        $scope.cutDisabled = false;
-        $scope.check_face = false;
-        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
-        $('#video').attr('src', '')
-        selfieCount += 1 
-    }
-
-    $scope.send_snapshot = function(){
-        kinetic($('#snapshot').attr('src'));
-    };
-
     $scope.get_tos = function(){
         $('#tos').fadeIn();
         if($scope.has_agreed){
             $scope.get_camera();
         } else{
-            $scope.$emit('show_quit');//.$parent.show_quit = true;
+            // Sent to LayoutCtrl
+            $scope.$emit('show_quit');
             $scope.snapshot_button.start = false;
             $scope.show_tos = true;
             $scope.camera_loaded = true;
@@ -163,6 +112,9 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.snapshot_button.snap_it = true;
         $scope.camera_loaded = true;
         $scope.show_camera = true;
+        $timeout(function(){
+            $('#snap_it').popover('show');
+        }, 300);
     };
 
     $scope.capture = function(){
@@ -180,7 +132,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
 
     $scope.upload_webcam = function(){
         if (cropObj.getSelectionRectangle()) {
-
             // Display loading; will display regardless of success or failure
             $scope.loading = true;
             $scope.cutDisabled = true;
@@ -202,6 +153,71 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
             });
         } 
     };
+
+    //Call grabcut with coordinates
+    $scope.cut = function(){
+        var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
+        var formData = {};
+        // var filename = $scope.pyuserid + "/" + selfieCount +  ".png";
+        // formData["filename"] = filename;
+        formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
+        formData['pyuserid'] = $scope.pyuserid;
+        formData['count'] = selfieCount;
+
+        $http.post('/grabcut', formData).success(function(data){
+            if (!Date.now) {
+                Date.now = function() { return new Date().getTime(); }
+            }
+            $scope.selfie = data + "?" + Date.now();
+            $('.check_image').attr('src', data);
+            $scope.check();
+        })
+        .error(function(){
+            $scope.loading = false;
+            $scope.cutDisabled = true;
+            alert ("There was an issue cropping the image.");
+        });
+    };
+
+    $scope.check = function(data){
+        $scope.check_face = true;
+        $scope.loading = false;
+        $scope.show_capture = false;
+        $('#snap_it').attr("disabled", "disabled");
+        $scope.snapshot_button = {'start':false,'snap_it':false,'cut':false};
+    }
+
+    // Reset snapshot page
+    $scope.redo = function(){
+        $scope.camera = false;
+        $scope.show_camera = true;
+        $scope.show_capture = false;
+        $scope.camera_loaded = false;
+        $scope.loading = false;
+        $scope.cutDisabled = false;
+        $scope.check_face = false;
+        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
+        $('#video').attr('src', '')
+    }
+
+    $scope.keep = function(){
+        if($scope.has_background){
+            // Sent to ViewCtrl
+            $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
+        } else {
+            // Sent to ViewCtrl
+            $scope.$emit('goto_background', $scope.selfie, selfieCount);
+            $scope.has_background = true;
+        }
+        // Snapshot page should be reset; above emits will move on to background/scenario
+        $scope.redo();
+        selfieCount += 1 
+    }
+
+    // Unused
+    // $scope.send_snapshot = function(){
+    //     kinetic($('#snapshot').attr('src'));
+    // };
 
     // Creates the kineticJS environment
     // Should be called by the change of img
