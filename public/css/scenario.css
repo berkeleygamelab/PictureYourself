@@ -2,6 +2,8 @@
 
 /* css originally by Hiro Kai on 11/27/2013 */
 
+@media screen and (max-width: 1281px) {
+
 .sticker{
   width: 25%;
   height: 25%;
@@ -24,11 +26,14 @@
 }
 
 #another_selfie_button{
-  width: 200px;
+  width: 150px;
   margin: 20px;
-  margin-left: 55px;
+  margin-left: 25%;
+  border: solid 1px #242941;
   text-transform: capitalize;
   font-size: 14px;
+  background-color: #F6B57C;
+  color: black;
 }
 
 .background, .frames{
@@ -344,4 +349,12 @@ button.close {
 .modal-backdrop.in {
   opacity: .35;
   filter: alpha(opacity=50);
+}
+
+    
+}
+
+@media screen and (max-width: 1280px) {
+
+
 }
