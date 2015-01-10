@@ -1,5 +1,22 @@
 #background_ctrl{
-    padding-top: 4.5%;
+    padding-top: 5.5%;
+}
+
+.background_container{
+    border: 1px solid #c3c3c3;
+    width: 90%;
+    margin: auto;
+    display: block;
+    -webkit-box-shadow: 0 0 10px #ddd;
+    box-shadow: 0 0 10px #ddd;
+    margin-bottom: 1.5%;
+    min-height: 515px;
+}
+
+.background_header{
+    text-align: center;
+    font-size: 1.75em;
+    line-height: 0.4em;
 }
 
 .multiple-items{
@@ -7,18 +24,26 @@
     margin: auto;
     display: block;
 }
-.backgrounds{
-    width: 80%;
+.backgrounds_div{
+    width: 90%;
     margin: auto;
     display: block;
     padding-bottom: 2%;
 }
-.slick-center{
-    /*background-color: white;*/
+.backgrounds{
+    width: 655px;
+    height: 450px;
+    transition: all 300ms ease;
 }
-
-.slick-slide{
-    /*padding-right: 20px;*/
+.slick-center img{
+    -webkit-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    -o-transform: scale(1.08);
+    transform: scale(1.08);
+    transition: all 300ms ease;
+}
+.slick-slide img{
+    padding: 1em 0;
 }
 .centered{
     margin: auto;

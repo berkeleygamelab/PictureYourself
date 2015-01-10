@@ -1,13 +1,27 @@
 // Handles what view we see
 app.controller('ViewCtrl', function($scope){
-    $scope.views = {snapshot: true, scenario: false}
-    $scope.$on('toggle_scenario', function(event, data, selfieCount){
+    $scope.views = {snapshot: true, scenario: false, background: false}
+    $scope.$on('toggle_scenario', function(event, data, selfieCount, background){
+        console.log(background);
         if(selfieCount != null){
-            $scope.$broadcast('load_selfies', data, selfieCount);
+            console.log("load_selfies");
+            $scope.$broadcast('load_selfies', data, selfieCount, background);
         }
-        $scope.views.snapshot = !$scope.views.snapshot;
-        $scope.views.scenario = !$scope.views.scenario;
+        if(background != undefined){
+            $scope.views.snapshot = false;
+            $scope.views.scenario = true;
+        } else{
+            $scope.views.snapshot = !$scope.views.snapshot;
+            $scope.views.scenario = !$scope.views.scenario;
+        }
+
+        $scope.views.background = false;
     });
+    $scope.$on('goto_background', function(event, data, selfieCount){
+        $scope.views.snapshot = false;
+        $scope.views.background = true;
+        $scope.$broadcast('send_selfie_to_background', data, selfieCount);
+    })
 });
 
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
@@ -38,6 +52,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $scope.cutDisabled = false;
     $scope.show_buttons = true;
     $scope.has_agreed = false;
+    $scope.has_background = false;
     $scope.check_face = false;
     $scope.webcam_accessed = true; //Disabled when true
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
@@ -95,7 +110,12 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     }
 
     $scope.keep = function(){
-        $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
+        if($scope.has_background){
+            $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
+        } else {
+            $scope.$emit('goto_background', $scope.selfie, selfieCount);
+            $scope.has_background = true;
+        }
         // Reset snapshot page
         $scope.camera = false;
         $scope.show_camera = true;

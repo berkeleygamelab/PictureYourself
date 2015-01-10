@@ -88,13 +88,19 @@ app // Need this for .controller and .directive
 
             $scope.selfies = [];
             // Listens to load_selfies event broadcast from ViewCtrl
-            $scope.$on('load_selfies', function(event, data, selfieCount){
+            $scope.$on('load_selfies', function(event, data, selfieCount, background){
+                console.log("Here");
                 $scope.selfies.push({source: data, count: selfieCount});
+                if(background != undefined){
+                    $scope.background_path = background;
+                    $scope.background.getImage().src = background;
+                }
             })
 
 
             // Setup and assign background Kinetic.Image object          
             $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
+            // $scope.background = backgroundSetup(closeTools, $scope.bg, layer, stage);
 
             // Called when user selects a background
             $scope.background_update = function(e){

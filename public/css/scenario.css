@@ -120,6 +120,7 @@
   display: block;
   text-align: center;
   position: relative;
+  /*vertical align*/
   top: 50%;
   transform: translateY(-50%);
 }

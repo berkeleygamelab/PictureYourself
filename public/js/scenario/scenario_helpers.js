@@ -16,7 +16,7 @@ function kineticSetup(stage_width, stage_height){
 
 // Creates background object (Kinetic.Image) with image source and events
 // returns - Kinetic.Image
-function backgroundSetup(closeTools, default_backgroud, layer, stage){
+function backgroundSetup(closeTools, default_background, layer, stage){
     
     var background_obj = new Image();
 

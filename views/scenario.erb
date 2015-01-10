@@ -11,7 +11,7 @@
                 <div class="tabs">
                     <ul class="nav nav-tabs" id='toolicon'>
                         <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
-                        <li class = 'tab' ng-click='show_tab("backgrounds")'> <img src="/images/img/backgrounds.png" ></li>
+                        <!-- <li class = 'tab' ng-click='show_tab("backgrounds")'> <img src="/images/img/backgrounds.png" ></li> -->
                         <li class = 'tab' ng-click='saveToGallery()'>
                             <i class="fa fa-cloud-upload"></i>
                         </li>
@@ -46,13 +46,13 @@
                     </div> <!-- #sticker_tab -->
 
                     <!-- Backgrounds 2-->
-                    <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
+<!--                     <div id="backgrounds_tab" ng-show='tabs.backgrounds'>
                         <h3 class="toolbox_text">Backgrounds</h3>
                         
                         <img ng-repeat= 'background in background_images' ng-src='{{background.source}}' class='background'   ng-click="background_update($event)" alt='{{background.name}}' />
 
-                    </div>  <!-- backgrounds_tab -->
-
+                    </div> -->  <!-- backgrounds_tab
+ -->
 
                 </div><!--  Toolbox body -->
             </div> <!-- Tabs Ctrl-->
