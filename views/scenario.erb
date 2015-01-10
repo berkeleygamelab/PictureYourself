@@ -12,7 +12,29 @@
 <script type="text/javascript" src='/js/scenario/scenario.js'></script>
 
 <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
-    <div class="row" id='framecontainer'>
+    <div id='framecontainer'>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel">Create Your Collage</h2>
+                </div>
+                <div class="modal-body">
+                    <div>Drag items onto the background to place them.</div>
+                    <div>Click on items to see available tools for skin color, rotation, and resizing.</div>
+                    <div>Choose <span><i class="fa fa-cloud-upload"></i></span> to add your collage to the gallery.</div>
+                    <div>Choose <span><i class="fa fa-envelope"></i></span> to email a copy of your collage.</div>
+                </div>
+    <!--               <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div> -->
+                </div>
+            </div>
+        </div>
+
         <div class='title'>
             <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
         </div>

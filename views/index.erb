@@ -6,15 +6,15 @@
 <script src='/js/index/webcam.js'></script>
 
 <div ng-controller="ViewCtrl">
-    <div ng-show='views.snapshot'>
+    <div ng-show='views.snapshot' id='snapshot_view'>
         <%= erb :snapshot %>
     </div>
 
-    <div ng-show='views.scenario'>
-        <%= erb :scenario %>
+    <div ng-show="views.background" id='background_view'>
+        <%= erb :background %>
     </div>
 
-    <div ng-show="views.background">
-        <%= erb :background %>
+    <div ng-show='views.scenario' id='scenario_view'>
+        <%= erb :scenario %>
     </div>
 </div>

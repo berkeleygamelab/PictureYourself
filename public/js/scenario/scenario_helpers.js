@@ -118,7 +118,7 @@ function grabStickerImages($scope, $http, $compile){
     var default_category = "shoes_and_pants";
     // Grab stickers from server and append them to category
     $http.get('/global_json/stickers.json').
-        success( function(data){
+        success(function(data){
                 data = angular.fromJson(data);
                 $scope.visible = {};
                 $scope.stickers = data['stickers'];

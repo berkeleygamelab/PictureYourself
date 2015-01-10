@@ -1,15 +1,16 @@
 // Handles what view we see
 app.controller('ViewCtrl', function($scope, $timeout){
     $scope.views = {snapshot: true, scenario: false, background: false}
-
     // Received from either BackgroundCtrl (the first time) or SnapshotCtrl 
     $scope.$on('toggle_scenario', function(event, data, selfieCount, background){
         if(selfieCount != null){
             // Sent to ScenarioCtrl
             $scope.$broadcast('load_selfies', data, selfieCount, background);
         }
+        $('#scenario_view, #snapshot_view').fadeIn(200);
         if(background != undefined){
             $scope.views.snapshot = false;
+            $('#myModal').modal();
             $scope.views.scenario = true;
         } else{
             $scope.views.snapshot = !$scope.views.snapshot;
@@ -20,14 +21,19 @@ app.controller('ViewCtrl', function($scope, $timeout){
 
     // Received from SnapshotCtrl 
     $scope.$on('goto_background', function(event, data, selfieCount){
-        // Super hacky fix for carousel width issues due to angular hiding (I think)
-        $('.backgrounds_div').slickPlay();
+        /* Super hacky fix for carousel width issues due to angular hiding (I think)
+            Having the carousel switch slides will force it to rerender correctly. 
+            The slide translation speed is init to 0 to minimise the appearance of 
+            the incorrectly rendered carousel. It's then set to 300 for the user. 
+            Additionally, the fadeIn below helps mask the incorrect rendering. */
+        $('.backgrounds_div').slickNext();
         $timeout(function(){
-            $('.backgrounds_div').slickPause().slickSetOption('speed', 300);
+            $('.backgrounds_div').slickSetOption('speed', 300);
         }, 1);
 
         // Sent to BackgroundCtrl
         $scope.$broadcast('send_selfie_to_background', data, selfieCount);
+        $('#background_view').fadeIn();
         $scope.views.snapshot = false;
         $scope.views.background = true;
     });
@@ -36,6 +42,7 @@ app.controller('ViewCtrl', function($scope, $timeout){
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $window){
     //create proper login methods etc...
+    $('#snapshot_ctrl').fadeIn();
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
     var selfieCount = 1; 
@@ -105,6 +112,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     /*if iPhone, do input...)
       else if no getUserMedia() do fileupload.
     */
+        $('#camera').fadeIn();
         $scope.show_buttons = true;
         $scope.camera = getUserMedia();
         $scope.show_tos = false;
@@ -128,14 +136,18 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.snapshot_button.snap_it = false;
         // Turn off webcam. Function defined in webcam.js
         stop_webcam()
+        $timeout(function(){
+            $('#snapshot_container').popover('show');
+        }, 500);
     };
 
     $scope.upload_webcam = function(){
         if (cropObj.getSelectionRectangle()) {
             // Display loading; will display regardless of success or failure
+            $('.loader').fadeIn();
+            $('#snapshot_container').popover('hide');
             $scope.loading = true;
             $scope.cutDisabled = true;
-
             var name = $scope.pyuserid;
             var formData = {"name":name, "data":canvas.toDataURL('image/png'), "count": selfieCount};
             $.ajax({
@@ -180,6 +192,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     };
 
     $scope.check = function(data){
+        // $('#check').fadeIn();
         $scope.check_face = true;
         $scope.loading = false;
         $scope.show_capture = false;

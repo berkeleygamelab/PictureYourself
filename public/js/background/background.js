@@ -4,7 +4,6 @@ app.directive('slickSlider',function($timeout){
         link: function(scope,element,attrs) {
             $timeout(function() {
                 $('.backgrounds_div').slick({
-                    autoplaySpeed: 0,
                     centerMode: true,
                     speed: 0,
                     swipeToSlide: true,
