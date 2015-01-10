@@ -2,6 +2,12 @@
 
 #snapshot_div{
     padding: 50px;
+    background-image: url("../images/img/PIC_arrow.png");
+    background-position: 90% 30%;
+    background-repeat: no-repeat;
+}
+
+#arrow_pic {
 }
 
 #camera, #camera_placeholder, #capture, #check{
@@ -9,6 +15,7 @@
     height:480px;
     padding-top: 3em;
 }
+
 #cam_icon{
     width: 100%;
     height: auto;

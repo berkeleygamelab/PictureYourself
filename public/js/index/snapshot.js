@@ -122,6 +122,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.show_camera = true;
         $timeout(function(){
             $('#snap_it').popover('show');
+            // $('#arrow_pic').popover('show');
         }, 300);
     };
 
