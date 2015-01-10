@@ -66,9 +66,9 @@ app // Need this for .controller and .directive
             var dragged_image = null;
 
             // Setup title
-            $scope.title = "Enter title here!";
+            $scope.title = "Enter your collage title here!";
             $scope.clearTitle = function(){
-                if($scope.title == "Enter title here!"){
+                if($scope.title == "Enter your collage title here!"){
                     $scope.title = null;
                 }
             }
