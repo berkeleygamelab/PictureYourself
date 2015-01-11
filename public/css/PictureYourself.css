@@ -179,6 +179,8 @@ table { border-collapse: collapse; }
 #framecontainer {
   margin-top: 50px;
   height: 39em;
+  margin: auto;
+  display: block;
 }
 
 /*
@@ -189,6 +191,8 @@ table { border-collapse: collapse; }
     height: 100%;
     background: white;
     box-shadow: 0 8px 5.6px rgba(119,116,117,0.6);
+    display:block;
+    margin:auto;
 
 }
 .index_container{
