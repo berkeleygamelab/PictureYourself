@@ -21,8 +21,8 @@
 .selfie{
   width: 50%;
   height: 50%;
-  margin-left: 25%
-  margin-right: auto;
+  margin: auto;
+  display: block;
 }
 
 #another_selfie_button{
@@ -208,8 +208,11 @@
 
 
 #scenario_canvas{
-  float: left;
-  margin-left: 4em;
+  /*float: left;
+  margin-left: 4em;*/
+  display: inline-block;
+  margin: auto;
+  padding-left: 5%;
 }
 
 
@@ -379,3 +382,22 @@ button.close {
   -webkit-box-shadow: 2px 2px 5px #ccc;
   box-shadow: 2px 2px 5px #ccc;
 }
+
+@media (min-width: 1281px) { 
+
+    #scenario_canvas {
+       padding:0px;
+    }
+
+    .title {
+      margin-top:80px;
+    }
+
+    #toolbox {
+      margin:8%;
+      margin-top:150px;
+    }
+
+
+}
+

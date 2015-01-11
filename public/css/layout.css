@@ -99,6 +99,7 @@
 /* Global Kinetic stuff */
 .kineticjs-content{
     position: relative; !important
+    margin:auto;
 }
 
 /* Nothing below this is currently used */
@@ -126,7 +127,7 @@
     width:960px;
 }
 #container{
-    margin:0 auto 0;
+    margin: auto;
     display:block;
 }
 
@@ -365,3 +366,4 @@
     margin:0;
     padding:0;
 }
+
