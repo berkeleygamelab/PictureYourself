@@ -19,7 +19,6 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h2 class="modal-title" id="instructionsModalLabel">Create Your Collage</h2>
                     </div>
                     <div class="modal-body">
@@ -28,36 +27,41 @@
                         <div>Choose <span><i class="fa fa-cloud-upload"></i></span> to add your collage to the gallery.</div>
                         <div>Choose <span><i class="fa fa-envelope"></i></span> to email a copy of your collage.</div>
                     </div>
+                    <div class="modal-footer">
+                        <input type="button" class="button center" data-dismiss='modal' value="Got it!">
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Save Modal -->
-        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true" data-show='true' data-backdrop='true' >
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header" ng-show='show_save_tos'>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-header">
                         <h2 class="modal-title" id="saveModalLabel">Save to Gallery</h2>
                     </div>
                     <div class="modal-body">
                         <div ng-show='show_save_tos'>
-                            I understand that my collage will be viewable in the museum's gallery and may be used to show of PIC Your Future in the media.
-                            By clicking <span>Agree</span>, I give CITRIS permission to use my collage.
+                            <div>I understand that my collage will be viewable in the museum's gallery and may be used to show of PIC Your Future in the media.</div>
+                            <div>By clicking <span>Agree</span>, I give CITRIS permission to use my collage.</div>
+                        </div>
+                        <div ng-show="show_saving_collage" class='center collage_saved'>
+                            <i class="fa fa-spinner fa-spin save_spinner"></i>    
                         </div>
                         <div ng-show='show_saved' class='center collage_saved'>
                             <h1>Collage Saved!</h1>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <div class="accept_buttons">
+                    <div class="modal-footer" ng-show='show_save_tos || show_saved'>
+                        <div class="save_accept_buttons" >
                             <div ng-show="show_save_tos">
                                 <input type="button" class="button" id='disagree' data-dismiss="modal" value="Disagree">
                                 <input type="button" class="button" ng-click='saveToGallery()' value="Agree">
                             </div>
                             <div ng-show="show_saved">
-                                <input type="button" class="button" id='disagree' ng-click='resetModal()' data-dismiss="modal" value="Return to Collage">
-                                <input type="button" class="button" ng-click='quit()' value="Quit">
+                                <input type="button" class="button" ng-click='resetSaveModal()' data-dismiss="modal" value="Return to Collage">
+                                <input type="button" class="button" id='disagree' ng-click='quit()' value="Quit">
                             </div>
                         </div>
                     </div>
@@ -65,8 +69,39 @@
             </div>
         </div>
 
-        <div class='title'>
-            <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
+        <!-- Email Modal -->
+        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="emailModalLabel">Email Your Collage</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class='emails center' ng-show='show_email_prompt'>
+                            <div>Enter your email address:</div>
+                            <input type="text" class="email_text" ng-model='emails'>
+                        </div>
+                        <div ng-show="show_saving_email" class='center collage_saved'>
+                            <i class="fa fa-spinner fa-spin save_spinner"></i>    
+                        </div>
+                        <div ng-show='show_emailed' class='center collage_saved'>
+                            <h1>Email sent!</h1>
+                        </div>
+                    </div>
+                    <div class="modal-footer" ng-show="show_email_prompt || show_emailed">
+                        <div class="save_accept_buttons">
+                            <div ng-show="show_email_prompt">
+                                <input type="button" class="button" ng-click='call_email()' value="Send">
+                                <input type="button" class="button" id='disagree' data-dismiss="modal" value="Cancel">
+                            </div>
+                            <div ng-show="show_emailed">
+                                <input type="button" class="button" ng-click='resetEmailModal()' data-dismiss="modal" value="Return to Collage">
+                                <input type="button" class="button" id='disagree' ng-click='quit()' value="Quit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id='toolbox'>
@@ -79,7 +114,7 @@
                         <li class = 'tab' data-toggle="modal" data-target="#saveModal">
                             <i class="fa fa-cloud-upload"></i>
                         </li>
-                        <li class = 'tab' ng-click='call_email()'>
+                        <li class = 'tab' data-toggle="modal" data-target="#emailModal">
                             <i class="fa fa-envelope"></i>
                         </li>
                     </ul>
@@ -138,6 +173,9 @@
 
 
         <div id = "scenario_canvas">
+            <div class='title'>
+                <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
+            </div>
             <div id = "container" ></div><!-- KineticJS Canvas -->
         </div>
 

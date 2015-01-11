@@ -17,15 +17,18 @@ end
 
 #sends email and attaches user's scenario to email
 post '/send_email' do
-  pyuserid = params[:pyuserid]
-  filepath = 'public/collages/'+pyuserid+'/1.png'  
-  emails = params[:emails]
+  data = request.body.read
+  parsed = JSON.parse data
+  emails = parsed["emails"]
+  fileName = parsed["fileName"]
+  puts emails
+  puts fileName
 
   Mail.deliver do
     to emails
     from 'picyourfuture@gmail.com'
     subject "PIC YOUR FUTURE"
     body "PIC Your Future at Berkeley\nwww.py-bcnm.berkeley.edu\n;)"
-    add_file filepath
+    add_file 'public/' + fileName
   end
 end

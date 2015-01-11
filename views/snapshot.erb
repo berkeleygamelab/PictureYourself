@@ -2,8 +2,6 @@
 
     <!-- Should probably set a height for this and adjust the rest -->
     <div id='snapshot_div'>
-        <!-- <canvas id="c" width = "640px" height = "480px"></canvas> -->
-
         <!-- Placeholder Image -->
         <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
             <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_tos()'>
@@ -41,10 +39,6 @@
                   an image has been cropped. TODO: See if Angular can delay resolution of ng-src until after it exists.
                   Note: An attempt to set $scope.selfie to '#' or something similar makes no difference. -->
             <img class='centered check_image' ng-src="/{{selfie}}" add-drag/>
-            <div class="accept_buttons">
-                <input type="button" class="button" ng-click = 'redo()' value = "Redo">
-                <input type="button" class="button" ng-click = 'keep()' value = "Keep">
-            </div>
         </div>
 
         <!-- snapshot_buttons -->
@@ -53,16 +47,18 @@
             <input type="button" class="button" ng-click='capture()' value="SNAP IT" id='snap_it' ng-show='snapshot_button.snap_it'
                 data-content="Make sure to allow access to your webcam by clicking the 'allow' button" data-placement='top' data-trigger='manual'
                 disabled="disabled">
-
             <input type="button" class="button" ng-click='upload_webcam()' value='SELECT' id='select' ng-show='snapshot_button.cut' 
                 ng-disabled="cutDisabled">
+            <div class="accept_buttons" ng-show='check_face'>
+                <input type="button" class="button" ng-click = 'redo()' value = "Redo">
+                <input type="button" class="button" ng-click = 'keep()' value = "Keep">
+            </div>
         </div>
 
     </div> <!-- snapshot_div -->
 
     <!-- Loading overlay -->
-    <div ng-show='loading' class='loader'>
-        <span class="loader_helper"></span>
-        <img src='images/img/loader.gif' class='loader_img'>
-    </div>
+    <div ng-show='loading' class='loader'></div>    
+    <i class="fa fa-spinner fa-spin loader_spinner" ng-show='loading'></i>    
+
 </div> <!-- Snapshot Controller -->

@@ -32,7 +32,7 @@ app.directive('slickSlider',function($timeout){
             // Visually, this has the side effect of seeing all the background images in a row first, before
             // slick kicks in. However, the user should never see that since this should be hidden while 
             // the user is taking a selfie
-            }, 1000); 
+            }, 3000); 
         }
     }
 }).controller('BackgroundCtrl', function($scope, $http, $timeout){

@@ -28,14 +28,15 @@ function getCookie(c_name) {
 }
 
 function checkCookie(pyuserid){
-  if (pyuserid!=null && pyuserid!="")
-    debug('pyuserid already created');
-    else  {
-        var randomID = GUID();
+  // if (pyuserid!=null && pyuserid!="")
+  //   debug('pyuserid already created; creating a new pyuserid');
+    
+  // else  {
+    var randomID = GUID();
     // check if value GUID is already registered on server or as cookie
     setCookie(pyuseridtag,randomID,pyuseridlife);
     console.log(getCookie(pyuseridtag));
-  }
+  // }
 }
 
 function GUID(){

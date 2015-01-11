@@ -122,22 +122,24 @@ table { border-collapse: collapse; }
 .button {
     background-color: #242941;
     text-indent: 0;
-    border: none;
-    display: inline-block;
     color: #ffffff;
     font-family: Arial;
     font-size: 14px;
     font-style: normal;
-    height: 40px;
+    height: 38px;
     padding: 0 1em;
     text-decoration: none;
     text-align: center;
     text-transform:uppercase;
     cursor: pointer;
     min-width: 100px;
+    border-radius: 4px;
+/*    -webkit-box-shadow: 0 0 5px #bbb;
+    box-shadow: 0 0 5px #bbb;*/
     -webkit-transition: background-color 0.3s;
     -o-transition: background-color 0.3s;
     transition: background-color 0.3s;
+    border: none;
 }
 
 .button:hover {
@@ -149,19 +151,6 @@ table { border-collapse: collapse; }
 .button:disabled{
     background-color: #5F5F5F;
     cursor: not-allowed;
-}
-
-.accept_buttons{
-    margin-top: 15%;
-    text-align: center;
-}
-
-.accept_buttons input:first-child{
-    margin-right: 100px;
-}
-
-.accept_buttons div input:first-child{
-    margin-right: 100px;
 }
 
 #disagree{
@@ -188,7 +177,7 @@ table { border-collapse: collapse; }
 */
 
 #framecontainer {
-  margin-top: 6em;
+  margin-top: 50px;
   height: 39em;
 }
 
@@ -227,7 +216,6 @@ ul{
 .loader{
     height: 100%;
     width: 100%;
-    background-color: black;
     opacity: 0.5;
     position: fixed;
     /*top: 0;*/
@@ -240,12 +228,12 @@ ul{
     -webkit-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    background-color: black;
 }
 
 .loader_helper {
-    display: inline-block;
-    height: 100%;
     vertical-align: middle;
+    display: inline-block;
 }
 
 .loader_img {
@@ -253,4 +241,15 @@ ul{
     height: 128px;
     margin: auto;
     vertical-align: middle;
+}
+
+.loader_spinner{
+    font-size: 100px;
+    color: #eee;
+    margin: auto;
+    display: block;
+    position: absolute;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px);
+    opacity: 0.75;
 }

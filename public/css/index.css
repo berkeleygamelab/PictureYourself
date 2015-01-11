@@ -40,14 +40,14 @@
 }
 
 #snapshot_button_div{
-    width:100px;
-    height:40px;
-    padding-top: 4em;
     padding-bottom: 2em;
+    height: 40px;
+    padding-top: 4em;
+    margin: auto;
+    display: block;
 }
-
 #snapshot_title_div{
-    width:300px;
+    width: 300px;
     height:100px;
 }
 
@@ -65,6 +65,14 @@
     padding: 3% 12%;
     width: 75%;
 }
+.accept_buttons{
+    text-align: center;
+}
+
+.accept_buttons input:first-child{
+    margin-right: 100px;
+}
+
 
 #face_select_blurb{
     width: 15%;
@@ -75,4 +83,12 @@
 video {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+}
+
+#snapshot_button_div>input.button{
+    margin: auto;
+    display: block;
+}
+#tos div:last-child{
+    padding-top: 10%;
 }

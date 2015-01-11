@@ -42,11 +42,12 @@ $(document).ready(function() {
     without $injector
 */
 
-
+var scope;
 
 app // Need this for .controller and .directive
     .controller('ScenarioCtrl', 
         function($scope, $resource, $http, $compile, $timeout, Sticker){
+            scope = $scope;
             var stage_width = 800;
             var stage_height = 550;
 
@@ -57,7 +58,11 @@ app // Need this for .controller and .directive
             $scope.selected_image = null;
 
             $scope.show_save_tos = true;
+            $scope.show_saving_collage = false;
             $scope.show_saved = false;
+            $scope.show_email_prompt = true;
+            $scope.show_saving_email = false;
+            $scope.show_emailed = false;
 
             // KineticJS stage and layer setup
             kinetic = kineticSetup(stage_width,stage_height);
@@ -220,94 +225,116 @@ app // Need this for .controller and .directive
                 $scope.$emit('toggle_scenario', true)
             }
 
-            $scope.resetModal = function(){
-                $scope.show_save_tos = true;
-                $scope.show_saved = false;
+            $('#saveModal').on('hidden.bs.modal', function(){
+                $scope.$apply(function(){
+                    $scope.resetSaveModal();
+                });
+            });
+
+            $('#emailModal').on('hidden.bs.modal', function(){
+                $scope.$apply(function(){
+                    $scope.resetEmailModal();
+                });
+            });
+
+            $scope.resetSaveModal = function(){
+                $timeout(function(){
+                    $scope.show_save_tos = true;
+                    $scope.show_saving_collage = false;
+                    $scope.show_saved = false;
+                }, 500);
             }
 
+            $scope.resetEmailModal = function(){
+                $timeout(function(){
+                    $scope.show_email_prompt = true;
+                    $scope.show_saving_email = false;
+                    $scope.show_emailed = false;
+                }, 500);
+            }
 
             // Initiate email process
             $scope.call_email = function(){
-                // Show loading overlay
-                $scope.loading = true;
                 closeTools();
                 stage.draw();
+                $scope.show_email_prompt = false;
+                $scope.show_saving_email = true;
+                $('#scenario_ctrl').css('pointer-events', 'none');
 
-                var emails = prompt("Please enter your friend's email(s)","oski@berkeley.edu, friend@berkeley.edu");
                 //check if input exists
-                if(emails !== null) {  
+                if($scope.emails !== null) {  
                   //remove spaces to have one long string as argv for python
-                  emails = emails.replace(/\s+/g, '');        
+                  $scope.emails = $scope.emails.replace(/\s+/g, '');        
                   //change to use scope variable instead
                   pyuserid = getCookie('pyuserid');
                   // Create image from stage and send to email function in email.js
                   stage.toDataURL({
                     callback: function(dataUrl) {
-                        debug('callback');
-                        email(pyuserid, emails, dataUrl, $scope);
+                        formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
+                        email($scope, $http, formData, $scope.emails);
                     }
                   }) ;         
-                }
-                // User clicked cancel, hide loading screen
-                else{
-                    $scope.loading = false;
                 }
             }; 
 
             $scope.saveToGallery = function(){
                 closeTools();
                 stage.draw();
+                $scope.show_save_tos = false;
+                $scope.show_saving_collage = true;
+                $('#scenario_ctrl').css('pointer-events', 'none');
+
                 stage.toDataURL({
                     callback: function(dataUrl) {
-                        debug('saveToGallery');
-                        formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')}
-                        console.log(formData);
+                        formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
                         $http.post('/saveToGallery', formData).success(function(data){
-                            debug("SAVETOGALLERY SUCCESS!");
-                            $scope.show_save_tos = false;
+                            $scope.show_saving_collage = false;
                             $scope.show_saved = true;
+                            $('#scenario_ctrl').css('pointer-events', '');
                         }).error(function(){
-                            alert("An error occured while saving the image")
+                            alert("An error occured while saving the image");
+                            $('#saveModal').modal('hide');
+                            $('#scenario_ctrl').css('pointer-events', '');
                         });
                     }
                 });    
             }
 
-            $scope.save = function(){
-                // formData = JSON.parse(stage.toJSON());
-                // formData.children[0].children[0].src = $scope.background.getImage().src;
+            // $scope.save = function(){
+            //     // formData = JSON.parse(stage.toJSON());
+            //     // formData.children[0].children[0].src = $scope.background.getImage().src;
 
-                formData = {}
-                formData.pyuserid = getCookie('pyuserid');
-                formData.title = $scope.title;
-                formData.background = {}
-                formData.background.src = $scope.background.getImage().src;
-                formData.stickers = []
+            //     formData = {}
+            //     formData.pyuserid = getCookie('pyuserid');
+            //     formData.title = $scope.title;
+            //     formData.background = {}
+            //     formData.background.src = $scope.background.getImage().src;
+            //     formData.stickers = []
 
-                var stickers = $(stage.find('.sticker'));
-                // console.log(stickers);
+            //     var stickers = $(stage.find('.sticker'));
+            //     // console.log(stickers);
 
-                stickers.each(function(index, sticker) {
-                    stickerDict = {};
-                    console.log(sticker);
-                    stickerDict.src = sticker.attrs.src;
-                    stickerDict.height = sticker.attrs.height;
-                    stickerDict.width = sticker.attrs.width;
-                    stickerDict.offsetX = sticker.attrs.offsetX;
-                    stickerDict.offsetY = sticker.attrs.offsetY;
-                    stickerDict.x = sticker.parent.attrs.x;
-                    stickerDict.y = sticker.parent.attrs.y;
-                    stickerDict.rotation = sticker.parent.attrs.rotation;
-                    formData.stickers.push(stickerDict);
-                })
+            //     stickers.each(function(index, sticker) {
+            //         stickerDict = {};
+            //         console.log(sticker);
+            //         stickerDict.src = sticker.attrs.src;
+            //         stickerDict.height = sticker.attrs.height;
+            //         stickerDict.width = sticker.attrs.width;
+            //         stickerDict.offsetX = sticker.attrs.offsetX;
+            //         stickerDict.offsetY = sticker.attrs.offsetY;
+            //         stickerDict.x = sticker.parent.attrs.x;
+            //         stickerDict.y = sticker.parent.attrs.y;
+            //         stickerDict.rotation = sticker.parent.attrs.rotation;
+            //         formData.stickers.push(stickerDict);
+            //     })
 
-                debug( formData );
-                $http.post('/save_canvas', formData).success(
-                    function( data ){
-                        debug("SUCCESS!");
-                    }
-                )
-            }      
+            //     debug( formData );
+            //     $http.post('/save_canvas', formData).success(
+            //         function( data ){
+            //             debug("SUCCESS!");
+            //         }
+            //     )
+            // }      
 
             // $scope.load = function(){
             //     pyuserid = getCookie('pyuserid');

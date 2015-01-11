@@ -71,11 +71,10 @@ get '/' do
   # Check if cookie exits, if it does delete pictures associated with cookie
   unless cookie.nil?
     # TODO: Delete all pictures
-    name = 'public/users/' + cookie + "/1_sticker.png"
-    if File.file?(name)
-        File.delete(name)
-    end
+    name = 'public/users/' + cookie
+    FileUtils.rm_rf(Dir.glob(name))
   end
+  FileUtils.rm_rf(Dir.glob('uploads/*'))
 
   erb :index
 end
@@ -123,7 +122,6 @@ post '/grabcut' do
   # end
 
   "users/#{params[:pyuserid]}/#{params[:count]}.png"
-  # Base64.encode64(open("public/users/#{params[:pyuserid]}/#{params[:count]}.png"){ |io| io.read })
 end
 
 
