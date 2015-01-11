@@ -87,7 +87,7 @@
 
 .tab{
   float: left;
-  width: 25%;
+  width: 33.33333%;
 }
 
 #toolbox {
@@ -336,7 +336,7 @@ button.close {
   margin-top: 15%;
 }
 .modal-content{
-  background-color: rgba(248, 248, 248, 0.94);
+  background-color: rgba(248, 248, 248, 0.95);
 }
 .modal-title{
   text-align: center;
@@ -344,12 +344,24 @@ button.close {
 .modal-body{
   font-size: 1.3em;
   line-height: 2em;
+  padding-bottom: 4em;;
 }
 .modal-backdrop.in {
   opacity: .35;
   filter: alpha(opacity=50);
 }
 
+.collage_saved{
+  padding-top: 3em;
+}
+.accept_buttons{
+    margin-top: 0;
+    text-align: center;
+}
+
+.accept_buttons input:first-child{
+    margin-right: 0;
+}
     
 }
 

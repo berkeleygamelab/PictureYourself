@@ -56,6 +56,9 @@ app // Need this for .controller and .directive
             $scope.image_sources = {};
             $scope.selected_image = null;
 
+            $scope.show_save_tos = true;
+            $scope.show_saved = false;
+
             // KineticJS stage and layer setup
             kinetic = kineticSetup(stage_width,stage_height);
 
@@ -96,7 +99,6 @@ app // Need this for .controller and .directive
             $scope.selfies = [];
             // Listens to load_selfies event broadcast from ViewCtrl
             $scope.$on('load_selfies', function(event, data, selfieCount, background){
-                console.log("Here");
                 $scope.selfies.push({source: data, count: selfieCount});
                 if(background != undefined){
                     $scope.background_path = background;
@@ -218,6 +220,11 @@ app // Need this for .controller and .directive
                 $scope.$emit('toggle_scenario', true)
             }
 
+            $scope.resetModal = function(){
+                $scope.show_save_tos = true;
+                $scope.show_saved = false;
+            }
+
 
             // Initiate email process
             $scope.call_email = function(){
@@ -248,7 +255,6 @@ app // Need this for .controller and .directive
             }; 
 
             $scope.saveToGallery = function(){
-                $scope.loading = true;
                 closeTools();
                 stage.draw();
                 stage.toDataURL({
@@ -258,14 +264,11 @@ app // Need this for .controller and .directive
                         console.log(formData);
                         $http.post('/saveToGallery', formData).success(function(data){
                             debug("SAVETOGALLERY SUCCESS!");
-                            console.log(data);
-                            // Sent up to LayoutCtrl
-                            // $scope.$emit('collageToLayout', data);
-
+                            $scope.show_save_tos = false;
+                            $scope.show_saved = true;
                         }).error(function(){
                             alert("An error occured while saving the image")
-                        })
-                        $scope.loading = false;
+                        });
                     }
                 });    
             }

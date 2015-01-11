@@ -10,7 +10,8 @@ app.controller('ViewCtrl', function($scope, $timeout){
         $('#scenario_view, #snapshot_view').fadeIn(200);
         if(background != undefined){
             $scope.views.snapshot = false;
-            $('#myModal').modal();
+            console.log("Modal??");
+            $('#instructionsModal').modal();
             $scope.views.scenario = true;
         } else{
             $scope.views.snapshot = !$scope.views.snapshot;

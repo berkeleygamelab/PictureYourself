@@ -14,23 +14,53 @@
 <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
     <div id='framecontainer'>
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+        <!-- Instructions Modal -->
+        <div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructionsModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
             <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h2 class="modal-title" id="myModalLabel">Create Your Collage</h2>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title" id="instructionsModalLabel">Create Your Collage</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div>Drag items onto the background to place them.</div>
+                        <div>Click on items to see available tools for skin color, rotation, and resizing.</div>
+                        <div>Choose <span><i class="fa fa-cloud-upload"></i></span> to add your collage to the gallery.</div>
+                        <div>Choose <span><i class="fa fa-envelope"></i></span> to email a copy of your collage.</div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div>Drag items onto the background to place them.</div>
-                    <div>Click on items to see available tools for skin color, rotation, and resizing.</div>
-                    <div>Choose <span><i class="fa fa-cloud-upload"></i></span> to add your collage to the gallery.</div>
-                    <div>Choose <span><i class="fa fa-envelope"></i></span> to email a copy of your collage.</div>
-                </div>
-    <!--               <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div> -->
+            </div>
+        </div>
+
+        <!-- Save Modal -->
+        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" ng-show='show_save_tos'>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title" id="saveModalLabel">Save to Gallery</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-show='show_save_tos'>
+                            I understand that my collage will be viewable in the museum's gallery and may be used to show of PIC Your Future in the media.
+                            By clicking <span>Agree</span>, I give CITRIS permission to use my collage.
+                        </div>
+                        <div ng-show='show_saved' class='center collage_saved'>
+                            <h1>Collage Saved!</h1>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="accept_buttons">
+                            <div ng-show="show_save_tos">
+                                <input type="button" class="button" id='disagree' data-dismiss="modal" value="Disagree">
+                                <input type="button" class="button" ng-click='saveToGallery()' value="Agree">
+                            </div>
+                            <div ng-show="show_saved">
+                                <input type="button" class="button" id='disagree' ng-click='resetModal()' data-dismiss="modal" value="Return to Collage">
+                                <input type="button" class="button" ng-click='quit()' value="Quit">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,7 +76,7 @@
                     <ul class="nav nav-tabs" id='toolicon'>
                         <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
                         <!-- <li class = 'tab' ng-click='show_tab("backgrounds")'> <img src="/images/img/backgrounds.png" ></li> -->
-                        <li class = 'tab' ng-click='saveToGallery()'>
+                        <li class = 'tab' data-toggle="modal" data-target="#saveModal">
                             <i class="fa fa-cloud-upload"></i>
                         </li>
                         <li class = 'tab' ng-click='call_email()'>
@@ -92,9 +122,6 @@
             </div> <!-- Tabs Ctrl-->
 
 <!--         
-            <div id="email_div">
-                <input type='button' id='email' class='button' ng-click='call_email()' value = "EMAIL">
-            </div>
             <div id="gallery_save_div">
                 <input type="button" id="gallery_save" class="button" ng-click="saveToGallery()" value="SAVE">
             </div> -->

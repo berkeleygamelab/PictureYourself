@@ -5,9 +5,6 @@
     background-image: none;
     background-position: 90% 30%;
     background-repeat: no-repeat;
-    -webkit-transition: all 0.3s ease-in;
-    -o-transition: all 0.3s ease-in;
-    transition: all 0.3s ease-in;
 }
 
 #camera, #camera_placeholder, #capture, #check{
@@ -67,21 +64,6 @@
     margin-top: 1.5%;
     padding: 3% 12%;
     width: 75%;
-}
-#disagree{
-    background-color: #BB3B3B;
-}
-#disagree:hover{
-    background-color: #CF072D;
-}
-
-.accept_buttons{
-    margin-top: 15%;
-    text-align: center;
-}
-
-.accept_buttons>input:first-child{
-    margin-right: 100px;
 }
 
 #face_select_blurb{

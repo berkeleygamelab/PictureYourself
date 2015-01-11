@@ -129,11 +129,12 @@ table { border-collapse: collapse; }
     font-size: 14px;
     font-style: normal;
     height: 40px;
-    width: 100px;
+    padding: 0 1em;
     text-decoration: none;
     text-align: center;
     text-transform:uppercase;
     cursor: pointer;
+    min-width: 100px;
     -webkit-transition: background-color 0.3s;
     -o-transition: background-color 0.3s;
     transition: background-color 0.3s;
@@ -148,6 +149,26 @@ table { border-collapse: collapse; }
 .button:disabled{
     background-color: #5F5F5F;
     cursor: not-allowed;
+}
+
+.accept_buttons{
+    margin-top: 15%;
+    text-align: center;
+}
+
+.accept_buttons input:first-child{
+    margin-right: 100px;
+}
+
+.accept_buttons div input:first-child{
+    margin-right: 100px;
+}
+
+#disagree{
+    background-color: #BB3B3B;
+}
+#disagree:hover{
+    background-color: #CF072D;
 }
 
 /* main.css
