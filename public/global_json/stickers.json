@@ -1126,6 +1126,15 @@
         "source": "images/stickers/7-art_studio_pack/canvas.png",
         "category": "art_studio_pack",
         "chroma_green": false,
+        "back_source": "",
+        "fore_source": ""
+      },
+      "text_box": {
+        "id": 599,
+        "name": "text_box",
+        "source": "images/stickers/7-art_studio_pack/text_box.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
         "text": true,
         "back_source": "",
         "fore_source": ""

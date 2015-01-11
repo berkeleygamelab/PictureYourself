@@ -159,7 +159,7 @@ app.service('Sticker', function(){
                     text: 'T',  //leave this it won't render correctly here but will on the canvas
                     fontFamily: 'Serif',
                     fontSize: tool_size,
-                    fill: '#eee',
+                    fill: 'black',
                     stroke: "#222",
                     strokeWidth: 0.75,
                     visible:true,
@@ -177,14 +177,39 @@ app.service('Sticker', function(){
                 layer.draw();
                 stage.remove( layer );
              });
+
             if(text){
                 sticker.txt.on('click', function(){
                     var input = prompt("Enter your text:")
                     if(input.length > 100){
                         input = input.substring(0,99);
                     };
-
-                    sticker.user_text = new Kinetic.Text({
+                    var img_too_small = sticker.image.width()/2 < 100;
+                    if(sticker.user_text){
+                        sticker.user_text.remove();
+                    }
+                    //since we dont want the text to resize as one letter a line we will only change its width if there
+                    //are more than 5 letters
+                    if (img_too_small){
+                        sticker.user_text = new Kinetic.Text({
+                            x : -sticker.image.width()/4, // sticker.image.x() - start_size.width/2,
+                            y : -sticker.image.height()/4, // sticker.image.y() - start_size.height/2,
+                            offsetX: tool_size/2,
+                            offsetY: tool_size/2,
+                            text: input,
+                            fontFamily: 'FontAwesome',
+                            fontSize: tool_size,
+                            fill: 'black',
+                            stroke: "#222",
+                            strokeWidth: 0.75,
+                            visible:true,
+                            name: 'user_text',
+                            align: 'center',
+                            width:100,
+                        });
+                    }
+                    else{
+                        sticker.user_text = new Kinetic.Text({
                         x : -sticker.image.width()/4, // sticker.image.x() - start_size.width/2,
                         y : -sticker.image.height()/4, // sticker.image.y() - start_size.height/2,
                         offsetX: tool_size/2,
@@ -198,7 +223,20 @@ app.service('Sticker', function(){
                         visible:true,
                         name: 'user_text',
                         align: 'center',
-                        width:sticker.image.width()/2,
+                        width:sticker.image.width() - 100,
+                    }); 
+                    }
+                    //this allows you to click on the text and it will toggle the tools
+                    sticker.user_text.on('click', function(){
+                        var change_vis = !sticker.rotate.visible
+                        sticker.scalerX.visible(change_vis);
+                        sticker.scalerY.visible(change_vis);
+                        sticker.delete_icon.visible(change_vis);
+                        sticker.rotate.visible(change_vis);
+                        sticker.background.visible(change_vis);
+                        if (text){
+                            sticker.txt.visible(change_vis);
+                        }
                     });
                     sticker.group.add(sticker.user_text);
                     layer.add(sticker.group);
@@ -206,10 +244,11 @@ app.service('Sticker', function(){
                  });
             }
 
-            
+           if(text){
+                if(sticker.user_text){
 
-
-
+                }
+            }
 
 
             // set horizontal height of image
@@ -373,9 +412,14 @@ app.service('Sticker', function(){
                     sticker.txt.x(half_width/4);
                     sticker.txt.y(half_height);
                     if(sticker.user_text){   
+                        if (sticker.image.width()/2 < 100){
+                            sticker.user_text.width(100);
+                        }
+                        else{
+                            sticker.user_text.width(half_width);
+                        }
                         sticker.user_text.x(-half_width/2);
                         sticker.user_text.y(-half_height/2);
-                        sticker.user_text.width(half_width);
                     }
                 };
 
@@ -396,6 +440,9 @@ app.service('Sticker', function(){
                 sticker.delete_icon.visible(is_visible);
                 sticker.rotate.visible(is_visible);
                 sticker.background.visible(is_visible);
+                if (text){
+                    sticker.txt.visible(is_visible);
+                }
             
                 // Toggle color picker            
                 is_visible && has_background_sticker ? $("#modal").show() : $("#modal").hide();
