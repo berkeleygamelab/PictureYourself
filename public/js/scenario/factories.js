@@ -152,14 +152,14 @@ app.service('Sticker', function(){
 
             if(text){
                 sticker.txt = new Kinetic.Text({
-                    x : start_size.width/4, // sticker.image.x() - start_size.width/2,
+                    x : start_size.width/2, // sticker.image.x() - start_size.width/2,
                     y : start_size.height/2, // sticker.image.y() - start_size.height/2,
                     offsetX: tool_size/2,
                     offsetY: tool_size/2,
                     text: 'T',  //leave this it won't render correctly here but will on the canvas
                     fontFamily: 'Serif',
                     fontSize: tool_size,
-                    fill: 'black',
+                    fill: '#eee',
                     stroke: "#222",
                     strokeWidth: 0.75,
                     visible:true,
@@ -228,7 +228,9 @@ app.service('Sticker', function(){
                     }
                     //this allows you to click on the text and it will toggle the tools
                     sticker.user_text.on('click', function(){
-                        var change_vis = !sticker.rotate.visible
+                        console.log("Clicked!")
+                        var change_vis = !sticker.rotate.visible();
+                        console.log(change_vis);
                         sticker.scalerX.visible(change_vis);
                         sticker.scalerY.visible(change_vis);
                         sticker.delete_icon.visible(change_vis);
@@ -237,6 +239,7 @@ app.service('Sticker', function(){
                         if (text){
                             sticker.txt.visible(change_vis);
                         }
+                        layer.draw();
                     });
                     sticker.group.add(sticker.user_text);
                     layer.add(sticker.group);
@@ -244,11 +247,11 @@ app.service('Sticker', function(){
                  });
             }
 
-           if(text){
-                if(sticker.user_text){
+           // if(text){
+           //      if(sticker.user_text){
 
-                }
-            }
+           //      }
+           //  }
 
 
             // set horizontal height of image
@@ -409,7 +412,7 @@ app.service('Sticker', function(){
                 sticker.delete_icon.y(-half_height);
 
                 if(text){
-                    sticker.txt.x(half_width/4);
+                    sticker.txt.x(half_width/10);
                     sticker.txt.y(half_height);
                     if(sticker.user_text){   
                         if (sticker.image.width()/2 < 100){
@@ -440,7 +443,9 @@ app.service('Sticker', function(){
                 sticker.delete_icon.visible(is_visible);
                 sticker.rotate.visible(is_visible);
                 sticker.background.visible(is_visible);
+                console.log("This one");
                 if (text){
+                    console.log("Hi");
                     sticker.txt.visible(is_visible);
                 }
             

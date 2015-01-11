@@ -90,7 +90,7 @@ app // Need this for .controller and .directive
 
             // Used to close tools for all stickers
             var closeTools = function(){
-                var tools = $(stage.find('.y, .x, .delete, .rotate, .background'));
+                var tools = $(stage.find('.y, .x, .delete, .rotate, .background, .txt'));
 
                 tools.each(function(index){
                     tools[index].visible(false);
@@ -195,7 +195,6 @@ app // Need this for .controller and .directive
 
                     // Tools for sticker are not displayed
                     else{
-                        
                         // Close tools for previously selected sticker
                         if($scope.selected_sticker != null)
                             $scope.selected_sticker.toggleTools(false);
