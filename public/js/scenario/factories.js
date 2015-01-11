@@ -228,9 +228,7 @@ app.service('Sticker', function(){
                     }
                     //this allows you to click on the text and it will toggle the tools
                     sticker.user_text.on('click', function(){
-                        console.log("Clicked!")
                         var change_vis = !sticker.rotate.visible();
-                        console.log(change_vis);
                         sticker.scalerX.visible(change_vis);
                         sticker.scalerY.visible(change_vis);
                         sticker.delete_icon.visible(change_vis);
