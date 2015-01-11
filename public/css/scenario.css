@@ -16,13 +16,29 @@
   border: solid;
   border-width: 2px;  
   border-color: transparent;
+  transition: background 0.15s linear;
 }
 
 .selfie{
-  width: 50%;
-  height: 50%;
-  margin-left: 25%
-  margin-right: auto;
+  width: 33%;
+  height: auto;
+  /*margin-right: auto;*/
+/*  margin-left: 25%;
+  margin-right: auto;*/
+}
+
+.add_selfie{
+  height: 2em;
+  float: right;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.add_selfie:hover{
+  color: red;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 #another_selfie_button{

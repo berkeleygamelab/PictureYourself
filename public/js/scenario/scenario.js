@@ -12,7 +12,6 @@ $(document).ready(function() {
     /*
     * Gets user selfie
     */
-    //also have to refresh page to get changes, why? probably a caching thing?
     //set pyuserid as global variable to easily access it
     $("#toolicon li").on("click", function(){
         $(this).parent().children().removeClass("active");
@@ -42,12 +41,9 @@ $(document).ready(function() {
     without $injector
 */
 
-var scope;
-
 app // Need this for .controller and .directive
     .controller('ScenarioCtrl', 
         function($scope, $resource, $http, $compile, $timeout, Sticker){
-            scope = $scope;
             var stage_width = 800;
             var stage_height = 550;
 
@@ -56,6 +52,7 @@ app // Need this for .controller and .directive
 
             $scope.image_sources = {};
             $scope.selected_image = null;
+            $scope.sticker_text = {}
 
             $scope.show_save_tos = true;
             $scope.show_saving_collage = false;
@@ -63,7 +60,6 @@ app // Need this for .controller and .directive
             $scope.show_email_prompt = true;
             $scope.show_saving_email = false;
             $scope.show_emailed = false;
-            $scope.sticker_text = {}
 
             // KineticJS stage and layer setup
             kinetic = kineticSetup(stage_width,stage_height);
@@ -95,9 +91,7 @@ app // Need this for .controller and .directive
                 tools.each(function(index){
                     tools[index].visible(false);
                 });
-
                 $("#modal").hide();
-
                 layer.draw();
             };
 
@@ -110,7 +104,11 @@ app // Need this for .controller and .directive
                     $scope.background_path = background;
                     $scope.background.getImage().src = background;
                 }
-            })
+            });
+            // Users can have a maximum of 3 selfies. Hides the add another selfie button after 3 selfies
+            $scope.checkSelfiesLength = function(){
+                return $scope.selfies.length < 3;
+            }
 
 
             // Setup and assign background Kinetic.Image object          
@@ -135,8 +133,9 @@ app // Need this for .controller and .directive
                     if($(this).data('chroma_green') == true){
                         $scope.chroma_green = true;
                     }
-                    else
+                    else{
                         $scope.chroma_green = false;
+                    }
                 });
             };
 
@@ -219,12 +218,15 @@ app // Need this for .controller and .directive
                     sticker.toggleTools(!is_visible);
                     layer.draw();
                 });
-            })
+            });
 
             $scope.add_selfie = function(){
                 $scope.$emit('toggle_scenario', true)
             }
 
+            // Next two eventListeners and two functions are to reset the 
+            // modals if the user closes the modal by clicking outside of it 
+            // rather than clicking the return to collage button
             $('#saveModal').on('hidden.bs.modal', function(){
                 $scope.$apply(function(){
                     $scope.resetSaveModal();
@@ -277,6 +279,7 @@ app // Need this for .controller and .directive
                 }
             }; 
 
+            // Save image to gallery
             $scope.saveToGallery = function(){
                 closeTools();
                 stage.draw();
