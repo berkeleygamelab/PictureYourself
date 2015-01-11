@@ -2,9 +2,12 @@
 
 #snapshot_div{
     padding: 50px;
-    background-image: url("../images/img/PIC_arrow.png");
+    background-image: none;
     background-position: 90% 30%;
     background-repeat: no-repeat;
+    -webkit-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
 }
 
 #camera, #camera_placeholder, #capture, #check{

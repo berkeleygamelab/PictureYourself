@@ -112,7 +112,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     /*if iPhone, do input...)
       else if no getUserMedia() do fileupload.
     */
-        $('#camera').fadeIn();
+        $('#snapshot_div').css('background-image', 'url("../images/img/PIC_arrow.png")');
         $scope.show_buttons = true;
         $scope.camera = getUserMedia();
         $scope.show_tos = false;

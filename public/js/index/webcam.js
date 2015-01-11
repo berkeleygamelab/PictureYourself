@@ -40,6 +40,7 @@ function getUserMedia(){
             video = document.querySelector('video');
             video.src = window.URL.createObjectURL(localMediaStream);
             $('#snap_it').attr("disabled", false).popover('hide');
+            $('#snapshot_div').css('background-image', '');
             video.onloadedmetadata = function(e) {
             // Do something with the video here.
             };
