@@ -83,7 +83,7 @@
                     <div class="modal-footer" ng-show="show_email_prompt || show_emailed">
                         <div class="save_accept_buttons">
                             <div ng-show="show_email_prompt">
-                                <input type="button" class="button" ng-click='call_email()' value="Send">
+                                <input type="button" class="button send_email_button" ng-click='call_email()' value="Send">
                                 <input type="button" class="button" id='disagree' data-dismiss="modal" value="Cancel">
                             </div>
                             <div ng-show="show_emailed">
@@ -154,8 +154,6 @@
             </div>
             <div id = "container" ></div><!-- KineticJS Canvas -->
         </div>
-
-        <div id="dialog-confirm-email" title="E-mail sent!"></div>
     </div> <!-- Framecontainer -->
 
     <div ng-show='loading' class='loader'>

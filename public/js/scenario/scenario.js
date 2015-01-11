@@ -224,6 +224,16 @@ app // Need this for .controller and .directive
                 $scope.$emit('toggle_scenario', true)
             }
 
+            $('#emailModal').on('shown.bs.modal', function(){
+                $('.email_text').focus();
+            });
+
+            $('.email_text').keypress(function(event){
+              if(event.keyCode == 13){
+                $('.send_email_button').click();
+              }
+            });
+
             // Next two eventListeners and two functions are to reset the 
             // modals if the user closes the modal by clicking outside of it 
             // rather than clicking the return to collage button
