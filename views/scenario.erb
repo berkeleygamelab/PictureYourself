@@ -126,6 +126,12 @@
                         <div id='selfie_div'>
                             <div class="subtab_title" id="faces">Faces</div>
                                 <img ng-repeat='selfie in selfies' id='selfie{{selfie.count}}' class="sticker selfie" ng-src="/{{selfie.source}}" add-drag/>
+<!--                                 <div ng-show="{{selfies.length < 1}}" class="sticker add_selfie">
+                                    <span class="fa-stack fa-4x" >
+                                        <i class="fa fa-square-o fa-stack-2x"></i>
+                                        <i class="fa fa-plus fa-stack-1x"></i>
+                                    </span>
+                                </div> -->
 
                                 <!-- Take another selfie button -->    
                                 <input class='button' type='button' id='another_selfie_button' class='button' ng-click='add_selfie()' value = "Take Another Selfie">
