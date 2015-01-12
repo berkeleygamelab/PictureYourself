@@ -22,23 +22,6 @@
 .selfie{
   width: 33%;
   height: auto;
-  /*margin-right: auto;*/
-/*  margin-left: 25%;
-  margin-right: auto;*/
-}
-
-.add_selfie{
-  height: 2em;
-  float: right;
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
-}
-.add_selfie:hover{
-  color: red;
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
 }
 
 #another_selfie_button{
@@ -224,8 +207,11 @@
 
 
 #scenario_canvas{
-  float: left;
-  margin-left: 4em;
+  /*float: left;
+  margin-left: 4em;*/
+  display: inline-block;
+  margin: auto;
+  padding-left: 5%;
 }
 
 
@@ -395,3 +381,22 @@ button.close {
   -webkit-box-shadow: 2px 2px 5px #ccc;
   box-shadow: 2px 2px 5px #ccc;
 }
+
+@media (min-width: 1281px) { 
+
+    #scenario_canvas {
+       padding:0px;
+    }
+
+    .title {
+      margin-top:80px;
+    }
+
+    #toolbox {
+      margin:8%;
+      margin-top:150px;
+    }
+
+
+}
+
