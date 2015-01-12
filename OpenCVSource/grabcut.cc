@@ -50,7 +50,7 @@ const int FGD_KEY = CV_EVENT_FLAG_SHIFTKEY;
 
 //suffix variables
 const string suffix = "_grabcut.";
-const string alphasuffix = "";
+const string alphasuffix = "_sticker";
 const string fileext = ".png";
 const string savepath = "public/users/";
 

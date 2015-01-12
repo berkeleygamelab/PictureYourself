@@ -2,1243 +2,1737 @@
   "stickers": {
     "shoes_and_pants": {
       "AblacksneakL": {
-        "id": 463,
         "name": "AblacksneakL",
         "source": "images/stickers/1-shoes_and_pants/AblacksneakL.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "BblacksneakR": {
-        "id": 464,
         "name": "BblacksneakR",
         "source": "images/stickers/1-shoes_and_pants/BblacksneakR.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper-front-left": {
+        "name": "bearslipper-front-left",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper-front-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper-front-right": {
+        "name": "bearslipper-front-right",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper-front-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper-side-left": {
+        "name": "bearslipper-side-left",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper-side-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper-side-right": {
+        "name": "bearslipper-side-right",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper-side-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper2-front-left": {
+        "name": "bearslipper2-front-left",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper2-front-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper2-front-right": {
+        "name": "bearslipper2-front-right",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper2-front-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper2-side-left": {
+        "name": "bearslipper2-side-left",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper2-side-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "bearslipper2-side-right": {
+        "name": "bearslipper2-side-right",
+        "source": "images/stickers/1-shoes_and_pants/bearslipper2-side-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
       },
       "Csneakerwhite": {
-        "id": 465,
         "name": "Csneakerwhite",
         "source": "images/stickers/1-shoes_and_pants/Csneakerwhite.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Dsneakerwhite": {
-        "id": 466,
         "name": "Dsneakerwhite",
         "source": "images/stickers/1-shoes_and_pants/Dsneakerwhite.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "ESneakerBlue": {
-        "id": 467,
         "name": "ESneakerBlue",
         "source": "images/stickers/1-shoes_and_pants/ESneakerBlue.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "female-jeans-jumping": {
+        "name": "female-jeans-jumping",
+        "source": "images/stickers/1-shoes_and_pants/female-jeans-jumping_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/female-jeans-jumping_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/female-jeans-jumping_fore.png",
+        "text": false
+      },
+      "female-jeans-oneleg": {
+        "name": "female-jeans-oneleg",
+        "source": "images/stickers/1-shoes_and_pants/female-jeans-oneleg_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/female-jeans-oneleg_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/female-jeans-oneleg_fore.png",
+        "text": false
+      },
+      "female-jeans-sitting": {
+        "name": "female-jeans-sitting",
+        "source": "images/stickers/1-shoes_and_pants/female-jeans-sitting_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/female-jeans-sitting_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/female-jeans-sitting_fore.png",
+        "text": false
+      },
+      "female-shorts-jumping": {
+        "name": "female-shorts-jumping",
+        "source": "images/stickers/1-shoes_and_pants/female-shorts-jumping_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/female-shorts-jumping_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/female-shorts-jumping_fore.png",
+        "text": false
+      },
+      "female-shorts-oneleg": {
+        "name": "female-shorts-oneleg",
+        "source": "images/stickers/1-shoes_and_pants/female-shorts-oneleg_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/female-shorts-oneleg_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/female-shorts-oneleg_fore.png",
+        "text": false
+      },
+      "female-shorts-sitting": {
+        "name": "female-shorts-sitting",
+        "source": "images/stickers/1-shoes_and_pants/female-shorts-sitting_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/female-shorts-sitting_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/female-shorts-sitting_fore.png",
+        "text": false
       },
       "FsnakerBlue": {
-        "id": 468,
         "name": "FsnakerBlue",
         "source": "images/stickers/1-shoes_and_pants/FsnakerBlue.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Gslipper": {
-        "id": 469,
         "name": "Gslipper",
         "source": "images/stickers/1-shoes_and_pants/Gslipper.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Hslipper": {
-        "id": 470,
         "name": "Hslipper",
         "source": "images/stickers/1-shoes_and_pants/Hslipper.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Islipper": {
-        "id": 471,
         "name": "Islipper",
         "source": "images/stickers/1-shoes_and_pants/Islipper.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Jslipper": {
-        "id": 472,
         "name": "Jslipper",
         "source": "images/stickers/1-shoes_and_pants/Jslipper.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Kblackjeanwomen": {
-        "id": 473,
         "name": "Kblackjeanwomen",
         "source": "images/stickers/1-shoes_and_pants/Kblackjeanwomen.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Lbluejeans": {
-        "id": 474,
         "name": "Lbluejeans",
         "source": "images/stickers/1-shoes_and_pants/Lbluejeans.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "male jeans-oneleg": {
+        "name": "male jeans-oneleg",
+        "source": "images/stickers/1-shoes_and_pants/male jeans-oneleg_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/male jeans-oneleg_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/male jeans-oneleg_fore.png",
+        "text": false
+      },
+      "male-jeans-jumping": {
+        "name": "male-jeans-jumping",
+        "source": "images/stickers/1-shoes_and_pants/male-jeans-jumping_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/male-jeans-jumping_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/male-jeans-jumping_fore.png",
+        "text": false
+      },
+      "male-jeans-sitting": {
+        "name": "male-jeans-sitting",
+        "source": "images/stickers/1-shoes_and_pants/male-jeans-sitting_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/male-jeans-sitting_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/male-jeans-sitting_fore.png",
+        "text": false
+      },
+      "male-shorts-jumping": {
+        "name": "male-shorts-jumping",
+        "source": "images/stickers/1-shoes_and_pants/male-shorts-jumping_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/male-shorts-jumping_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/male-shorts-jumping_fore.png",
+        "text": false
+      },
+      "male-shorts-oneleg": {
+        "name": "male-shorts-oneleg",
+        "source": "images/stickers/1-shoes_and_pants/male-shorts-oneleg_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/male-shorts-oneleg_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/male-shorts-oneleg_fore.png",
+        "text": false
+      },
+      "male-shorts-sitting": {
+        "name": "male-shorts-sitting",
+        "source": "images/stickers/1-shoes_and_pants/male-shorts-sitting_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/male-shorts-sitting_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/male-shorts-sitting_fore.png",
+        "text": false
       },
       "Mbluewindpants": {
-        "id": 475,
         "name": "Mbluewindpants",
         "source": "images/stickers/1-shoes_and_pants/Mbluewindpants.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Nwhitewindpants": {
-        "id": 476,
         "name": "Nwhitewindpants",
         "source": "images/stickers/1-shoes_and_pants/Nwhitewindpants.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Opinkpajamas": {
-        "id": 477,
         "name": "Opinkpajamas",
         "source": "images/stickers/1-shoes_and_pants/Opinkpajamas.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "pajama-pants-jumping": {
+        "name": "pajama-pants-jumping",
+        "source": "images/stickers/1-shoes_and_pants/pajama-pants-jumping_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/pajama-pants-jumping_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/pajama-pants-jumping_fore.png",
+        "text": false
+      },
+      "pajama-pants-oneleg": {
+        "name": "pajama-pants-oneleg",
+        "source": "images/stickers/1-shoes_and_pants/pajama-pants-oneleg_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/pajama-pants-oneleg_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/pajama-pants-oneleg_fore.png",
+        "text": false
+      },
+      "pajama-pants-sitting": {
+        "name": "pajama-pants-sitting",
+        "source": "images/stickers/1-shoes_and_pants/pajama-pants-sitting_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/pajama-pants-sitting_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/pajama-pants-sitting_fore.png",
+        "text": false
       },
       "Pyellowpajamas": {
-        "id": 478,
         "name": "Pyellowpajamas",
         "source": "images/stickers/1-shoes_and_pants/Pyellowpajamas.png",
         "category": "shoes_and_pants",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker-front-left": {
+        "name": "sneaker-front-left",
+        "source": "images/stickers/1-shoes_and_pants/sneaker-front-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker-front-right": {
+        "name": "sneaker-front-right",
+        "source": "images/stickers/1-shoes_and_pants/sneaker-front-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker-side-left": {
+        "name": "sneaker-side-left",
+        "source": "images/stickers/1-shoes_and_pants/sneaker-side-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker-side-right": {
+        "name": "sneaker-side-right",
+        "source": "images/stickers/1-shoes_and_pants/sneaker-side-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker2-front-left": {
+        "name": "sneaker2-front-left",
+        "source": "images/stickers/1-shoes_and_pants/sneaker2-front-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker2-front-right": {
+        "name": "sneaker2-front-right",
+        "source": "images/stickers/1-shoes_and_pants/sneaker2-front-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker2-side-left": {
+        "name": "sneaker2-side-left",
+        "source": "images/stickers/1-shoes_and_pants/sneaker2-side-left.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sneaker2-side-right": {
+        "name": "sneaker2-side-right",
+        "source": "images/stickers/1-shoes_and_pants/sneaker2-side-right.png",
+        "category": "shoes_and_pants",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "sweat-pants-jumping": {
+        "name": "sweat-pants-jumping",
+        "source": "images/stickers/1-shoes_and_pants/sweat-pants-jumping_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/sweat-pants-jumping_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/sweat-pants-jumping_fore.png",
+        "text": false
+      },
+      "sweat-pants-oneleg": {
+        "name": "sweat-pants-oneleg",
+        "source": "images/stickers/1-shoes_and_pants/sweat-pants-oneleg_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/sweat-pants-oneleg_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/sweat-pants-oneleg_fore.png",
+        "text": false
+      },
+      "sweat-pants-sitting": {
+        "name": "sweat-pants-sitting",
+        "source": "images/stickers/1-shoes_and_pants/sweat-pants-sitting_display.png",
+        "category": "shoes_and_pants",
+        "chroma_green": true,
+        "back_source": "images/stickers/1-shoes_and_pants/sweat-pants-sitting_back.png",
+        "fore_source": "images/stickers/1-shoes_and_pants/sweat-pants-sitting_fore.png",
+        "text": false
       }
     },
     "shirts": {
       "0fam": {
-        "id": 479,
         "name": "0fam",
         "source": "images/stickers/2-shirts/0fam.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "0xfam": {
-        "id": 480,
         "name": "0xfam",
         "source": "images/stickers/2-shirts/0xfam.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "0yfam": {
-        "id": 481,
         "name": "0yfam",
         "source": "images/stickers/2-shirts/0yfam.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Ablack": {
-        "id": 482,
         "name": "Ablack",
         "source": "images/stickers/2-shirts/Ablack.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Bwhite": {
-        "id": 483,
         "name": "Bwhite",
         "source": "images/stickers/2-shirts/Bwhite.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Cwhite": {
-        "id": 484,
         "name": "Cwhite",
         "source": "images/stickers/2-shirts/Cwhite.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Dblack": {
-        "id": 485,
         "name": "Dblack",
         "source": "images/stickers/2-shirts/Dblack.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Eblack": {
-        "id": 486,
         "name": "Eblack",
         "source": "images/stickers/2-shirts/Eblack.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
-      },
-      "Ggrey": {
-        "id": 488,
-        "name": "Ggrey",
-        "source": "images/stickers/2-shirts/Ggrey.png",
-        "category": "shirts",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Hgrey": {
-        "id": 489,
-        "name": "Hgrey",
-        "source": "images/stickers/2-shirts/Hgrey.png",
-        "category": "shirts",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Iyellow": {
-        "id": 490,
-        "name": "Iyellow",
-        "source": "images/stickers/2-shirts/Iyellow.png",
-        "category": "shirts",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Lpink": {
-        "id": 493,
-        "name": "Lpink",
-        "source": "images/stickers/2-shirts/Lpink.png",
-        "category": "shirts",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Mblack": {
-        "id": 494,
-        "name": "Mblack",
-        "source": "images/stickers/2-shirts/Mblack.png",
-        "category": "shirts",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Ncaldadblue": {
-        "id": 495,
-        "name": "Ncaldadblue",
-        "source": "images/stickers/2-shirts/Ncaldadblue.png",
-        "category": "shirts",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "fblack": {
-        "id": 487,
         "name": "fblack",
         "source": "images/stickers/2-shirts/fblack.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "female-longsleeve-highfive": {
+        "name": "female-longsleeve-highfive",
+        "source": "images/stickers/2-shirts/female-longsleeve-highfive_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-longsleeve-highfive_back.png",
+        "fore_source": "images/stickers/2-shirts/female-longsleeve-highfive_fore.png",
+        "text": false
+      },
+      "female-longsleeve-pointing": {
+        "name": "female-longsleeve-pointing",
+        "source": "images/stickers/2-shirts/female-longsleeve-pointing_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-longsleeve-pointing_back.png",
+        "fore_source": "images/stickers/2-shirts/female-longsleeve-pointing_fore.png",
+        "text": false
+      },
+      "female-longsleeve-sign01": {
+        "name": "female-longsleeve-sign01",
+        "source": "images/stickers/2-shirts/female-longsleeve-sign01_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-longsleeve-sign01_back.png",
+        "fore_source": "images/stickers/2-shirts/female-longsleeve-sign01_fore.png",
+        "text": false
+      },
+      "female-longsleeve-sign02": {
+        "name": "female-longsleeve-sign02",
+        "source": "images/stickers/2-shirts/female-longsleeve-sign02_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-longsleeve-sign02_back.png",
+        "fore_source": "images/stickers/2-shirts/female-longsleeve-sign02_fore.png",
+        "text": false
+      },
+      "female-tshirt-highfive": {
+        "name": "female-tshirt-highfive",
+        "source": "images/stickers/2-shirts/female-tshirt-highfive_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-tshirt-highfive_back.png",
+        "fore_source": "images/stickers/2-shirts/female-tshirt-highfive_fore.png",
+        "text": false
+      },
+      "female-tshirt-pointing": {
+        "name": "female-tshirt-pointing",
+        "source": "images/stickers/2-shirts/female-tshirt-pointing_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-tshirt-pointing_back.png",
+        "fore_source": "images/stickers/2-shirts/female-tshirt-pointing_fore.png",
+        "text": false
+      },
+      "female-tshirt-sign01": {
+        "name": "female-tshirt-sign01",
+        "source": "images/stickers/2-shirts/female-tshirt-sign01_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-tshirt-sign01_back.png",
+        "fore_source": "images/stickers/2-shirts/female-tshirt-sign01_fore.png",
+        "text": false
+      },
+      "female-tshirt-sign02": {
+        "name": "female-tshirt-sign02",
+        "source": "images/stickers/2-shirts/female-tshirt-sign02_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/female-tshirt-sign02_back.png",
+        "fore_source": "images/stickers/2-shirts/female-tshirt-sign02_fore.png",
+        "text": false
+      },
+      "Ggrey": {
+        "name": "Ggrey",
+        "source": "images/stickers/2-shirts/Ggrey.png",
+        "category": "shirts",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "Hgrey": {
+        "name": "Hgrey",
+        "source": "images/stickers/2-shirts/Hgrey.png",
+        "category": "shirts",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "hoodie-sweatshirt-highfive": {
+        "name": "hoodie-sweatshirt-highfive",
+        "source": "images/stickers/2-shirts/hoodie-sweatshirt-highfive_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/hoodie-sweatshirt-highfive_back.png",
+        "fore_source": "images/stickers/2-shirts/hoodie-sweatshirt-highfive_fore.png",
+        "text": false
+      },
+      "hoodie-sweatshirt-pointing": {
+        "name": "hoodie-sweatshirt-pointing",
+        "source": "images/stickers/2-shirts/hoodie-sweatshirt-pointing_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/hoodie-sweatshirt-pointing_back.png",
+        "fore_source": "images/stickers/2-shirts/hoodie-sweatshirt-pointing_fore.png",
+        "text": false
+      },
+      "hoodie-sweatshirt-sign01": {
+        "name": "hoodie-sweatshirt-sign01",
+        "source": "images/stickers/2-shirts/hoodie-sweatshirt-sign01_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/hoodie-sweatshirt-sign01_back.png",
+        "fore_source": "images/stickers/2-shirts/hoodie-sweatshirt-sign01_fore.png",
+        "text": false
+      },
+      "hoodie-sweatshirt-sign02": {
+        "name": "hoodie-sweatshirt-sign02",
+        "source": "images/stickers/2-shirts/hoodie-sweatshirt-sign02_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/hoodie-sweatshirt-sign02_back.png",
+        "fore_source": "images/stickers/2-shirts/hoodie-sweatshirt-sign02_fore.png",
+        "text": false
+      },
+      "Iyellow": {
+        "name": "Iyellow",
+        "source": "images/stickers/2-shirts/Iyellow.png",
+        "category": "shirts",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
       },
       "jyellow": {
-        "id": 491,
         "name": "jyellow",
         "source": "images/stickers/2-shirts/jyellow.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "kpink": {
-        "id": 492,
         "name": "kpink",
         "source": "images/stickers/2-shirts/kpink.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "Lpink": {
+        "name": "Lpink",
+        "source": "images/stickers/2-shirts/Lpink.png",
+        "category": "shirts",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "male-longsleeve-highfive": {
+        "name": "male-longsleeve-highfive",
+        "source": "images/stickers/2-shirts/male-longsleeve-highfive_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-longsleeve-highfive_back.png",
+        "fore_source": "images/stickers/2-shirts/male-longsleeve-highfive_fore.png",
+        "text": false
+      },
+      "male-longsleeve-pointing": {
+        "name": "male-longsleeve-pointing",
+        "source": "images/stickers/2-shirts/male-longsleeve-pointing_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-longsleeve-pointing_back.png",
+        "fore_source": "images/stickers/2-shirts/male-longsleeve-pointing_fore.png",
+        "text": false
+      },
+      "male-longsleeve-sign01": {
+        "name": "male-longsleeve-sign01",
+        "source": "images/stickers/2-shirts/male-longsleeve-sign01_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-longsleeve-sign01_back.png",
+        "fore_source": "images/stickers/2-shirts/male-longsleeve-sign01_fore.png",
+        "text": false
+      },
+      "male-longsleeve-sign02": {
+        "name": "male-longsleeve-sign02",
+        "source": "images/stickers/2-shirts/male-longsleeve-sign02_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-longsleeve-sign02_back.png",
+        "fore_source": "images/stickers/2-shirts/male-longsleeve-sign02_fore.png",
+        "text": false
+      },
+      "male-tshirt-highfive": {
+        "name": "male-tshirt-highfive",
+        "source": "images/stickers/2-shirts/male-tshirt-highfive_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-tshirt-highfive_back.png",
+        "fore_source": "images/stickers/2-shirts/male-tshirt-highfive_fore.png",
+        "text": false
+      },
+      "male-tshirt-pointing": {
+        "name": "male-tshirt-pointing",
+        "source": "images/stickers/2-shirts/male-tshirt-pointing_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-tshirt-pointing_back.png",
+        "fore_source": "images/stickers/2-shirts/male-tshirt-pointing_fore.png",
+        "text": false
+      },
+      "male-tshirt-sign01": {
+        "name": "male-tshirt-sign01",
+        "source": "images/stickers/2-shirts/male-tshirt-sign01_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-tshirt-sign01_back.png",
+        "fore_source": "images/stickers/2-shirts/male-tshirt-sign01_fore.png",
+        "text": false
+      },
+      "male-tshirt-sign02": {
+        "name": "male-tshirt-sign02",
+        "source": "images/stickers/2-shirts/male-tshirt-sign02_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/male-tshirt-sign02_back.png",
+        "fore_source": "images/stickers/2-shirts/male-tshirt-sign02_fore.png",
+        "text": false
+      },
+      "Mblack": {
+        "name": "Mblack",
+        "source": "images/stickers/2-shirts/Mblack.png",
+        "category": "shirts",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "Ncaldadblue": {
+        "name": "Ncaldadblue",
+        "source": "images/stickers/2-shirts/Ncaldadblue.png",
+        "category": "shirts",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
       },
       "ocalmomyellow": {
-        "id": 496,
         "name": "ocalmomyellow",
         "source": "images/stickers/2-shirts/ocalmomyellow.png",
         "category": "shirts",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
-      },
-      "zSweaterGuyBlue": {
-        "id": 498,
-        "name": "zSweaterGuyBlue",
-        "source": "images/stickers/2-shirts/zSweaterGuyBlue_display.png",
-        "category": "shirts",
-        "chroma_green": true,
-        "back_source": "images/stickers/2-shirts/zSweaterGuyBlue_back.png",
-        "fore_source": "images/stickers/2-shirts/zSweaterGuyBlue_fore.png"
-      },
-      "zSweaterWomanGray": {
-        "id": 499,
-        "name": "zSweaterWomanGray",
-        "source": "images/stickers/2-shirts/zSweaterWomanGray_display.png",
-        "category": "shirts",
-        "chroma_green": true,
-        "back_source": "images/stickers/2-shirts/zSweaterWomanGray_back.png",
-        "fore_source": "images/stickers/2-shirts/zSweaterWomanGray_fore.png"
-      },
-      "zSweaterWomanPink": {
-        "id": 500,
-        "name": "zSweaterWomanPink",
-        "source": "images/stickers/2-shirts/zSweaterWomanPink_display.png",
-        "category": "shirts",
-        "chroma_green": true,
-        "back_source": "images/stickers/2-shirts/zSweaterWomanPink_back.png",
-        "fore_source": "images/stickers/2-shirts/zSweaterWomanPink_fore.png"
+        "fore_source": "",
+        "text": false
       },
       "zqse": {
-        "id": 497,
         "name": "zqse",
         "source": "images/stickers/2-shirts/zqse_display.png",
         "category": "shirts",
         "chroma_green": true,
         "back_source": "images/stickers/2-shirts/zqse_back.png",
-        "fore_source": "images/stickers/2-shirts/zqse_fore.png"
+        "fore_source": "images/stickers/2-shirts/zqse_fore.png",
+        "text": false
+      },
+      "zSweaterGuyBlue": {
+        "name": "zSweaterGuyBlue",
+        "source": "images/stickers/2-shirts/zSweaterGuyBlue_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/zSweaterGuyBlue_back.png",
+        "fore_source": "images/stickers/2-shirts/zSweaterGuyBlue_fore.png",
+        "text": false
+      },
+      "zSweaterWomanGray": {
+        "name": "zSweaterWomanGray",
+        "source": "images/stickers/2-shirts/zSweaterWomanGray_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/zSweaterWomanGray_back.png",
+        "fore_source": "images/stickers/2-shirts/zSweaterWomanGray_fore.png",
+        "text": false
+      },
+      "zSweaterWomanPink": {
+        "name": "zSweaterWomanPink",
+        "source": "images/stickers/2-shirts/zSweaterWomanPink_display.png",
+        "category": "shirts",
+        "chroma_green": true,
+        "back_source": "images/stickers/2-shirts/zSweaterWomanPink_back.png",
+        "fore_source": "images/stickers/2-shirts/zSweaterWomanPink_fore.png",
+        "text": false
       }
     },
     "accessories": {
-      "Owinterhatblack": {
-        "id": 514,
-        "name": "Owinterhatblack",
-        "source": "images/stickers/3-accessories/Owinterhatblack.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "PWinterHat": {
-        "id": 515,
-        "name": "PWinterHat",
-        "source": "images/stickers/3-accessories/PWinterHat.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "QCapYellowOski": {
-        "id": 516,
-        "name": "QCapYellowOski",
-        "source": "images/stickers/3-accessories/QCapYellowOski.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "RCapPinkCali": {
-        "id": 517,
-        "name": "RCapPinkCali",
-        "source": "images/stickers/3-accessories/RCapPinkCali.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "SCapGrayCali": {
-        "id": 518,
-        "name": "SCapGrayCali",
-        "source": "images/stickers/3-accessories/SCapGrayCali.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "SCapWhiteCal": {
-        "id": 519,
-        "name": "SCapWhiteCal",
-        "source": "images/stickers/3-accessories/SCapWhiteCal.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "TOskiEarsYellow": {
-        "id": 520,
-        "name": "TOskiEarsYellow",
-        "source": "images/stickers/3-accessories/TOskiEarsYellow.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "UOskiEarsBrown": {
-        "id": 521,
-        "name": "UOskiEarsBrown",
-        "source": "images/stickers/3-accessories/UOskiEarsBrown.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "VOskiEarsPink": {
-        "id": 522,
-        "name": "VOskiEarsPink",
-        "source": "images/stickers/3-accessories/VOskiEarsPink.png",
-        "category": "accessories",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
       "ablackshades": {
-        "id": 501,
         "name": "ablackshades",
         "source": "images/stickers/3-accessories/ablackshades.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "bblueshades": {
-        "id": 502,
         "name": "bblueshades",
         "source": "images/stickers/3-accessories/bblueshades.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "cyellowshades": {
-        "id": 503,
         "name": "cyellowshades",
         "source": "images/stickers/3-accessories/cyellowshades.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "dpinkshades": {
-        "id": 504,
         "name": "dpinkshades",
         "source": "images/stickers/3-accessories/dpinkshades.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "eredshades": {
-        "id": 505,
         "name": "eredshades",
         "source": "images/stickers/3-accessories/eredshades.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "fwig1": {
-        "id": 506,
         "name": "fwig1",
         "source": "images/stickers/3-accessories/fwig1.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "gwig2": {
-        "id": 507,
         "name": "gwig2",
         "source": "images/stickers/3-accessories/gwig2.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "hwig3": {
-        "id": 508,
         "name": "hwig3",
         "source": "images/stickers/3-accessories/hwig3.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "iwig4": {
-        "id": 509,
         "name": "iwig4",
         "source": "images/stickers/3-accessories/iwig4.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "kjmustache2": {
-        "id": 510,
         "name": "kjmustache2",
         "source": "images/stickers/3-accessories/kjmustache2.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "lmustache4": {
-        "id": 511,
         "name": "lmustache4",
         "source": "images/stickers/3-accessories/lmustache4.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "mmustache1": {
-        "id": 512,
         "name": "mmustache1",
         "source": "images/stickers/3-accessories/mmustache1.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "nmustache3": {
-        "id": 513,
         "name": "nmustache3",
         "source": "images/stickers/3-accessories/nmustache3.png",
         "category": "accessories",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "Owinterhatblack": {
+        "name": "Owinterhatblack",
+        "source": "images/stickers/3-accessories/Owinterhatblack.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "PWinterHat": {
+        "name": "PWinterHat",
+        "source": "images/stickers/3-accessories/PWinterHat.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "QCapYellowOski": {
+        "name": "QCapYellowOski",
+        "source": "images/stickers/3-accessories/QCapYellowOski.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "RCapPinkCali": {
+        "name": "RCapPinkCali",
+        "source": "images/stickers/3-accessories/RCapPinkCali.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "SCapGrayCali": {
+        "name": "SCapGrayCali",
+        "source": "images/stickers/3-accessories/SCapGrayCali.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "SCapWhiteCal": {
+        "name": "SCapWhiteCal",
+        "source": "images/stickers/3-accessories/SCapWhiteCal.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "TOskiEarsYellow": {
+        "name": "TOskiEarsYellow",
+        "source": "images/stickers/3-accessories/TOskiEarsYellow.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "UOskiEarsBrown": {
+        "name": "UOskiEarsBrown",
+        "source": "images/stickers/3-accessories/UOskiEarsBrown.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "VOskiEarsPink": {
+        "name": "VOskiEarsPink",
+        "source": "images/stickers/3-accessories/VOskiEarsPink.png",
+        "category": "accessories",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
       }
     },
     "cal_day": {
       "Afunnyface": {
-        "id": 523,
         "name": "Afunnyface",
         "source": "images/stickers/4-cal_day/Afunnyface.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Bcottoncandy2": {
-        "id": 524,
         "name": "Bcottoncandy2",
         "source": "images/stickers/4-cal_day/Bcottoncandy2.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Ccottoncandy2": {
-        "id": 525,
         "name": "Ccottoncandy2",
         "source": "images/stickers/4-cal_day/Ccottoncandy2.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Dballoons": {
-        "id": 526,
         "name": "Dballoons",
         "source": "images/stickers/4-cal_day/Dballoons.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Eumbrella": {
-        "id": 527,
         "name": "Eumbrella",
         "source": "images/stickers/4-cal_day/Eumbrella.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Fsquirrel": {
-        "id": 528,
         "name": "Fsquirrel",
         "source": "images/stickers/4-cal_day/Fsquirrel.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Gsquirrelb": {
-        "id": 529,
         "name": "Gsquirrelb",
         "source": "images/stickers/4-cal_day/Gsquirrelb.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Hcalblue": {
-        "id": 530,
         "name": "Hcalblue",
         "source": "images/stickers/4-cal_day/Hcalblue.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Ipinkcal": {
-        "id": 531,
         "name": "Ipinkcal",
         "source": "images/stickers/4-cal_day/Ipinkcal.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Jyellowbutton": {
-        "id": 532,
         "name": "Jyellowbutton",
         "source": "images/stickers/4-cal_day/Jyellowbutton.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Koskiblack": {
-        "id": 533,
         "name": "Koskiblack",
         "source": "images/stickers/4-cal_day/Koskiblack.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Loskipink": {
-        "id": 534,
         "name": "Loskipink",
         "source": "images/stickers/4-cal_day/Loskipink.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Moskiyellow": {
-        "id": 535,
         "name": "Moskiyellow",
         "source": "images/stickers/4-cal_day/Moskiyellow.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Ncampblue": {
-        "id": 536,
         "name": "Ncampblue",
         "source": "images/stickers/4-cal_day/Ncampblue.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Osadf": {
-        "id": 537,
         "name": "Osadf",
         "source": "images/stickers/4-cal_day/Osadf.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Oski": {
-        "id": 538,
         "name": "Oski",
         "source": "images/stickers/4-cal_day/Oski.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Pcampyellow": {
-        "id": 539,
         "name": "Pcampyellow",
         "source": "images/stickers/4-cal_day/Pcampyellow.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Qbluepenant": {
-        "id": 540,
         "name": "Qbluepenant",
         "source": "images/stickers/4-cal_day/Qbluepenant.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Rpinkpennant": {
-        "id": 541,
         "name": "Rpinkpennant",
         "source": "images/stickers/4-cal_day/Rpinkpennant.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Swhitepenant": {
-        "id": 542,
         "name": "Swhitepenant",
         "source": "images/stickers/4-cal_day/Swhitepenant.png",
         "category": "cal_day",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       }
     },
     "dorm_room": {
       "bed": {
-        "id": 543,
         "name": "bed",
         "source": "images/stickers/5-dorm_room/bed.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "bluecalpillow": {
-        "id": 544,
         "name": "bluecalpillow",
         "source": "images/stickers/5-dorm_room/bluecalpillow.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "bluepillow": {
-        "id": 545,
         "name": "bluepillow",
         "source": "images/stickers/5-dorm_room/bluepillow.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "books": {
-        "id": 546,
         "name": "books",
         "source": "images/stickers/5-dorm_room/books.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "computerchair": {
-        "id": 547,
         "name": "computerchair",
         "source": "images/stickers/5-dorm_room/computerchair.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "desk": {
-        "id": 548,
         "name": "desk",
         "source": "images/stickers/5-dorm_room/desk.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "desklamp": {
-        "id": 549,
         "name": "desklamp",
         "source": "images/stickers/5-dorm_room/desklamp.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "DormBGRND": {
+        "name": "DormBGRND",
+        "source": "images/stickers/5-dorm_room/DormBGRND.png",
+        "category": "dorm_room",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
       },
       "dresser": {
-        "id": 551,
         "name": "dresser",
         "source": "images/stickers/5-dorm_room/dresser.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "greenlamp": {
-        "id": 552,
         "name": "greenlamp",
         "source": "images/stickers/5-dorm_room/greenlamp.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "highfiveposter": {
-        "id": 553,
         "name": "highfiveposter",
         "source": "images/stickers/5-dorm_room/highfiveposter.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "keepcalmblue": {
-        "id": 554,
         "name": "keepcalmblue",
         "source": "images/stickers/5-dorm_room/keepcalmblue.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "keepcalmyellow": {
-        "id": 555,
         "name": "keepcalmyellow",
         "source": "images/stickers/5-dorm_room/keepcalmyellow.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "legoman": {
-        "id": 556,
         "name": "legoman",
         "source": "images/stickers/5-dorm_room/legoman.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "nutsblue": {
-        "id": 557,
         "name": "nutsblue",
         "source": "images/stickers/5-dorm_room/nutsblue.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "nutsyellow": {
-        "id": 558,
         "name": "nutsyellow",
         "source": "images/stickers/5-dorm_room/nutsyellow.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "pillowblack": {
-        "id": 559,
         "name": "pillowblack",
         "source": "images/stickers/5-dorm_room/pillowblack.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "redlamp": {
-        "id": 560,
         "name": "redlamp",
         "source": "images/stickers/5-dorm_room/redlamp.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "yellowcalpillow": {
-        "id": 561,
         "name": "yellowcalpillow",
         "source": "images/stickers/5-dorm_room/yellowcalpillow.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "yellowpillow": {
-        "id": 562,
         "name": "yellowpillow",
         "source": "images/stickers/5-dorm_room/yellowpillow.png",
         "category": "dorm_room",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       }
     },
     "football_game": {
       "ABody": {
-        "id": 563,
         "name": "ABody",
         "source": "images/stickers/6-football_game/ABody.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "BHelmet": {
-        "id": 564,
         "name": "BHelmet",
         "source": "images/stickers/6-football_game/BHelmet.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "CFootball": {
-        "id": 565,
         "name": "CFootball",
         "source": "images/stickers/6-football_game/CFootball.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "DBearClaw": {
-        "id": 566,
         "name": "DBearClaw",
         "source": "images/stickers/6-football_game/DBearClaw.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Echeerposter": {
-        "id": 567,
         "name": "Echeerposter",
         "source": "images/stickers/6-football_game/Echeerposter.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Fbandsign": {
-        "id": 568,
         "name": "Fbandsign",
         "source": "images/stickers/6-football_game/Fbandsign.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Gpompom": {
-        "id": 569,
         "name": "Gpompom",
         "source": "images/stickers/6-football_game/Gpompom.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Hmegaphone": {
-        "id": 570,
         "name": "Hmegaphone",
         "source": "images/stickers/6-football_game/Hmegaphone.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Ihotdog": {
-        "id": 571,
         "name": "Ihotdog",
         "source": "images/stickers/6-football_game/Ihotdog.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Jfootballplayer": {
-        "id": 572,
         "name": "Jfootballplayer",
         "source": "images/stickers/6-football_game/Jfootballplayer.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "Koski1": {
-        "id": 573,
         "name": "Koski1",
         "source": "images/stickers/6-football_game/Koski1.png",
         "category": "football_game",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       }
     },
     "art_studio_pack": {
-      "Athinker": {
-        "id": 575,
-        "name": "Athinker",
-        "source": "images/stickers/7-art_studio_pack/Athinker.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Beret": {
-        "id": 576,
-        "name": "Beret",
-        "source": "images/stickers/7-art_studio_pack/Beret.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Easel": {
-        "id": 581,
-        "name": "Easel",
-        "source": "images/stickers/7-art_studio_pack/Easel.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "PaintTubeBlue": {
-        "id": 583,
-        "name": "PaintTubeBlue",
-        "source": "images/stickers/7-art_studio_pack/PaintTubeBlue.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "PaintTubeGreen": {
-        "id": 584,
-        "name": "PaintTubeGreen",
-        "source": "images/stickers/7-art_studio_pack/PaintTubeGreen.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "PaintTubePurple": {
-        "id": 585,
-        "name": "PaintTubePurple",
-        "source": "images/stickers/7-art_studio_pack/PaintTubePurple.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "PaintTubeRed": {
-        "id": 586,
-        "name": "PaintTubeRed",
-        "source": "images/stickers/7-art_studio_pack/PaintTubeRed.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "PaintTubeYellow": {
-        "id": 587,
-        "name": "PaintTubeYellow",
-        "source": "images/stickers/7-art_studio_pack/PaintTubeYellow.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Paintbrush": {
-        "id": 582,
-        "name": "Paintbrush",
-        "source": "images/stickers/7-art_studio_pack/Paintbrush.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
-      "Palette": {
-        "id": 588,
-        "name": "Palette",
-        "source": "images/stickers/7-art_studio_pack/Palette.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "back_source": "",
-        "fore_source": ""
-      },
       "apron": {
-        "id": 574,
         "name": "apron",
         "source": "images/stickers/7-art_studio_pack/apron.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "Athinker": {
+        "name": "Athinker",
+        "source": "images/stickers/7-art_studio_pack/Athinker.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "Beret": {
+        "name": "Beret",
+        "source": "images/stickers/7-art_studio_pack/Beret.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
       },
       "camera": {
-        "id": 577,
         "name": "camera",
         "source": "images/stickers/7-art_studio_pack/camera.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "canvas": {
-        "id": 578,
         "name": "canvas",
         "source": "images/stickers/7-art_studio_pack/canvas.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
-      },
-      "text_box": {
-        "id": 599,
-        "name": "text_box",
-        "source": "images/stickers/7-art_studio_pack/text_box.png",
-        "category": "art_studio_pack",
-        "chroma_green": false,
-        "text": true,
-        "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "clapboard": {
-        "id": 579,
         "name": "clapboard",
         "source": "images/stickers/7-art_studio_pack/clapboard.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "dali": {
-        "id": 580,
         "name": "dali",
         "source": "images/stickers/7-art_studio_pack/dali.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
+      },
+      "Easel": {
+        "name": "Easel",
+        "source": "images/stickers/7-art_studio_pack/Easel.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "Paintbrush": {
+        "name": "Paintbrush",
+        "source": "images/stickers/7-art_studio_pack/Paintbrush.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "PaintTubeBlue": {
+        "name": "PaintTubeBlue",
+        "source": "images/stickers/7-art_studio_pack/PaintTubeBlue.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "PaintTubeGreen": {
+        "name": "PaintTubeGreen",
+        "source": "images/stickers/7-art_studio_pack/PaintTubeGreen.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "PaintTubePurple": {
+        "name": "PaintTubePurple",
+        "source": "images/stickers/7-art_studio_pack/PaintTubePurple.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "PaintTubeRed": {
+        "name": "PaintTubeRed",
+        "source": "images/stickers/7-art_studio_pack/PaintTubeRed.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "PaintTubeYellow": {
+        "name": "PaintTubeYellow",
+        "source": "images/stickers/7-art_studio_pack/PaintTubeYellow.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "Palette": {
+        "name": "Palette",
+        "source": "images/stickers/7-art_studio_pack/Palette.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": false
+      },
+      "text_box": {
+        "name": "text_box",
+        "source": "images/stickers/7-art_studio_pack/text_box.png",
+        "category": "art_studio_pack",
+        "chroma_green": false,
+        "back_source": "",
+        "fore_source": "",
+        "text": true
       },
       "thinker": {
-        "id": 589,
         "name": "thinker",
         "source": "images/stickers/7-art_studio_pack/thinker.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "tripod": {
-        "id": 590,
         "name": "tripod",
         "source": "images/stickers/7-art_studio_pack/tripod.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "videocamera": {
-        "id": 591,
         "name": "videocamera",
         "source": "images/stickers/7-art_studio_pack/videocamera.png",
         "category": "art_studio_pack",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       }
     },
     "Dev": {
       "cal-beanie": {
-        "id": 592,
         "name": "cal-beanie",
         "source": "images/stickers/8-Dev/cal-beanie.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "cal-cap": {
-        "id": 593,
         "name": "cal-cap",
         "source": "images/stickers/8-Dev/cal-cap.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "female-cal-sweatshirt": {
-        "id": 594,
         "name": "female-cal-sweatshirt",
         "source": "images/stickers/8-Dev/female-cal-sweatshirt.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "female-cal-tshirt": {
-        "id": 595,
         "name": "female-cal-tshirt",
         "source": "images/stickers/8-Dev/female-cal-tshirt.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "female-shorts": {
-        "id": 596,
         "name": "female-shorts",
         "source": "images/stickers/8-Dev/female-shorts.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "male-cal-sweatshirt": {
-        "id": 597,
         "name": "male-cal-sweatshirt",
         "source": "images/stickers/8-Dev/male-cal-sweatshirt.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       },
       "male-shorts": {
-        "id": 598,
         "name": "male-shorts",
         "source": "images/stickers/8-Dev/male-shorts.png",
         "category": "Dev",
         "chroma_green": false,
         "back_source": "",
-        "fore_source": ""
+        "fore_source": "",
+        "text": false
       }
     }
   },
