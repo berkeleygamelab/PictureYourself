@@ -1,137 +1,77 @@
 {
-  "-blank": {
-    "id": 444,
-    "name": "-blank",
+  "-blank_background": {
+    "name": "-blank_background",
     "source": "images/stickers/0-backgrounds/-blank_background.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "ASproul": {
-    "id": 445,
     "name": "ASproul",
     "source": "images/stickers/0-backgrounds/ASproul.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Bgate2": {
-    "id": 446,
     "name": "Bgate2",
     "source": "images/stickers/0-backgrounds/Bgate2.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Ccaldaygate": {
-    "id": 447,
     "name": "Ccaldaygate",
     "source": "images/stickers/0-backgrounds/Ccaldaygate.png",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Ddorm": {
-    "id": 448,
     "name": "Ddorm",
     "source": "images/stickers/0-backgrounds/Ddorm.png",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Eartstudio": {
-    "id": 449,
     "name": "Eartstudio",
     "source": "images/stickers/0-backgrounds/Eartstudio.png",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Fcaldayglade": {
-    "id": 450,
     "name": "Fcaldayglade",
     "source": "images/stickers/0-backgrounds/Fcaldayglade.png",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Gcamp": {
-    "id": 451,
     "name": "Gcamp",
     "source": "images/stickers/0-backgrounds/Gcamp.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Hcafe": {
-    "id": 452,
     "name": "Hcafe",
     "source": "images/stickers/0-backgrounds/Hcafe.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Ibikes": {
-    "id": 453,
     "name": "Ibikes",
     "source": "images/stickers/0-backgrounds/Ibikes.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Jfountain": {
-    "id": 454,
     "name": "Jfountain",
     "source": "images/stickers/0-backgrounds/Jfountain.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Kfootballbgrnd": {
-    "id": 455,
     "name": "Kfootballbgrnd",
     "source": "images/stickers/0-backgrounds/Kfootballbgrnd.png",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Mmoffit": {
-    "id": 456,
     "name": "Mmoffit",
     "source": "images/stickers/0-backgrounds/Mmoffit.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Nwalkway": {
-    "id": 457,
     "name": "Nwalkway",
     "source": "images/stickers/0-backgrounds/Nwalkway.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   },
   "Ogate": {
-    "id": 458,
     "name": "Ogate",
     "source": "images/stickers/0-backgrounds/Ogate.jpg",
-    "category": "backgrounds",
-    "chroma_green": false,
-    "back_source": "",
-    "fore_source": ""
+    "category": "backgrounds"
   }
 }

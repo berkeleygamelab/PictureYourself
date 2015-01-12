@@ -89,7 +89,7 @@ post '/fileupload' do
     end
 
     # fix - fix to have dynamic png numbers - or naming
-    File.open("#{dirname}/#{dirNumber}_sticker.png", 'wb') do |f|
+    File.open("#{dirname}/#{dirNumber}.png", 'wb') do |f|
       f.write(Base64.decode64(data))
     end
     # Needs to be updated to account for errors
@@ -98,7 +98,7 @@ end
 
 post '/grabcut' do
   params = JSON.parse request.body.read, :symbolize_names => true
-  filename = "#{params[:pyuserid]}/#{params[:count]}_sticker.png"
+  filename = "#{params[:pyuserid]}/#{params[:count]}.png"
 
   # if File.exist? "public/users/#{params[:pyuserid]}/1_sticker.png"
   #   puts "Previous 1_sticker.png file did not get renamed"
@@ -121,7 +121,7 @@ post '/grabcut' do
   #   end
   # end
 
-  "users/#{filename}"
+  "users/#{params[:pyuserid]}/#{params[:count]}_sticker.png"
 end
 
 
