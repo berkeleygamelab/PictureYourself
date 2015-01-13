@@ -92,3 +92,23 @@ video {
 #tos div:last-child{
     padding-top: 10%;
 }
+
+@media (min-width: 1281px) { 
+
+   #snapshot_div{
+        margin-top: 10%;
+        background-position: 95% 30%;
+    }
+
+   #tos {
+        margin-top: 5%;
+    }
+
+   #popover.top {
+    top: 526px;
+    left: 825px;
+    display:block;
+   }
+
+}
+
