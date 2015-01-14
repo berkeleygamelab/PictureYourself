@@ -7,7 +7,7 @@
             <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_tos()'>
         </div>
 
-        <i class="fa fa-arrow-up up_arrow"></i>
+        <i class="fa fa-long-arrow-up up_arrow"></i>
 
         <!-- Terms of Service -->
         <div id="tos" class="centered" ng-show='show_tos'>
@@ -47,8 +47,8 @@
         <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>
             <input type="button" class="button" ng-click='get_tos()' value="START" ng-show='snapshot_button.start'>
             <input type="button" class="button" ng-click='capture()' value="SNAP IT" id='snap_it' ng-show='snapshot_button.snap_it'
-                data-content="Make sure to allow access to your webcam by clicking the 'allow' button" data-placement='top' data-trigger='manual'
-                disabled="disabled">
+                data-content="Make sure to allow access to your webcam by clicking the 'Allow' button on the upper right hand corner" 
+                    data-placement='top' data-trigger='manual' disabled="disabled">
             <input type="button" class="button" ng-click='upload_webcam()' value='SELECT' id='select' ng-show='snapshot_button.cut' 
                 ng-disabled="cutDisabled">
             <div class="accept_buttons" ng-show='check_face'>
