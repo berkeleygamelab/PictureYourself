@@ -50,3 +50,9 @@
     margin: auto;
     display: block;
 }
+
+@media (min-width: 1281px) { 
+    #background_ctrl {
+        padding-top: 12.5%;
+    }
+}

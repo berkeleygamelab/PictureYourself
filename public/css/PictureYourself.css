@@ -257,3 +257,14 @@ ul{
     top: calc(50% - 50px);
     opacity: 0.75;
 }
+
+@media (min-width: 1281px) { 
+    .loader{
+        height: 100vh;
+        transform: translateY(-40%);
+    }
+    
+    .loader_spinner{
+        top: 50%;
+    }
+}

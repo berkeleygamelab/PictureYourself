@@ -333,6 +333,9 @@ button.close {
   filter: alpha(opacity=20);
   opacity: .2;
 }
+.modal{
+  height: 100vh;
+}
 .modal-dialog{
   width: 50%;
   margin-top: 15%;

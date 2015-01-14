@@ -7,6 +7,16 @@
     background-repeat: no-repeat;
 }
 
+.up_arrow{
+    display: none;
+    top: 10px;
+    position: absolute;
+    right: 1.3%;
+    font-size: 80px;
+    z-index: 1500;
+    color: #9E3131;
+}
+
 #camera, #camera_placeholder, #capture, #check{
     width:640px;
     height:480px;
@@ -92,3 +102,23 @@ video {
 #tos div:last-child{
     padding-top: 10%;
 }
+
+@media (min-width: 1281px) { 
+
+   #snapshot_div{
+        margin-top: 10%;
+        background-position: 95% 30%;
+    }
+
+   #tos {
+        margin-top: 5%;
+    }
+
+   #popover.top {
+    top: 526px;
+    left: 825px;
+    display:block;
+   }
+
+}
+

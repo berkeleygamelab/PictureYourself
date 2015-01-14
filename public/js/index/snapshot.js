@@ -94,7 +94,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
             $scope.get_camera();
         } else{
             // Sent to LayoutCtrl
-            $scope.$emit('show_quit');
+            $scope.$emit('toggle_quit');
             $scope.snapshot_button.start = false;
             $scope.show_tos = true;
             $scope.camera_loaded = true;
@@ -112,9 +112,10 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     /*if iPhone, do input...)
       else if no getUserMedia() do fileupload.
     */
-        $('#snapshot_div').css('background-image', 'url("../images/img/PIC_arrow.png")');
+        $('.up_arrow').fadeIn();
+        $scope.$emit('toggle_quit');
         $scope.show_buttons = true;
-        $scope.camera = getUserMedia();
+        $scope.camera = getUserMedia($scope);
         $scope.show_tos = false;
         $scope.snapshot_button.start = false;
         $scope.snapshot_button.snap_it = true;

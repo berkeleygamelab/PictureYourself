@@ -11,7 +11,7 @@ if (!hasGetUserMedia()) {
 
 var stream;
 
-function getUserMedia(){
+function getUserMedia($scope){
     var video = document.querySelector('video');
     var canvas = document.querySelector('canvas');
     var button = document.querySelector('#button');
@@ -40,7 +40,10 @@ function getUserMedia(){
             video = document.querySelector('video');
             video.src = window.URL.createObjectURL(localMediaStream);
             $('#snap_it').attr("disabled", false).popover('hide');
-            $('#snapshot_div').css('background-image', '');
+            $('.up_arrow').fadeOut();
+            $scope.$apply(function(){
+                $scope.$emit('toggle_quit');
+            });
             video.onloadedmetadata = function(e) {
             // Do something with the video here.
             };

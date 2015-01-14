@@ -18,8 +18,8 @@ app.controller('LayoutCtrl', function($scope, $window){
         $window.location.href = '/';
     }
 
-    $scope.$on('show_quit', function(){
-        $scope.show_quit = true;
+    $scope.$on('toggle_quit', function(){
+        $scope.show_quit = !$scope.show_quit;
     });
 });
 
