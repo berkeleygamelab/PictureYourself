@@ -1,19 +1,10 @@
 <script src="/js/slideshow/slideshow.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/slideshow.css">
 <div ng-controller="SlideshowCtrl" id='slideshow_ctrl'>
-    <!-- <img class ='mosaic' ng-repeat="collage in collages" ng-src="/{{collage.source}}?{{date}}"> -->
     <div class="slider">
         <!-- track by $index prevents flickering when the images are updated -->
         <div class="slide" ng-repeat="collage in collages track by $index" ng-show="collage.visible">
             <img ng-src="/{{collage.source}}?{{date}}" />
         </div>
-        <!-- <div class="arrows" ng-show="showArrows">
-            <div >
-                <i class="fa fa-chevron-left" ng-click="prev()"></i>
-            </div>
-            <div >
-                <i class="fa fa-chevron-right" ng-click="next()"></i>
-            </div>
-        </div> -->
     </div>
 </div>

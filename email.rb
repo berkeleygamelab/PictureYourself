@@ -21,8 +21,8 @@ post '/send_email' do
   parsed = JSON.parse data
   emails = parsed["emails"]
   fileName = parsed["fileName"]
-  puts emails
-  puts fileName
+  # puts emails
+  # puts fileName
 
   Mail.deliver do
     to emails
