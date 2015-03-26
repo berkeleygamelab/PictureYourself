@@ -4,7 +4,7 @@
 <div ng-controller="BackgroundCtrl" id='background_ctrl'>
     <div class="background_container">
         <div class="background_header">Choose a background image for your collage</div>
-        <div class="backgrounds_div" slick-slider="">
+        <div class="backgrounds_div" slick-slider>
             <div ng-repeat='background in background_images'>
                 <img ng-src='{{background.source}}' class='backgrounds' alt='{{background.name}}' />
             </div>

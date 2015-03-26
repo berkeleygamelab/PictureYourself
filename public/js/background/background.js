@@ -5,8 +5,9 @@ app.directive('slickSlider',function($timeout){
             $timeout(function() {
                 $('.backgrounds_div').slick({
                     centerMode: true,
+                    draggable: false,
                     speed: 0,
-                    swipeToSlide: true,
+                    swipeToSlide: false,
                     variableWidth: true,
                     responsive: [
                         {
@@ -45,10 +46,21 @@ app.directive('slickSlider',function($timeout){
 
     $scope.selectBackground = function(){
         $scope.bg = $('.slick-center>img').attr('src');
+        //Sent to ViewCtrl
         $scope.$emit('toggle_scenario', $scope.data, $scope.selfieCount, $scope.bg)
     }
 
-    // Recieved from ViewCtrl
+    $timeout(function(){   
+        $('.backgrounds').click(function(){
+            if($($(this).parent()).hasClass('slick-center')){
+                $scope.$apply(function(){
+                    $scope.selectBackground();
+                });
+            }
+        });
+    }, 4000);
+
+    // Received from ViewCtrl
     $scope.$on('send_selfie_to_background', function(event, data, selfieCount){
         $scope.data = data;
         $scope.selfieCount = selfieCount;

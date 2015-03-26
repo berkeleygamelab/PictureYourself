@@ -38,7 +38,7 @@
     right: 20px;
 }
 
-@media (min-width: 1900px){
+@media (min-width: 1281px){
     .slider {
         position: relative;
         padding: 5px;

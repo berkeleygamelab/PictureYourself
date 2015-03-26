@@ -27,6 +27,7 @@ app.controller('ViewCtrl', function($scope, $timeout){
             the incorrectly rendered carousel. It's then set to 300 for the user. 
             Additionally, the fadeIn below helps mask the incorrect rendering. */
         $('.backgrounds_div').slickNext();
+        $('.backgrounds_div').slickPrev();
         $timeout(function(){
             $('.backgrounds_div').slickSetOption('speed', 300);
         }, 1);
