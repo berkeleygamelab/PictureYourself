@@ -154,14 +154,14 @@ app.service('Sticker', function(){
                 sticker.txt = new Kinetic.Text({
                     x : start_size.width/2, // sticker.image.x() - start_size.width/2,
                     y : start_size.height/2, // sticker.image.y() - start_size.height/2,
-                    offsetX: tool_size/2,
+                    offsetX: tool_size/1.95,
                     offsetY: tool_size/2,
                     text: 'T',  //leave this it won't render correctly here but will on the canvas
                     fontFamily: 'Serif',
-                    fontSize: tool_size,
-                    fill: '#eee',
+                    fontSize: tool_size * 1.5,
+                    fill: '#c53c52',
                     stroke: "#222",
-                    strokeWidth: 0.75,
+                    strokeWidth: 0.85,
                     visible:true,
                     name: 'txt',
                 });

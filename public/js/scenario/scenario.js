@@ -44,8 +44,8 @@ $(document).ready(function() {
 app // Need this for .controller and .directive
     .controller('ScenarioCtrl', 
         function($scope, $resource, $http, $compile, $timeout, Sticker){
-            var stage_width = 800;
-            var stage_height = 550;
+            var stage_width = $('#container').width()
+            var stage_height = $('#container').height()
 
             $scope.loading = false;
             $scope.chroma_green = false;

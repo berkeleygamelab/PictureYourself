@@ -62,11 +62,11 @@
 
 /*--------------------------------------------Title--------------------------------------------*/
 .title{
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin: auto;
   display: block;
   width: 50%;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  margin: auto;
 }
 
 .title_text{
@@ -168,9 +168,9 @@
   color:white;
   border-bottom: solid;
   border-width: 1px;
-  padding-top: 0.4em;
   cursor: pointer;
   transition: background-color 0.5s ease;
+  padding-top: 0.4em;
 }
 
 .subtab_title:hover {
@@ -209,9 +209,9 @@
 #scenario_canvas{
   /*float: left;
   margin-left: 4em;*/
+  padding-left: 5%;
   display: inline-block;
   margin: auto;
-  padding-left: 5%;
 }
 
 
@@ -388,18 +388,58 @@ button.close {
 @media (min-width: 1281px) { 
 
     #scenario_canvas {
-       padding:0px;
+      padding:0px;
+      margin-top:-60px;
     }
 
     .title {
-      margin-top:80px;
+      margin-top:60px;
+      font-size:20px;
+      width:60%;
     }
 
     #toolbox {
-      margin:8%;
-      margin-top:150px;
+      margin:3.7%;
+      margin-top:100px;
+      height: 60em;
+    }
+    #toolboxbody{
+      height: 53em;
     }
 
+    #container{
+      width: 87.2727273em;
+      height: 60em;
+    }
+
+    .modal-body{
+      font-size: 2.5em;
+    }
+
+    .modal-title{
+      font-size: 50px;
+    }
+
+    .modal-dialog{
+      margin-top: 10%;
+    }
+
+    #toolicon li {
+        height: 7em;
+    }
+
+    #toolicon li .fa {
+        font-size: 50px;
+    }
+
+    #another_selfie_button{
+        height: 50px;
+    }
+
+    .subtab_title{
+        height: 55px;
+        font-size: x-large;
+    }
 
 }
 

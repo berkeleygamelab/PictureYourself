@@ -72,8 +72,8 @@
     -webkit-box-shadow: 0 0 8px #bbb;
     box-shadow: 0 0 8px #bbb;
     margin-top: 1.5%;
-    padding: 3% 12%;
     width: 75%;
+    padding: 3% 12%;
 }
 .accept_buttons{
     text-align: center;
@@ -105,20 +105,41 @@ video {
 
 @media (min-width: 1281px) { 
 
+    #camera_placeholder{
+        width: 1000px;
+        padding-top: 0;
+    }
+
    #snapshot_div{
-        margin-top: 10%;
+        margin-top: 5%;
         background-position: 95% 30%;
     }
 
    #tos {
-        margin-top: 5%;
+        margin-top: 0;
+        padding: 3% 8%;
+        font-size: 28px;
     }
 
-   #popover.top {
+    #snapshot_button_div{
+        padding-bottom: 0;
+        padding-top: 22em;
+    }
+    #snapshot_button_div>input.button, .accept_buttons>input.button{
+        height: 70px;
+        font-size: 25px;
+        border-radius: 7px;
+        min-width: 170px;
+    }
+
+    .popover-content{
+        font-size: 22px;
+    }
+    #popover.top {
     top: 526px;
     left: 825px;
     display:block;
-   }
+    }
 
 }
 

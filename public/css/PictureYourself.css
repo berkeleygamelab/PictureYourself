@@ -261,10 +261,17 @@ ul{
 @media (min-width: 1281px) { 
     .loader{
         height: 100vh;
-        transform: translateY(-40%);
+        transform: translateY(-45%);
     }
     
     .loader_spinner{
         top: 50%;
+    }
+
+    .button{
+        height: 70px;
+        font-size: 25px;
+        border-radius: 7px;
+        min-width: 170px;
     }
 }

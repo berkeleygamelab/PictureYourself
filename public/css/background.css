@@ -61,17 +61,36 @@
 .slick-prev {
     left: -45px;
 }
+.slick-next{
+    right: -45px;
+}
+.slick-prev, .slick-next{
+    height: 40px;
+    width: 40px;
+}
 .slick-prev:before, .slick-next:before {
     color: black;
     font-size: 40px;
 }
-.slick-prev:hover:before, .slick-next:hover:before, {
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
     color: #333;
     font-size: 40px;
 }
 
 @media (min-width: 1281px) { 
     #background_ctrl {
-        padding-top: 12.5%;
+        padding-top: 7.5%;
+    }
+    .background_container{
+        height: 800px;
+    }
+    
+    .background_header{
+        font-size: 3em;
+    }
+
+    .backgrounds{
+        width: 950px;
+        height: 650px;
     }
 }
