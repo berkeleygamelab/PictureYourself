@@ -11,7 +11,7 @@
     box-shadow: 0 0 10px #ddd;
     margin-bottom: 1.5%;
     min-height: 506px;
-    background: #D8D8D8;;
+    background: #D8D8D8;
 }
 
 .background_header{
@@ -37,8 +37,8 @@
     transition: all 300ms ease;
 }
 .slick-slide img{
-    padding: 1em 0;
-    cursor: pointer;
+    padding: 2em 0;
+    cursor: default;
     z-index: 1200;
     position: relative;
     -webkit-filter: blur(2.5px);
@@ -49,8 +49,11 @@
     -o-transform: scale(1.15);
     transform: scale(1.15);
     transition: all 300ms ease;
+    transition: height 0;
     z-index: 1300;
     -webkit-filter: blur(0);
+    padding-top: 0;
+    cursor: pointer;
 }
 
 .centered{
@@ -59,10 +62,10 @@
 }
 
 .slick-prev {
-    left: -45px;
+    left: -60px;
 }
 .slick-next{
-    right: -45px;
+    right: -60px;
 }
 .slick-prev, .slick-next{
     height: 40px;
@@ -78,19 +81,27 @@
 }
 
 @media (min-width: 1281px) { 
-    #background_ctrl {
-        padding-top: 7.5%;
+    #background_ctrl{
+        padding-top: 4.5%;
     }
     .background_container{
-        height: 800px;
+        height: 750px;
     }
     
     .background_header{
-        font-size: 3em;
+        font-size: 2.2em;
     }
 
     .backgrounds{
         width: 950px;
+        height: 600px;
+    }
+
+    .slick-slide img{
+        padding: 4em 0 0 0;
+    }
+
+    .slick-center img{
         height: 650px;
     }
 }

@@ -71,7 +71,7 @@
 
 .title_text{
   text-align: center;
-  height: 3em;
+  height: 2.3em;
   border-radius: 0.3em;
   border: solid 1px #aeaeae;
   width: 100%;
@@ -393,14 +393,14 @@ button.close {
     }
 
     .title {
+      font-size:18px;
+      width:50%;
       margin-top:60px;
-      font-size:20px;
-      width:60%;
     }
 
     #toolbox {
       margin:3.7%;
-      margin-top:100px;
+      margin-top:77px;
       height: 60em;
     }
     #toolboxbody{
@@ -413,19 +413,19 @@ button.close {
     }
 
     .modal-body{
-      font-size: 2.5em;
+      font-size: 1.7em;
     }
 
     .modal-title{
-      font-size: 50px;
+      font-size: 35px;
     }
 
     .modal-dialog{
-      margin-top: 10%;
+      margin-top: 12.5%;
     }
 
     #toolicon li {
-        height: 7em;
+        height: 6.5em;
     }
 
     #toolicon li .fa {
@@ -438,7 +438,8 @@ button.close {
 
     .subtab_title{
         height: 55px;
-        font-size: x-large;
+        font-size: 22px;
+        padding-top: 0.5em;
     }
 
 }

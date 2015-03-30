@@ -100,13 +100,13 @@ video {
     display: block;
 }
 #tos div:last-child{
-    padding-top: 10%;
+    padding-top: 6%;
 }
 
 @media (min-width: 1281px) { 
 
     #camera_placeholder{
-        width: 1000px;
+        width: 900px;
         padding-top: 0;
     }
 
@@ -118,27 +118,34 @@ video {
    #tos {
         margin-top: 0;
         padding: 3% 8%;
-        font-size: 28px;
+        font-size: 22px;
     }
 
     #snapshot_button_div{
         padding-bottom: 0;
-        padding-top: 22em;
+        padding-top: 16em;
     }
-    #snapshot_button_div>input.button, .accept_buttons>input.button{
+/*    #snapshot_button_div>input.button, .accept_buttons>input.button{
         height: 70px;
         font-size: 25px;
         border-radius: 7px;
         min-width: 170px;
-    }
+    }*/
 
     .popover-content{
-        font-size: 22px;
+        font-size: 17px;
+    }
+    .popover-title{
+        font-size: 17px;
     }
     #popover.top {
-    top: 526px;
-    left: 825px;
-    display:block;
+        top: 526px;
+        left: 825px;
+        display:block;
+    }
+
+    .up_arrow{
+        right: 2.0%;
     }
 
 }

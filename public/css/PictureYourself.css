@@ -265,13 +265,13 @@ ul{
     }
     
     .loader_spinner{
-        top: 50%;
+        top: 45%;
     }
 
     .button{
-        height: 70px;
-        font-size: 25px;
-        border-radius: 7px;
-        min-width: 170px;
+        height: 55px;
+        font-size: 18px;
+        border-radius: 6px;
+        min-width: 140px;
     }
 }
