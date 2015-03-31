@@ -62,10 +62,10 @@
 }
 
 .slick-prev {
-    left: -60px;
+    left: -45px;
 }
 .slick-next{
-    right: -60px;
+    right: -45px;
 }
 .slick-prev, .slick-next{
     height: 40px;
@@ -103,5 +103,12 @@
 
     .slick-center img{
         height: 650px;
+    }
+
+    .slick-prev {
+        left: -60px;
+    }
+    .slick-next{
+        right: -60px;
     }
 }
