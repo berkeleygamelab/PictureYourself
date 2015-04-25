@@ -24,7 +24,7 @@ The Picture Yourself application uses visual storytelling practices like the "se
 Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future.
 To fix this, run shotgun -p <port number> picture_yourself.rb
 
-### Form
+### Style
 - use 4 spaces (!not tabs!) for indentation
 - write descriptive commit messages
 
@@ -32,7 +32,7 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
 
 #### Frameworks / tools used
   - Project uses Sinatra, Angular.js and Ruby
-  - DataMapper.rb is used as an ORM
+  - DataMapper.rb is used as an ORM (not anymore)
   - Kinetic.js is used for the image manipulation functionality
 
 

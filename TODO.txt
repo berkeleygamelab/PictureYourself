@@ -1,0 +1,18 @@
+Minor:
+    Get a new, higher res logo image (the image in the top left corner of the navbar)
+    Get more text images
+
+These shouldn't be too difficult:
+    Fix timeout, and timeout dialog boxes
+    Add/expand on error handling. Currently, some exists, but is very poor, 
+        usually just alerting the user that "Something went wrong"
+    Figure out a way to allow user to take more images from the webcam 
+        without having to reallow Chrome access. Issue might be with way 
+        the webcam access is coded.
+
+Unknown difficulty:
+    Add animations to the toolbox drawers when they open and close. Require
+        AngularJS animations (I think), which I'm not sure how to use.
+
+Hard:
+    Replace KineticJS with some other canvas library, since KineticJS is no longer supported.
