@@ -1,19 +1,4 @@
-#writes scenario image to server
-post '/email' do
-  data = params[:data].split(',')[1]
-  #how about... pyuserid
-  dirname = 'public/collages/' + params[:pyuserid]
-  unless File.directory?(dirname)
-    Dir.mkdir(dirname)
-  end
-  # fix - fix to have dynamic png numbers - or naming (pic_index.filetype)
-  File.open(dirname+'/1.png', 'wb') do |f|
-    f.write(Base64.decode64(data))
-  end
-  
-  status 200
-
-end
+# Handles email requests
 
 #sends email and attaches user's scenario to email
 post '/send_email' do
@@ -21,8 +6,6 @@ post '/send_email' do
   parsed = JSON.parse data
   emails = parsed["emails"]
   fileName = parsed["fileName"]
-  # puts emails
-  # puts fileName
 
   Mail.deliver do
     to emails

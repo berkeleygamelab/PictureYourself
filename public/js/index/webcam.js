@@ -52,7 +52,6 @@ function getUserMedia($scope){
         // errorCallback
         function(err) {
             alert('Webcam access denied. Please refresh the page to enable.');
-            // console.log("The following error occured: " + err);
         }
     );
 

@@ -60,16 +60,18 @@
     text-decoration: none;
 }
 .navtitle{
-    font-family: 'Alegreya SC', serif;
-    text-transform: uppercase;
-    font-size: 27px;
-    color: #e8e8e7;
-    margin-left: 1.5%;
-    margin-top: 0.45%;
+    font-family: 'Stockholm Slab', serif;
+    text-transform: lowercase;
+    font-size: 1.75em;
+    color: #E5E5E5;
+    margin-top: 0.9%;
+    margin-left: 1.25%;
+    float: left;
 }
 
 .navleft{
     float: left;
+    margin-left: 0.5%;
 }
 #navright{
     float: right;
@@ -367,3 +369,10 @@
     padding:0;
 }
 
+@media (min-width: 1281px) { 
+    .navtitle{
+        margin-top: 0.7%;
+    }
+
+
+}

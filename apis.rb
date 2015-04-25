@@ -100,6 +100,3 @@ post '/load_canvas' do
 
 end
 
-def isBackground? (category)
-    ['backgrounds','frames'].include? category
-end

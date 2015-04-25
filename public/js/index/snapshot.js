@@ -23,14 +23,8 @@ app.controller('ViewCtrl', function($scope, $timeout){
     $scope.$on('goto_background', function(event, data, selfieCount){
         /* Super hacky fix for carousel width issues due to angular hiding (I think)
             Having the carousel switch slides will force it to rerender correctly. 
-            The slide translation speed is init to 0 to minimise the appearance of 
-            the incorrectly rendered carousel. It's then set to 300 for the user. 
-            Additionally, the fadeIn below helps mask the incorrect rendering. */
+        */
         $('.backgrounds_div').slickNext();
-        $('.backgrounds_div').slickPrev();
-        $timeout(function(){
-            $('.backgrounds_div').slickSetOption('speed', 300);
-        }, 1);
 
         // Sent to BackgroundCtrl
         $scope.$broadcast('send_selfie_to_background', data, selfieCount);
@@ -110,10 +104,8 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     }
 
     $scope.get_camera = function(){
-    /*if iPhone, do input...)
-      else if no getUserMedia() do fileupload.
-    */
         $('.up_arrow').fadeIn();
+        // Sent to LayoutCtrl
         $scope.$emit('toggle_quit');
         $scope.show_buttons = true;
         $scope.camera = getUserMedia($scope);
@@ -124,7 +116,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.show_camera = true;
         $timeout(function(){
             $('#snap_it').popover('show');
-            // $('#arrow_pic').popover('show');
         }, 300);
     };
 
@@ -173,8 +164,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $scope.cut = function(){
         var coord = cropObj.getSelectionRectangle().getOpenCVXYWH();
         var formData = {};
-        // var filename = $scope.pyuserid + "/" + selfieCount +  ".png";
-        // formData["filename"] = filename;
         formData['coords'] = coord.x + ' ' + coord.y  + ' ' + coord.width + ' ' + coord.height;
         formData['pyuserid'] = $scope.pyuserid;
         formData['count'] = selfieCount;
@@ -195,7 +184,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     };
 
     $scope.check = function(data){
-        // $('#check').fadeIn();
         $scope.check_face = true;
         $scope.loading = false;
         $scope.show_capture = false;
@@ -229,11 +217,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         $scope.redo();
         selfieCount += 1 
     }
-
-    // Unused
-    // $scope.send_snapshot = function(){
-    //     kinetic($('#snapshot').attr('src'));
-    // };
 
     // Creates the kineticJS environment
     // Should be called by the change of img

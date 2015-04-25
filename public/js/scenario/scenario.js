@@ -178,7 +178,8 @@ app // Need this for .controller and .directive
                 var offset = {};
 
                 // Creates a new sticker object. See factories.js
-                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, stage, offset, $scope.sticker_text[$scope.dragged_image.name]);
+                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, 
+                                          stage, offset, $scope.sticker_text[$scope.dragged_image.name]);
 
                 $scope.selected_sticker = sticker;
 

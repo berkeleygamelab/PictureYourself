@@ -1,5 +1,5 @@
 // Sticker.new(Image, {'x':,'y':}, {'width':,'height':'}, Kinetic.Layer, Image)
-// Creates a new sticker object from factory in factories.js
+// Creates a new sticker object. Called in scenario.js
 // Returns a dictionary with sticker objects and needed event functions
 
 app.service('Sticker', function(){
@@ -34,6 +34,7 @@ app.service('Sticker', function(){
                 y: pos.y + start_size.height/2
             });
 
+            // Not chroma green
             if(!has_background_sticker) {
                 sticker.image = new Kinetic.Image({
                     image:imageObj,
@@ -48,6 +49,7 @@ app.service('Sticker', function(){
                 });
             }
 
+            // Chroma green
             if (has_background_sticker){
                 sticker.image = new Kinetic.Image({
                     image:imageObj,
@@ -73,6 +75,7 @@ app.service('Sticker', function(){
                 });
             }
 
+            // Blueish overlay
             sticker.background = new Kinetic.Rect({
                 width: start_size.width,
                 height: start_size.height,
@@ -156,7 +159,7 @@ app.service('Sticker', function(){
                     y : start_size.height/2, // sticker.image.y() - start_size.height/2,
                     offsetX: tool_size/1.95,
                     offsetY: tool_size/2,
-                    text: 'T',  //leave this it won't render correctly here but will on the canvas
+                    text: 'T', 
                     fontFamily: 'Serif',
                     fontSize: tool_size * 1.5,
                     fill: '#c53c52',
@@ -166,7 +169,6 @@ app.service('Sticker', function(){
                     name: 'txt',
                 });
             }
-
 
             sticker.delete_icon.on('click', function(){
                 sticker.group.destroy();
@@ -197,7 +199,7 @@ app.service('Sticker', function(){
                             offsetX: tool_size/2,
                             offsetY: tool_size/2,
                             text: input,
-                            fontFamily: 'FontAwesome',
+                            fontFamily: 'Source Sans Pro',
                             fontSize: tool_size,
                             fill: 'black',
                             stroke: "#222",
@@ -215,7 +217,7 @@ app.service('Sticker', function(){
                         offsetX: tool_size/2,
                         offsetY: tool_size/2,
                         text: input,
-                        fontFamily: 'FontAwesome',
+                        fontFamily: 'Source Sans Pro',
                         fontSize: tool_size,
                         fill: 'black',
                         stroke: "#222",
@@ -245,13 +247,6 @@ app.service('Sticker', function(){
                  });
             }
 
-           // if(text){
-           //      if(sticker.user_text){
-
-           //      }
-           //  }
-
-
             // set horizontal height of image
             sticker.scalerX.on('dragmove touchmove',function(){
                     
@@ -262,7 +257,6 @@ app.service('Sticker', function(){
                 if(has_background_sticker) {
                     sticker.imageBack.width(sticker.image.width());
                     sticker.imageBack.offsetX(half_width);
-                    // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
                 }
 
                 sticker.reposition();
@@ -280,7 +274,6 @@ app.service('Sticker', function(){
                 {
                     sticker.imageBack.height(sticker.image.height());
                     sticker.imageBack.offsetY(half_height);
-                    // sticker.imageBack.setAbsolutePosition({ x: sticker.image.getAbsolutePosition().x, y: sticker.image.getAbsolutePosition().y });
                 }
 
                 sticker.reposition();   
@@ -309,8 +302,7 @@ app.service('Sticker', function(){
                 start_rotation = sticker.image.rotation();
             });
 
-            sticker.rotate.on('dragmove touchmove', function(e){ //dragmove
-
+            sticker.rotate.on('dragmove touchmove', function(e){
                 endX = stage.getPointerPosition().x - sticker.image.getAbsolutePosition().x;
                 endY = stage.getPointerPosition().y - sticker.image.getAbsolutePosition().y;
                 end_angle = Math.atan2(endY, endX);
@@ -329,24 +321,20 @@ app.service('Sticker', function(){
             if(has_background_sticker){
                 // Using image_load_count as a counter to make sure
                 // both the background and foreground are loaded before onload process
-
                 imageObjBack.onload = function(){
                     if(image_load_count > 0){
                         return load();
                     }
-
                     image_load_count++;
                 };
 
                 imageObj.onload = function(){
                     if(image_load_count > 0){
                         return load();
-                    };
+                    }
                     image_load_count++;
                 };
-
             }
-
             else {
                 imageObj.onload = function(){
                     return load();
@@ -367,20 +355,15 @@ app.service('Sticker', function(){
                 if(text){
                     sticker.group.add(sticker.txt);
                 }
-                
                 layer.add(sticker.group);
-                
                 sticker.reposition();
-                
                 if(has_background_sticker){
                     sticker.move_color();
                 }
-
                 layer.draw();
             }
 
             sticker.move_color = function(){
-
                 $("#modal").css({
                     left: $('#container').offset().left + (sticker.rotate.getAbsolutePosition().x
                         + sticker.scalerY.getAbsolutePosition().x)/2 - tool_size/2,
@@ -422,17 +405,13 @@ app.service('Sticker', function(){
                         sticker.user_text.x(-half_width/2);
                         sticker.user_text.y(-half_height/2);
                     }
-                };
-
-                
-
+                };             
                 sticker.background.x(0);
                 sticker.background.y(0);
                 sticker.background.width(half_width*2);
                 sticker.background.height(half_height*2);
                 sticker.background.offsetX(half_width);
                 sticker.background.offsetY(half_height);
-
             };
 
             sticker.toggleTools = function(is_visible){
@@ -441,27 +420,18 @@ app.service('Sticker', function(){
                 sticker.delete_icon.visible(is_visible);
                 sticker.rotate.visible(is_visible);
                 sticker.background.visible(is_visible);
-                console.log("This one");
                 if (text){
-                    console.log("Hi");
                     sticker.txt.visible(is_visible);
                 }
             
                 // Toggle color picker            
                 is_visible && has_background_sticker ? $("#modal").show() : $("#modal").hide();
-                
-
             }
-
             sticker.group.on('dragmove', function(){
                 if(sticker.scalerX.isVisible() && has_background_sticker)
                     sticker.move_color();   
             });
-
-
-
             return sticker;
-             
             }
     }
 });

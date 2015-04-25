@@ -1,5 +1,6 @@
 #background_ctrl{
     padding-top: 5.5%;
+    padding-bottom: 2%;
 }
 
 .background_container{
@@ -18,6 +19,7 @@
     text-align: center;
     font-size: 1.75em;
     margin: 0.4em 0;
+    font-weight: 400;
 }
 
 .multiple-items{
@@ -34,7 +36,6 @@
 .backgrounds{
     width: 655px;
     height: 450px;
-    transition: all 300ms ease;
 }
 .slick-slide img{
     padding: 2em 0;
@@ -42,14 +43,13 @@
     z-index: 1200;
     position: relative;
     -webkit-filter: blur(2.5px);
+    transition: transform 300ms ease, -webkit-filter 150ms ease;
 }
 .slick-center img{
     -webkit-transform: scale(1.15);
     -ms-transform: scale(1.15);
     -o-transform: scale(1.15);
     transform: scale(1.15);
-    transition: all 300ms ease;
-    transition: height 0;
     z-index: 1300;
     -webkit-filter: blur(0);
     padding-top: 0;

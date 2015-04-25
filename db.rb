@@ -1,3 +1,5 @@
+#Current unused
+
 #This is essentially the model that deals with saving information to the database
 #Currently, it just handles stickers 
 

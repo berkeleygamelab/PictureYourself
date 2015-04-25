@@ -1,10 +1,12 @@
-<link rel="stylesheet" href="/css/animate.min.css">
+<link rel="stylesheet" href="/css/libraries/animate.min.css">
 <link rel="stylesheet" href="/css/index.css">
 
+<!-- Putting this at the top allows the / page to load properly -->
 <script src="/js/index/snapshot.js"></script>
 <script src='/js/index/upload.js'></script>
 <script src='/js/index/webcam.js'></script>
 
+<!-- ViewCtrl implemented in snapshot.js -->
 <div ng-controller="ViewCtrl">
     <div ng-show='views.snapshot' id='snapshot_view'>
         <%= erb :snapshot %>
