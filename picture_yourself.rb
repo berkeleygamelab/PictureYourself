@@ -71,32 +71,33 @@ get '/' do
 end
 
 post '/fileupload' do
-    data = params[:data].split(',')[1]
-    dirname = 'uploads/'+params[:name]
-    dirNumber = params[:count]
+    parsed = JSON.parse request.body.read, :symbolize_names => true
+    dirname = 'uploads/'+parsed[:name]
+    dirNumber = parsed[:count]
+    image = parsed[:data].split(',')[1]
 
     unless File.directory?(dirname)
       FileUtils.mkpath dirname
     end
 
     File.open("#{dirname}/#{dirNumber}.png", 'wb') do |f|
-      f.write(Base64.decode64(data))
+      f.write(Base64.decode64(image))
     end
     # Needs to be updated to account for errors
     status 200
 end
 
 post '/grabcut' do
-  params = JSON.parse request.body.read, :symbolize_names => true
-  filename = "#{params[:pyuserid]}/#{params[:count]}.png"
+  parsed = JSON.parse request.body.read, :symbolize_names => true
+  filename = "#{parsed[:pyuserid]}/#{parsed[:count]}.png"
 
   if OS.mac?
-    system("./grabcut uploads/#{filename} #{params[:coords]} #{params[:pyuserid]}")
+    system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
   elsif OS.unix?
-    system("./opencv_trans_UNIX uploads/" + filename + ' ' + params[:coords] + ' ' + params[:pyuserid])
+    system("./opencv_trans_UNIX uploads/" + filename + ' ' + parsed[:coords] + ' ' + parsed[:pyuserid])
   end
 
-  "users/#{params[:pyuserid]}/#{params[:count]}_sticker.png"
+  "users/#{parsed[:pyuserid]}/#{parsed[:count]}_sticker.png"
 end
 
 

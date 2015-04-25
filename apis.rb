@@ -17,8 +17,7 @@ end
 
 post '/saveToGallery' do
   begin
-    data = request.body.read
-    parsed = JSON.parse data
+    parsed = JSON.parse request.body.read
     title = parsed["title"]
     pyuserid = parsed["pyuserid"]
     image = parsed["image"].split(',')[1]

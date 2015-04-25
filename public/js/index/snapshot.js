@@ -138,24 +138,18 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $scope.upload_webcam = function(){
         if (cropObj.getSelectionRectangle()) {
             // Display loading; will display regardless of success or failure
-            $('.loader').fadeIn();
+            // $('.loader').fadeIn();
             $('#snapshot_container').popover('hide');
             $scope.loading = true;
             $scope.cutDisabled = true;
             var name = $scope.pyuserid;
             var formData = {"name":name, "data":canvas.toDataURL('image/png'), "count": selfieCount};
-            $.ajax({
-                url: '/fileupload',
-                type: 'POST',
-                data: formData,
-                success: function(){
-                    $scope.cut();
-                },
-                error: function(){
-                    $scope.loading = false;
-                    $scope.cutDisabled = true;
-                    alert("There was an issue uploading the image.");
-                }
+            $http.post('/fileupload', formData).success(function(data){
+                $scope.cut();
+            }).error(function(){
+                $scope.loading = false;
+                $scope.cutDisabled = true;
+                alert("There was an issue uploading the image.");
             });
         } 
     };
