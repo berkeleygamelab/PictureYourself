@@ -6,35 +6,31 @@ The Picture Yourself application uses visual storytelling practices like the "se
 
 ### To run this app locally: 
 
-- Make sure Ruby is installed. 
-  - check by running 'which Ruby' in your terminal. This will tell you the path to the installation if Ruby is installed
-  - if Ruby is not installed, download the latest version here: https://www.ruby-lang.org/en/downloads/
-- In the terminal, navigate to the PictureYourself root folder
-- Run: 'bundle install'
-- When gems are all installed, run: 'shotgun picture_yourself.rb'
-- Open localhost: < port number given in terminal > in your browser
+- Run `./install.sh`. This should install all the required libraries and software ([rvm](https://rvm.io/), [ruby](https://www.ruby-lang.org/en/), [brew](http://brew.sh/), [opencv](http://opencv.org/)).
 
 ### To contribute to this app:
 
-- Create a branch with 'git checkout -b <name of branch>'
-- Submit a pull request with 'git push origin <name of branch>'
+- Create a branch with `git checkout -b <name of branch>`
+- Push code to repo with `git push origin <name of branch>`
 - Have another team member review your code before either of you merge with the master branch
 
 ### Troubleshooting
 Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future.
-To fix this, run shotgun -p <port number> picture_yourself.rb
+To fix this, run `shotgun -p <port number> picture_yourself.rb`
 
 ### Style
-- use 4 spaces (!not tabs!) for indentation
-- write descriptive commit messages
+- Use 4 spaces (**not tabs**) for indentation. Most text editors should automatically change tabs into spaces. 
+- Write descriptive commit messages.
 
-### Orientation
-
-#### Frameworks / tools used
-  - Project uses Sinatra, Angular.js and Ruby
-  - DataMapper.rb is used as an ORM (not anymore)
-  - Kinetic.js is used for the image manipulation functionality
-
+#### Frameworks
+  - Backend uses Ruby with [Sinatra](http://www.sinatrarb.com/)
+  - Frontend includes 
+    - [Angular.js](https://angularjs.org/)
+    - [jQuery](https://jquery.com/) (which should be removed in favor of only Angular)
+    - [Kinetic.js](http://kineticjs.com/) for the canvas functionality
+      - Unfortunately, Kinetic.js is no longer supported. The documentation is included in the repo.
+    - [slick.js](http://kenwheeler.github.io/slick/) for the background chooser carousel
+    - [bootstrap](http://getbootstrap.com/) for modals and various other DOM elements
 
 #### (! NEW !) File structure and logic
  
@@ -70,11 +66,5 @@ To fix this, run shotgun -p <port number> picture_yourself.rb
   - scenario.js : HTTP request is made to /stickers. Sticker table is queried, data turned into JSON
   - factories.js : manipulates transparent buttons on images
   
-#### Making and Testing Changes
-
-- After making changes to JavaScript or CSS files, don't forget to minify them before running. Instructions for minifying:
-    - For all JS/CSS files: ruby /public/minifier.rb
-    - For one file: juicer merge -i <name of file> --force 
-
 
 - When making changes locally, just refreshing the page will register the new changes (Shotgun does NOT need to be restarted). However, Shotgun DOES have to be restarted when installing new gems.

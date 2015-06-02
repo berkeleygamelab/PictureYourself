@@ -35,8 +35,8 @@ fi
 # http://blog.sailsoftware.co/2014/12/18/rails-4-2-0-rc3-fixing-libiconv-missing-dependency-on-yosemite.html
 bundle install
 
-# InstallopenCV. In depth instructions and some troubleshooting at http://www.jeffreythompson.org/blog/2013/08/22/update-installing-opencv-on-mac-mountain-lion/
-# First install homebrew (http://brew.sh/), a package manager for Mac 
+# Install openCV. In depth instructions and some troubleshooting at http://www.jeffreythompson.org/blog/2013/08/22/update-installing-opencv-on-mac-mountain-lion/
+# First install homebrew (http://brew.sh/), a package manager for Mac, which makes opencv installation a lot easier
 if !command -v brew >/dev/null 2>&1; then
     echo "Installing brew.";
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
