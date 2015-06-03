@@ -15,16 +15,19 @@ The Picture Yourself application uses visual storytelling practices like the "se
 - Have another team member review your code before either of you merge with the master branch
 
 ### Troubleshooting
-Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future.
-To fix this, run `shotgun -p <port number> picture_yourself.rb`
+- Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future. To fix this, run `shotgun -p <port number> picture_yourself.rb`
+- When making changes locally, just refreshing the page will register the new changes (Shotgun does NOT need to be restarted). However, Shotgun DOES have to be restarted when installing new gems.
 
 ### Style
 - Use 4 spaces (**not tabs**) for indentation. Most text editors should automatically change tabs into spaces. 
 - Write descriptive commit messages.
 
-#### Frameworks
-  - Backend uses Ruby with [Sinatra](http://www.sinatrarb.com/)
-  - Frontend includes 
+### Frameworks
+
+  #### Backend
+    - Ruby with [Sinatra](http://www.sinatrarb.com/)
+
+  #### Frontend 
     - [Angular.js](https://angularjs.org/)
     - [jQuery](https://jquery.com/) (which should be removed in favor of only Angular)
     - [Kinetic.js](http://kineticjs.com/) for the canvas functionality
@@ -32,7 +35,12 @@ To fix this, run `shotgun -p <port number> picture_yourself.rb`
     - [slick.js](http://kenwheeler.github.io/slick/) for the background chooser carousel
     - [bootstrap](http://getbootstrap.com/) for modals and various other DOM elements
 
-#### (! NEW !) File structure and logic
+### File Organization
+  - In general, the CSS and JS related to any view will be in `public/css/<view name>.css` and `public/js/<view name>`
+  - `layout.erb` is a template loaded on every page. All CSS related to it are located in `public/css/layout.css` and all JS related to it is in the directory `public/js/layout`.
+  - `index.erb` controls which of the other views are seen. CSS in `public/css/index.css`, JS in `public/js/index`
+
+#### File Logic
  
   - Controllers:
     - handles user interaction
@@ -52,19 +60,4 @@ To fix this, run `shotgun -p <port number> picture_yourself.rb`
     - functions that deal with setup, independent processes, etc. that don't necessarily relate directly to user interaction
     - don't logically map to abstract entity (e.g. Camera, Sticker)
   
-  - Directives
-  
 
-#### (! OLD !) File structure and logic
-
-  - public/js/index  : all JS files used for the homepage
-  - public/js/scenarios : all JS files used for main interactive page
-      - handles stickers being dropped onto image, sends data to kinetic.js   
-  - public/js/layout : JS file used to make the navigation bar interactive
-  - users/minifier.rb: minifies JS and CSS files before they're run 
-  - db.rb : seeds new images loaded into 'public/images' folder into the database
-  - scenario.js : HTTP request is made to /stickers. Sticker table is queried, data turned into JSON
-  - factories.js : manipulates transparent buttons on images
-  
-
-- When making changes locally, just refreshing the page will register the new changes (Shotgun does NOT need to be restarted). However, Shotgun DOES have to be restarted when installing new gems.
