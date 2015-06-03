@@ -24,10 +24,8 @@ The Picture Yourself application uses visual storytelling practices like the "se
 
 ### Frameworks
 
-  #### Backend
-    - Ruby with [Sinatra](http://www.sinatrarb.com/)
-
-  #### Frontend 
+  - Backend uses Ruby with [Sinatra](http://www.sinatrarb.com/)
+  - Frontend uses
     - [Angular.js](https://angularjs.org/)
     - [jQuery](https://jquery.com/) (which should be removed in favor of only Angular)
     - [Kinetic.js](http://kineticjs.com/) for the canvas functionality
