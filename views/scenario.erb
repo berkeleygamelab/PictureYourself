@@ -97,52 +97,59 @@
             </div>
         </div>
 
-        <div id='toolbox'>
-            <div ng-controller='TabsCtrl'>
-                <div class="tabs">
-                    <ul class="nav nav-tabs" id='toolicon'>
-                        <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
-                        <li class = 'tab' data-toggle="modal" data-target="#saveModal">
-                            <i class="fa fa-cloud-upload"></i>
-                        </li>
-                        <li class = 'tab' data-toggle="modal" data-target="#emailModal">
-                            <i class="fa fa-envelope"></i>
-                        </li>
-                    </ul>
-                </div> <!-- Tabs -->
+        <div class = "row">
+          <div class = "col-md-3">
+            <div id='toolbox'>
+              <div ng-controller='TabsCtrl'>
+                  <div class="tabs">
+                      <ul class="nav nav-tabs" id='toolicon'>
+                          <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
+                          <li class = 'tab' data-toggle="modal" data-target="#saveModal">
+                              <i class="fa fa-cloud-upload"></i>
+                          </li>
+                          <li class = 'tab' data-toggle="modal" data-target="#emailModal">
+                              <i class="fa fa-envelope"></i>
+                          </li>
+                      </ul>
+                  </div> <!-- Tabs -->
 
-                <div class='tabContent' id='toolboxbody'>
-                    <div id="sticker_tab" ng-show='tabs.stickers'>
-                        <div id='selfie_div'>
-                            <div class="subtab_title" id="faces">Faces</div>
-                                <img ng-repeat='selfie in selfies' id='selfie{{selfie.count}}' class="sticker selfie" ng-src="/{{selfie.source}}" add-drag/>
-                                <!-- Take another selfie button -->    
-                                <input class='button' type='button' id='another_selfie_button' class='button' ng-show="checkSelfiesLength()" 
-                                    ng-click='add_selfie()' value = "Take Another Selfie">
-                        </div>
+                  <div class='tabContent' id='toolboxbody'>
+                      <div id="sticker_tab" ng-show='tabs.stickers'>
+                          <div id='selfie_div'>
+                              <div class="subtab_title" id="faces">Faces</div>
+                                  <img ng-repeat='selfie in selfies' id='selfie{{selfie.count}}' class="sticker selfie" ng-src="/{{selfie.source}}" add-drag/>
+                                  <!-- Take another selfie button -->
+                                  <input class='button' type='button' id='another_selfie_button' class='button' ng-show="checkSelfiesLength()"
+                                      ng-click='add_selfie()' value = "Take Another Selfie">
+                          </div>
 
-                        <!-- Sticker category titles -->
-                        <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>
-                            {{categories[key]}}
-                        </div>
-                        
-                        <!-- Sticker category content -->
-                        <div ng-repeat-end id='{{key}}_content' class = 'animate-content content' ng-show='visible[key]'>
-                            <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" ng-src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
-                        </div>
+                          <!-- Sticker category titles -->
+                          <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>
+                              {{categories[key]}}
+                          </div>
 
-                    </div> <!-- #sticker_tab -->
-                </div><!--  Toolbox body -->
-            </div> <!-- Tabs Ctrl-->    
-        </div> <!-- Toolbox -->
+                          <!-- Sticker category content -->
+                          <div ng-repeat-end id='{{key}}_content' class = 'animate-content content' ng-show='visible[key]'>
+                              <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" ng-src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
+                          </div>
 
+                      </div> <!-- #sticker_tab -->
+                  </div><!--  Toolbox body -->
+              </div> <!-- Tabs Ctrl-->
+            </div> <!-- Toolbox -->
+          </div>
 
-        <div id = "scenario_canvas">
-            <div class='title'>
-                <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
+          <div class = "col-md-9">
+            <div id = "scenario_canvas">
+                <div class='title'>
+                    <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
+                </div>
+                <div id = "container" ></div><!-- KineticJS Canvas -->
             </div>
-            <div id = "container" ></div><!-- KineticJS Canvas -->
+          </div>
+
         </div>
+
     </div> <!-- Framecontainer -->
 
     <div ng-show='loading' class='loader'>

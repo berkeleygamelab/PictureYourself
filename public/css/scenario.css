@@ -90,9 +90,7 @@
 #toolbox {
   background: #e8e8e7;
   box-shadow: 2.5px 2.5px 10px #ccc;
-  margin-left: 4%;
-  width:25%;
-  float: left;
+  /*margin-left: 4%;*/
   border: solid 1px #aeaeae;
   margin-top: 5em;
   height: 39.3em;
@@ -198,19 +196,9 @@
 #container {
   background: white;
   box-shadow: 3px 3px 10px #aaa;
-  width: 800px; 
+  width: 800px;
   height:550px;
 }
-
-
-#scenario_canvas{
-  /*float: left;
-  margin-left: 4em;*/
-  padding-left: 5%;
-  display: inline-block;
-  margin: auto;
-}
-
 
 /*--------------------------------------------- Email div ---------------------------------------------*/
 
