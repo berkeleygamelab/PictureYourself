@@ -1,5 +1,5 @@
 # Please note, this is partially untested since I already have everything installed and do not remember the exact steps I took. However, these
-# should approximate the steps required to install all the software to run PIC and any troubleshooting can likely be solved through the 
+# should approximate the steps required to install all the software to run PIC and any troubleshooting can likely be solved through the
 # various software's websites or Google
 
 # Install rvm (https://rvm.io/), a ruby version manager, and then get the most recent stable version of Ruby
@@ -62,10 +62,4 @@ else
     exit 1;
 fi
 echo "\n"
-cd .. 
-# Everything should be installed at this point. Start the local server. (In the future, can just run line below in shell)
-shotgun picture_yourself.rb
-
-
-
-
+cd ..
