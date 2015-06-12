@@ -30,6 +30,15 @@ shotgun picture_yourself.rb
 ## Troubleshooting
 - Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future. To fix this, run `shotgun -p <port number> picture_yourself.rb`
 - When making changes locally, just refreshing the page will register the new changes (Shotgun does NOT need to be restarted). However, Shotgun DOES have to be restarted when installing new gems.
+- If you encounter the following error (Mac OSX 10.10.3)
+  
+  ```
+  dyld: Library not loaded: /usr/local/lib/libImath-2_2.12.dylib
+    Referenced from: /usr/local/lib/libopencv_highgui.2.4.dylib
+    Reason: image not found
+  ```
+  then you may need reinstall OpenCV from source instead of bottled version (source). If you have OpenCV installed already, run   brew remove opencv followed by brew install -fs opencv.
+- If, after cropping, the cropped image does not show up, it may be because grabcut.cc executable did not create the public/users directory. Go ahead and add the users directory under public to fix this issue and try again.
 
 
 ## Style
