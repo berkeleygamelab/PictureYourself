@@ -59,7 +59,7 @@ end
 
 get '/' do
   cookie = request.cookies["pyuserid"]
-  
+
   # Check if cookie exits, if it does delete pictures associated with cookie
   unless cookie.nil?
     name = 'public/users/' + cookie
@@ -91,17 +91,21 @@ post '/grabcut' do
   parsed = JSON.parse request.body.read, :symbolize_names => true
   filename = "#{parsed[:pyuserid]}/#{parsed[:count]}.png"
 
-  if OS.mac?
-    system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
-  elsif OS.unix?
-    system("./opencv_trans_UNIX uploads/" + filename + ' ' + parsed[:coords] + ' ' + parsed[:pyuserid])
-  end
+  # TODO: What was the decision to separate the OpenCV libraries by OS? grabcut
+  # works on Ubuntu while opencv_trans_UNIX is always missing some .so files. For
+  # now, we'll go with grabcut for all OS.
+  # if OS.mac?
+  #   system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
+  # elsif OS.unix?
+  #   system("./opencv_trans_UNIX uploads/" + filename + ' ' + parsed[:coords] + ' ' + parsed[:pyuserid])
+  # end
+  system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
 
   "users/#{parsed[:pyuserid]}/#{parsed[:count]}_sticker.png"
 end
 
 
-# These are provided for ease of debugging, instead of going through the entire process every time 
+# These are provided for ease of debugging, instead of going through the entire process every time
 get '/scenario' do
   erb :scenario
 end
