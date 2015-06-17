@@ -25,9 +25,10 @@ require_relative 'email'
 # DataMapper.finalize.auto_upgrade!
 
 #mail Settings
+domain = ENV["RAILS_HOST"] || 'py-bcnm.berkeley.edu'
 options = { :address              => "smtp.gmail.com",
             :port                 => 587,
-            :domain               => 'py-bcnm.berkeley.edu',
+            :domain               => domain,
             :user_name            => 'picyourfuture',
             :password             => 'Py12ab21yP',
             :authentication       => 'plain',
