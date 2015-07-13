@@ -1,0 +1,161 @@
+/*---------------CSS corresponding to any and ALL HTML found in index.erb and snapshot.erb---------------*/
+
+#snapshot_div{
+    padding: 50px;
+    background-image: none;
+    background-position: 90% 30%;
+    background-repeat: no-repeat;
+}
+
+.popover-content{
+    font-family: Source Sans Pro;
+}
+.popover-title{
+    font-family: Source Sans Pro;
+    font-weight: 600;
+}
+.arrow_div{
+    position: fixed;
+    top: 15%;
+    left: 27.8%;
+}
+.up_arrow{
+    display: none;
+    color: #9E3131;
+    z-index: 1500;
+    font-size: 100px;
+}
+
+#camera, #camera_placeholder, #capture, #check{
+    width:640px;
+    height:480px;
+    padding-top: 3em;
+}
+
+#cam_icon{
+    width: 100%;
+    height: auto;
+}
+
+#capture{
+    position:relative;
+}
+.centered{
+    margin-right: auto;
+    margin-left: auto;
+}
+.check_image{
+    display: block;
+}
+#retake_div{
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+
+#retake_img{
+    width:100px;
+    height:75px;
+}
+
+#snapshot_button_div{
+    padding-bottom: 2em;
+    height: 40px;
+    padding-top: 4em;
+    margin: auto;
+    display: block;
+}
+#snapshot_title_div{
+    width: 300px;
+    height:100px;
+}
+
+#cam_canvas{
+    display:none;
+    width: 640px;
+    height: 480px; 
+}
+
+#tos{
+    background: white;
+    -webkit-box-shadow: 0 0 8px #bbb;
+    box-shadow: 0 0 8px #bbb;
+    margin-top: 1.5%;
+    width: 75%;
+    padding: 3% 12%;
+}
+.accept_buttons{
+    text-align: center;
+}
+
+.accept_buttons input:first-child{
+    margin-right: 100px;
+}
+
+
+#face_select_blurb{
+    width: 15%;
+    float: left;
+    margin-top: -25%;
+}
+
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+#snapshot_button_div>input.button{
+    margin: auto;
+    display: block;
+}
+#tos div:last-child{
+    padding-top: 6%;
+}
+
+@media (min-width: 1281px) { 
+
+    #camera_placeholder{
+        width: 900px;
+        padding-top: 0;
+    }
+
+   #snapshot_div{
+        margin-top: 5%;
+        background-position: 95% 30%;
+    }
+
+   #tos {
+        margin-top: 0;
+        padding: 3% 8%;
+        font-size: 22px;
+    }
+
+    #snapshot_button_div{
+        padding-bottom: 0;
+        padding-top: 16em;
+    }
+/*    #snapshot_button_div>input.button, .accept_buttons>input.button{
+        height: 70px;
+        font-size: 25px;
+        border-radius: 7px;
+        min-width: 170px;
+    }*/
+
+    .popover-content{
+        font-size: 17px;
+    }
+    .popover-title{
+        font-size: 17px;
+    }
+    #popover.top {
+        top: 526px;
+        left: 825px;
+        display:block;
+    }
+
+    .up_arrow{
+        right: 2.0%;
+    }
+
+}
+
