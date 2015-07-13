@@ -3,13 +3,17 @@
 <!DOCTYPE html>
 <html ng-app='PictureYourselfApp' no-js>
   <head>
-      <title>P.I.C. Your Future</title>
-      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
-      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
-      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
-      <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+    <title>P.I.C. Your Future</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
+    <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+    <link rel="stylesheet" href="css/libraries/animate.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <link rel="stylesheet" type="text/css" href="css/snapshot.css"/>
   </head>
 
   <body>
@@ -17,24 +21,19 @@
     <div ng-controller='LayoutCtrl'>
       <div class="outside">
         <nav class="navbar" role="navigation">
-
           <div class="navleft">
               <img class='navbariconleft' alt='Home' src='images/img/new_home.png'>
           </div>
-          <!-- <a class="navbar-link"><img class='navbariconleft' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a> -->
           <div class="navtitle">P.I.C. YOUR FUTURE</div>
 
           <div id="navright">
-              <div class="quit_div" ng-show='show_quit'>
-                  <input type='button' id='quit' class='button' ng-click='quit()' value = "QUIT">
-              </div>
-          </div> <!--navright-->
+            <div class="quit_div" ng-show='show_quit'>
+              <input type='button' id='quit' class='button' ng-click='quit()' value = "QUIT">
+            </div>
+          </div>
         </nav>
-      </div> <!--outside-->
+      </div>
 
-      <link rel="stylesheet" href="css/libraries/animate.min.css">
-
-      <link rel="stylesheet" href="css/index.css">
 
       <!-- ViewCtrl implemented in snapshot.js -->
       <div ng-controller="ViewCtrl">
