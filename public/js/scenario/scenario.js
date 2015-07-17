@@ -96,17 +96,19 @@ app // Need this for .controller and .directive
             };
 
             // $scope.$broadcast('load_selfies', "users/" + $scope.pyuserid + "/1_sticker.png", 1, undefined);
+            $scope.selfies = []
+            $scope.selfies.push({source: "users/" + getCookie('pyuserid') + "/1_sticker.png", count: 1});
 
 
-            $scope.selfies = [];
+            // $scope.selfies = [];
             // Listens to load_selfies event broadcast from ViewCtrl
-            $scope.$on('load_selfies', function(event, data, selfieCount, background){
-                $scope.selfies.push({source: data, count: selfieCount});
-                if(background != undefined){
-                    $scope.background_path = background;
-                    $scope.background.getImage().src = background;
-                }
-            });
+            // $scope.$on('load_selfies', function(event, data, selfieCount, background){
+            //     $scope.selfies.push({source: data, count: selfieCount});
+                // if(background != undefined){
+                //     $scope.background_path = background;
+                //     $scope.background.getImage().src = background;
+                // }
+            // });
             // Users can have a maximum of 3 selfies. Hides the add another selfie button after 3 selfies
             $scope.checkSelfiesLength = function(){
                 return $scope.selfies.length < 3;
