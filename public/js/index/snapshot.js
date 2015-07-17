@@ -5,8 +5,8 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     //create proper login methods etc...
     $('#snapshot_ctrl').fadeIn();
     var mouse = 'up';
-    var pyuserid = getCookie(pyuseridtag);
-    var selfieCount = 1;
+    var pyuserid    = getCookie(pyuseridtag);
+    var selfieCount = parseInt(getCookie("selfiecount") || 1);
     checkCookie(pyuserid);
 
     //canvas setup
@@ -15,18 +15,17 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     var video = document.querySelector('video');
     var cropObj; // CropJS object set up in function kinetic()
 
-    // var button = document.querySelector('#button'); // need this?
     $scope.pyuserid = getCookie(pyuseridtag);     // fix - Do we need both this and var pyuserid? i don't think so
 
     //site setup
     $scope.camera = false;
 
     // ng-show/ng-hide expressions for which divs are shown
-    $scope.camera_loaded = false;
-    $scope.show_tos = false;
-    $scope.show_camera = true;
-    $scope.show_capture = false;
-    $scope.check_face = false;
+    $scope.show_tos      = false;
+    $scope.show_capture  = false;
+    $scope.check_face    = false;
+    $scope.show_camera   = true;
+    $scope.camera_loaded = true;
 
     // Loading overlay
     $scope.loading = false;
@@ -45,12 +44,9 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
 
     // //KineticJS setup
-    var imageObj = new Image();
-
-
+    var imageObj  = new Image();
     $scope.camera = getUserMedia($scope);
-    $scope.show_camera = true;
-    $scope.camera_loaded = true;
+
     $scope.snapshot_button.snap_it = true;
 
     // Button functions
@@ -72,22 +68,22 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     };
 
     $scope.upload_webcam = function(){
-        if (cropObj.getSelectionRectangle()) {
-            // Display loading; will display regardless of success or failure
-            // $('.loader').fadeIn();
-            $('#snapshot_container').popover('hide');
-            $scope.loading = true;
+      if (cropObj.getSelectionRectangle()) {
+        // Display loading; will display regardless of success or failure
+        // $('.loader').fadeIn();
+        $('#snapshot_container').popover('hide');
+        $scope.loading = true;
+        $scope.cutDisabled = true;
+        var name = $scope.pyuserid;
+        var formData = {"name":name, "data":canvas.toDataURL('image/png'), "count": selfieCount};
+        $http.post('/fileupload', formData).success(function(data){
+            $scope.cut();
+        }).error(function(){
+            $scope.loading = false;
             $scope.cutDisabled = true;
-            var name = $scope.pyuserid;
-            var formData = {"name":name, "data":canvas.toDataURL('image/png'), "count": selfieCount};
-            $http.post('/fileupload', formData).success(function(data){
-                $scope.cut();
-            }).error(function(){
-                $scope.loading = false;
-                $scope.cutDisabled = true;
-                alert("There was an issue uploading the image.");
-            });
-        }
+            alert("There was an issue uploading the image.");
+        });
+      }
     };
 
     //Call grabcut with coordinates
@@ -125,33 +121,12 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     // Reset snapshot page
     $scope.redo = function(){
       $window.location.href = "/camera";
-        // $scope.camera = false;
-        // $scope.show_camera = true;
-        // $scope.show_capture = false;
-        // $scope.camera_loaded = false;
-        // $scope.loading = false;
-        // $scope.cutDisabled = false;
-        // $scope.check_face = false;
-        // $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
-        // $('#video').attr('src', '')
     }
 
     $scope.keep = function(){
       var selfieCount = getCookie("selfiecount") || 1
       setCookie("selfiecount", selfieCount, 1)
-
       $window.location.href = "/background"
-        // if($scope.has_background){
-        //     // Sent to ViewCtrl
-        //     $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
-        // } else {
-        //     // Sent to ViewCtrl
-        //     $scope.$emit('goto_background', $scope.selfie, selfieCount);
-        //     $scope.has_background = true;
-        // }
-        // // Snapshot page should be reset; above emits will move on to background/scenario
-        // $scope.redo();
-        // selfieCount += 1
     }
 
     // Creates the kineticJS environment
@@ -195,6 +170,8 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     }; // End of kinetic Function
 
 });//End of new SnapshotCtrl
+
+
 
 $(function () {
   $('[data-toggle="popover"]').popover()

@@ -8,23 +8,23 @@ var debug_flag = true;
 var default_background = '/images/stickers/0-backgrounds/ASproul.jpg';
 
 $(document).ready(function() {
-    var formData;
-    /*
-    * Gets user selfie
-    */
-    //set pyuserid as global variable to easily access it
-    $("#toolicon li").on("click", function(){
-        $(this).parent().children().removeClass("active");
-        $(this).addClass("active");
-    });
+  var formData;
+  /*
+  * Gets user selfie
+  */
+  //set pyuserid as global variable to easily access it
+  $("#toolicon li").on("click", function(){
+      $(this).parent().children().removeClass("active");
+      $(this).addClass("active");
+  });
 
-    //fixes positioning issue with kineticJS canvas
-    $(".kineticjs-content").css('position','');
+  //fixes positioning issue with kineticJS canvas
+  $(".kineticjs-content").css('position','');
 
-    $("#modal").hide();
+  $("#modal").hide();
 
-    // Canvas where color changing occurs. Should always be hidden
-    $("#color_change_canvas").hide();
+  // Canvas where color changing occurs. Should always be hidden
+  $("#color_change_canvas").hide();
 
 });
 
@@ -95,9 +95,19 @@ app // Need this for .controller and .directive
                 layer.draw();
             };
 
+            $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
+
             // $scope.$broadcast('load_selfies', "users/" + $scope.pyuserid + "/1_sticker.png", 1, undefined);
             $scope.selfies = []
             $scope.selfies.push({source: "users/" + getCookie('pyuserid') + "/1_sticker.png", count: 1});
+
+            var background = getCookie("currentbackground");
+            if (background)
+            {
+              $scope.background_path           = background;
+              $scope.background.getImage().src = background;
+            }
+
 
 
             // $scope.selfies = [];
@@ -116,7 +126,7 @@ app // Need this for .controller and .directive
 
 
             // Setup and assign background Kinetic.Image object
-            $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
+            // $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
             // $scope.background = backgroundSetup(closeTools, $scope.bg, layer, stage);
 
             // Called when user selects a background
