@@ -81,6 +81,12 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     // //KineticJS setup
     var imageObj = new Image();
 
+
+    $scope.camera = getUserMedia($scope);
+    $scope.show_camera = true;
+    $scope.camera_loaded = true;
+    $scope.snapshot_button.snap_it = true;
+
     // Button functions
 
     $scope.get_tos = function(){
@@ -190,15 +196,16 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
 
     // Reset snapshot page
     $scope.redo = function(){
-        $scope.camera = false;
-        $scope.show_camera = true;
-        $scope.show_capture = false;
-        $scope.camera_loaded = false;
-        $scope.loading = false;
-        $scope.cutDisabled = false;
-        $scope.check_face = false;
-        $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
-        $('#video').attr('src', '')
+      $window.location.href = "/camera";
+        // $scope.camera = false;
+        // $scope.show_camera = true;
+        // $scope.show_capture = false;
+        // $scope.camera_loaded = false;
+        // $scope.loading = false;
+        // $scope.cutDisabled = false;
+        // $scope.check_face = false;
+        // $scope.snapshot_button = {'start':true,'snap_it':false,'cut':false};
+        // $('#video').attr('src', '')
     }
 
     $scope.keep = function(){
