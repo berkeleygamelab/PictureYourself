@@ -3,17 +3,36 @@
 <!-- Putting this at the top allows the /background page to load properly -->
 <script type="text/javascript" src="/js/background/background.js"></script>
 
-<div ng-controller="BackgroundCtrl" id='background_ctrl'>
-    <div class="background_container">
-        <div class="background_header">Choose a background image for your collage</div>
-        <div class="backgrounds_div" slick-slider>
-            <div ng-repeat='background in background_images'>
-                <img ng-src='{{background.source}}' class='backgrounds' alt='{{background.name}}' />
+
+<link rel="stylesheet" href="/css/libraries/animate.min.css">
+<link rel="stylesheet" href="/css/index.css">
+
+<!-- Putting this at the top allows the / page to load properly -->
+<script src="/js/index/snapshot.js"></script>
+<script src='/js/index/upload.js'></script>
+<script src='/js/index/webcam.js'></script>
+
+
+<!-- ViewCtrl implemented in snapshot.js -->
+<div ng-controller="ViewCtrl">
+
+  <div ng-show="true" id='background_view'>
+    <div ng-controller="BackgroundCtrl" id='background_ctrl'>
+        <div class="background_container">
+            <div class="background_header">Choose a background image for your collage</div>
+            <div class="backgrounds_div" slick-slider>
+                <div ng-repeat='background in background_images'>
+                    <img ng-src='{{background.source}}' class='backgrounds' alt='{{background.name}}' />
+                </div>
             </div>
+        </div>
+
+        <div>
+            <input type="button" class="button centered" ng-click='selectBackground()' value="Select">
         </div>
     </div>
 
-    <div>
-        <input type="button" class="button centered" ng-click='selectBackground()' value="Select">
-    </div>
+  </div>
+
+
 </div>

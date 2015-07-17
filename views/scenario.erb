@@ -12,200 +12,224 @@
 <script type="text/javascript" src='/js/scenario/email.js'></script>
 <script type="text/javascript" src='/js/scenario/scenario.js'></script>
 
-<div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
-    <div id='framecontainer'>
 
-        <!-- Instructions Modal -->
-        <div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructionsModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="instructionsModalLabel">Create Your Collage</h2>
-                    </div>
-                    <div class="modal-body">
-                        <div>Drag items onto the background to place them.</div>
-                        <div>Click on items to see available tools for skin color, rotation, and resizing.</div>
-                        <div>Choose <span><i class="fa fa-cloud-upload"></i></span> to add your collage to the gallery.</div>
-                        <div>Choose <span><i class="fa fa-envelope"></i></span> to email a copy of your collage.</div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="button center" data-dismiss='modal' value="Got it!">
-                    </div>
-                </div>
-            </div>
-        </div>
+<link rel="stylesheet" href="/css/libraries/animate.min.css">
+<link rel="stylesheet" href="/css/index.css">
 
-        <!-- Save Modal -->
-        <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true" data-show='true' data-backdrop='true' >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header"><h2 class="modal-title" id="saveModalLabel">Save to Gallery</h2></div>
-                    <div class="modal-body">
-                        <div ng-show='show_save_tos'>
-                            <div>I understand that my collage will be viewable in the museum's gallery and may be used to show of PIC Your Future in the media.</div>
-                            <div>By clicking <span>Agree</span>, I give CITRIS permission to use my collage.</div>
+<!-- Putting this at the top allows the / page to load properly -->
+<script src="/js/index/snapshot.js"></script>
+<script src='/js/index/upload.js'></script>
+<script src='/js/index/webcam.js'></script>
+
+<script style="text/javascript">
+  $(document).ready(function()
+  {
+    $('#instructionsModal').modal();
+  })
+
+</script>
+
+<!-- ViewCtrl implemented in snapshot.js -->
+<div ng-controller="ViewCtrl">
+
+  <div ng-show='true' id='scenario_view'>
+
+    <div ng-controller='ScenarioCtrl' id='scenario_ctrl'>
+        <div id='framecontainer'>
+
+            <!-- Instructions Modal -->
+            <div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructionsModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="instructionsModalLabel">Create Your Collage</h2>
                         </div>
-                        <div ng-show="show_saving_collage" class='center collage_saved'>
-                            <i class="fa fa-spinner fa-spin save_spinner"></i>    
+                        <div class="modal-body">
+                            <div>Drag items onto the background to place them.</div>
+                            <div>Click on items to see available tools for skin color, rotation, and resizing.</div>
+                            <div>Choose <span><i class="fa fa-cloud-upload"></i></span> to add your collage to the gallery.</div>
+                            <div>Choose <span><i class="fa fa-envelope"></i></span> to email a copy of your collage.</div>
                         </div>
-                        <div ng-show='show_saved' class='center collage_saved'><h1>Collage Saved!</h1></div>
-                    </div>
-                    <div class="modal-footer" ng-show='show_save_tos || show_saved'>
-                        <div class="save_accept_buttons" >
-                            <div ng-show="show_save_tos">
-                                <input type="button" class="button" id='disagree' data-dismiss="modal" value="Disagree">
-                                <input type="button" class="button" ng-click='saveToGallery()' value="Agree">
-                            </div>
-                            <div ng-show="show_saved">
-                                <input type="button" class="button" ng-click='resetSaveModal()' data-dismiss="modal" value="Return to Collage">
-                                <input type="button" class="button" id='disagree' ng-click='quit()' value="Quit">
-                            </div>
+                        <div class="modal-footer">
+                            <input type="button" class="button center" data-dismiss='modal' value="Got it!">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Email Modal -->
-        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header"><h2 class="modal-title" id="emailModalLabel">Email Your Collage</h2></div>
-                    <div class="modal-body">
-                        <div class='emails center' ng-show='show_email_prompt'>
-                            <div>Enter your email address:</div>
-                            <input type="text" class="email_text" ng-model='emails'>
-                        </div>
-                        <div ng-show="show_saving_email" class='center collage_saved'>
-                            <i class="fa fa-spinner fa-spin save_spinner"></i>    
-                        </div>
-                        <div ng-show='show_emailed' class='center collage_saved'><h1>Email sent!</h1></div>
-                    </div>
-                    <div class="modal-footer" ng-show="show_email_prompt || show_emailed">
-                        <div class="save_accept_buttons">
-                            <div ng-show="show_email_prompt">
-                                <input type="button" class="button send_email_button" ng-click='call_email()' value="Send">
-                                <input type="button" class="button" id='disagree' data-dismiss="modal" value="Cancel">
+            <!-- Save Modal -->
+            <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true" data-show='true' data-backdrop='true' >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><h2 class="modal-title" id="saveModalLabel">Save to Gallery</h2></div>
+                        <div class="modal-body">
+                            <div ng-show='show_save_tos'>
+                                <div>I understand that my collage will be viewable in the museum's gallery and may be used to show of PIC Your Future in the media.</div>
+                                <div>By clicking <span>Agree</span>, I give CITRIS permission to use my collage.</div>
                             </div>
-                            <div ng-show="show_emailed">
-                                <input type="button" class="button" ng-click='resetEmailModal()' data-dismiss="modal" value="Return to Collage">
-                                <input type="button" class="button" id='disagree' ng-click='quit()' value="Quit">
+                            <div ng-show="show_saving_collage" class='center collage_saved'>
+                                <i class="fa fa-spinner fa-spin save_spinner"></i>
+                            </div>
+                            <div ng-show='show_saved' class='center collage_saved'><h1>Collage Saved!</h1></div>
+                        </div>
+                        <div class="modal-footer" ng-show='show_save_tos || show_saved'>
+                            <div class="save_accept_buttons" >
+                                <div ng-show="show_save_tos">
+                                    <input type="button" class="button" id='disagree' data-dismiss="modal" value="Disagree">
+                                    <input type="button" class="button" ng-click='saveToGallery()' value="Agree">
+                                </div>
+                                <div ng-show="show_saved">
+                                    <input type="button" class="button" ng-click='resetSaveModal()' data-dismiss="modal" value="Return to Collage">
+                                    <input type="button" class="button" id='disagree' ng-click='quit()' value="Quit">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class = "row">
-          <div class = "col-md-3">
-            <div id='toolbox'>
-              <div ng-controller='TabsCtrl'>
-                  <div class="tabs">
-                      <ul class="nav nav-tabs" id='toolicon'>
-                          <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
-                          <li class = 'tab' data-toggle="modal" data-target="#saveModal">
-                              <i class="fa fa-cloud-upload"></i>
-                          </li>
-                          <li class = 'tab' data-toggle="modal" data-target="#emailModal">
-                              <i class="fa fa-envelope"></i>
-                          </li>
-                      </ul>
-                  </div> <!-- Tabs -->
-
-                  <div class='tabContent' id='toolboxbody'>
-                      <div id="sticker_tab" ng-show='tabs.stickers'>
-                          <div id='selfie_div'>
-                              <div class="subtab_title" id="faces">Faces</div>
-                                  <img ng-repeat='selfie in selfies' id='selfie{{selfie.count}}' class="sticker selfie" ng-src="/{{selfie.source}}" add-drag/>
-                                  <!-- Take another selfie button -->
-                                  <input class='button' type='button' id='another_selfie_button' class='button' ng-show="checkSelfiesLength()"
-                                      ng-click='add_selfie()' value = "Take Another Selfie">
-                          </div>
-
-                          <!-- Sticker category titles -->
-                          <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>
-                              {{categories[key]}}
-                          </div>
-
-                          <!-- Sticker category content -->
-                          <div ng-repeat-end id='{{key}}_content' class = 'animate-content content' ng-show='visible[key]'>
-                              <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" ng-src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
-                          </div>
-
-                      </div> <!-- #sticker_tab -->
-                  </div><!--  Toolbox body -->
-              </div> <!-- Tabs Ctrl-->
-            </div> <!-- Toolbox -->
-          </div>
-
-          <div class = "col-md-9">
-            <div id = "scenario_canvas">
-                <div class='title'>
-                    <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
+            <!-- Email Modal -->
+            <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true" data-show='true' data-backdrop='true'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header"><h2 class="modal-title" id="emailModalLabel">Email Your Collage</h2></div>
+                        <div class="modal-body">
+                            <div class='emails center' ng-show='show_email_prompt'>
+                                <div>Enter your email address:</div>
+                                <input type="text" class="email_text" ng-model='emails'>
+                            </div>
+                            <div ng-show="show_saving_email" class='center collage_saved'>
+                                <i class="fa fa-spinner fa-spin save_spinner"></i>
+                            </div>
+                            <div ng-show='show_emailed' class='center collage_saved'><h1>Email sent!</h1></div>
+                        </div>
+                        <div class="modal-footer" ng-show="show_email_prompt || show_emailed">
+                            <div class="save_accept_buttons">
+                                <div ng-show="show_email_prompt">
+                                    <input type="button" class="button send_email_button" ng-click='call_email()' value="Send">
+                                    <input type="button" class="button" id='disagree' data-dismiss="modal" value="Cancel">
+                                </div>
+                                <div ng-show="show_emailed">
+                                    <input type="button" class="button" ng-click='resetEmailModal()' data-dismiss="modal" value="Return to Collage">
+                                    <input type="button" class="button" id='disagree' ng-click='quit()' value="Quit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id = "container" ></div><!-- KineticJS Canvas -->
             </div>
-          </div>
+
+            <div class = "row">
+              <div class = "col-md-3">
+                <div id='toolbox'>
+                  <div ng-controller='TabsCtrl'>
+                      <div class="tabs">
+                          <ul class="nav nav-tabs" id='toolicon'>
+                              <li class="active tab" ng-click='show_tab("stickers")'> <img src="/images/img/stickers.png" ></li>
+                              <li class = 'tab' data-toggle="modal" data-target="#saveModal">
+                                  <i class="fa fa-cloud-upload"></i>
+                              </li>
+                              <li class = 'tab' data-toggle="modal" data-target="#emailModal">
+                                  <i class="fa fa-envelope"></i>
+                              </li>
+                          </ul>
+                      </div> <!-- Tabs -->
+
+                      <div class='tabContent' id='toolboxbody'>
+                          <div id="sticker_tab" ng-show='tabs.stickers'>
+                              <div id='selfie_div'>
+                                  <div class="subtab_title" id="faces">Faces</div>
+                                      <img ng-repeat='selfie in selfies' id='selfie{{selfie.count}}' class="sticker selfie" ng-src="/{{selfie.source}}" add-drag/>
+                                      <!-- Take another selfie button -->
+                                      <input class='button' type='button' id='another_selfie_button' class='button' ng-show="checkSelfiesLength()"
+                                          ng-click='add_selfie()' value = "Take Another Selfie">
+                              </div>
+
+                              <!-- Sticker category titles -->
+                              <div ng-repeat-start='key in sticker_keys' id="{{key}}" class='subtab_title' ng-click="visible[key] = !visible[key]" end-of-adding-stickers>
+                                  {{categories[key]}}
+                              </div>
+
+                              <!-- Sticker category content -->
+                              <div ng-repeat-end id='{{key}}_content' class = 'animate-content content' ng-show='visible[key]'>
+                                  <img ng-repeat='sticker in stickers[key]' class="sticker {{key}}" ng-src="/{{sticker.source}}" name="{{sticker.name}}" data-chroma_green="{{sticker.chroma_green.toString()}}" add-drag/>
+                              </div>
+
+                          </div> <!-- #sticker_tab -->
+                      </div><!--  Toolbox body -->
+                  </div> <!-- Tabs Ctrl-->
+                </div> <!-- Toolbox -->
+              </div>
+
+              <div class = "col-md-9">
+                <div id = "scenario_canvas">
+                    <div class='title'>
+                        <input type="text" class="title_text" ng-model='title' ng-click="clearTitle()">
+                    </div>
+                    <div id = "container" ></div><!-- KineticJS Canvas -->
+                </div>
+              </div>
+
+            </div>
+
+        </div> <!-- Framecontainer -->
+
+        <div ng-show='loading' class='loader'>
+            <span class="loader_helper"></span>
+            <img src='images/img/loader.gif' class='loader_img'>
+        </div>
+
+        <!-- Color picker -->
+          <div id='modal'>
+
+            <!-- TODO These need to update from the server -->
+            <select name="colorpicker">
+                <option value="#ffdcb1"></option>
+                <option value="#e5c298"></option>
+                <option value="#e4b98e"></option>
+                <option value="#e2b98f"></option>
+                <option value="#e3a173"></option>
+                <option value="#d99164"></option>
+                <option value="#cc8443"></option>
+                <option value="#c77a58"></option>
+                <option value="#a53900"></option>
+                <option value="#880400"></option>
+                <option value="#710200"></option>
+                <option value="#440000"></option>
+                <option value="#ffe0c4"></option>
+                <option value="#eecfb4"></option>
+                <option value="#deab7f"></option>
+                <option value="#e0b184"></option>
+                <option value="#dfa675"></option>
+                <option value="#be723c"></option>
+                <option value="#a01900"></option>
+                <option value="#5b0000"></option>
+                <option value="#000000"></option>
+                <option value="#ede4c8"></option>
+                <option value="#efd6bd"></option>
+                <option value="#eabd9d"></option>
+                <option value="#e3c2ae"></option>
+                <option value="#dfb997"></option>
+                <option value="#d0926e"></option>
+                <option value="#bd9778"></option>
+                <option value="#bb6d4a"></option>
+                <option value="#940a00"></option>
+                <option value="#e1ada4"></option>
+                <option value="#a58869"></option>
+                <option value="#7b0000"></option>
+                <option value="#720000"></option>
+                <option value="#380000"></option>
+
+            </select>
+
+
+          <!-- Canvas to update color -->
+          <!-- TODO possibly change width and height if images change -->
+          <canvas id="color_change_canvas" width="120", height="120"></canvas>
 
         </div>
 
-    </div> <!-- Framecontainer -->
+    </div> <!-- ScenarioCtrl -->
 
-    <div ng-show='loading' class='loader'>
-        <span class="loader_helper"></span>
-        <img src='images/img/loader.gif' class='loader_img'>
-    </div>
-
-    <!-- Color picker -->
-      <div id='modal'>
-        
-        <!-- TODO These need to update from the server -->
-        <select name="colorpicker">
-            <option value="#ffdcb1"></option>
-            <option value="#e5c298"></option>
-            <option value="#e4b98e"></option>
-            <option value="#e2b98f"></option>
-            <option value="#e3a173"></option>
-            <option value="#d99164"></option>
-            <option value="#cc8443"></option>
-            <option value="#c77a58"></option>
-            <option value="#a53900"></option>
-            <option value="#880400"></option>
-            <option value="#710200"></option>
-            <option value="#440000"></option>
-            <option value="#ffe0c4"></option>
-            <option value="#eecfb4"></option>
-            <option value="#deab7f"></option>
-            <option value="#e0b184"></option>
-            <option value="#dfa675"></option>
-            <option value="#be723c"></option>
-            <option value="#a01900"></option>
-            <option value="#5b0000"></option>
-            <option value="#000000"></option>
-            <option value="#ede4c8"></option>
-            <option value="#efd6bd"></option>
-            <option value="#eabd9d"></option>
-            <option value="#e3c2ae"></option>
-            <option value="#dfb997"></option>
-            <option value="#d0926e"></option>
-            <option value="#bd9778"></option>
-            <option value="#bb6d4a"></option>
-            <option value="#940a00"></option>
-            <option value="#e1ada4"></option>
-            <option value="#a58869"></option>
-            <option value="#7b0000"></option>
-            <option value="#720000"></option>
-            <option value="#380000"></option>
-
-        </select>
-
-
-      <!-- Canvas to update color -->
-      <!-- TODO possibly change width and height if images change -->
-      <canvas id="color_change_canvas" width="120", height="120"></canvas>
-
-    </div>
-
-</div> <!-- ScenarioCtrl -->
-
+  </div>
+</div>
