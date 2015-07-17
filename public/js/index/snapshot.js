@@ -1,38 +1,4 @@
-// Handles what view we see
-app.controller('ViewCtrl', function($scope, $timeout){
-    $scope.views = {snapshot: true, scenario: false, background: false}
-    // Received from either BackgroundCtrl (the first time) or SnapshotCtrl
-    $scope.$on('toggle_scenario', function(event, data, selfieCount, background){
-        if(selfieCount != null){
-            // Sent to ScenarioCtrl
-            $scope.$broadcast('load_selfies', data, selfieCount, background);
-        }
-        $('#scenario_view, #snapshot_view').fadeIn(200);
-        if(background != undefined){
-            $scope.views.snapshot = false;
-            $('#instructionsModal').modal();
-            $scope.views.scenario = true;
-        } else{
-            $scope.views.snapshot = !$scope.views.snapshot;
-            $scope.views.scenario = !$scope.views.scenario;
-        }
-        $scope.views.background = false;
-    });
 
-    // Received from SnapshotCtrl
-    $scope.$on('goto_background', function(event, data, selfieCount){
-        /* Super hacky fix for carousel width issues due to angular hiding (I think)
-            Having the carousel switch slides will force it to rerender correctly.
-        */
-        $('.backgrounds_div').slickNext();
-
-        // Sent to BackgroundCtrl
-        $scope.$broadcast('send_selfie_to_background', data, selfieCount);
-        $('#background_view').fadeIn();
-        $scope.views.snapshot = false;
-        $scope.views.background = true;
-    });
-});
 
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
 app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $window){
