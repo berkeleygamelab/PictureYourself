@@ -175,6 +175,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
             if (!Date.now) {
                 Date.now = function() { return new Date().getTime(); }
             }
+            console.log(data)
             $scope.selfie = data + "?" + Date.now();
             $('.check_image').attr('src', data);
             $scope.check();
@@ -209,17 +210,18 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     }
 
     $scope.keep = function(){
-        if($scope.has_background){
-            // Sent to ViewCtrl
-            $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
-        } else {
-            // Sent to ViewCtrl
-            $scope.$emit('goto_background', $scope.selfie, selfieCount);
-            $scope.has_background = true;
-        }
-        // Snapshot page should be reset; above emits will move on to background/scenario
-        $scope.redo();
-        selfieCount += 1
+      $window.location.href = "/background"
+        // if($scope.has_background){
+        //     // Sent to ViewCtrl
+        //     $scope.$emit('toggle_scenario', $scope.selfie, selfieCount);
+        // } else {
+        //     // Sent to ViewCtrl
+        //     $scope.$emit('goto_background', $scope.selfie, selfieCount);
+        //     $scope.has_background = true;
+        // }
+        // // Snapshot page should be reset; above emits will move on to background/scenario
+        // $scope.redo();
+        // selfieCount += 1
     }
 
     // Creates the kineticJS environment

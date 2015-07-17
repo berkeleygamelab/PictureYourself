@@ -19,8 +19,8 @@ $(document).ready(function() {
     });
 
     //fixes positioning issue with kineticJS canvas
-    $(".kineticjs-content").css('position',''); 
-    
+    $(".kineticjs-content").css('position','');
+
     $("#modal").hide();
 
     // Canvas where color changing occurs. Should always be hidden
@@ -42,7 +42,7 @@ $(document).ready(function() {
 */
 
 app // Need this for .controller and .directive
-    .controller('ScenarioCtrl', 
+    .controller('ScenarioCtrl',
         function($scope, $resource, $http, $compile, $timeout, Sticker){
             var stage_width = $('#container').width()
             var stage_height = $('#container').height()
@@ -81,7 +81,7 @@ app // Need this for .controller and .directive
             // Setup color picker
             $('select[name="colorpicker"]').simplecolorpicker({picker:true}).
                 on('change', function(){
-                    change_color($('select[name="colorpicker"]').val(), layer, $scope);   
+                    change_color($('select[name="colorpicker"]').val(), layer, $scope);
                 });
 
             // Used to close tools for all stickers
@@ -94,6 +94,8 @@ app // Need this for .controller and .directive
                 $("#modal").hide();
                 layer.draw();
             };
+
+            // $scope.$broadcast('load_selfies', "users/" + $scope.pyuserid + "/1_sticker.png", 1, undefined);
 
 
             $scope.selfies = [];
@@ -111,7 +113,7 @@ app // Need this for .controller and .directive
             }
 
 
-            // Setup and assign background Kinetic.Image object          
+            // Setup and assign background Kinetic.Image object
             $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
             // $scope.background = backgroundSetup(closeTools, $scope.bg, layer, stage);
 
@@ -145,7 +147,7 @@ app // Need this for .controller and .directive
                 //stop Firefox from opening image
                 e.preventDefault();
 
-                // close tools of previously selected sticker 
+                // close tools of previously selected sticker
                 if ($scope.selected_sticker != null) { $scope.selected_sticker.toggleTools(false) };
 
                 // Assign a local variable with chroma green flag value.
@@ -153,10 +155,10 @@ app // Need this for .controller and .directive
 
                 imageObj = new Image();
                 imageObj.src = $scope.dragged_image.src;
-                
+
                 var imageObjBack = null;
 
-                // If chroma green set background and foreground sticker source appropriately 
+                // If chroma green set background and foreground sticker source appropriately
                 if (has_chroma_green){
                     var sources = $scope.image_sources[$scope.dragged_image.name];
 
@@ -178,7 +180,7 @@ app // Need this for .controller and .directive
                 var offset = {};
 
                 // Creates a new sticker object. See factories.js
-                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope, 
+                var sticker = Sticker.new(imageObj, {'x':x,'y':y}, start_size, layer, imageObjBack, $scope,
                                           stage, offset, $scope.sticker_text[$scope.dragged_image.name]);
 
                 $scope.selected_sticker = sticker;
@@ -188,9 +190,9 @@ app // Need this for .controller and .directive
                     var is_visible = sticker.scalerX.visible();
 
                     // Tools for sticker are displayed
-                    if(is_visible){ 
+                    if(is_visible){
                         $scope.selected_background = null;
-                        $scope.selected_sticker = null;    
+                        $scope.selected_sticker = null;
                     }
 
                     // Tools for sticker are not displayed
@@ -199,11 +201,11 @@ app // Need this for .controller and .directive
                         if($scope.selected_sticker != null)
                             $scope.selected_sticker.toggleTools(false);
 
-                        $scope.selected_sticker = sticker;  
+                        $scope.selected_sticker = sticker;
 
                         // Set previous selected color
                         if($scope.selected_sticker.previous_color != null){
-                            $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);   
+                            $('select[name="colorpicker"]').simplecolorpicker('selectColor', $scope.selected_sticker.previous_color);
                         }
 
                         // Assign a local variable with chroma green flag value.
@@ -215,7 +217,7 @@ app // Need this for .controller and .directive
                             $scope.selected_background = imageObjBack;
                         }
                     }
-        
+
                     sticker.toggleTools(!is_visible);
                     layer.draw();
                 });
@@ -235,8 +237,8 @@ app // Need this for .controller and .directive
               }
             });
 
-            // Next two eventListeners and two functions are to reset the 
-            // modals if the user closes the modal by clicking outside of it 
+            // Next two eventListeners and two functions are to reset the
+            // modals if the user closes the modal by clicking outside of it
             // rather than clicking the return to collage button
             $('#saveModal').on('hidden.bs.modal', function(){
                 $scope.$apply(function(){
@@ -275,9 +277,9 @@ app // Need this for .controller and .directive
                 $('#scenario_ctrl').css('pointer-events', 'none');
 
                 //check if input exists
-                if($scope.emails !== null) {  
+                if($scope.emails !== null) {
                   //remove spaces to have one long string as argv for python
-                  $scope.emails = $scope.emails.replace(/\s+/g, '');        
+                  $scope.emails = $scope.emails.replace(/\s+/g, '');
                   //change to use scope variable instead
                   pyuserid = getCookie('pyuserid');
                   // Create image from stage and send to email function in email.js
@@ -286,9 +288,9 @@ app // Need this for .controller and .directive
                         formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
                         email($scope, $http, formData, $scope.emails);
                     }
-                  }) ;         
+                  }) ;
                 }
-            }; 
+            };
 
             // Save image to gallery
             $scope.saveToGallery = function(){
@@ -311,7 +313,7 @@ app // Need this for .controller and .directive
                             $('#scenario_ctrl').css('pointer-events', '');
                         });
                     }
-                });    
+                });
             }
 
             // $scope.save = function(){
@@ -348,7 +350,7 @@ app // Need this for .controller and .directive
             //             debug("SUCCESS!");
             //         }
             //     )
-            // }      
+            // }
 
             // $scope.load = function(){
             //     pyuserid = getCookie('pyuserid');
@@ -373,10 +375,10 @@ app // Need this for .controller and .directive
             //             $(data.stickers).each(function(index, s) {
             //                 console.log(s);
             //                 var imageObj = new Image();
-            //                 imageObj.src = s.src;           
+            //                 imageObj.src = s.src;
             //                 var imageObjBack = s.back;
 
-            //                 var offset = {"offsetX": s.offsetX, 
+            //                 var offset = {"offsetX": s.offsetX,
             //                                     "offsetY": s.offsetY}
             //                 var start_size = {"width":s.width,
             //                                            "height":s.height};
@@ -391,7 +393,7 @@ app // Need this for .controller and .directive
             //                 // Set the tool popup event
             //                 show_tools(sticker);
             //             })
-                
+
             //         })
             //         .error(
             //                function(){
@@ -405,14 +407,14 @@ app // Need this for .controller and .directive
             });
 
         })// End of Scenario Controller
-    
+
     // custom directive, calls when sticker image is created during ng-repeat in view
     // addDrag binds drag event to image object
     .directive('addDrag', function(){
         return function($scope, element, attrs){
             $scope.$eval('addDrag()');
-        } 
-    }); 
+        }
+    });
 
 
 //Used to make it easy to turn on and off console.log
@@ -421,4 +423,3 @@ function debug(msg){
         console.log(msg);
     }
 }
-
