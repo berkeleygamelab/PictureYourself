@@ -176,6 +176,9 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     }
 
     $scope.keep = function(){
+      var selfieCount = getCookie("selfiecount") || 1
+      setCookie("selfiecount", selfieCount, 1)
+
       $window.location.href = "/background"
         // if($scope.has_background){
         //     // Sent to ViewCtrl
