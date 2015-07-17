@@ -1,7 +1,7 @@
 
 
 //Handles getting user image from snapshot, sending image + coords to server, and calling the crop
-app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $window){
+app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     //create proper login methods etc...
     $('#snapshot_ctrl').fadeIn();
     var mouse = 'up';
@@ -54,45 +54,6 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $scope.snapshot_button.snap_it = true;
 
     // Button functions
-
-    $scope.get_tos = function(){
-      $window.location.href = "/tos"
-
-      // $('#tos').fadeIn();
-      // if($scope.has_agreed){
-      //     $scope.get_camera();
-      // } else{
-      //     // Sent to LayoutCtrl
-      //     $scope.$emit('toggle_quit');
-      //     $scope.snapshot_button.start = false;
-      //     $scope.show_tos = true;
-      //     $scope.camera_loaded = true;
-      //     $scope.show_camera = false;
-      //     $scope.show_buttons = false;
-      //     $scope.has_agreed = true;
-      // }
-    }
-
-    $scope.startover = function(){
-      $window.location.href = '/';
-    }
-
-    $scope.get_camera = function(){
-      $window.location.href = '/camera';
-      // $('.up_arrow').fadeIn();
-      // // Sent to LayoutCtrl
-      // $scope.$emit('toggle_quit');
-      // $scope.show_buttons = true;
-      // $scope.camera = getUserMedia($scope);
-      // $scope.show_tos = false;
-      // $scope.snapshot_button.start = false;
-      // $scope.snapshot_button.snap_it = true;
-      // $scope.camera_loaded = true;
-      // $scope.show_camera = true;
-      // $timeout(function(){
-      //     $('#snap_it').popover('show');
-      // }, 300);
-    };
 
     $scope.capture = function(){
         ctx.drawImage(video, 0, 0);
@@ -257,6 +218,3 @@ function debug(msg){
         console.log(msg);
     }
 }
-
-// SnapshotCtrl.$inject = ['$scope', 'fileReader', '$http', '$timeout', '$window']; //required for minifying angular
-// ViewCtrl.$inject = ['$scope']
