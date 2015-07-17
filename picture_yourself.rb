@@ -91,6 +91,25 @@ get "/camera" do
   erb :camera
 end
 
+#------------------------------------------------------------------------------
+# GET /background
+#---------
+
+get "/background" do
+  erb :background
+end
+
+#------------------------------------------------------------------------------
+# GET /scenario
+#---------
+
+get "/scenario" do
+  erb :scenario
+end
+
+get "/selfie" do
+  "users/#{request.cookies["pyuserid"]}/1_sticker.png"
+end
 
 #------------------------------------------------------------------------------
 # POST /fileupload
@@ -132,10 +151,6 @@ end
 
 
 # These are provided for ease of debugging, instead of going through the entire process every time
-get '/scenario' do
-  erb :scenario
-end
-
 get '/snapshot' do
   erb :snapshot
 end
