@@ -5,52 +5,49 @@
 <script src='/js/index/upload.js'></script>
 <script src='/js/index/webcam.js'></script>
 
-
 <!-- ViewCtrl implemented in snapshot.js -->
 
-<div ng-show='true' id='snapshot_view'>
-  <div ng-controller="SnapshotCtrl" id='snapshot_ctrl'>
 
-    <!-- Should probably set a height for this and adjust the rest -->
-    <div id='snapshot_div'>
+<div ng-controller="SnapshotCtrl" id='snapshot_ctrl'>
 
-        <!-- Webcam Input -->
-        <div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
-            <video autoplay id='video'></video>
-            <canvas id='cam_canvas' width = "640px" height = "480px"></canvas>
-        </div>
+  <!-- Should probably set a height for this and adjust the rest -->
+  <div id='snapshot_div'>
 
-        <!-- KineticJS Stage -->
-        <div id='capture' ng-show='show_capture' class='centered'>
-            <div id="snapshot_container" ng-show='show_capture' class='index_container' data-toggle="popover" title="Select Your Face"
-                data-content="Drag the box to frame your face, then press select." data-placement='left' data-trigger='manual'>
-            </div>
-        </div>
+      <!-- Webcam Input -->
+      <div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
+          <video autoplay id='video'></video>
+          <canvas id='cam_canvas' width = "640px" height = "480px"></canvas>
+      </div>
 
-        <div id="check" ng-show='check_face' class='centered'>
-            <!-- This line causes this warning: "Resource interpreted as Image but transferred with MIME type text/html:"
-                  This is because Angular attempts to resolve this immediately, but $scope.selfie doesn't get a value until after
-                  an image has been cropped. TODO: See if Angular can delay resolution of ng-src until after it exists.
-                  Note: An attempt to set $scope.selfie to '#' or something similar makes no difference. -->
-            <img class='centered check_image' ng-src="/{{selfie}}" add-drag/>
-        </div>
+      <!-- KineticJS Stage -->
+      <div id='capture' ng-show='show_capture' class='centered'>
+          <div id="snapshot_container" ng-show='show_capture' class='index_container' data-toggle="popover" title="Select Your Face"
+              data-content="Drag the box to frame your face, then press select." data-placement='left' data-trigger='manual'>
+          </div>
+      </div>
 
-        <!-- snapshot_buttons -->
-        <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>
-            <input type="button" class="button" ng-click='capture()' value="SNAP IT" id='snap_it' ng-show='snapshot_button.snap_it'
-                data-content="Make sure to allow access to your webcam by clicking the 'Allow' button on the dropdown window"
-                data-placement='top' data-trigger='manual' disabled="disabled">
-            <input type="button" class="button" ng-click='upload_webcam()' value='SELECT' id='select' ng-show='snapshot_button.cut'
-                ng-disabled="cutDisabled">
-            <div class="accept_buttons" ng-show='check_face'>
-                <input type="button" class="button" ng-click = 'redo()' value = "Redo">
-                <input type="button" class="button" ng-click = 'keep()' value = "Keep">
-            </div>
-        </div>
+      <div id="check" ng-show='check_face' class='centered'>
+          <!-- This line causes this warning: "Resource interpreted as Image but transferred with MIME type text/html:"
+                This is because Angular attempts to resolve this immediately, but $scope.selfie doesn't get a value until after
+                an image has been cropped. TODO: See if Angular can delay resolution of ng-src until after it exists.
+                Note: An attempt to set $scope.selfie to '#' or something similar makes no difference. -->
+          <img class='centered check_image' ng-src="/{{selfie}}" add-drag/>
+      </div>
 
-    </div> <!-- snapshot_div -->
+      <!-- snapshot_buttons -->
+      <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>
+          <input type="button" class="button" ng-click='capture()' value="SNAP IT" id='snap_it' ng-show='snapshot_button.snap_it'
+              data-content="Make sure to allow access to your webcam by clicking the 'Allow' button on the dropdown window"
+              data-placement='top' data-trigger='manual' disabled="disabled">
+          <input type="button" class="button" ng-click='upload_webcam()' value='SELECT' id='select' ng-show='snapshot_button.cut'
+              ng-disabled="cutDisabled">
+          <div class="accept_buttons" ng-show='check_face'>
+              <input type="button" class="button" ng-click = 'redo()' value = "Redo">
+              <input type="button" class="button" ng-click = 'keep()' value = "Keep">
+          </div>
+      </div>
 
+  </div> <!-- snapshot_div -->
 
-  </div>
 
 </div>

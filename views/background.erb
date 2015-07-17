@@ -13,26 +13,21 @@
 <script src='/js/index/webcam.js'></script>
 
 
-<!-- ViewCtrl implemented in snapshot.js -->
-<div ng-controller="ViewCtrl">
 
-  <div ng-show="true" id='background_view'>
-    <div ng-controller="BackgroundCtrl" id='background_ctrl'>
-        <div class="background_container">
-            <div class="background_header">Choose a background image for your collage</div>
-            <div class="backgrounds_div" slick-slider>
-                <div ng-repeat='background in background_images'>
-                    <img ng-src='{{background.source}}' class='backgrounds' alt='{{background.name}}' />
-                </div>
-            </div>
-        </div>
+<div id='background_view'>
+  <div ng-controller="BackgroundCtrl" id='background_ctrl'>
+      <div class="background_container">
+          <div class="background_header">Choose a background image for your collage</div>
+          <div class="backgrounds_div" slick-slider>
+              <div ng-repeat='background in background_images'>
+                  <img ng-src='{{background.source}}' class='backgrounds' alt='{{background.name}}' />
+              </div>
+          </div>
+      </div>
 
-        <div>
-            <input type="button" class="button centered" ng-click='selectBackground()' value="Select">
-        </div>
-    </div>
-
+      <div>
+          <input type="button" class="button centered" ng-click='selectBackground()' value="Select">
+      </div>
   </div>
-
 
 </div>
