@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="/css/libraries/jquery.simplecolorpicker.css">
 <link rel="stylesheet" type="text/css" href="/css/scenario.css">
 <link rel="stylesheet" type="text/css" href="/css/chroma.min.css" />
+<link rel="stylesheet" href="/css/libraries/animate.min.css">
+<link rel="stylesheet" href="/css/index.css">
 
 <!-- Putting this at the top allows the /scenario page to load properly -->
 <script type="text/javascript" src='/js/scenario/timeout.js'></script>
@@ -13,20 +15,11 @@
 <script type="text/javascript" src='/js/scenario/scenario.js'></script>
 
 
-<link rel="stylesheet" href="/css/libraries/animate.min.css">
-<link rel="stylesheet" href="/css/index.css">
-
-<!-- Putting this at the top allows the / page to load properly -->
-<script src="/js/index/snapshot.js"></script>
-<script src='/js/index/upload.js'></script>
-<script src='/js/index/webcam.js'></script>
-
 <script style="text/javascript">
   $(document).ready(function()
   {
     $('#instructionsModal').modal();
   })
-
 </script>
 
 <div ng-show='true' id='scenario_view'>
