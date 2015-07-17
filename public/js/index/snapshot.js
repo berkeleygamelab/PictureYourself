@@ -1,7 +1,7 @@
 // Handles what view we see
 app.controller('ViewCtrl', function($scope, $timeout){
     $scope.views = {snapshot: true, scenario: false, background: false}
-    // Received from either BackgroundCtrl (the first time) or SnapshotCtrl 
+    // Received from either BackgroundCtrl (the first time) or SnapshotCtrl
     $scope.$on('toggle_scenario', function(event, data, selfieCount, background){
         if(selfieCount != null){
             // Sent to ScenarioCtrl
@@ -19,10 +19,10 @@ app.controller('ViewCtrl', function($scope, $timeout){
         $scope.views.background = false;
     });
 
-    // Received from SnapshotCtrl 
+    // Received from SnapshotCtrl
     $scope.$on('goto_background', function(event, data, selfieCount){
         /* Super hacky fix for carousel width issues due to angular hiding (I think)
-            Having the carousel switch slides will force it to rerender correctly. 
+            Having the carousel switch slides will force it to rerender correctly.
         */
         $('.backgrounds_div').slickNext();
 
@@ -40,7 +40,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $('#snapshot_ctrl').fadeIn();
     var mouse = 'up';
     var pyuserid = getCookie(pyuseridtag);
-    var selfieCount = 1; 
+    var selfieCount = 1;
     checkCookie(pyuserid);
 
     //canvas setup
@@ -70,7 +70,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     $scope.cutDisabled = false;
     $scope.webcam_accessed = true; //Disabled when true
 
-    // Controls whether the user has already agreed to the TOS and chosen a background. 
+    // Controls whether the user has already agreed to the TOS and chosen a background.
     // Once, true, should stay true.
     $scope.has_agreed = false;
     $scope.has_background = false;
@@ -84,39 +84,42 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
     // Button functions
 
     $scope.get_tos = function(){
-        $('#tos').fadeIn();
-        if($scope.has_agreed){
-            $scope.get_camera();
-        } else{
-            // Sent to LayoutCtrl
-            $scope.$emit('toggle_quit');
-            $scope.snapshot_button.start = false;
-            $scope.show_tos = true;
-            $scope.camera_loaded = true;
-            $scope.show_camera = false;
-            $scope.show_buttons = false;
-            $scope.has_agreed = true;
-        }
+      $window.location.href = "/tos"
+
+      // $('#tos').fadeIn();
+      // if($scope.has_agreed){
+      //     $scope.get_camera();
+      // } else{
+      //     // Sent to LayoutCtrl
+      //     $scope.$emit('toggle_quit');
+      //     $scope.snapshot_button.start = false;
+      //     $scope.show_tos = true;
+      //     $scope.camera_loaded = true;
+      //     $scope.show_camera = false;
+      //     $scope.show_buttons = false;
+      //     $scope.has_agreed = true;
+      // }
     }
 
     $scope.startover = function(){
-        $window.location.href = '/';
+      $window.location.href = '/';
     }
 
     $scope.get_camera = function(){
-        $('.up_arrow').fadeIn();
-        // Sent to LayoutCtrl
-        $scope.$emit('toggle_quit');
-        $scope.show_buttons = true;
-        $scope.camera = getUserMedia($scope);
-        $scope.show_tos = false;
-        $scope.snapshot_button.start = false;
-        $scope.snapshot_button.snap_it = true;
-        $scope.camera_loaded = true;
-        $scope.show_camera = true;
-        $timeout(function(){
-            $('#snap_it').popover('show');
-        }, 300);
+      $window.location.href = '/camera';
+      // $('.up_arrow').fadeIn();
+      // // Sent to LayoutCtrl
+      // $scope.$emit('toggle_quit');
+      // $scope.show_buttons = true;
+      // $scope.camera = getUserMedia($scope);
+      // $scope.show_tos = false;
+      // $scope.snapshot_button.start = false;
+      // $scope.snapshot_button.snap_it = true;
+      // $scope.camera_loaded = true;
+      // $scope.show_camera = true;
+      // $timeout(function(){
+      //     $('#snap_it').popover('show');
+      // }, 300);
     };
 
     $scope.capture = function(){
@@ -151,7 +154,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
                 $scope.cutDisabled = true;
                 alert("There was an issue uploading the image.");
             });
-        } 
+        }
     };
 
     //Call grabcut with coordinates
@@ -209,7 +212,7 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
         }
         // Snapshot page should be reset; above emits will move on to background/scenario
         $scope.redo();
-        selfieCount += 1 
+        selfieCount += 1
     }
 
     // Creates the kineticJS environment
@@ -229,10 +232,10 @@ app.controller('SnapshotCtrl', function($scope, fileReader, $http, $timeout, $wi
             // Flip the image and draw it so that we can get the Base64 representation
             ctx.translate(image.width, 0);
             ctx.scale(-1, 1);
-            ctx.drawImage(image, 0, 0); 
+            ctx.drawImage(image, 0, 0);
             // Now set the actual image of the canvas to the flipped image
             imageObj.src = canvas.toDataURL('image/png');
-            
+
             // This is nested to ensure the image was loaded and flipped before presenting it to the user (Async issues)
             imageObj.onload = function() {
                 // CropJS set up
