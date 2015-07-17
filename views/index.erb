@@ -9,14 +9,29 @@
 <!-- ViewCtrl implemented in snapshot.js -->
 <div ng-controller="ViewCtrl">
     <div ng-show='views.snapshot' id='snapshot_view'>
-        <%= erb :snapshot %>
+      <div ng-controller="SnapshotCtrl" id='snapshot_ctrl'>
+
+          <!-- Should probably set a height for this and adjust the rest -->
+          <div id='snapshot_div'>
+              <!-- Starting Image -->
+              <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
+                  <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_tos()'>
+              </div>
+
+              <!-- Webcam Input -->
+              <div id='camera' ng-show='show_camera && camera_loaded' class='centered'>
+                  <video autoplay id='video'></video>
+                  <canvas id='cam_canvas' width = "640px" height = "480px"></canvas>
+              </div>
+
+              <!-- snapshot_buttons -->
+              <div id='snapshot_button_div' class='centered' ng-show='show_buttons'>
+                  <input type="button" class="button" ng-click='get_tos()' value="START" ng-show='snapshot_button.start'>
+              </div>
+
+          </div> <!-- snapshot_div -->
+
+      </div> <!-- Snapshot Controller -->
     </div>
 
-    <div ng-show="views.background" id='background_view'>
-        <%= erb :background %>
-    </div>
-
-    <div ng-show='views.scenario' id='scenario_view'>
-        <%= erb :scenario %>
-    </div>
 </div>
