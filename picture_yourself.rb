@@ -58,6 +58,10 @@ module OS
 end
 
 
+#------------------------------------------------------------------------------
+# GET /
+#---------
+
 get '/' do
   cookie = request.cookies["pyuserid"]
 
@@ -70,6 +74,46 @@ get '/' do
 
   erb :index
 end
+
+#------------------------------------------------------------------------------
+# GET /tos
+#---------
+
+get "/tos" do
+  erb :tos
+end
+
+#------------------------------------------------------------------------------
+# GET /camera
+#---------
+
+get "/camera" do
+  erb :camera
+end
+
+#------------------------------------------------------------------------------
+# GET /background
+#---------
+
+get "/background" do
+  erb :background
+end
+
+#------------------------------------------------------------------------------
+# GET /scenario
+#---------
+
+get "/scenario" do
+  erb :scenario
+end
+
+get "/selfie" do
+  "users/#{request.cookies["pyuserid"]}/1_sticker.png"
+end
+
+#------------------------------------------------------------------------------
+# POST /fileupload
+#-----------------
 
 post '/fileupload' do
     parsed = JSON.parse request.body.read, :symbolize_names => true
@@ -107,24 +151,20 @@ end
 
 
 # These are provided for ease of debugging, instead of going through the entire process every time
-get '/scenario' do
-  erb :scenario
-end
-
 get '/snapshot' do
   erb :snapshot
 end
 
-get '/background' do 
+get '/background' do
   erb :background
 end
 
-get '/slideshow' do 
+get '/slideshow' do
   erb :slideshow
 end
 
 
-#currently unused 
+#currently unused
 post '/session' do
   #sticker src, left & top (location) are properly passed
   #rotation information is also passed, but as a matrix transformation (i think)
