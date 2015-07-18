@@ -1,0 +1,68 @@
+.well {
+  box-shadow: 1px 1px 10px grey;
+  text-align: center;
+  margin-top: 3%;
+  color: #4eb1ba;
+  padding-bottom: 10%;
+}
+
+h1 {
+  margin-top: 5%;
+  text-align: center;
+  font-family: montserrat;
+  color: #4eb1ba;
+}
+
+body {
+  background-color: #222930;
+}
+
+.navtitle {
+  color: #e9e9e9;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #122930;
+}
+
+#quit {
+  background-color: #122930;
+  color: #e9e9e9;
+}
+
+.button {
+  background-color: #122930;
+  color: #e9e9e9;
+  margin-top: -5%;
+}
+
+form {
+  background-color: #202930;
+}
+
+#snapshot_button_div {
+  background-color: #202930;
+}
+
+.email {
+  background-color: white;
+  margin-top: 2%;
+
+}
+
+.password {
+  margin-top: 2%;
+}
+
+.name {
+  margin-top: 2%;
+}
+
+.high_school {
+  margin-top: 2%;
+}
+
+.state {
+  margin-top: 2%;
+}

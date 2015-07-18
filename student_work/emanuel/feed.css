@@ -1,0 +1,22 @@
+.post{
+  height: 180px;
+  width: 180px;
+  margin: 4%;
+  text-align: center;
+  padding-bottom: .01%;
+}
+
+.feed{
+  margin-left: 4%;
+  margin-top: 5%;
+}
+
+.img{
+  height: 180px;
+  width: 180px;
+
+}
+
+span{
+  display: flex;
+}
