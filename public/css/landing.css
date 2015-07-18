@@ -1,0 +1,29 @@
+#about-site{
+  height: 1000px;
+  margin-top: 40px;
+}
+
+/*#snapshot_button_div{
+  text-align: center;
+  margin-top: -20%;
+}*/
+
+#User_ex{
+  height: auto;
+  width: auto;
+  padding: 20%;
+}
+
+img.example{
+  height: 500px;
+    margin-top: -400%;
+    margin-left: 440%;
+}
+
+h2{
+  margin-left:4%;
+}
+
+input{
+  margin-top: -2%;
+}
