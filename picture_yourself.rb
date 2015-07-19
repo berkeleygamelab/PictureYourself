@@ -1,5 +1,7 @@
-#Main file to be executed
 
+#------------------------------------------------------------------------------
+# Libraries
+#----------
 require 'sinatra'
 require 'base64'
 require 'data_mapper'
@@ -8,21 +10,32 @@ require 'json'
 require 'sinatra/contrib/all'
 require 'mail'
 require 'fileutils'
+require "sinatra/activerecord"
 
+#------------------------------------------------------------------------------
+# App-specific models
+#--------------------
+require "./models/user.rb"
+
+#------------------------------------------------------------------------------
+# Routes
+#--------------------
+require "./routes/user.rb"
+require "./routes/parse.rb"
+
+#------------------------------------------------------------------------------
+# Configuration
+#--------------
 set :port, 80
 set :bind, '128.32.189.148'
 #trying to lock threads to avoid not receiving requests
 set :lock, true
 set :server, 'thin'
+set :database_file, "database.yml"
 
 # Connects to apis.rb and email.rb
 require_relative 'apis'
 require_relative 'email'
-# No database is currently used
-# require_relative 'db'
-
-
-# DataMapper.finalize.auto_upgrade!
 
 #mail Settings
 domain = ENV["RAILS_HOST"] || 'py-bcnm.berkeley.edu'
@@ -37,26 +50,6 @@ options = { :address              => "smtp.gmail.com",
 Mail.defaults do
   delivery_method :smtp, options
 end
-
-#handles OS detection for openCV
-module OS
-  def OS.windows?
-    (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
-  end
-
-  def OS.mac?
-   (/darwin/ =~ RUBY_PLATFORM) != nil
-  end
-
-  def OS.unix?
-    !OS.windows?
-  end
-
-  def OS.linux?
-    OS.unix? and not OS.mac?
-  end
-end
-
 
 #------------------------------------------------------------------------------
 # GET /
@@ -109,73 +102,4 @@ end
 
 get "/selfie" do
   "users/#{request.cookies["pyuserid"]}/1_sticker.png"
-end
-
-#------------------------------------------------------------------------------
-# POST /fileupload
-#-----------------
-
-post '/fileupload' do
-    parsed = JSON.parse request.body.read, :symbolize_names => true
-    dirname = 'uploads/'+parsed[:name]
-    dirNumber = parsed[:count]
-    image = parsed[:data].split(',')[1]
-
-    unless File.directory?(dirname)
-      FileUtils.mkpath dirname
-    end
-
-    File.open("#{dirname}/#{dirNumber}.png", 'wb') do |f|
-      f.write(Base64.decode64(image))
-    end
-    # Needs to be updated to account for errors
-    status 200
-end
-
-post '/grabcut' do
-  parsed = JSON.parse request.body.read, :symbolize_names => true
-  filename = "#{parsed[:pyuserid]}/#{parsed[:count]}.png"
-
-  # TODO: What was the decision to separate the OpenCV libraries by OS? grabcut
-  # works on Ubuntu while opencv_trans_UNIX is always missing some .so files. For
-  # now, we'll go with grabcut for all OS.
-  # if OS.mac?
-  #   system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
-  # elsif OS.unix?
-  #   system("./opencv_trans_UNIX uploads/" + filename + ' ' + parsed[:coords] + ' ' + parsed[:pyuserid])
-  # end
-  system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
-
-  "users/#{parsed[:pyuserid]}/#{parsed[:count]}_sticker.png"
-end
-
-
-# These are provided for ease of debugging, instead of going through the entire process every time
-get '/snapshot' do
-  erb :snapshot
-end
-
-get '/background' do
-  erb :background
-end
-
-get '/slideshow' do
-  erb :slideshow
-end
-
-
-#currently unused
-post '/session' do
-  #sticker src, left & top (location) are properly passed
-  #rotation information is also passed, but as a matrix transformation (i think)
-  #can be extended to additional sticker data, as long as that information is accessible from the html
-  dirname = 'session/'
-  unless File.directory?(dirname)
-    Dir.mkdir(dirname)
-  end
-  # fix - fix to have dynamic txt numbers - or naming
-  File.open(dirname+'/test.txt', 'wb') do |f|
-    puts "write\n "
-      f.write(params)
-  end
 end
