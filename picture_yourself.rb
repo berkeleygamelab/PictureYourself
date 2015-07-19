@@ -103,17 +103,3 @@ end
 get "/selfie" do
   "users/#{request.cookies["pyuserid"]}/1_sticker.png"
 end
-
-
-# These are provided for ease of debugging, instead of going through the entire process every time
-get '/snapshot' do
-  erb :snapshot
-end
-
-get '/background' do
-  erb :background
-end
-
-get '/slideshow' do
-  erb :slideshow
-end
