@@ -1,0 +1,14 @@
+#-------------------------------------------------------------------------------
+# Database Connections
+#
+# Note that we do not specify anything for production, since Heroku will take
+# care of this.
+#-------------------------------------------------------------------------------
+
+development:
+  adapter: "sqlite3"
+  database: "picyourfuture.sqlite3"
+
+production:
+  adapter: "sqlite3"
+  database: "picyourfuture.sqlite3"
