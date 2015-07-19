@@ -1,5 +1,7 @@
-#Main file to be executed
 
+#------------------------------------------------------------------------------
+# Libraries
+#----------
 require 'sinatra'
 require 'base64'
 require 'data_mapper'
@@ -8,21 +10,26 @@ require 'json'
 require 'sinatra/contrib/all'
 require 'mail'
 require 'fileutils'
+require "sinatra/activerecord"
 
+#------------------------------------------------------------------------------
+# App-specific models
+#--------------------
+require "./models/user.rb"
+
+#------------------------------------------------------------------------------
+# Configuration
+#--------------
 set :port, 80
 set :bind, '128.32.189.148'
 #trying to lock threads to avoid not receiving requests
 set :lock, true
 set :server, 'thin'
+set :database_file, "database.yml"
 
 # Connects to apis.rb and email.rb
 require_relative 'apis'
 require_relative 'email'
-# No database is currently used
-# require_relative 'db'
-
-
-# DataMapper.finalize.auto_upgrade!
 
 #mail Settings
 domain = ENV["RAILS_HOST"] || 'py-bcnm.berkeley.edu'
@@ -38,7 +45,10 @@ Mail.defaults do
   delivery_method :smtp, options
 end
 
-#handles OS detection for openCV
+#------------------------------------------------------------------------------
+# handles OS detection for openCV
+#--------------------------------
+
 module OS
   def OS.windows?
     (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
