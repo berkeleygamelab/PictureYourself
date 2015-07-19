@@ -67,6 +67,17 @@ module OS
   end
 end
 
+#------------------------------------------------------------------------------
+# GET /
+#---------
+
+get "/users", :provides => :json do
+  if params[:token] == "R7dBjMP39"
+    content_type :json
+    @users = User.all
+    @users.to_json
+  end
+end
 
 #------------------------------------------------------------------------------
 # GET /
