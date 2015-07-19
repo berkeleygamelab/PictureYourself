@@ -18,6 +18,11 @@ require "sinatra/activerecord"
 require "./models/user.rb"
 
 #------------------------------------------------------------------------------
+# Routes
+#--------------------
+require "./routes/user.rb"
+
+#------------------------------------------------------------------------------
 # Configuration
 #--------------
 set :port, 80
@@ -64,18 +69,6 @@ module OS
 
   def OS.linux?
     OS.unix? and not OS.mac?
-  end
-end
-
-#------------------------------------------------------------------------------
-# GET /
-#---------
-
-get "/users", :provides => :json do
-  if params[:token] == "R7dBjMP39"
-    content_type :json
-    @users = User.all
-    @users.to_json
   end
 end
 
@@ -182,21 +175,4 @@ end
 
 get '/slideshow' do
   erb :slideshow
-end
-
-
-#currently unused
-post '/session' do
-  #sticker src, left & top (location) are properly passed
-  #rotation information is also passed, but as a matrix transformation (i think)
-  #can be extended to additional sticker data, as long as that information is accessible from the html
-  dirname = 'session/'
-  unless File.directory?(dirname)
-    Dir.mkdir(dirname)
-  end
-  # fix - fix to have dynamic txt numbers - or naming
-  File.open(dirname+'/test.txt', 'wb') do |f|
-    puts "write\n "
-      f.write(params)
-  end
 end
