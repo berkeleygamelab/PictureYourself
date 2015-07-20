@@ -11,6 +11,9 @@ require 'sinatra/contrib/all'
 require 'mail'
 require 'fileutils'
 require "sinatra/activerecord"
+require 'sinatra/flash'
+
+enable :sessions
 
 #------------------------------------------------------------------------------
 # App-specific models
