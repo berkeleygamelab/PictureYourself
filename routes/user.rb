@@ -130,20 +130,23 @@ post "/users" do
   end
 end
 
-#------------------------------------------------------------------------------
 
-# TODO: Old code that needs to be removed or integrated. Currently unused.
-post '/session' do
-  #sticker src, left & top (location) are properly passed
-  #rotation information is also passed, but as a matrix transformation (i think)
-  #can be extended to additional sticker data, as long as that information is accessible from the html
-  dirname = 'session/'
-  unless File.directory?(dirname)
-    Dir.mkdir(dirname)
-  end
-  # fix - fix to have dynamic txt numbers - or naming
-  File.open(dirname+'/test.txt', 'wb') do |f|
-    puts "write\n "
-      f.write(params)
+#------------------------------------------------------------------------------
+# POST /email
+
+post '/email' do
+  data     = request.body.read
+  parsed   = JSON.parse data
+  emails   = parsed["emails"]
+  fileName = parsed["fileName"]
+
+  Mail.deliver do
+    to emails
+    from 'picyourfuture@gmail.com'
+    subject "PIC YOUR FUTURE"
+    body "PIC Your Future at Berkeley\nwww.py-bcnm.berkeley.edu\n;)"
+    add_file "#{settings.root}/public/#{fileName}"
   end
 end
+
+#------------------------------------------------------------------------------

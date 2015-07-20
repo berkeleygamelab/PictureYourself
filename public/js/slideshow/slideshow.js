@@ -10,15 +10,15 @@ app.controller('SlideshowCtrl', function($scope, $http, $interval, $timeout){
     }
 
     // Get collages the first time
-    $http.get('/getCollages').success(getCollages);
+    $http.get('/collages').success(getCollages);
 
     // Update collages every 5 minutes
     $interval(function() {
-        $http.get('/getCollages').success(getCollages);
-    }, 300000); 
+        $http.get('/collages').success(getCollages);
+    }, 300000);
 
     $scope.currentIndex = 0; // Initially the index is at the first image
-     
+
     $scope.next = function() {
         if($($scope.collages).length > 1){
                 $scope.currentIndex < $scope.collages.length - 1 ? $scope.currentIndex++ : $scope.currentIndex = 0;
@@ -28,7 +28,7 @@ app.controller('SlideshowCtrl', function($scope, $http, $interval, $timeout){
     //Update image every 5 seconds
     $interval(function() {
         $scope.next();
-    }, 5000); 
+    }, 5000);
 
     $scope.$watch('collages', function(){
         $scope.$watch('currentIndex', function() {
@@ -37,7 +37,7 @@ app.controller('SlideshowCtrl', function($scope, $http, $interval, $timeout){
                     collage.visible = false; // make every image invisible
                 });
                 $scope.collages[$scope.currentIndex].visible = true; // make the current image visible
-            } 
+            }
         });
     });
 

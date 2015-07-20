@@ -1,4 +1,4 @@
-//Helper functions related to emailing. 
+//Helper functions related to emailing.
 
 // Called from scenario.js in $scope.call_email
 function email($scope, $http, formData, emails){
@@ -14,13 +14,13 @@ function email($scope, $http, formData, emails){
 
 function send_email($scope, $http, emails, data){
     formData = {"emails": emails, "fileName": data};
-    $http.post('/send_email', formData).success(function(data){
+    $http.post('/email', formData).success(function(data){
         $scope.show_saving_email = false;
         $scope.show_emailed = true;
-        $('#scenario_ctrl').css('pointer-events', '');   
+        $('#scenario_ctrl').css('pointer-events', '');
     }).error(function(){
         alert("Something went wrong");
         $('#emailModal').modal('hide');
-        $('#scenario_ctrl').css('pointer-events', '');   
+        $('#scenario_ctrl').css('pointer-events', '');
     });
 }

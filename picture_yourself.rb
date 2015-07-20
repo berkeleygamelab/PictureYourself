@@ -7,24 +7,12 @@ require 'base64'
 require 'data_mapper'
 require 'dm-timestamps'
 require 'json'
-require 'sinatra/contrib/all'
 require 'mail'
 require 'fileutils'
 require "sinatra/activerecord"
 require 'sinatra/flash'
 
-enable :sessions
 
-#------------------------------------------------------------------------------
-# App-specific models
-#--------------------
-require "./models/user.rb"
-
-#------------------------------------------------------------------------------
-# Routes
-#--------------------
-require "./routes/user.rb"
-require "./routes/parse.rb"
 
 #------------------------------------------------------------------------------
 # Configuration
@@ -36,10 +24,6 @@ set :lock, true
 set :server, 'thin'
 set :database_file, "database.yml"
 
-# Connects to apis.rb and email.rb
-require_relative 'apis'
-require_relative 'email'
-
 #mail Settings
 domain = ENV["RAILS_HOST"] || 'py-bcnm.berkeley.edu'
 options = { :address              => "smtp.gmail.com",
@@ -50,10 +34,31 @@ options = { :address              => "smtp.gmail.com",
             :authentication       => 'plain',
             :enable_starttls_auto => true  }
 
+enable :sessions
+
+
 Mail.defaults do
   delivery_method :smtp, options
 end
 
+
+#------------------------------------------------------------------------------
+# App-specific models
+#--------------------
+require "./models/user.rb"
+
+#------------------------------------------------------------------------------
+# Routes
+#-------
+require "./routes/user.rb"
+require "./routes/parse.rb"
+require "./routes/apis.rb"
+require "./routes/email.rb"
+
+
+#------------------------------------------------------------------------------
+# Filters
+#--------
 before do
   if @current_user.blank? && session[:auth_token].present?
     @current_user = User.find_by_auth_token(session[:auth_token])
@@ -61,12 +66,27 @@ before do
   end
 end
 
+#------------------------------------------------------------------------------
+# Helper methods
+#---------------
+
 def login_user(user)
   session[:auth_token] = user.auth_token
   @current_user        = user
-
-  puts "User should now be logged in. cookies: #{session[:auth_token]} and user: #{@current_user.inspect}"
 end
+
+def user_selfie_path(uuid)
+  return "#{settings.root}/users/#{uuid}"
+end
+
+def collages_path
+  return "#{settings.root}/public/collages"
+end
+
+def user_collage_path(uuid)
+  return collages_path + "/uuid"
+end
+
 
 #------------------------------------------------------------------------------
 # GET /
@@ -77,11 +97,11 @@ get '/' do
 
   # Check if cookie exits, if it does delete pictures associated with cookie
   # TODO: We don't want to be deleting these directories.
-  unless cookie.nil?
-    name = 'public/users/' + cookie
-    FileUtils.rm_rf(Dir.glob(name))
-  end
-  FileUtils.rm_rf(Dir.glob('uploads/*'))
+  # unless cookie.nil?
+  #   name = 'public/users/' + cookie
+  #   FileUtils.rm_rf(Dir.glob(name))
+  # end
+  # FileUtils.rm_rf(Dir.glob('uploads/*'))
 
   erb :index
 end
