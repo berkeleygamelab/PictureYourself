@@ -108,7 +108,13 @@ post "/users" do
   # At this point, we know this is a new email. Let's create the user.
   params[:password_digest] = Base64.encode64(params[:password_digest]) if params[:password_digest].present?
 
-  @user = User.new(params)
+  @user = User.find_by_uuid(request.cookies["pyuserid"])
+  if @user.present?
+    @user.attributes = params
+  else
+    @user = User.new(params)
+  end
+  
   if @user.save
     # Let's create an authentication token and log the user in.
     @user.update_column(:auth_token, SecureRandom.hex)

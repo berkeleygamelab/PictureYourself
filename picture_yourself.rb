@@ -150,6 +150,7 @@ end
 #---------
 
 get "/scenario" do
+  puts "@current_user: #{@current_user.inspect}"
   # NOTE: If we're at this point, then let's go ahead and create the user only
   # if we don't have an existing user with the pyuserid.
   if @current_user.blank? && request.cookies["pyuserid"] && User.find_by_uuid(request.cookies["pyuserid"]).blank?
