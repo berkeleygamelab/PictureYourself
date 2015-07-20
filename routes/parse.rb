@@ -58,5 +58,5 @@ post '/grabcut' do
   # end
   system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
 
-  return user_selfie_path(parsed[:pyuserid]) + "#{parsed[:count]}_sticker.png"
+  return user_selfie_path(parsed[:pyuserid]) + "/#{parsed[:count]}_sticker.png"
 end

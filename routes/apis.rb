@@ -4,6 +4,7 @@
 
 # This file is now used for requests involving state
 
+# TODO: This may have to be deprecated as we don't have a Sticker model.
 get '/test/stickers' do
   images  = []
 
@@ -16,28 +17,33 @@ end
 
 #------------------------------------------------------------------------------
 # POST /saveToGallery
-#------------------
+#--------------------
+
 post '/saveToGallery' do
   begin
-    parsed = JSON.parse request.body.read
-    title = parsed["title"]
+    parsed   = JSON.parse request.body.read
+    title    = parsed["title"]
     pyuserid = parsed["pyuserid"]
-    image = parsed["image"].split(',')[1]
+    image    = parsed["image"].split(',')[1]
 
-    dirname = user_collage_path(pyuserid)
+    dirname   = user_collage_path(pyuserid)
+    file_path = "#{dirname}/#{title}.png"
+
+    # Create if the directory doesn't exist yet.
     unless File.directory?(dirname)
       Dir.mkdir(dirname)
     end
 
-    File.open("#{dirname}/#{title}.png", 'wb') do |f|
+    # Create a new file and save the image.
+    File.open(file_path, 'wb') do |f|
       f.write(Base64.decode64(image))
     end
 
-    # status 200
-    return collages_path + "#{pyuserid}/#{title}.png"
-    # "collages/#{pyuserid}/#{title}.png"
+    return file_path
   rescue => exception
+    puts "[Error] Something went wrong:\n\n\n"
     puts exception.inspect
+    puts "\n\n\n"
     status 500
   end
 end
@@ -62,10 +68,10 @@ end
 post '/save_canvas' do
   begin
     # We have to do this because Angular does not like 'params'
-    data = request.body.read
-    parsed = JSON.parse data
+    data     = request.body.read
+    parsed   = JSON.parse data
     pyuserid = parsed["pyuserid"]
-    title = parsed["title"]
+    title    = parsed["title"]
 
     # This digs into the parsed JSON deep enough to hit sticker data
     # We want to remove extraneous JSON data, such as data for the tools
@@ -93,12 +99,12 @@ end
 post '/load_canvas' do
   begin
     # We have to do this because Angular does not like 'params'
-    data = request.body.read
-    parsed = JSON.parse data
+    data     = request.body.read
+    parsed   = JSON.parse data
     pyuserid = parsed["pyuserid"]
-    title = parsed["title"]
+    title    = parsed["title"]
 
-    file = File.open("public/" + user_selfie_path(pyuserid) + "#{title}.json", "r" )
+    file = File.open(user_selfie_path(pyuserid) + "/#{title}.json", "r" )
     file.read
   rescue Errno::ENOENT
     status 404
