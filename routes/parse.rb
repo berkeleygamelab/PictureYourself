@@ -29,7 +29,7 @@ end
 
 post '/fileupload' do
     parsed = JSON.parse request.body.read, :symbolize_names => true
-    dirname = 'uploads/'+parsed[:name]
+    dirname = 'uploads/' + parsed[:name]
     dirNumber = parsed[:count]
     image = parsed[:data].split(',')[1]
 
@@ -58,5 +58,5 @@ post '/grabcut' do
   # end
   system("./grabcut uploads/#{filename} #{parsed[:coords]} #{parsed[:pyuserid]}")
 
-  "users/#{parsed[:pyuserid]}/#{parsed[:count]}_sticker.png"
+  return user_selfie_path(parsed[:pyuserid]) + "#{parsed[:count]}_sticker.png"
 end
