@@ -150,6 +150,16 @@ end
 #---------
 
 get "/scenario" do
+  # NOTE: If we're at this point, then let's go ahead and create the user only
+  # if we don't have an existing user with the pyuserid.
+  if @current_user.blank? && request.cookies["pyuserid"] && User.find_by_uuid(request.cookies["pyuserid"]).blank?
+    # It's important that we do not validate as we're missing name and email.
+    @user = User.new
+    @user.uuid = request.cookies["pyuserid"]
+    @user.save(:validate => false)
+    login_user(@user)
+  end
+
   erb :scenario
 end
 
