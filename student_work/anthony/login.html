@@ -1,0 +1,80 @@
+<!-- Template that gets loaded on every page. Currently just the navigation bar -->
+<!DOCTYPE html>
+<html ng-app='PictureYourselfApp' no-js>
+  <head>
+      <title>P.I.C. Your Future</title>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
+      <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+      <link rel="stylesheet" href="css/libraries/animate.min.css">
+      <link rel="stylesheet" href="css/index.css">
+
+      <link rel="stylesheet" type="text/css" href="css/login.css"/>
+  </head>
+
+  <body>
+    <div id="compatibility"></div>
+    <div ng-controller='LayoutCtrl'>
+      <div class="outside">
+        <nav class="navbar" role="navigation">
+
+          <div class="navleft">
+            <img class='navbariconleft' alt='Home' src='images/img/new_home.png'>
+          </div>
+
+          <div class="navtitle">*_* ifuture *_*</div>
+
+          <div id="navright">
+            <div class="quit_div" ng-show='show_quit'>
+              <input type='button' id='quit' class='button' ng-click='quit()' value = "QUIT">
+            </div>
+          </div>
+        </nav>
+      </div>
+
+
+      <!-- ViewCtrl implemented in snapshot.js -->
+      <div ng-controller="ViewCtrl">
+        <div id='snapshot_view'>
+          <div id='snapshot_ctrl'>
+            <!--Anthony's  -->
+            <div> <h1> login </h1> </div>
+            <div class="row">
+              <div class="col-md-4 col-md-offset-4">
+                <div class="well">
+                  <form>
+                    Email:<br>
+                    <input type="text" name="email">
+                    <br>
+                    Password:<br>
+                    <input type="text" name="password">
+                    </form>
+
+                  <div id='title'>
+
+                   <div id='snapshot_button_div' class='centered'>
+                   <input type="button" class="button" value="START" ng-show='snapshot_button.start'>
+                   </div>
+                 </div>
+               </div>
+              </div>
+              <div class="col-md-6"><div id='snapshot_div'>
+                <!-- snapshot_buttons -->
+
+              </div></div>
+            </div>
+
+
+            <!-- Should probably set a height for this and adjust the rest -->
+
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End of LayoutCtrl-->
+  </body>
+
+</html>

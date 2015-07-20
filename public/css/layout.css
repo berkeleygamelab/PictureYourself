@@ -1,8 +1,22 @@
 /*---------------CSS corresponding to any and ALL HTML found in layout.erb---------------*/
 
+#flash {
+  margin: 10px;
+  padding: 10px;
+  color: white;
+
+
+}
+#flash .error {
+  background-color:#FF0000;
+}
+#flash .success {
+  background-color:#2ECC71;
+}
+
 #compatibility{
-    visibility:hidden; 
-    width:636px; 
+    visibility:hidden;
+    width:636px;
     border:1px solid;
 }
 
@@ -187,10 +201,10 @@
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
-    margin-right: 20px; 
+    margin-right: 20px;
     text-align: center;
     cursor: pointer;
-    
+
 }
 
 .checklistButton{
@@ -208,10 +222,10 @@
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
-    margin-right: 20px; 
+    margin-right: 20px;
     text-align: center;
     cursor: pointer;
-    
+
 }
 
 .workspaceButton{
@@ -221,7 +235,7 @@
 #checklist {
     list-style: none;
     width:120px;
-    margin: 0px 15px; 
+    margin: 0px 15px;
     -webkit-padding-start: 5px;
     cursor: pointer;
     padding: 2px;
@@ -240,7 +254,7 @@
 
 #menu ul li{
     background-color:#669999;
-    
+
     padding: 10px;
     border-bottom:1px solid white;
 }
@@ -249,7 +263,7 @@
 }
 
 #menu ul li:hover a{
-    background-color: white; 
+    background-color: white;
     color:#7BAB96;
 }
 #checklistMenu:hover ul{
@@ -369,7 +383,7 @@
     padding:0;
 }
 
-@media (min-width: 1281px) { 
+@media (min-width: 1281px) {
     .navtitle{
         margin-top: 0.7%;
     }

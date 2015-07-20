@@ -1,13 +1,61 @@
-<link rel="stylesheet" href="/css/libraries/animate.min.css">
-<link rel="stylesheet" href="/css/index.css">
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>PIC Your Future</title>
+      <link rel="stylesheet" href="/css/libraries/animate.min.css">
+      <link rel="stylesheet" href="/css/index.css">
 
-<div id='snapshot_div'>
-  <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
-      <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_tos()'>
-  </div>
+<link rel="stylesheet" type="text/css" href="css/landing.css"/>    </head>
+    <body>
+      <div id="top">
+        <div class="banner_container">
 
-  <div id='snapshot_button_div' class='centered'>
-      <input type="button" class="button" ng-click='get_tos()' value="START">
-  </div>
+          <img id="plant" src="images/laptop.jpg" width="100%" height="675" alt="Earth" />
+          
+          <div class="navbarr"> <h2><span class = "name">PIC Your Future</span><div class="desc"> The quick brown fox jumped over the lazy turtle</div>
+            <span class="start" ng-click='get_tos()' value="START"><a href="tos"> START </a></span>
+            </div>
+          <a href="#middle"class="smoothScroll"><img class="top_down" src="images/downarrow.png" alt="arrow" /></a>
+        </div>
+      </div>
+      <div id="middle"><a href="middle" class="smoothScroll"></a>
+        <a id="back" href="#top"class="smoothScroll"><img class="back" src="images/left.png" alt="arrow"></a>  <a id="back" href="#top" class="smoothScroll"><img src="images/home.png"></a>  <a id="forward" href="#bottom"class="smoothScroll"><img class="forward" src="images/right.png" alt="arrow"></a>
+        <h1>About</h1>
+        <p class="Lorem">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
+        </p>
+      </div>
+      <div id="bottom"><a href="bottom" class="smoothScroll"></a>
+        <a id="back" href="#middle"class="smoothScroll"><img class="back" src="images/left.png" alt="arrow"></a>  <a id="back" href="#top" class="smoothScroll"><img src="images/home.png"></a>  <a id="forward" href="#last"class="smoothScroll"><img class="forward" src="images/right.png" alt="arrow"></a>
+        <div id="center">
+          <h1>Testimonials</h1>
+          <div id="about-site"><a href="about-site" class="smoothScroll"></a>
+            <div class="row">
+          <div class="col-md-4">
+            <img id="User_ex" src="/images/User.png" alt="user">
+            <h1 style="text-align: center;" class = "test_names">Joe the Plumer</h1>
+            <p><h2 class = "test_text" style="text-align: center;">&#34;BEST APP EVER. Helped me envision my self being a plumer.&#34;</h2></p>
+          </div>
+          <div class="col-md-4">
+            <img id="User_ex" src="/images/User3.png" alt="user">
+            <h1 style="text-align: center;" class = "test_names">Jill Student</h1>
+            <p><h2 class = "test_text"style="text-align: center;">&#34;This App Helped. Made a comic in highschool and now I am a junior in college&#33;&#33;&#33;&#34;</h2></p>
+          </div>
+          <div class="col-md-4">
+            <img id="User_ex" src="/images/User2.png" alt="user">
+            <h1 style="text-align: center;" class = "test_names"> Jason Fresshman in College</h1>
+            <p><h2 class = "test_text" style="text-align: center;">&#34;This App Chill&#32;&#34;</h2></p>
+           </div>
+        </div>
+      </div>
 
-</div>
+  <script type="text/javascript" src="js/smoothscroll.js"></script>
+        </div>
+      </div>
+      <div id="last"><a href="last"class="smoothScroll"></a>
+        <a id="back" href="#bottom"class="smoothScroll"><img class="back" src="images/left.png" alt="arrow"></a><a id="back" href="#top" class="smoothScroll"><img src="images/home.png"></a>
+        <h1 style="text-align: center;">FAQ</h1>
+      </div>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+      <script type="text/javascript" src="smoothscroll.js"></script>
+    </body>
+  </html>

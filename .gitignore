@@ -3,7 +3,7 @@ email
 uploads
 public/users/*
 !public/users
-public/collages
+!public/collages
 */.DS_Store
 .DS_Store
 .dropbox
