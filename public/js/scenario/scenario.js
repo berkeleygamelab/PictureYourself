@@ -316,7 +316,7 @@ app // Need this for .controller and .directive
                 stage.toDataURL({
                     callback: function(dataUrl) {
                         formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
-                        $http.post('/saveToGallery', formData).success(function(data){
+                        $http.post('/collages', formData).success(function(data){
                             $scope.show_saving_collage = false;
                             $scope.show_saved = true;
                             $('#scenario_ctrl').css('pointer-events', '');

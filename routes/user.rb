@@ -20,13 +20,6 @@ end
 #---------
 
 get "/profile" do
-  puts "In /profile now..."
-  puts "@current_user: #{@current_user.inspect}"
-  puts "session[:auth_token]: #{session[:auth_token]}"
-
-  puts "@current_user.blank? && session[:auth_token].present?: #{@current_user.blank? && session[:auth_token].present?}"
-
-
   if @current_user.blank?
     flash[:error] = "You need to login before proceeding!"
     redirect to("/login") and return

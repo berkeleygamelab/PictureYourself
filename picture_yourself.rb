@@ -46,14 +46,16 @@ end
 # App-specific models
 #--------------------
 require "./models/user.rb"
+require "./models/collage.rb"
 
 #------------------------------------------------------------------------------
 # Routes
 #-------
 require "./routes/user.rb"
 require "./routes/parse.rb"
+require "./routes/collage.rb"
 require "./routes/apis.rb"
-require "./routes/email.rb"
+
 
 
 #------------------------------------------------------------------------------
@@ -76,15 +78,27 @@ def login_user(user)
 end
 
 def user_selfie_path(uuid)
-  return "#{settings.root}/users/#{uuid}"
+  return "users/#{uuid}"
+end
+
+def user_self_file_path(uuid)
+  return "#{settings.root}/public/" + user_self_path(uuid)
 end
 
 def collages_path
-  return "#{settings.root}/public/collages"
+  return "collages"
+end
+
+def collages_file_path
+  return "#{settings.root}/public/" + collages_path
 end
 
 def user_collage_path(uuid)
-  return collages_path + "/uuid"
+  return "collages/#{uuid}"
+end
+
+def user_collage_file_path(uuid)
+  return "#{settings.root}/public/" + user_collage_path(uuid)
 end
 
 
@@ -136,6 +150,16 @@ end
 #---------
 
 get "/scenario" do
+  # NOTE: If we're at this point, then let's go ahead and create the user only
+  # if we don't have an existing user with the pyuserid.
+  if @current_user.blank? && request.cookies["pyuserid"] && User.find_by_uuid(request.cookies["pyuserid"]).blank?
+    # It's important that we do not validate as we're missing name and email.
+    @user = User.new
+    @user.uuid = request.cookies["pyuserid"]
+    @user.save(:validate => false)
+    login_user(@user)
+  end
+
   erb :scenario
 end
 
