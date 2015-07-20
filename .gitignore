@@ -2,6 +2,7 @@ nohup.out
 email
 uploads
 public/users/*
+public/collages/*
 !public/users
 !public/collages
 */.DS_Store
