@@ -37,40 +37,52 @@
 
 
       <!-- ViewCtrl implemented in snapshot.js -->
-      <div ng-controller="ViewCtrl">
-        <div id='snapshot_view'>
-          <div id='snapshot_ctrl'>
-            <!--Anthony's  -->
-            <div> <h1> sign up </h1> </div>
-            <div class="row">
-              <div class="col-md-4 col-md-offset-4">
-                <div class="well">
-                  <form>
-                    Email:<br>
-                    <input type="text" name="email">
-                    <br>
-                    Password:<br>
-                    <input type="text" name="password">
-                    </form>
+      <div id='snapshot_view'>
+        <div id='snapshot_ctrl'>
 
-                  <div id='title'>
+          <!--Anthony's  -->
+          <div> <h1> sign up </h1> </div>
+          <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+              <div class="well">
+                <%= styled_flash %>
+                <form action="/users" method="post">
+                  Email:<br>
+                  <input type="text" name="email" class="email">
+                  <br>
+                  Password:<br>
+                  <input type="password" name="password_digest" class="password">
+                  <br>
+                  Name:<br>
+                  <input type="text" name="name" class="name">
+                  <br>
+                  <!-- High School:<br>
+                  <input type="text" name="high_school" class="high_school">
+                  <br>
+                  State:<br>
+                  <input type="text" name="state" class="state">
+                  <br> -->
 
-                   <div id='snapshot_button_div' class='centered'>
-                   <input type="button" class="button" value="START" ng-show='snapshot_button.start'>
-                   </div>
-                 </div>
-               </div>
-              </div>
-              <div class="col-md-6"><div id='snapshot_div'>
+                  <div id='snapshot_button_div' class='centered'>
+                    <input type="submit" class="button" value="Sign-Up">
+                  </div>
+
+                </form>
+
+
+             </div>
+            </div>
+            <div class="col-md-6">
+              <div id='snapshot_div'>
                 <!-- snapshot_buttons -->
 
-              </div></div>
+              </div>
             </div>
-
-
-            <!-- Should probably set a height for this and adjust the rest -->
-
           </div>
+
+
+          <!-- Should probably set a height for this and adjust the rest -->
+
         </div>
       </div>
 
