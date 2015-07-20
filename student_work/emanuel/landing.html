@@ -1,0 +1,93 @@
+
+<!-- Template that gets loaded on every page. Currently just the navigation bar -->
+<!DOCTYPE html>
+<html ng-app='PictureYourselfApp' no-js>
+  <head>
+      <title>P.I.C. Your Future</title>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
+      <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+      <link rel="stylesheet" href="css/libraries/animate.min.css">
+      <link rel="stylesheet" href="css/index.css">
+
+      <link rel="stylesheet" type="text/css" href="css/landing.css"/>
+  </head>
+
+  <body>
+    <div id="compatibility"></div>
+    <div ng-controller='LayoutCtrl'>
+      <div class="outside">
+        <nav class="navbar" role="navigation">
+
+          <div class="navleft">
+            <img class='navbariconleft' alt='Home' src='images/img/new_home.png'>
+          </div>
+
+          <div class="navtitle">P.I.C. YOUR FUTURE</div>
+
+          <div id="navright">
+            <div class="quit_div" ng-show='show_quit'>
+              <input type='button' id='quit' class='button' ng-click='quit()' value = "QUIT">
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- ViewCtrl implemented in snapshot.js -->
+      <div ng-controller="ViewCtrl">
+        <div id='snapshot_view'>
+          <div id='snapshot_ctrl'>
+
+            <!-- Should probably set a height for this and adjust the rest -->
+            <div id='snapshot_div'>
+              <!-- Starting Image -->
+              <div id='camera_placeholder' class='centered' ng-hide='camera_loaded'>
+                <img id='cam_icon' src='images/img/camera_placeholder.png' ng-click='get_tos()'>
+              </div>
+
+              <!-- snapshot_buttons -->
+              <div id='snapshot_button_div' class='centered'>
+                <a href="#about-site" class="smoothScroll"><input type="button" class="button" value="START" ng-show='snapshot_button.start'></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End of LayoutCtrl-->
+  <!-- Emans Work -->
+    <div id="about-site"><a href="about-site" class="smoothScroll"></a>
+      <div class="row">
+        <div class="col-md-4">
+          <img id="User_ex" src="User.png" alt="user">
+          <h1 style="text-align: center;">Joe the Plumer</h1>
+          <p><h2 style="text-align: center;">&#34;BEST APP EVER. Helped me envision my self being a plumer.&#34;</h2></p>
+        </div>
+        <div class="col-md-4">
+          <img id="User_ex" src="User3.png" alt="user">
+          <h1 style="text-align: center;">Jill Student</h1>
+          <p><h2 style="text-align: center;">&#34;This App Helped. Made a comic in highschool and now I am a junior in college&#33;&#33;&#33;&#34;</h2></p>
+
+        </div>
+        <div class="col-md-4">
+          <img id="User_ex" src="User2.png" alt="user">
+          <h1 style="text-align: center;">Jason Fresshman in College</h1>
+          <p><h2 style="text-align: center;">&#34;This App Chill&#32;&#34;</h2></p>
+         </div>
+      </div>
+    </div>
+    <div id="examples"><a href="examples" class="smoothScroll"></a>
+      <div class="row">
+        <div class="col-md-1">
+          <img class="example" src="example.jpg" alt="College">
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="smoothscroll.js"></script>
+  <!-- End -->
+  </body>
+
+</html>
