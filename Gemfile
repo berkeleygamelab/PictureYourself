@@ -12,3 +12,5 @@ gem 'mail'
 gem "sinatra-activerecord"
 gem "sqlite3"
 gem "rake"
+
+gem "sinatra-flash"

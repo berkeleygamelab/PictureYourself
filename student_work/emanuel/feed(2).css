@@ -1,0 +1,17 @@
+.post{
+  height: 180px;
+  width: 180px;
+  /*padding: 2%;*/
+  margin: 4%;
+  text-align: center;
+}
+
+.feed{
+  margin-left: 4%;
+  margin-top: 4%;
+}
+
+.img{
+  height: 180px;
+  width: 180px;
+}

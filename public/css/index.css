@@ -90,7 +90,9 @@
 
 .accept_buttons input:first-child{
     margin-right: 100px;
+    background-color: #00CC00;
 }
+
 
 
 #face_select_blurb{
