@@ -11,6 +11,9 @@ require 'sinatra/contrib/all'
 require 'mail'
 require 'fileutils'
 require "sinatra/activerecord"
+require 'sinatra/flash'
+
+enable :sessions
 
 #------------------------------------------------------------------------------
 # App-specific models
@@ -51,6 +54,20 @@ Mail.defaults do
   delivery_method :smtp, options
 end
 
+before do
+  if @current_user.blank? && session[:auth_token].present?
+    @current_user = User.find_by_auth_token(session[:auth_token])
+    session[:auth_token] = nil if @current_user.blank?
+  end
+end
+
+def login_user(user)
+  session[:auth_token] = user.auth_token
+  @current_user        = user
+
+  puts "User should now be logged in. cookies: #{session[:auth_token]} and user: #{@current_user.inspect}"
+end
+
 #------------------------------------------------------------------------------
 # GET /
 #---------
@@ -59,6 +76,7 @@ get '/' do
   cookie = request.cookies["pyuserid"]
 
   # Check if cookie exits, if it does delete pictures associated with cookie
+  # TODO: We don't want to be deleting these directories.
   unless cookie.nil?
     name = 'public/users/' + cookie
     FileUtils.rm_rf(Dir.glob(name))
@@ -67,6 +85,7 @@ get '/' do
 
   erb :index
 end
+
 
 #------------------------------------------------------------------------------
 # GET /tos

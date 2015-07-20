@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719202917) do
+ActiveRecord::Schema.define(version: 20150719225016) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150719202917) do
     t.string "password_digest"
     t.string "profile_photo_file_name"
     t.string "uuid"
+    t.string "name"
+    t.string "auth_token"
   end
 
 end
