@@ -1,1 +1,0 @@
-# Handles email requests

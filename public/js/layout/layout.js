@@ -11,6 +11,14 @@ app.controller('LayoutCtrl', function($scope, $window){
         $scope.show_quit = !$scope.show_quit;
     });
 
+    $scope.get_career = function(){
+      $window.location.href = "/career"
+    }
+
+    $scope.stickers_for_career = function(career){
+      $window.location.href = "/stickers?career=" + career
+    }
+
     $scope.get_tos = function(){
       $window.location.href = "/tos"
     }

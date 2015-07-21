@@ -9,6 +9,7 @@ require 'dm-timestamps'
 require 'json'
 require 'mail'
 require 'fileutils'
+require "sinatra/cookies"
 require "sinatra/activerecord"
 require 'sinatra/flash'
 
@@ -163,6 +164,38 @@ get "/scenario" do
 
   erb :scenario
 end
+
+
+#------------------------------------------------------------------------------
+# GET /feed
+#----------
+
+get "/feed" do
+  erb :feed
+end
+
+#------------------------------------------------------------------------------
+# GET /career
+#----------
+
+get "/career" do
+  erb :career
+end
+
+#------------------------------------------------------------------------------
+# GET /stickers
+#----------
+
+get "/stickers" do
+  cookies[:career] = params[:career] if params[:career].present?
+
+  # TODO: Render the stickers appropriate for this career.
+  erb :stickers
+end
+
+
+#------------------------------------------------------------------------------
+
 
 get "/selfie" do
   "users/#{request.cookies["pyuserid"]}/1_sticker.png"
