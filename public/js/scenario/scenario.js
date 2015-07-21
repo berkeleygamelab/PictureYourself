@@ -329,6 +329,31 @@ app // Need this for .controller and .directive
                 });
             }
 
+            $scope.saveToGalleryAndContinue = function(){
+                closeTools();
+                stage.draw();
+                $scope.show_save_tos = false;
+                $scope.show_saving_collage = true;
+                $('#scenario_ctrl').css('pointer-events', 'none');
+
+                stage.toDataURL({
+                    callback: function(dataUrl) {
+                        formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
+                        $http.post('/collages', formData).success(function(data){
+                            $scope.show_saving_collage = false;
+                            $scope.show_saved = true;
+                            $('#scenario_ctrl').css('pointer-events', '');
+                            window.location.href = "/comic";
+
+                        }).error(function(){
+                            alert("An error occured while saving the image");
+                            $('#saveModal').modal('hide');
+                            $('#scenario_ctrl').css('pointer-events', '');
+                        });
+                    }
+                });
+            }
+
             // $scope.save = function(){
             //     // formData = JSON.parse(stage.toJSON());
             //     // formData.children[0].children[0].src = $scope.background.getImage().src;
