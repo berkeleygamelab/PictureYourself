@@ -23,13 +23,14 @@ end
 
 post '/collages' do
   begin
+    parsed   = JSON.parse request.body.read
+
     if @current_user
       pyuserid = @current_user.uuid
     else
       pyuserid = parsed["pyuserid"]
     end
 
-    parsed   = JSON.parse request.body.read
     title    = parsed["title"].downcase.strip.gsub(" ", "_")
     image    = parsed["image"].split(',')[1]
     dirname   = user_collage_file_path(pyuserid)
