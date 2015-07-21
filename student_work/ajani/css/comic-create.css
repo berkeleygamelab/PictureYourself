@@ -1,0 +1,151 @@
+/* Ajani's Work */
+.navbariconleft {
+  width: 55px;
+  top: 10px;
+
+}
+
+.navbar {
+  background-color: #01A9DB;
+  top: -2px;
+  margin-top: 0px;
+}
+
+.navtitle {
+  color: #2EFEF7;
+
+}
+
+ul {
+  list-style-type: none;
+  display: inline;
+  text-align: right;
+  text-decoration: none;
+
+}
+
+}
+
+.tabs {
+  display: inline;
+  float: left;
+  text-align: right;
+  margin-left: 20px;
+
+
+
+}
+
+a {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: 1.0s ease;
+}
+
+a:hover {
+  transition: 1.0s;
+  color: black;
+  text-decoration: none;
+}
+#login {
+
+  background-color: #B40431;
+  border-radius: 0;
+  height: 50px;
+}
+
+.login_div {
+  position: relative;
+  top: -40px;
+}
+
+body {
+  margin-top: 0px;
+}
+
+
+}
+
+#snapshot_div {
+  padding: 0px;
+}
+
+.navytabby {
+
+  margin-left: 40px;
+  border: 0px;
+  padding-top: 40px;
+  text-decoration: none;
+  left: 38px;
+  font-size: 28px;
+  display: inline;
+  top: 40px;
+
+
+
+}
+
+
+.table-bordered, tr, td {
+  border: 2px dotted black;
+  height: 200px;
+  border-right: 2px dotted black !important;
+
+
+
+
+}
+
+td {
+  width: 50%;
+}
+
+#finish {
+  position: relative;
+  border-radius: 0% ;
+  right: -800px;
+  height: 80px;
+  width: 300px;
+  top: -30px;
+  font-size: 30px;
+  background-color: #ecf0f1;
+}
+
+.finish_div {
+  position: relative;
+  height: 60px;
+}
+
+.plus {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: 108px;
+  top: 70px;
+}
+
+.collageDisplay {
+  border: 2px solid black;
+  height: 400px;
+  width: 450px;
+  border-right: 2px solid black !important;
+}
+
+#collage {
+  height: 400px;
+  border: 4px solid black;
+  width: 400px;
+}
+
+.textBox_Title {
+  position: relative;
+  height: 40px;
+  width: 100;
+}
+
+#addText {
+  position: relative;
+  left: 178px;
+  top: 20px;
+  color: #ecf0f1;
+}

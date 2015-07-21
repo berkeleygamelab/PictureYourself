@@ -1,0 +1,68 @@
+<!-- Template that gets loaded on every page. Currently just the navigation bar -->
+<!DOCTYPE html>
+<html ng-app='PictureYourselfApp' no-js>
+  <head>
+      <title>P.I.C. Your Future</title>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
+      <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+      <link rel="stylesheet" href="css/libraries/animate.min.css">
+      <link rel="stylesheet" href="css/index.css">
+
+      <link rel="stylesheet" type="text/css" href="css/landing.css"/>
+  </head>
+
+  <body>
+    <!-- Ajani's work -->
+    <div id="compatibility"></div>
+    <div ng-controller='LayoutCtrl'>
+      <div class="outside">
+        <nav class="navbar" role="navigation">
+
+          <div class="navtitle">P.I.C. YOUR FUTURE</div>
+
+            <!-- Last left off (July 13) -->
+            <div class = 'tabs'>
+                <ul>
+                <a href = 'ph' > <li class = "navytabby" id = 'pop'> Feed </li> </a>
+                <a href = 'ph' > <li class = "navytabby" id = 'recent'> About </li> </a>
+
+</div>
+
+          <div id="navright">
+            <div class="login_div" ng-show='show_login'>
+              <input type='button' id='login' class='button' ng-click='quit()' value = "LOGIN">
+          </div>
+        </nav>
+      </div>
+
+
+      <!-- ViewCtrl implemented in snapshot.js -->
+      <div ng-controller="ViewCtrl">
+        <div id='snapshot_view'>
+          <div id='snapshot_ctrl'>
+
+            <!-- Should probably set a height for this and adjust the rest -->
+            <div id='snapshot_div'>
+              <!-- Change Logo-->
+
+              <div id='image_placeholder' class='centered' ng-hide='camera_loaded'>
+                <img id='cover' src='http://orig11.deviantart.net/6b84/f/2008/038/8/7/874feef4b3502680.jpg' ng-click='get_tos()'>
+              </div>
+
+              <!-- snapshot_buttons -->
+              <div id='snapshot_button_div' class='centered'>
+                <input type="button" class="button" value="START" ng-show='snapshot_button.start'>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End of LayoutCtrl-->
+  </body>
+
+</html>

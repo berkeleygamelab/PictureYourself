@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="/css/comic.css">
+
+<div ng-controller="ViewCtrl">
+  <div id='snapshot_view'>
+    <div id='snapshot_ctrl'>
+
+      <!-- Should probably set a height for this and adjust the rest -->
+      <div id='snapshot_div'>
+        <!-- Change Logo-->
+
+        <div class = 'row' style = 'margin-top: 10%;'>
+          <div class = 'col-md-6'>
+              <table class = "preview">
+                <tr>
+                  <td class = 'collageDisplay'></td>
+                </tr>
+            </table>
+              <div class = addTextButton>
+                <input type="button" id='addText' class = 'button' value="Add Text">
+              </div>
+          </div>
+
+            <div class = 'col-md-6' id = 'html-table'>
+
+
+              <!--  -->
+              <div class = 'textBox_title'>
+                <!-- <input type="text" name="fname" placeholder="Title Yo Comic, Son" style = "width: 100px;"> -->
+                <p contenteditable="true" style = "text-decoration: none;" >Title Yo Comic, Son </p>
+               </div>
+
+              <table class = "table">
+                <tr>
+                  <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img> </td>
+                  <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                </tr>
+                <tr>
+                  <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                  <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                </tr>
+                <tr>
+                  <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                  <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                </tr>
+
+
+             </table>
+
+            </div>
+
+
+
+
+        </div>
+      </div>
+
+        <!-- snapshot_buttons -->
+
+        <div class = 'finish_div'>
+          <input type="button" id='finish' class = 'button' value="FINISH">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

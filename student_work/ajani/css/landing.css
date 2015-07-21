@@ -1,0 +1,89 @@
+/* Ajani's Work */
+.navbariconleft {
+  width: 55px;
+  top: 10px;
+
+}
+
+.navbar {
+  background-color: #3498db;
+  top: -2px;
+  margin-top: 0px;
+}
+
+.navtitle {
+  color: #8A0829;
+
+}
+
+ul {
+  list-style-type: none;
+  display: inline;
+  text-align: right;
+  text-decoration: none;
+
+}
+
+}
+
+.tabs {
+  display: inline;
+  float: left;
+  text-align: right;
+  margin-left: 20px;
+}
+
+a {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: 1.0s ease;
+}
+
+a:hover {
+  transition: 1.0s;
+  color: #08298A;
+  text-decoration: none;
+}
+#login {
+
+  background-color: #8A0829;
+  border-radius: 0;
+  height: 50px;
+}
+
+.login_div {
+  display: block;
+  position: relative;
+  top: -40px;
+}
+
+body {
+  margin-top: 0px;
+}
+
+#cover {
+  margin-top: 0px;
+  width: 1290px;
+  height: 500px;
+
+
+}
+
+#snapshot_div {
+  padding: 0px;
+}
+
+.navytabby {
+
+  margin-left: 40px;
+  border: 0px;
+  padding-top: 40px;
+  text-decoration: none;
+  left: 38px;
+  font-size: 28px;
+  display: inline;
+
+
+
+
+}

@@ -1,0 +1,111 @@
+<!-- Template that gets loaded on every page. Currently just the navigation bar -->
+<!DOCTYPE html>
+<html ng-app='PictureYourselfApp' no-js>
+  <head>
+      <title>P.I.C. Your Future</title>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
+      <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+      <link rel="stylesheet" href="css/libraries/animate.min.css">
+      <link rel="stylesheet" href="css/index.css">
+
+      <link rel="stylesheet" type="text/css" href="css/comic-create.css"/>
+  </head>
+
+  <body>
+    <!-- Ajani's work -->
+    <div id="compatibility"></div>
+    <div ng-controller='LayoutCtrl'>
+      <div class="outside">
+        <nav class="navbar" role="navigation">
+
+          <div class="navtitle">P.I.C. YOUR FUTURE</div>
+
+            <!-- Last left off (July 13) -->
+            <div class = 'tabs'>
+                <ul>
+                <a href = 'ph' > <li class = "navytabby" id = 'pop'> Feed  </li> </a>
+                <a href = 'ph' > <li class = "navytabby" id = 'recent'> About  </li> </a>
+
+</div>
+
+          <div id="navright">
+            <div class="login_div" ng-show='show_login'>
+              <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN">
+          </div>
+        </nav>
+      </div>
+
+
+      <!-- ViewCtrl implemented in snapshot.js -->
+      <div ng-controller="ViewCtrl">
+        <div id='snapshot_view'>
+          <div id='snapshot_ctrl'>
+
+            <!-- Should probably set a height for this and adjust the rest -->
+            <div id='snapshot_div'>
+              <!-- Change Logo-->
+
+              <div class = 'row' style = 'margin-top: 10%;'>
+                <div class = 'col-md-6'>
+                    <table class = "preview">
+                      <tr>
+                        <td class = 'collageDisplay'></td>
+                      </tr>
+                  </table>
+                    <div class = addTextButton>
+                      <input type="button" id='addText' class = 'button' value="Add Text">
+                    </div>
+                </div>
+
+                  <div class = 'col-md-6' id = 'html-table'>
+
+
+                    <!--  -->
+                    <div class = 'textBox_title'>
+                      <!-- <input type="text" name="fname" placeholder="Title Yo Comic, Son" style = "width: 100px;"> -->
+                      <p contenteditable="true" style = "text-decoration: none;" >Title Yo Comic, Son </p>
+                     </div>
+
+                    <table class = "table">
+                      <tr>
+                        <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img> </td>
+                        <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                      </tr>
+                      <tr>
+                        <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                        <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                      </tr>
+                      <tr>
+                        <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                        <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
+                      </tr>
+
+
+                   </table>
+
+                  </div>
+
+
+
+
+              </div>
+            </div>
+
+              <!-- snapshot_buttons -->
+
+              <div class = 'finish_div'>
+                <input type="button" id='finish' class = 'button' value="FINISH">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- End of LayoutCtrl-->
+  </body>
+
+</html>
