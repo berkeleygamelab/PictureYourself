@@ -16,6 +16,7 @@ app.controller('LayoutCtrl', function($scope, $window){
     }
 
     $scope.stickers_for_career = function(career){
+      setCookie("career", career);
       $window.location.href = "/stickers?career=" + career
     }
 

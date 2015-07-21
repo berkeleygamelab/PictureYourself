@@ -47,7 +47,7 @@ end
 
 get "/logout" do
   @current_user        = nil
-  session[:auth_token] = nil
+  response.set_cookie("auth_token", "")
   flash[:success] = "You've successfully logged out"
   redirect to("/") and return
 end
@@ -114,7 +114,7 @@ post "/users" do
   else
     @user = User.new(params)
   end
-  
+
   if @user.save
     # Let's create an authentication token and log the user in.
     @user.update_column(:auth_token, SecureRandom.hex)

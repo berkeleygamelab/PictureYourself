@@ -63,9 +63,16 @@ require "./routes/apis.rb"
 # Filters
 #--------
 before do
-  if @current_user.blank? && session[:auth_token].present?
-    @current_user = User.find_by_auth_token(session[:auth_token])
-    session[:auth_token] = nil if @current_user.blank?
+  puts "request.cookies: #{request.cookies}"
+  puts "Attempting login"
+  puts "@current_user.blank? is #{@current_user.blank?}"
+  puts "request.cookies['auth_token'].present? is #{request.cookies["auth_token"].present?}"
+  if @current_user.blank? && request.cookies["auth_token"].present?
+    @current_user = User.find_by_auth_token(request.cookies["auth_token"])
+
+    puts "Is @current_user present? #{@current_user.present?}"
+
+    response.set_cookie("auth_token", "") if @current_user.blank?
   end
 end
 
@@ -74,8 +81,8 @@ end
 #---------------
 
 def login_user(user)
-  session[:auth_token] = user.auth_token
-  @current_user        = user
+  response.set_cookie( "auth_token", (user.auth_token || SecureRandom.hex) )
+  @current_user = user
 end
 
 def user_selfie_path(uuid)
@@ -151,13 +158,15 @@ end
 #---------
 
 get "/scenario" do
-  puts "@current_user: #{@current_user.inspect}"
+  puts "[/scenario] Inspecting @current_user: #{@current_user.inspect}"
+  puts "Here is request.cookies['pyuserid'] = #{request.cookies["pyuserid"]}"
   # NOTE: If we're at this point, then let's go ahead and create the user only
   # if we don't have an existing user with the pyuserid.
   if @current_user.blank? && request.cookies["pyuserid"] && User.find_by_uuid(request.cookies["pyuserid"]).blank?
     # It's important that we do not validate as we're missing name and email.
-    @user = User.new
-    @user.uuid = request.cookies["pyuserid"]
+    @user            = User.new
+    @user.uuid       = request.cookies["pyuserid"]
+    @user.auth_token = SecureRandom.hex
     @user.save(:validate => false)
     login_user(@user)
   end
