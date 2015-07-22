@@ -2,10 +2,61 @@
   box-shadow: 1px 1px 10px grey;
   text-align: center;
   margin-top: 3%;
+  color: black;
+  background-color: #edf0f5;
+  font-family: lato;
+  font-size: 20px;
 }
 
 h1 {
   margin-top: 5%;
   text-align: center;
-  font-family: montserrat;
+  font-family: Montserrat;
+  color: black;
+}
+
+.navtitle {
+  color: #e9e9e9;
+}
+
+.navbar {
+  width: 100%;
+  background-color: rgba(19,82,162,1);
+}
+
+#quit {
+  background-color: rgba(19,82,162,1);
+  color: #e9e9e9;
+}
+
+.button {
+  background-color: rgba(19,82,162,1);
+  color: #e9e9e9;
+  margin-top: -5%;
+}
+
+form {
+  background-color: white;
+}
+
+#snapshot_button_div {
+  background-color: white;
+}
+
+.email {
+  background-color: white;
+  margin-top: 2%;
+  width: 50%;
+  border-color: #3498db;
+}
+
+.password {
+  margin-top: 2%;
+  width: 50%;
+  border-color: #3498db;
+  background-color: white;
+}
+
+.col-md-12 {
+
 }
