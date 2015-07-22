@@ -90,7 +90,11 @@
 
 .accept_buttons input:first-child{
     margin-right: 100px;
-    background-color: #00CC00;
+    background-color: #57E964;
+}
+
+.accept_buttons input:first-child:hover {
+    background-color:#43D550;
 }
 
 

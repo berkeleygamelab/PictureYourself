@@ -7,15 +7,18 @@
 font-size:100px;
 margin-right:22%;
 background-color:transparent;
+color:transparent;
 
 }
 
 .desc{
   margin-top:18%;
   margin-left:4%;
-  margin-right:28%;
+  margin-right:41%;
   color:white;
   margin-bottom: 1.75%;
+  text-decoration: underline;
+  color:transparent;
 }
 
 
@@ -57,7 +60,7 @@ h1 {
   background-color:black;
   width:100px;
   padding-top:10%;
-  margin-right:25%;
+  margin-right:22%;
 
 }
 input{
@@ -116,8 +119,8 @@ h2 span{
    letter-spacing: -1px;
    background: rgba(0, 0, 0, 0.7);
    padding: 12px;
-   margin-right:46.5%;
-   margin-top:30%;
+   margin-right:44.5%;
+   margin-top:45%;
 
 }
 h2 span.start:hover {
@@ -127,8 +130,8 @@ h2 span.start:hover {
 img.top_down{
   display: block;
   margin-left: auto;
-  margin-right: auto;
-  margin-top: 64%;
+  margin-right: 47%;
+  margin-top: 65%;
   transition: all .2s ease-in-out;
 }
 img.top_down:hover { 
@@ -233,5 +236,5 @@ a:active {
 }
 
 #plant{
-  margin-bottom: 1%;
+  margin-top: 3.25%;
 }
