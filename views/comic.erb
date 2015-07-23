@@ -1,65 +1,139 @@
-<link rel="stylesheet" href="/css/comic.css">
+<!-- Template that gets loaded on every page. Currently just the navigation bar -->
+<!DOCTYPE html>
+<html ng-app='PictureYourselfApp' no-js>
+  <head>
+      <title>P.I.C. Your Future</title>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Vesper+Libre:900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap-theme.min.css">
+      <link rel="stylesheet" type="text/css" href="css/libraries/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/PictureYourself.css"/>
+      <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+      <link rel="stylesheet" href="css/libraries/animate.min.css">
+      <link rel="stylesheet" href="css/index.css">
 
-<div ng-controller="ViewCtrl">
-  <div id='snapshot_view'>
-    <div id='snapshot_ctrl'>
+      <link rel="stylesheet" type="text/css" href="css/comic-create.css"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  </head>
 
-      <!-- Should probably set a height for this and adjust the rest -->
-      <div id='snapshot_div'>
-        <!-- Change Logo-->
+  <body background = 'http://i.imgur.com/P3urdLb.png'>
+    <!-- Ajani's work -->
+    <script>
+    $( document ).ready(function() {
+      $('.navicon').on('click', function(){
+        $('.mainNavDropDown').slideToggle(500);
+       });
+   });
+ </script>
+    <div id="compatibility"></div>
+    <div ng-controller='LayoutCtrl'>
+      <div class="outside">
+        <nav class="navbar" role="navigation">
 
-        <div class = 'row' style = 'margin-top: 10%;'>
-          <div class = 'col-md-6'>
-              <table class = "preview">
-                <tr>
-                  <td class = 'collageDisplay'></td>
-                </tr>
-            </table>
-              <div class = addTextButton>
-                <input type="button" id='addText' class = 'button' value="Add Text">
+          <div>
+              <img id = 'logo' src = 'http://i.imgur.com/ENFluBk.png'>
+                <div class="navtitle" > PIC YOUR FUTURE</div>
+                <div class = 'tabs'>
+
+
+                    <!-- no longer needed -->
+                    <a href = 'ph' > <li class = "navytabby" id = 'feed'>  </li> </a>
+                    <a href = 'ph' > <li class = "navytabby" id = 'about'>   </li> </a>
+
+
               </div>
           </div>
+          <!-- ^^^^ -->
 
-            <div class = 'col-md-6' id = 'html-table'>
-
-
-              <!--  -->
-              <div class = 'textBox_title'>
-                <!-- <input type="text" name="fname" placeholder="Title Yo Comic, Son" style = "width: 100px;"> -->
-                <p contenteditable="true" style = "text-decoration: none;" >Title Yo Comic, Son </p>
-               </div>
-
-              <table class = "table">
-                <tr>
-                  <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img> </td>
-                  <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
-                </tr>
-                <tr>
-                  <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
-                  <td> <img class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
-                </tr>
-                <tr>
-                  <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
-                  <td> <img  class = 'plus' src = 'http://i.imgur.com/GaBP67D.png'></img></td>
-                </tr>
+          
+          <div id="navright">
+            <div class="login_div" ng-show='show_login'>
+              <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN"> 
+          </div>
+          <div class = "mainNav clearfix">
+            <p class = "navicon">&#9776;</p>
+           </div>
+           <ul class = "mainNavDropDown clearfix">
+             <li>Home</li>
+             <li>About</li>
+             <li>Feed</li>
+             <li>Contact</li>
+           </ul>
+        </div>
+        </nav>
+      </div>
 
 
-             </table>
+      <!-- ViewCtrl implemented in snapshot.js -->
+      <div ng-controller="ViewCtrl">
+        <div id='snapshot_view'>
+          <div id='snapshot_ctrl'>
 
+            <!-- Should probably set a height for this and adjust the rest -->
+            <div id='snapshot_div'>
+              <!-- Change Logo-->
+
+              <div class = 'row' style = 'margin-top: 10%;'>
+                <div class = 'col-md-6'>
+                    <table class = "preview">
+                      <tr>
+                        <td class = 'collageDisplay'></td>
+                      </tr>
+                  </table>
+                    <div class = 'addTextButton'>
+                      <input type="button" id='addText' class = 'button' value="Add Text">
+                      <div class = 'save'>
+                        <input type="button" id='save' class = 'button' value="Save">
+                      </div>
+
+                    </div>
+                </div>
+
+                  <div class = 'col-md-6' id = 'html-table'>
+
+
+                    <!--  -->
+                    <div class = 'textBox_title'>
+                      <!-- <input type="text" name="fname" placeholder="Title Yo Comic, Son" style = "width: 100px;"> -->
+                      <p contenteditable="true"> Title Yo Comic, Son </p>
+                     </div>
+
+                    <table class = "table">
+                      <tr>
+                        <td> <img class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img> </td>
+                        <td> <img class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
+                      </tr>
+                      <tr>
+                        <td> <img  class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
+                        <td> <img class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
+                      </tr>
+                      <tr>
+                        <td> <img  class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
+                        <td> <img  class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
+                      </tr>
+
+
+                   </table>
+
+                  </div>
+
+
+
+
+              </div>
             </div>
 
+              <!-- snapshot_buttons -->
 
-
-
+              <div class = 'finish_div'>
+                <input type="button" id='finish' class = 'button' value="FINISH">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-        <!-- snapshot_buttons -->
+    </div> <!-- End of LayoutCtrl-->
+  </body>
 
-        <div class = 'finish_div'>
-          <input type="button" id='finish' class = 'button' value="FINISH">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+</html>

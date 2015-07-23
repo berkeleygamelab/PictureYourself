@@ -22,24 +22,51 @@
         <script type="text/javascript" src='/js/compatibility.js'></script>
     </head>
 
-    <body>
+    <body background = 'http://i.imgur.com/P3urdLb.png'>
+        <script>
+    $( document ).ready(function() {
+      $('.navicon').on('click', function(){
+        $('.mainNavDropDown').slideToggle(500);
+       });
+   });
+ </script>
+
         <div id="compatibility"></div>
         <div ng-controller='LayoutCtrl'>
             <div class="outside">
-                <nav class="navbar" role="navigation">
+                       <nav class="navbar" role="navigation">
 
-                    <div class="navleft">
-                        <img class='navbariconleft' alt='Home' src='/images/img/new_home.png'>
-                    </div>
-                    <!-- <a class="navbar-link"><img class='navbariconleft' alt='Picture Yourself Logo' src='/images/img/new_logo.png'></a> -->
-                    <div class="navtitle">P.I.C. YOUR FUTURE</div>
+          <div>
+              <img id = 'logo' src = 'http://i.imgur.com/ENFluBk.png'>
+                <div class="navtitle" > PIC YOUR FUTURE</div>
+                <div class = 'tabs'>
 
-                    <div id="navright">
-                        <div class="quit_div" ng-show='show_quit'>
-                            <input type='button' id='quit' class='button' ng-click='quit()' value = "QUIT">
-                        </div>
-                    </div> <!--navright-->
-                </nav>
+
+                    <!-- no longer needed -->
+                    <a href = 'ph' > <li class = "navytabby" id = 'feed'>  </li> </a>
+                    <a href = 'ph' > <li class = "navytabby" id = 'about'>   </li> </a>
+
+
+              </div>
+          </div>
+          <!-- ^^^^ -->
+
+          
+          <div id="navright">
+            <div class="login_div" ng-show='show_login'>
+              <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN"> 
+          </div>
+          <div class = "mainNav clearfix">
+            <p class = "navicon">&#9776;</p>
+           </div>
+           <ul class = "mainNavDropDown clearfix">
+             <li>Home</li>
+             <li>About</li>
+             <li>Feed</li>
+             <li>Contact</li>
+           </ul>
+        </div>
+        </nav>
             </div> <!--outside-->
 
             <%= yield %>
