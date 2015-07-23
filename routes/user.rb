@@ -101,8 +101,10 @@ end
 #---------
 
 post "/users" do
+  puts "params:#{params}\n\n\n"
 
   @user = User.find_by_email(params[:email])
+  puts "@user.inspect: #{@user.inspect}"
   if @user.present?
     flash[:error] = "User with this email already exists!"
     redirect to("/signup")

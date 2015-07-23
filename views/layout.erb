@@ -51,7 +51,11 @@
 
           <div id="navright">
             <div class="login_div">
-              <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN">
+              <% if @current_user.present? %>
+                <input type='button' id='login' class='button' ng-click='logout()' value = "LOGOUT">
+              <% else %>
+                <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN">
+              <% end %>
           </div>
           <div class = "mainNav clearfix">
             <p class = "navicon">&#9776;</p>

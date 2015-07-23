@@ -35,6 +35,11 @@ app.controller('LayoutCtrl', function($scope, $window, $http){
       $window.location.href = "/login"
     }
 
+    $scope.logout = function() {
+      $window.location.href = "/logout"
+    }
+
+
     $scope.startover = function(){
       $window.location.href = '/';
     }

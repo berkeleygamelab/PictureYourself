@@ -17,32 +17,42 @@
   </head>
 
   <body background="images/geometry2.png">
-   
+
 
 
       <!-- ViewCtrl implemented in snapshot.js -->
-      <div ng-controller="ViewCtrl">
+      <div>
         <div id='snapshot_view'>
           <div id='snapshot_ctrl'>
             <!--Anthony's  -->
             <div> <h1> Login </h1> </div>
+
+
             <div class="row">
               <div class="col-md-4 col-md-offset-4">
                 <div class="well">
-                  <form>
+                  <%= styled_flash %>
+                </div>
+
+                <div class="well">
+                  <form action="/login" method="post">
                     Email:<br>
-                    <input type="text" class="email">
+                    <input type="text" name="email" class="email">
                     <br>
                     Password:<br>
-                    <input type="text" class="password">
-                    </form>
+                    <input type="password" name="password_digest" class="password">
+
 
                   <div id='title'>
 
                    <div id='snapshot_button_div' class='centered'>
-                   <input type="button" class="button" value="START" ng-show='snapshot_button.start'>
+                   <input type="submit" class="button" value="START">
                    </div>
                  </div>
+
+                 <a href="/signup" style="color:blue;">No account? Sign up now!</a>
+
+                 </form>
                </div>
               </div>
               <div class="col-md-12"><div id='snapshot_div'>
