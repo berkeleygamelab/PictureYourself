@@ -8,8 +8,9 @@ font-size:100px;
 margin-right:22%;
 background-color:transparent;
 margin-top:-50%;
-color: white;
-text-shadow: 2px 2px 4px #000000;
+color: transparent;
+/*text-shadow: 2px 2px 4px #000000;
+*/
 
 }
 
@@ -18,9 +19,9 @@ text-shadow: 2px 2px 4px #000000;
   margin-right:41.5%;
   color:white;
   margin-bottom: 1.75%;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-}
+  color: transparent;
+/*  text-shadow: 2px 2px 4px #000000;
+*/}
 
 
 /*#snapshot_button_div{
@@ -59,7 +60,7 @@ h1 {
   text-align: center;
   width:100px;
   padding-top:10%;
-  margin-right:25%;
+  margin-right:20%;
 
 }
 input{
@@ -119,7 +120,7 @@ h2 span{
    letter-spacing: -1px;
    background: rgba(0, 0, 0, 0.7);
    padding: 12px;
-   margin-right:46.5%;
+   margin-right:44%;
    margin-top:30%;
 
 }
@@ -130,7 +131,7 @@ h2 span.start:hover {
 img.top_down{
   display: block;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 46.25%;
   margin-top: 59.5%;
   transition: all .2s ease-in-out;
 }
@@ -172,7 +173,7 @@ padding-left: 0;
  }
  .banner_container{
    position: relative;
-   background-color:black;
+   background-color:transparent;
     background-position:center top;
     width: 100%;
      height:675px;
@@ -242,7 +243,7 @@ a:active {
 #plant{
   margin-bottom: 1%;
 }
-img#plant {
+/*img#plant {
   background-color:black;
   opacity:0.5;
-}
+}*/
