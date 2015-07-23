@@ -236,8 +236,7 @@ app // Need this for .controller and .directive
             });
 
             $scope.add_selfie = function(){
-              $window.location.href = "/camera";
-                // $scope.$emit('toggle_scenario', true)
+              window.location.href = "/camera";
             }
 
             $('#emailModal').on('shown.bs.modal', function(){

@@ -73,7 +73,7 @@ app.controller('BackgroundCtrl', function($scope, $http, $timeout, $location){
     $scope.bg = $('.slick-center>img').attr('src');
     //Sent to ViewCtrl
     setCookie("currentbackground", $scope.bg)
-    window.location.href = "/scenario";
+    window.location.href = "/camera";
   }
 
   $timeout(function(){
