@@ -24,6 +24,10 @@ app.controller('LayoutCtrl', function($scope, $window){
       $window.location.href = "/tos"
     }
 
+    $scope.login = function() {
+      $window.location.href = "/login"
+    }
+
     $scope.startover = function(){
       $window.location.href = '/';
     }
