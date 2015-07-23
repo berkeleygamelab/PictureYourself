@@ -21,69 +21,76 @@
 
 
       <!-- ViewCtrl implemented in snapshot.js -->
-      <div ng-controller="ViewCtrl">
-        <div id='snapshot_view'>
-          <div id='snapshot_ctrl'>
+      <div id='snapshot_view'>
+        <div id='snapshot_ctrl'>
 
-            <!-- Should probably set a height for this and adjust the rest -->
-            <div id='snapshot_div'>
-              <!-- Change Logo-->
+          <!-- Should probably set a height for this and adjust the rest -->
+          <div id='snapshot_div'>
+            <!-- Change Logo-->
 
-              <div class = 'row' style = 'margin-top: 10%;'>
-                <div class = 'col-md-6'>
-                    <table class = "preview">
-                      <tr>
-                        <td class = 'collageDisplay'></td>
-                      </tr>
-                  </table>
-                    <div class = 'addTextButton'>
-                      <input type="button" id='addText' class = 'button' value="Add Text">
-                      <div class = 'save'>
-                        <input type="button" id='save' class = 'button' value="Save">
+            <div class = 'row' style = 'margin-top: 10%;'>
+
+
+                <div class = 'col-md-12' id = 'html-table'>
+
+
+                  <!--  -->
+                  <!-- <div class = 'textBox_title'>
+                    <p contenteditable="true"> Title Yo Comic, Son </p>
+                   </div> -->
+
+
+                    <% @comic.collages.order("position ASC").each_slice(2) do |c1, c2| %>
+                      <div class="row">
+                        <div class="col-md-2 col-md-offset-4">
+                          <% if c1.present? %>
+                            <img src="<%= c1.file_path %>" style="width:200px;" />
+                          <% end %>
+                        </div>
+
+                        <div class="col-md-6">
+                          <% if c2.present? %>
+                            <img src="<%= c2.file_path %>" style="width:200px;" />
+                          <% else %>
+                            <a href="/career">
+                              <img class = 'plus' style="width: 150px;" src = 'http://i.imgur.com/Pcb0b2B.png'>
+                            </a>
+                          <% end %>
+                        </div>
                       </div>
+                    <% end %>
 
-                    </div>
+                    <% if [2, 4].include?(@comic.collages.count) %>
+                      <div class="row">
+                        <div class="col-md-2 col-md-offset-4">
+                          <a href="/career">
+                            <img class = 'plus' style="width: 150px;" src = 'http://i.imgur.com/Pcb0b2B.png'>
+                          </a>
+                        </div>
+
+                        <div class="col-md-6">
+                          <a href="/career">
+                            <img class = 'plus' style="width: 150px;" src = 'http://i.imgur.com/Pcb0b2B.png'>
+                          </a>
+                        </div>
+                      </div>
+                    <% end %>
+
+
+
+
                 </div>
 
-                  <div class = 'col-md-6' id = 'html-table'>
-
-
-                    <!--  -->
-                    <div class = 'textBox_title'>
-                      <!-- <input type="text" name="fname" placeholder="Title Yo Comic, Son" style = "width: 100px;"> -->
-                      <p contenteditable="true"> Title Yo Comic, Son </p>
-                     </div>
-
-                    <table class = "table">
-                      <tr>
-                        <td> <img class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img> </td>
-                        <td> <img class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
-                      </tr>
-                      <tr>
-                        <td> <img  class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
-                        <td> <img class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
-                      </tr>
-                      <tr>
-                        <td> <img  class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
-                        <td> <img  class = 'plus' src = 'http://i.imgur.com/Pcb0b2B.png'></img></td>
-                      </tr>
-
-
-                   </table>
-
-                  </div>
 
 
 
-
-              </div>
             </div>
+          </div>
 
-              <!-- snapshot_buttons -->
+            <!-- snapshot_buttons -->
 
-              <div class = 'finish_div'>
-                <input type="button" id='finish' class = 'button' value="FINISH">
-              </div>
+            <div class = 'finish_div' style="margin-top: 100px;">
+              <input type="button" id='finish' class = 'button' value="FINISH" ng-click="finishComic(<%= @comic.id %>)">
             </div>
           </div>
         </div>

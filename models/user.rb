@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates :name,            :presence => true
 
   has_many :collages
+  has_many :comic_strips
 
   def collage_file_paths
     return self.collages.map {|c| "#{settings.root}/public/collages/#{self.uuid}/#{c.file_name}"}

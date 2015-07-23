@@ -24,8 +24,8 @@ get "/profile" do
     flash[:error] = "You need to login before proceeding!"
     redirect to("/login") and return
   else
-    @collages = Collage.where(:user_id => @current_user.id)
-    puts "@collages: #{@collages.inspect}"
+    @comics = @current_user.comic_strips.order("created_at DESC")
+
 
     erb :profile
   end
@@ -116,6 +116,7 @@ post "/users" do
     @user.attributes = params
   else
     @user = User.new(params)
+    @user.created_at = Time.now
   end
 
   if @user.save

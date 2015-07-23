@@ -52,6 +52,7 @@ end
 #--------------------
 require "./models/user.rb"
 require "./models/collage.rb"
+require "./models/comic_strip.rb"
 
 #------------------------------------------------------------------------------
 # Routes
@@ -61,6 +62,7 @@ require "./routes/parse.rb"
 require "./routes/collage.rb"
 require "./routes/apis.rb"
 require "./routes/career.rb"
+require "./routes/comic.rb"
 
 
 
@@ -170,6 +172,7 @@ get "/scenario" do
   if @current_user.blank? && request.cookies["pyuserid"] && User.find_by_uuid(request.cookies["pyuserid"]).blank?
     # It's important that we do not validate as we're missing name and email.
     @user            = User.new
+    @user.created_at = Time.now
     @user.uuid       = request.cookies["pyuserid"]
     @user.auth_token = SecureRandom.hex
     @user.save(:validate => false)
@@ -212,8 +215,23 @@ end
 #----------
 
 get "/comic" do
+  @comic   = @current_user.comic_strips.order("created_at DESC").where(:finished_at => nil).limit(1).first
+
   erb :comic
 end
+
+
+#------------------------------------------------------------------------------
+# GET /comic
+#----------
+
+get "/comics", :provides => :json do
+  @comics = @current_user.comic_strips.order("created_at DESC")
+
+  return @comics.to_json(:include => [:collages])
+end
+
+
 
 #------------------------------------------------------------------------------
 

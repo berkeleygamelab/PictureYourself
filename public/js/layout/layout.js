@@ -1,6 +1,6 @@
 var app = angular.module('PictureYourselfApp', ['ngResource', 'ngAnimate']);
 
-app.controller('LayoutCtrl', function($scope, $window){
+app.controller('LayoutCtrl', function($scope, $window, $http){
   $scope.careers = ["college", "medical", "military", "legal", "business"];
 
     $scope.show_quit = false;
@@ -42,6 +42,16 @@ app.controller('LayoutCtrl', function($scope, $window){
     $scope.get_camera = function(){
       $window.location.href = '/camera';
     };
+
+    $scope.finishComic = function(comicID) {
+
+      $http.post("/comic/" + comicID).success(function(data) {
+        window.location.href = "/profile"
+      }).error(function(){
+        alert("There was an issue finishing the comic");
+      });
+
+    }
 
 });
 

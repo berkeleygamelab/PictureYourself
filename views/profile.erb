@@ -18,17 +18,40 @@
 
       <div class="text-center">
         <h1>
-          Your collages
+          Your comic strips
         </h1>
-        <% if @collages.count == 0 %>
-          <p>You have no collages!</p>
+        <% if @comics.count == 0 %>
+          <p>You have no comics!</p>
           <a href="/career" class="btn btn-success btn-lg">
             Create one now!
           </a>
-
         <% else %>
-          <% @collages.each do |c| %>
-            <img src="<%= c.file_path %>" />
+          <a href="/career" class="btn btn-success btn-lg" style="margin-bottom: 20px;">
+            Create one now!
+          </a>
+          <% @comics.each do |c| %>
+
+            <% c.collages.order("position ASC").each_slice(2) do |c1, c2| %>
+              <div class="row">
+                <div class="col-md-6">
+                  <% if c1.present? %>
+                    <img src="<%= c1.file_path %>" style="width:200px;" />
+                  <% end %>
+                </div>
+
+                <div class="col-md-6">
+                  <% if c2.present? %>
+                    <img src="<%= c2.file_path %>" style="width:200px;" />
+
+                  <% end %>
+                </div>
+              </div>
+
+            <% end %>
+
+            <hr style="border: 1px solid black;">
+
+
           <% end %>
         <% end %>
       </div>

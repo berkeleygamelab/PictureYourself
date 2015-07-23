@@ -54,16 +54,28 @@ post '/collages' do
       f.write(Base64.decode64(image))
     end
 
+    # Let's create a new comic only if there are no unfinished comics OR there
+    # is a comic with at least 6 collages.
+    @comic = @current_user.comic_strips.order("created_at DESC").where(:finished_at => nil).first
+    if @comic.blank? || @comic.collages.count >= 6
+      @comic = ComicStrip.new
+      @comic.user_id = @current_user.id
+      @comic.save!
+    end
+
     # At this point, everything worked and the file is persisted to disk. Let's
     # create a new Collage object.
     logger.info "Saving collage!"
 
-    @collage           = Collage.new
-    @collage.user_id   = @current_user.id
-    @collage.file_name = file_name
+    @collage            = Collage.new
+    @collage.created_at = Time.now
+    @collage.user_id    = @current_user.id
+    @collage.file_name  = file_name
+    @collage.comic_strip_id = @comic.id
+    @collage.position       = @comic.collages.count + 1
     @collage.save!
 
-    logger.info "Collage saved! Returning...\n\n\n"
+    logger.info "Collage and comic strip saved! Returning...\n\n\n"
 
 
     return "#{user_collage_path(pyuserid)}/#{file_name}"
