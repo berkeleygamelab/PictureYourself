@@ -54,6 +54,7 @@ require "./routes/user.rb"
 require "./routes/parse.rb"
 require "./routes/collage.rb"
 require "./routes/apis.rb"
+require "./routes/career.rb"
 
 
 
