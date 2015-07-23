@@ -541,6 +541,8 @@ td {
   transition: 1.0s ease;
   font-size: 20px;
   padding: 20px;
+  padding-top:0px;
+  padding-bottom:1px;
   width: 100%;
   background-color: rgba(242,105,100,1);
   color:white;
@@ -564,4 +566,8 @@ td {
  li {
   display:inline;
  }
+
+body{
+    font-family: 'Avenir', sans-serif;
+}
 

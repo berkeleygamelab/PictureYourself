@@ -7,15 +7,19 @@
 font-size:100px;
 margin-right:22%;
 background-color:transparent;
+margin-top:-50%;
+color: white;
+text-shadow: 2px 2px 4px #000000;
 
 }
 
 .desc{
   margin-top:18%;
-  margin-left:4%;
-  margin-right:28%;
+  margin-right:41.5%;
   color:white;
   margin-bottom: 1.75%;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 
@@ -48,13 +52,11 @@ h1 {
 }
 
 #start {
-  background-color:white;
   width:auto;
   height:auto;
   color:white;
   font-size:40px;
   text-align: center;
-  background-color:black;
   width:100px;
   padding-top:10%;
   margin-right:25%;
@@ -72,7 +74,8 @@ body{
 */}
 
 a{
-  text-decoration: none; color: white;
+  text-decoration: none; 
+  color: white;
 }
 /*a:link{
   background-color: #000;
@@ -85,7 +88,7 @@ a.web{
 }*/
 a:hover{
   transform: scale(2.1)
-    background:black;
+  background:rgba(242,105,100,1);
  transition: background-color 0.5s ease
 }
 .navbarr{
@@ -128,7 +131,7 @@ img.top_down{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 64%;
+  margin-top: 59.5%;
   transition: all .2s ease-in-out;
 }
 img.top_down:hover { 
@@ -169,6 +172,10 @@ padding-left: 0;
  }
  .banner_container{
    position: relative;
+   background-color:black;
+    background-position:center top;
+    width: 100%;
+     height:675px;
  }
  #top{
    height: 675px;
@@ -234,4 +241,8 @@ a:active {
 
 #plant{
   margin-bottom: 1%;
+}
+img#plant {
+  background-color:black;
+  opacity:0.5;
 }
