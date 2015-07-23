@@ -547,7 +547,7 @@ td {
   background-color: rgba(242,105,100,1);
   color:white;
   margin-left:0px;
-    font-family: 'Avenir', sans-serif;
+  font-family: 'Avenir', sans-serif;
 
 /*  border-bottom: 1px solid black;
   border: 1px solid black;
@@ -570,4 +570,5 @@ td {
 body{
     font-family: 'Avenir', sans-serif;
 }
+
 
