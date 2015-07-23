@@ -18,50 +18,6 @@
 
   <body background = 'http://i.imgur.com/P3urdLb.png'>
     <!-- Ajani's work -->
-    <script>
-    $( document ).ready(function() {
-      $('.navicon').on('click', function(){
-        $('.mainNavDropDown').slideToggle(500);
-       });
-   });
- </script>
-    <div id="compatibility"></div>
-    <div ng-controller='LayoutCtrl'>
-      <div class="outside">
-        <nav class="navbar" role="navigation">
-
-          <div>
-              <img id = 'logo' src = 'http://i.imgur.com/ENFluBk.png'>
-                <div class="navtitle" > PIC YOUR FUTURE</div>
-                <div class = 'tabs'>
-
-
-                    <!-- no longer needed -->
-                    <a href = 'ph' > <li class = "navytabby" id = 'feed'>  </li> </a>
-                    <a href = 'ph' > <li class = "navytabby" id = 'about'>   </li> </a>
-
-
-              </div>
-          </div>
-          <!-- ^^^^ -->
-
-          
-          <div id="navright">
-            <div class="login_div" ng-show='show_login'>
-              <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN"> 
-          </div>
-          <div class = "mainNav clearfix">
-            <p class = "navicon">&#9776;</p>
-           </div>
-           <ul class = "mainNavDropDown clearfix">
-             <li>Home</li>
-             <li>About</li>
-             <li>Feed</li>
-             <li>Contact</li>
-           </ul>
-        </div>
-        </nav>
-      </div>
 
 
       <!-- ViewCtrl implemented in snapshot.js -->
