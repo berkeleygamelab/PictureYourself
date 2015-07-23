@@ -48,13 +48,12 @@ a:hover {
   background-color: rgba(242,105,100,1);
   border-radius: 0;
   height: 53px;
-  left: 20px;
 }
 
 .login_div {
   display: block;
-  position: absolute;
-  margin-top: -5px;
+  position: relative;
+  top: -86px;
 }
 
 #login:hover {
@@ -96,7 +95,71 @@ td {
   width: 50%;
 }
 
+#finish {
+  position: relative;
+  border-radius: 0% ;
+  right: -800px;
+  height: 80px;
+  width: 300px;
+  top: -30px;
+  font-size: 30px;
+  background-color: rgba(19,82,162,1);
+}
 
+.finish_div {
+  position: relative;
+  height: 60px;
+
+}
+
+.plus {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: 108px;
+  top: 70px;
+}
+
+.collageDisplay {
+  border: 2px solid black;
+  height: 400px;
+  width: 450px;
+  border-right: 2px solid black !important;
+}
+
+#collage {
+  height: 400px;
+  border: 4px solid black;
+  width: 400px;
+}
+
+.textBox_Title {
+  position: relative;
+  height: 40px;
+  width: 100;
+}
+
+#addText {
+  position: relative;
+  left: 176px;
+  top: 20px;
+  background-color: rgba(19,82,162,1);
+  border-radius: 0%;
+  height: 60px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+#save {
+  position: relative;
+  left: 185px;
+  top: 20px;
+  background-color: rgba(242,105,100,1);
+  border-radius: 0%;
+  height: 60px;
+  font-size: 20px;
+  margin-top: 10px;
+}
 
 #logo {
   width: 90px;
@@ -108,67 +171,3 @@ td {
   position: relative;
   display: inline;
 }
-
-#background {
-  z-index: 1;
-  position:
-}
-
-#feed {
-  margin-left: 850px;
-}
-
-.mainNav{
-  postion: relative;
-  width: 100%;
-  font-family: 'Avenir', sans-serif;
-  color: white;
- }
-
-.navicon{
-  transition: 1.0s ease;
-  font-size: 40px;
-  margin: 10px 25px ;
-  float: right;
-  color: seashell;
-  top: -11px;
-  position: absolute;
-  left: 1090px;
-
- }
-
- hover:.navicon {
-   transition: 1.0s;
-   color: rgba(210, 89, 85, 1);
- }
-
-.mainNavDropDown{
-  padding-left: 0;
-  margin: 0;
-  list-style: none;
-  text-align: center;
-  display: none;
-  top: 50px;
-  position: absolute;
-  left: 1113px;
-
- }
-.mainNavDropDown li{
-  transition: 1.0s ease;
-  font-size: 20px;
-  padding: 15px;
-  width: 100%;
-  background: white;
-  border-bottom: 1px solid black;
-  border: 1px solid black;
-  border-bottom: 2px solid black !important;
- }
-.mainNavDropDown li:last-child{
-  border-bottom: none;
- }
-.mainNavDropDown li:hover{
-  transition: 1.0s;
-  color: rgba(242,105,100,1);
-  text-decoration: none;
-  background-color: black;
- }
