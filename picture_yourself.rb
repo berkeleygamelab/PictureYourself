@@ -18,9 +18,7 @@ require 'sinatra/flash'
 #------------------------------------------------------------------------------
 # Configuration
 #--------------
-set :port, 80
-set :bind, '128.32.189.148'
-#trying to lock threads to avoid not receiving requests
+set :port, 9393
 set :lock, true
 set :server, 'thin'
 set :database_file, "database.yml"

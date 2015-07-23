@@ -18,7 +18,7 @@ The Picture Yourself application uses visual storytelling practices like the "se
 To start the app, run
 
 ```
-shotgun picture_yourself.rb
+ruby picture_yourself.rb
 ```
 
 ## Frameworks
