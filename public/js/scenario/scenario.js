@@ -97,9 +97,17 @@ app // Need this for .controller and .directive
 
             $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
 
-            // $scope.$broadcast('load_selfies', "users/" + $scope.pyuserid + "/1_sticker.png", 1, undefined);
             $scope.selfies = []
-            $scope.selfies.push({source: "users/" + getCookie('pyuserid') + "/1_sticker.png", count: 1});
+            $http.get("/selfies").success(function(data) {
+              console.log(data)
+              for (var i = 0; i < data.length; i += 1)
+              {
+                $scope.selfies.push({source: data[i], count: i + 1});
+              }
+            })
+
+
+
 
             var background = getCookie("currentbackground");
             if (background)
