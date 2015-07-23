@@ -12,7 +12,7 @@ post '/load_canvas' do
     else
       pyuserid = parsed["pyuserid"]
     end
-    
+
     title    = parsed["title"]
     file = File.open(user_selfie_file_path(pyuserid) + "/#{title}.json", "r" )
     file.read
