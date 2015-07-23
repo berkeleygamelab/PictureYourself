@@ -345,7 +345,9 @@ app // Need this for .controller and .directive
 
                 stage.toDataURL({
                     callback: function(dataUrl) {
-                        formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
+                      console.log(dataUrl);
+
+                        formData = {"image": dataUrl};
                         $http.post('/collages', formData).success(function(data){
                             $scope.show_saving_collage = false;
                             $scope.show_saved = false;

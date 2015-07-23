@@ -22,6 +22,8 @@ end
 #---------------
 
 post '/collages' do
+  puts "\n\n\nBEGINNING TO PARSE /collages now..."
+
   begin
     puts "\n\n\nBEGINNING TO PARSE /collages..."
 
@@ -32,10 +34,10 @@ post '/collages' do
     if @current_user
       pyuserid = @current_user.uuid
     else
-      pyuserid = parsed["pyuserid"]
+      pyuserid = request.cookies["pyuserid"]
     end
 
-    puts "pyuserid = #{pyuser}\n\n\n"
+    puts "pyuserid = #{pyuserid}\n\n\n"
 
     image     = parsed["image"].split(',')[1]
     dirname   = user_collage_file_path(pyuserid)
@@ -48,6 +50,8 @@ post '/collages' do
       puts "Making directory!"
       Dir.mkdir(dirname)
     end
+
+    puts "#{dirname}/#{file_name}"
 
     # Create a new file and save the image.
     File.open("#{dirname}/#{file_name}", 'wb') do |f|
