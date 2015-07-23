@@ -6,7 +6,7 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     $('#snapshot_ctrl').fadeIn();
     var mouse = 'up';
     var pyuserid    = getCookie(pyuseridtag);
-    var selfieCount = parseInt(getCookie("selfiecount") || 1);
+    var selfieCount = parseInt(getCookie("selfiecount") || 0);
     checkCookie(pyuserid);
 
     //canvas setup
@@ -124,7 +124,7 @@ app.controller('SnapshotCtrl', function($scope, $http, $timeout, $window){
     }
 
     $scope.keep = function(){
-      var selfieCount = getCookie("selfiecount") || 1
+      selfieCount += 1
       setCookie("selfiecount", selfieCount, 1)
       $window.location.href = "/scenario"
     }
