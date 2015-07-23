@@ -1,6 +1,8 @@
 var app = angular.module('PictureYourselfApp', ['ngResource', 'ngAnimate']);
 
 app.controller('LayoutCtrl', function($scope, $window){
+  $scope.careers = ["college", "medical", "military", "legal", "business"];
+
     $scope.show_quit = false;
 
     $scope.quit = function(){
@@ -16,8 +18,13 @@ app.controller('LayoutCtrl', function($scope, $window){
     }
 
     $scope.stickers_for_career = function(career){
+      if (career === "random") {
+        var randomInteger = Math.floor(Math.random() * $scope.careers.length);
+        career = $scope.careers[randomInteger];
+      }
+
       setCookie("career", career);
-      $window.location.href = "/stickers?career=" + career
+      $window.location.href = "/background?career=" + career
     }
 
     $scope.get_tos = function(){
