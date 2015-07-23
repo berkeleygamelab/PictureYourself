@@ -17,7 +17,7 @@ function kineticSetup(stage_width, stage_height){
 // Creates background object (Kinetic.Image) with image source and events
 // returns - Kinetic.Image
 function backgroundSetup(closeTools, default_background, layer, stage){
-    
+
     var background_obj = new Image();
 
     var background = new Kinetic.Image({
@@ -65,7 +65,7 @@ function change_color(color, layer, $scope){
     canvas.width = $scope.selected_background.width;
     canvas.height = $scope.selected_background.height;
 
-    // clears canvas 
+    // clears canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.drawImage($scope.selected_background, 0,0, canvas.width, canvas.height);
@@ -115,32 +115,62 @@ function grabBackgroundImages($scope, $http, $compile){
 //    categories - dictionary of categories id name and display title (e.g. {'shirts_and_shoes' : 'Shirts And Shoes'})
 //    sticker_keys - array of category id names used for keys in stickers dictionary. Perserves order
 function grabStickerImages($scope, $http, $compile){
-    var default_category = "shoes_and_pants";
-    // Grab stickers from server and append them to category
-    $http.get('/global_json/stickers.json').
-        success(function(data){
-                data = angular.fromJson(data);
-                $scope.visible = {};
-                $scope.stickers = data['stickers'];
-                $scope.categories = data['categories'];
-                $scope.sticker_keys = Object.keys($scope.categories);
+  var default_category = "shoes_and_pants";
+  // Grab stickers from server and append them to category
 
-                angular.forEach($scope.stickers, function(stickers,category){
-                    // Category is open on page load if it's the default category
-                    $scope.visible[category] = (category == default_category);
+  var career = location.search.split("?career=")[1] || getCookie("career");
+  if (career) {
+    $http.get('/careers/' + career + '/stickers').success(function(data) {
+      data                = angular.fromJson(data);
+      console.log(data)
+      $scope.visible      = {};
+      $scope.stickers     = data['stickers'];
+      $scope.categories   = data['categories'];
+      $scope.sticker_keys = Object.keys($scope.categories);
 
-                    // Assign background and foreground sources for chroma green stickers
-                    angular.forEach(stickers, function(sticker){
-                            if(sticker.chroma_green){
-                                $scope.image_sources[sticker.name] = {'fore':sticker.fore_source,
-                                                                     'back': sticker.back_source};
-                            };
-                            if(sticker.text){
-                                $scope.sticker_text[sticker.name] = true;
-                            };
-                    });
-                });
+      angular.forEach($scope.stickers, function(stickers, category){
+        console.log(category)
+        // Category is open on page load if it's the default category
+        $scope.visible[category] = (category == default_category);
+
+        // Assign background and foreground sources for chroma green stickers
+        angular.forEach(stickers, function(sticker){
+          if(sticker.chroma_green){
+            $scope.image_sources[sticker.name] = {'fore':sticker.fore_source, 'back': sticker.back_source};
+          };
+          if(sticker.text){
+            $scope.sticker_text[sticker.name] = true;
+          };
         });
+
+      });
+    });
+  } else {
+    $http.get('/global_json/stickers.json').
+      success(function(data) {
+        data                = angular.fromJson(data);
+        $scope.visible      = {};
+        $scope.stickers     = data['stickers'];
+        $scope.categories   = data['categories'];
+        $scope.sticker_keys = Object.keys($scope.categories);
+
+        angular.forEach($scope.stickers, function(stickers, category){
+          // Category is open on page load if it's the default category
+          $scope.visible[category] = (category == default_category);
+
+          // Assign background and foreground sources for chroma green stickers
+          angular.forEach(stickers, function(sticker){
+            if(sticker.chroma_green){
+              $scope.image_sources[sticker.name] = {'fore':sticker.fore_source, 'back': sticker.back_source};
+            };
+            if(sticker.text){
+              $scope.sticker_text[sticker.name] = true;
+            };
+          });
+
+        });
+      });
+    }
 }
 
 // Changes hex code to rgb values
@@ -153,5 +183,3 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16)
     } : null;
 };
-
-
