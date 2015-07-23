@@ -88,8 +88,8 @@ def user_selfie_path(uuid)
   return "users/#{uuid}"
 end
 
-def user_self_file_path(uuid)
-  return "#{settings.root}/public/" + user_self_path(uuid)
+def user_selfie_file_path(uuid)
+  return "#{settings.root}/public/" + user_selfie_path(uuid)
 end
 
 def collages_path

@@ -149,3 +149,21 @@ post '/email' do
 end
 
 #------------------------------------------------------------------------------
+# GET /selfies
+
+get '/selfies' do
+  uuid = @current_user.uuid if @current_user.present?
+  uuid = request.cookies["pyuserid"] if uuid.blank?
+
+  puts "uuid: #{uuid}\n\n\n"
+
+  filenames = []
+  Dir["#{user_selfie_file_path(uuid)}/*"].each do |f|
+    filenames << f.split("/")[-1]
+  end
+
+  filenames.map {|f| user_selfie_path(uuid) + "/" + f}.to_json
+end
+
+
+#------------------------------------------------------------------------------
