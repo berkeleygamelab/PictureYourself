@@ -350,7 +350,7 @@ app // Need this for .controller and .directive
                         formData = {"image": dataUrl};
                         $http.post('/collages', formData).success(function(data){
                             $scope.show_saving_collage = false;
-                            $scope.show_saved = false;
+                            $scope.show_saved          = true;
                             $('#scenario_ctrl').css('pointer-events', '');
                             window.location.href = "/comic";
 

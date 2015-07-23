@@ -13,7 +13,13 @@ require "sinatra/cookies"
 require "sinatra/activerecord"
 require 'sinatra/flash'
 
+use Rack::Logger
 
+helpers do
+  def logger
+    request.logger
+  end
+end
 
 #------------------------------------------------------------------------------
 # Configuration

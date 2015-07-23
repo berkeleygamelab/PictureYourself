@@ -22,14 +22,12 @@ end
 #---------------
 
 post '/collages' do
-  puts "\n\n\nBEGINNING TO PARSE /collages now..."
+  logger.info "Beginning to parse /collages..."
 
   begin
-    puts "\n\n\nBEGINNING TO PARSE /collages..."
+    logger.info "Inside begin block (Beginning to parse /collages...)"
 
     parsed   = JSON.parse request.body.read
-
-    puts "parsed = #{parsed}\n\n\n"
 
     if @current_user
       pyuserid = @current_user.uuid
@@ -37,21 +35,19 @@ post '/collages' do
       pyuserid = request.cookies["pyuserid"]
     end
 
-    puts "pyuserid = #{pyuserid}\n\n\n"
+    logger.info "pyuserid = #{pyuserid}"
 
     image     = parsed["image"].split(',')[1]
     dirname   = user_collage_file_path(pyuserid)
     file_name = SecureRandom.hex + ".png"
 
-    puts "dirname = #{dirname} & file_name = #{file_name}"
+    logger.info "dirname = #{dirname} & file_name = #{file_name}"
 
     # Create if the directory doesn't exist yet.
     unless File.directory?(dirname)
-      puts "Making directory!"
+      logger.info "Making directory!"
       Dir.mkdir(dirname)
     end
-
-    puts "#{dirname}/#{file_name}"
 
     # Create a new file and save the image.
     File.open("#{dirname}/#{file_name}", 'wb') do |f|
@@ -60,21 +56,20 @@ post '/collages' do
 
     # At this point, everything worked and the file is persisted to disk. Let's
     # create a new Collage object.
-    puts "Saving college!"
+    logger.info "Saving collage!"
 
     @collage           = Collage.new
     @collage.user_id   = @current_user.id
     @collage.file_name = file_name
     @collage.save!
 
-    puts "Collage saved! Returning...\n\n\n"
+    logger.info "Collage saved! Returning...\n\n\n"
 
 
     return "#{user_collage_path(pyuserid)}/#{file_name}"
   rescue => exception
-    puts "[Error] Something went wrong:\n\n\n"
-    puts exception.inspect
-    puts "\n\n\n"
+    logger.error "[Error] Something went wrong:\n\n\n"
+    logger.error exception.inspect
     status 500
   end
 end
