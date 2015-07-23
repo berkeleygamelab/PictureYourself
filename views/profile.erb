@@ -15,6 +15,23 @@
       <div class="well">
         <%= styled_flash %>
       </div>
+
+      <div class="text-center">
+        <h1>
+          Your collages
+        </h1>
+        <% if @collages.count == 0 %>
+          <p>You have no collages!</p>
+          <a href="/career" class="btn btn-success btn-lg">
+            Create one now!
+          </a>
+
+        <% else %>
+          <% @collages.each do |c| %>
+            <img src="<%= c.file_path %>" />
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </body>

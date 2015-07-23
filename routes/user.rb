@@ -24,6 +24,9 @@ get "/profile" do
     flash[:error] = "You need to login before proceeding!"
     redirect to("/login") and return
   else
+    @collages = Collage.where(:user_id => @current_user.id)
+    puts "@collages: #{@collages.inspect}"
+
     erb :profile
   end
 end
