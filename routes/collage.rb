@@ -23,7 +23,11 @@ end
 
 post '/collages' do
   begin
+    puts "\n\n\nBEGINNING TO PARSE /collages..."
+
     parsed   = JSON.parse request.body.read
+
+    puts "parsed = #{parsed}\n\n\n"
 
     if @current_user
       pyuserid = @current_user.uuid
@@ -31,30 +35,38 @@ post '/collages' do
       pyuserid = parsed["pyuserid"]
     end
 
-    title    = parsed["title"].downcase.strip.gsub(" ", "_")
-    image    = parsed["image"].split(',')[1]
+    puts "pyuserid = #{pyuser}\n\n\n"
+
+    image     = parsed["image"].split(',')[1]
     dirname   = user_collage_file_path(pyuserid)
+    file_name = SecureRandom.hex + ".png"
+
+    puts "dirname = #{dirname} & file_name = #{file_name}"
 
     # Create if the directory doesn't exist yet.
     unless File.directory?(dirname)
+      puts "Making directory!"
       Dir.mkdir(dirname)
     end
 
     # Create a new file and save the image.
-    file_path = "#{dirname}/#{title}.png"
-    File.open(file_path, 'wb') do |f|
+    File.open("#{dirname}/#{file_name}", 'wb') do |f|
       f.write(Base64.decode64(image))
     end
 
     # At this point, everything worked and the file is persisted to disk. Let's
     # create a new Collage object.
+    puts "Saving college!"
+
     @collage           = Collage.new
     @collage.user_id   = @current_user.id
-    @collage.title     = parsed["title"]
-    @collage.file_name = title + ".png"
+    @collage.file_name = file_name
     @collage.save!
 
-    return "#{user_collage_path(pyuserid)}/#{title}.png"
+    puts "Collage saved! Returning...\n\n\n"
+
+
+    return "#{user_collage_path(pyuserid)}/#{file_name}"
   rescue => exception
     puts "[Error] Something went wrong:\n\n\n"
     puts exception.inspect

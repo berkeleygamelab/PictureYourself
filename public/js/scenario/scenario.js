@@ -348,7 +348,7 @@ app // Need this for .controller and .directive
                         formData = {"title": $scope.title, "image": dataUrl, "pyuserid": getCookie('pyuserid')};
                         $http.post('/collages', formData).success(function(data){
                             $scope.show_saving_collage = false;
-                            $scope.show_saved = true;
+                            $scope.show_saved = false;
                             $('#scenario_ctrl').css('pointer-events', '');
                             window.location.href = "/comic";
 
