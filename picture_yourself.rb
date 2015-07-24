@@ -188,7 +188,7 @@ end
 #----------
 
 get "/feed" do
-  @comics = ComicStrip.order("comic_strips.created_at DESC").includes(:collages).order("collages.position ASC").limit(10)
+  @comics = ComicStrip.order("comic_strips.created_at DESC").includes(:collages).order("collages.position ASC")
   erb :feed
 end
 
