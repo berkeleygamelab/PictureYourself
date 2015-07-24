@@ -1,10 +1,21 @@
-var app = angular.module('PictureYourselfApp', ['ngResource']);
+app.controller('ComicCtrl', function($scope, $timeout, $window, $http, $attrs){
+  $scope.comics = angular.fromJson($attrs.comics);
 
-app.controller('ComicCtrl', function($scope, $window, $http, $attrs){
+  var randomInteger = Math.floor(Math.random() * $scope.comics.length);
+  $scope.comic = $scope.comics[randomInteger];
 
-  $scope.comic = angular.fromJson($attrs.comic);
-  console.log($attrs)
-  console.log($scope.comic)
+  var sampleComic = function() {
+    $timeout(function() {
+      var randomInteger = Math.floor(Math.random() * $scope.comics.length);
+      $scope.comic = $scope.comics[randomInteger];
+      console.log("Now sampling comic!")
+      console.log($scope.comic)
+      sampleComic();
+    }, 5000);
+  }
+
+  sampleComic()
+
 
 
 });

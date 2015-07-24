@@ -1,2 +1,23 @@
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="/css/feed.css">
+
+<div class="feed" ng-controller="ComicCtrl", comics = <%= @comics.to_json(:include => { :user => {:only => [:name]}, :collages => {:methods => [:file_path]} } ) %>>
+  <div class ="row">
+    {{$scope.comic}}
+    <div class="col-md-12 text-center">
+      <h1>
+        Comic created by {{comic.user.name}}
+      </h1>
+
+      <div ng-repeat = "collage in comic.collages", ng-class-even = "'row'">
+        <div class="col-md-6">
+          <img ng-src="{{collage.file_path}}" style="width:600px;" />
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
