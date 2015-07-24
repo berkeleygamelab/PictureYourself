@@ -8,9 +8,9 @@ font-size:100px;
 margin-right:22%;
 background-color:transparent;
 margin-top:-50%;
-color: white;
-text-shadow: 2px 2px 4px #000000;
-
+color: transparent;
+/*text-shadow: 2px 2px 4px #000000;
+*/
 
 }
 
@@ -19,9 +19,9 @@ text-shadow: 2px 2px 4px #000000;
   margin-right:37.5%;
   color:white;
   margin-bottom: 1.75%;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-}
+  color: transparent;
+/*  text-shadow: 2px 2px 4px #000000;
+*/}
 
 
 /*#snapshot_button_div{
@@ -244,10 +244,10 @@ a:active {
 #plant{
   margin-bottom: 1%;
 }
-img#plant {
+/*img#plant {
   background-color:black;
   opacity:0.5;
-}
+}*/
 .faq {
   font-size:24px;
 }
