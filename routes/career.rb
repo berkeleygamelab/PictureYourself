@@ -41,7 +41,7 @@ get '/careers/:career/stickers' do |career|
     # backgorund object (usually the customizable chroma skin color).
     # We don't yet have such mappings for other careers.
     if career == "college"
-      f = File.open(settings.root + '/public/editable_clothes/college.json')
+      f = File.open(settings.root + '/public/chroma_mappings/college.json')
       file_names = JSON.parse(f.read)
       file_names.each do |fn|
         relative_fn = fn["source"].split("/public/")[-1]
