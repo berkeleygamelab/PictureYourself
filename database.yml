@@ -11,4 +11,4 @@ development:
 
 production:
   adapter: "sqlite3"
-  database: "picyourfuture.sqlite3"
+  database: "../picyourfuture.sqlite3"
