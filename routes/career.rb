@@ -33,10 +33,30 @@ get '/careers/:career/stickers' do |career|
 
     # Define an array of clothes for the career.
     clothes_array = []
-    file_names = Dir["#{settings.root}/public/images/careers/#{career}/clothes/*"]
-    file_names.each do |fn|
-      relative_fn = fn.split("/public/")[-1]
-      clothes_array << {:source => relative_fn, :name => relative_fn, "back_source" => "", "fore_source" => ""}
+
+    # NOTE: If the career chosen is college, then we use the original routes
+    # to clothes/people/objects defined in college_career_objects.json. Why?
+    # Because these objects have a well-defined mapping that associates two
+    # images with a clothing object: foreground object (usually the clothing) and
+    # backgorund object (usually the customizable chroma skin color).
+    # We don't yet have such mappings for other careers.
+    if career == "college"
+      f = File.open(settings.root + '/public/college_career_objects.json')
+      stickers = JSON.parse(f.read)["stickers"]
+      existing_stickers = stickers.values.map {|el| el.values}.flatten
+      chroma_stickers   = existing_stickers.find_all {|es| es["chroma_green"] == true}
+
+      file_names = stickers["shoes_and_pants"].values
+      file_names.each do |fn|
+        relative_fn = fn["source"].split("/public/")[-1]
+        clothes_array << fn.merge(:source => relative_fn, :name => relative_fn)
+      end
+    else
+      file_names = Dir["#{settings.root}/public/images/careers/#{career}/clothes/*"]
+      file_names.each do |fn|
+        relative_fn = fn.split("/public/")[-1]
+        clothes_array << {:source => relative_fn, :name => relative_fn, "back_source" => "", "fore_source" => ""}
+      end
     end
 
     stickers["clothes"] = clothes_array
