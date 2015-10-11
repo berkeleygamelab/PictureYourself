@@ -57,7 +57,7 @@
               <% if @current_user.present? %>
                 <input type='button' id='login' class='button' ng-click='logout()' value = "LOGOUT">
               <% else %>
-                <input type='button' id='login' class='button' ng-click='login()' value = "LOGIN">
+                <input type='button' id='login' class='button' ng-click="register()" value = "REGISTER">
               <% end %>
           </div>
           <div class = "mainNav clearfix">
