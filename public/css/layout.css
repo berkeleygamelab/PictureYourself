@@ -440,7 +440,6 @@ a:hover {
 #login {
   transition: 1.0s ease;
   background-color: rgba(242,105,100,1);
-  border-radius: 0;
   height: 53px;
   left: 20px;
   margin-top:1.5px;
@@ -448,15 +447,28 @@ a:hover {
 }
 
 .login_div {
-  display: block;
-  position: relative;
+/*  display: block;
+*/  position: relative;
+  border-radius: 7px solid;
+
   top: -86px;
 }
 
 #login:hover {
   transition: 1.0s;
   background-color: rgba(210, 89, 85, 1);
-  color: black;
+}
+
+@media only screen and (max-width: 905px) {
+  #login_div {
+    display:none;
+  }
+  #login{
+    display:none;
+  }
+  #navicon {
+
+  }
 }
 
 .navytabby {
@@ -508,13 +520,13 @@ td {
 .navicon{
   transition: 1.0s ease;
   font-size: 40px;
-  margin: 10px 25px ;
   float: right;
   color: seashell;
-  top: -11px;
+  top:-2%;
   position: absolute;
-  left: 1090px;
-  margin-left:-25%;
+  left: 85%;
+  display:block;
+  margin: 0 auto;
   cursor: pointer;
 
  }
@@ -532,8 +544,7 @@ td {
   display: none;
   top: 50px;
   position: absolute;
-  left: 1113px;
-  margin-left:-41%;
+  left: 82.5%;
     font-family: 'Avenir', sans-serif;
 
   background-color:rgba(19,82,162,1);
@@ -542,8 +553,8 @@ td {
   transition: 1.0s ease;
   font-size: 20px;
   padding: 20px;
-  padding-top:0px;
-  padding-bottom:1px;
+  padding-top:5px;
+  padding-bottom:5px;
   width: 100%;
   background-color: rgba(242,105,100,1);
   color:white;
@@ -564,9 +575,24 @@ td {
   color: black;
  }
 
- li {
-  display:inline;
+ @media only screen and (max-width: 1215px) {
+ .mainNavDropDown {
+  left:81.5%;
  }
+  @media only screen and (max-width: 1000px) {
+ .mainNavDropDown {
+  left:81%;
+ }
+   @media only screen and (max-width: 885px) {
+ .mainNavDropDown {
+  left:80.5%;
+ }
+
+}
+
+ li {
+/*  display:inline;
+*/ }
 
 body{
     font-family: 'Avenir', sans-serif;
