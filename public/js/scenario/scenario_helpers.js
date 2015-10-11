@@ -97,17 +97,6 @@ function change_color(color, layer, $scope){
     layer.draw();
 }
 
-// Ajax call to server for background images
-//  assigns image data to $scope.background_images
-function grabBackgroundImages($scope, $http, $compile){
-    // Grab backgrounds from server
-    $http.get('/global_json/backgrounds.json').success(
-        function(data)
-        {
-            $scope.background_images = data;
-        }) ;
-}
-
 // Ajax call to server for sticker images
 //  creates $scope variables :
 //    visible - dictionary of categories and if their stickers are visible
