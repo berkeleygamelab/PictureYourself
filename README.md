@@ -6,12 +6,11 @@ The Picture Yourself application uses visual storytelling practices like the "se
 
 ## installation
 
-1. Install [rvm](https://rvm.io/) Ruby manager,
-2. Install Ruby version 1.9.3-p448,
-3. Install all the Ruby libraries by running `bundle install`. Make sure that `bundler` gem is installed (if it is not, run `gem install bundler`).
-4. Install homebrew on Mac or Linux.
-5. Install OpenCV by running `brew install opencv`
-6. Run `grabcut.sh` script to configure GrabCut.
+1. Install Ruby version 1.9.3-p448,
+2. Install all the Ruby libraries by running `bundle install`. Make sure that `bundler` gem is installed (if it is not, run `gem install bundler`).
+3. Install homebrew on Mac or Linux.
+4. Install OpenCV by running `brew install opencv`
+5. Run `grabcut.sh` script to configure GrabCut.
 
 ## Running the app
 
