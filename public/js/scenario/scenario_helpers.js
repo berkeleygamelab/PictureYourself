@@ -29,8 +29,6 @@ function backgroundSetup(closeTools, layer, stage){
         id: 'background',
     });
 
-    background_obj.src = '/images/stickers/0-backgrounds/ASproul.jpg';
-
     background_obj.onload = function(){
         layer.add(background);
         background.setZIndex(0);
@@ -108,58 +106,31 @@ function grabStickerImages($scope, $http, $compile){
   // Grab stickers from server and append them to category
 
   var career = location.search.split("?career=")[1] || getCookie("career");
-  if (career) {
-    $http.get('/careers/' + career + '/stickers').success(function(data) {
-      data                = angular.fromJson(data);
-      console.log(data)
-      $scope.visible      = {};
-      $scope.stickers     = data['stickers'];
-      $scope.categories   = data['categories'];
-      $scope.sticker_keys = Object.keys($scope.categories);
+  $http.get('/careers/' + career + '/stickers').success(function(data) {
+    data                = angular.fromJson(data);
+    $scope.visible      = {};
+    $scope.stickers     = data['stickers'];
+    $scope.categories   = data['categories'];
+    $scope.sticker_keys = Object.keys($scope.categories);
 
-      angular.forEach($scope.stickers, function(stickers, category){
-        console.log(category)
-        // Category is open on page load if it's the default category
-        $scope.visible[category] = (category == default_category);
+    angular.forEach($scope.stickers, function(stickers, category){
+      // Category is open on page load if it's the default category
+      $scope.visible[category] = (category == default_category);
 
-        // Assign background and foreground sources for chroma green stickers
-        angular.forEach(stickers, function(sticker){
-          if(sticker.chroma_green){
-            $scope.image_sources[sticker.name] = {'fore':sticker.fore_source, 'back': sticker.back_source};
-          };
-          if(sticker.text){
-            $scope.sticker_text[sticker.name] = true;
-          };
-        });
-
+      // Assign background and foreground sources for chroma green stickers
+      angular.forEach(stickers, function(sticker){
+        if(sticker.chroma_green){
+          console.log(sticker)
+          $scope.image_sources[sticker.name] = {'fore':sticker.fore_source, 'back': sticker.back_source};
+        };
+        if(sticker.text){
+          $scope.sticker_text[sticker.name] = true;
+        };
       });
+
     });
-  } else {
-    $http.get('/global_json/stickers.json').
-      success(function(data) {
-        data                = angular.fromJson(data);
-        $scope.visible      = {};
-        $scope.stickers     = data['stickers'];
-        $scope.categories   = data['categories'];
-        $scope.sticker_keys = Object.keys($scope.categories);
+  });
 
-        angular.forEach($scope.stickers, function(stickers, category){
-          // Category is open on page load if it's the default category
-          $scope.visible[category] = (category == default_category);
-
-          // Assign background and foreground sources for chroma green stickers
-          angular.forEach(stickers, function(sticker){
-            if(sticker.chroma_green){
-              $scope.image_sources[sticker.name] = {'fore':sticker.fore_source, 'back': sticker.back_source};
-            };
-            if(sticker.text){
-              $scope.sticker_text[sticker.name] = true;
-            };
-          });
-
-        });
-      });
-    }
 }
 
 // Changes hex code to rgb values

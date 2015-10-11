@@ -42,11 +42,7 @@ get '/careers/:career/stickers' do |career|
     # We don't yet have such mappings for other careers.
     if career == "college"
       f = File.open(settings.root + '/public/college_career_objects.json')
-      stickers = JSON.parse(f.read)["stickers"]
-      existing_stickers = stickers.values.map {|el| el.values}.flatten
-      chroma_stickers   = existing_stickers.find_all {|es| es["chroma_green"] == true}
-
-      file_names = stickers["shoes_and_pants"].values
+      file_names = JSON.parse(f.read)
       file_names.each do |fn|
         relative_fn = fn["source"].split("/public/")[-1]
         clothes_array << fn.merge(:source => relative_fn, :name => relative_fn)
