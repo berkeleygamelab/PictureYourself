@@ -16,7 +16,7 @@ function kineticSetup(stage_width, stage_height){
 
 // Creates background object (Kinetic.Image) with image source and events
 // returns - Kinetic.Image
-function backgroundSetup(closeTools, default_background, layer, stage){
+function backgroundSetup(closeTools, layer, stage){
 
     var background_obj = new Image();
 
@@ -29,7 +29,7 @@ function backgroundSetup(closeTools, default_background, layer, stage){
         id: 'background',
     });
 
-    background_obj.src = default_background;
+    background_obj.src = '/images/stickers/0-backgrounds/ASproul.jpg';
 
     background_obj.onload = function(){
         layer.add(background);

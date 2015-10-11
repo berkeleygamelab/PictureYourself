@@ -3,10 +3,6 @@
 //COLOR PICKER - https://github.com/tkrotoff/jquery-simplecolorpicker
 
 //This flag is used to determine if you want console output or not.
-//Don't use console.log, instead use debug("some thing you want to send to console")
-var debug_flag = true;
-var default_background = '/images/stickers/0-backgrounds/ASproul.jpg';
-
 $(document).ready(function() {
   var formData;
   /*
@@ -25,7 +21,6 @@ $(document).ready(function() {
 
   // Canvas where color changing occurs. Should always be hidden
   $("#color_change_canvas").hide();
-
 });
 
 
@@ -41,7 +36,7 @@ $(document).ready(function() {
     without $injector
 */
 
-app.controller('ScenarioCtrl', function($scope, $resource, $http, $compile, $timeout, Sticker){
+angular.module('PictureYourselfApp').controller('ScenarioCtrl', function($scope, $resource, $http, $timeout, Sticker){
     var stage_width = $('#container').width()
     var stage_height = $('#container').height()
 
@@ -93,7 +88,7 @@ app.controller('ScenarioCtrl', function($scope, $resource, $http, $compile, $tim
         layer.draw();
     };
 
-    $scope.background = backgroundSetup(closeTools, default_background, layer, stage);
+    $scope.background = backgroundSetup(closeTools, layer, stage);
 
     $scope.selfies = []
     $http.get("/selfies").success(function(data) {
@@ -122,7 +117,7 @@ app.controller('ScenarioCtrl', function($scope, $resource, $http, $compile, $tim
     };
 
     // Ajax call to load background images and stickers
-    grabStickerImages($scope, $http, $compile);
+    grabStickerImages($scope, $http);
 
     // Called by custom directive to add event to start start of sticker drag
     $scope.addDrag = function(){
@@ -131,10 +126,10 @@ app.controller('ScenarioCtrl', function($scope, $resource, $http, $compile, $tim
 
         // Flag so color change tool is added to sticker
         if($(this).data('chroma_green') == true){
-            $scope.chroma_green = true;
+          $scope.chroma_green = true;
         }
         else{
-            $scope.chroma_green = false;
+          $scope.chroma_green = false;
         }
       });
     };
@@ -355,11 +350,3 @@ app.directive('addDrag', function(){
     $scope.$eval('addDrag()');
   }
 });
-
-
-//Used to make it easy to turn on and off console.log
-function debug(msg){
-    if(debug_flag){
-        console.log(msg);
-    }
-}
