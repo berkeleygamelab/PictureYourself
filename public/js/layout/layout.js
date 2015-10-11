@@ -1,5 +1,3 @@
-var app = angular.module('PictureYourselfApp', ['ngResource', 'ngAnimate']);
-
 app.controller('LayoutCtrl', function($scope, $window, $http){
   $scope.careers = ["college", "medical", "military", "legal", "business"];
 
@@ -59,5 +57,3 @@ app.controller('LayoutCtrl', function($scope, $window, $http){
     }
 
 });
-
-// LayoutCtrl.$inject = ['$scope', '$window'];  //for minifying angular

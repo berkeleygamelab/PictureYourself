@@ -3,14 +3,20 @@
 <link rel="stylesheet" href="/css/index.css">
 
 <!-- Putting this at the top allows the /background page to load properly -->
-<script type="text/javascript" src="/js/background/background.js"></script>
+<script type="text/javascript" src="/js/angular/controllers/background.js"></script>
 
 <div id='background_view'>
   <div ng-controller="BackgroundCtrl" id='background_ctrl'>
     <div class="background_container">
       <div class="background_header">Choose a background image for your collage</div>
+
+      <h1 class="text-center" style="font-size: 64px;" ng-hide="loadingComplete === true">
+        <i class="fa fa-spin fa-repeat"></i>
+      </h1>
+
       <div class="backgrounds_div" slick-slider>
-        <div ng-repeat='background in background_images'>
+
+        <div ng-repeat='background in background_images' repeat-complete="applyCarousel()">
           <img ng-src='{{background.source}}' class='backgrounds' alt='{{background.name}}' />
         </div>
       </div>
