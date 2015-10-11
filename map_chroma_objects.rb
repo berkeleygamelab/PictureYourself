@@ -1,7 +1,12 @@
 # This file is responsible for creating a mapping between files named with _display
 # suffix to their respective foreground and background images.
+# For instance, to create a mapping for clothing objects for college career, I did
+# the following:
+# ruby map_chroma_objects.rb > public/editable_clothes/college.json
+
 require 'json'
 
+# TODO: Ask for user input rather than hard-coding here.
 directory_to_map = "public/images/careers/college/clothes"
 folders = Dir.glob(directory_to_map + "/*").reject{|f| f.include? '0-' }
 

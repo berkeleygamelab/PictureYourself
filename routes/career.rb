@@ -34,14 +34,14 @@ get '/careers/:career/stickers' do |career|
     # Define an array of clothes for the career.
     clothes_array = []
 
-    # NOTE: If the career chosen is college, then we use the original routes
-    # to clothes/people/objects defined in college_career_objects.json. Why?
+    # NOTE: If the career chosen is college, then we use the objects
+    # defined in college_career_objects.json. Why?
     # Because these objects have a well-defined mapping that associates two
     # images with a clothing object: foreground object (usually the clothing) and
     # backgorund object (usually the customizable chroma skin color).
     # We don't yet have such mappings for other careers.
     if career == "college"
-      f = File.open(settings.root + '/public/college_career_objects.json')
+      f = File.open(settings.root + '/public/editable_clothes/college.json')
       file_names = JSON.parse(f.read)
       file_names.each do |fn|
         relative_fn = fn["source"].split("/public/")[-1]
