@@ -20,6 +20,10 @@ To start the app, run
 ruby picture_yourself.rb
 ```
 
+## Deploying
+
+Check out the [wiki](https://github.com/berkeleygamelab/PictureYourself/wiki) to learn how to deploy the app to different servers.
+
 ## Frameworks
 
   - Backend uses Ruby with [Sinatra](http://www.sinatrarb.com/)
@@ -43,6 +47,7 @@ ruby picture_yourself.rb
     Reason: image not found
   ```
   then you may need reinstall OpenCV from source instead of bottled version (source). If you have OpenCV installed already, run   brew remove opencv followed by brew install -fs opencv.
+
 
 ## Style
 - Use 4 spaces (**not tabs**) for indentation. Most text editors should automatically change tabs into spaces.
