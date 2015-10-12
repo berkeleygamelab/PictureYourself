@@ -7,7 +7,7 @@
 #---------
 
 get "/users", :provides => :json do
-  if params[:token] == "R7dBjMP39"
+  if params[:token] == ENV["USERS_TOKEN"]
     content_type :json
     @users = User.all
     @users.to_json
@@ -101,7 +101,6 @@ end
 
 post "/users" do
   puts "params:#{params}\n\n\n"
-
   @user = User.find_by_email(params[:email])
   puts "@user.inspect: #{@user.inspect}"
   if @user.present?
@@ -144,6 +143,7 @@ post '/email' do
   emails   = parsed["emails"]
   fileName = parsed["fileName"]
 
+  # TODO: Update the body to use correct server name.
   Mail.deliver do
     to emails
     from 'picyourfuture@gmail.com'
