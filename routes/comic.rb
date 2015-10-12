@@ -1,3 +1,23 @@
+#------------------------------------------------------------------------------
+# GET /comic
+#----------
+
+get "/comics", :provides => :json do
+  @comics = @current_user.comic_strips.order("created_at DESC")
+  return @comics.to_json(:include => [:collages])
+end
+
+
+#------------------------------------------------------------------------------
+# GET /comic
+#----------
+
+get "/comic" do
+  @comic   = @current_user.comic_strips.order("created_at DESC").where(:finished_at => nil).limit(1).first
+  erb :comic
+end
+
+
 
 #------------------------------------------------------------------------------
 # POST /comic/:id

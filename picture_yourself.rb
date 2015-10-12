@@ -13,6 +13,10 @@ require "sinatra/cookies"
 require "sinatra/activerecord"
 require 'sinatra/flash'
 
+# Load environment variables specified in .env
+require 'dotenv'
+Dotenv.load
+
 use Rack::Logger
 
 helpers do
@@ -29,12 +33,9 @@ set :lock, true
 set :server, 'thin'
 set :database_file, "database.yml"
 
-
-# Load environment variables specified in .env
-require 'dotenv'
-Dotenv.load
-
-#mail Settings
+#------------------------------------------------------------------------------
+# Mailer
+#-------
 domain = ENV["RAILS_HOST"] || 'py-bcnm.berkeley.edu'
 options = { :address              => "smtp.gmail.com",
             :port                 => 587,
@@ -66,6 +67,7 @@ require "./routes/collage.rb"
 require "./routes/apis.rb"
 require "./routes/career.rb"
 require "./routes/comic.rb"
+require "./routes/feed.rb"
 
 
 
@@ -85,7 +87,6 @@ end
 #------------------------------------------------------------------------------
 # Helper methods
 #---------------
-
 
 def login(user)
   user.update_column(:auth_token, SecureRandom.hex)  if user.auth_token.blank?
@@ -150,6 +151,16 @@ get "/tos" do
   erb :tos
 end
 
+
+#------------------------------------------------------------------------------
+# GET /career
+#----------
+
+get "/career" do
+  erb :career
+end
+
+
 #------------------------------------------------------------------------------
 # GET /camera
 #---------
@@ -180,34 +191,6 @@ get "/scenario" do
   erb :scenario
 end
 
-
-#------------------------------------------------------------------------------
-# GET /feed
-#----------
-
-get "/feed" do
-  @comics = ComicStrip.order("comic_strips.created_at DESC").includes(:collages).order("collages.position ASC")
-  erb :feed
-end
-
-get "/feed/edit" do
-  unless params[:token] == ENV["FEED_EDIT_TOKEN"]
-    flash[:error] = "You do not have permission to view this page"
-    redirect to("/feed") and return
-  end
-
-  @comics = ComicStrip.order("comic_strips.created_at DESC").includes(:collages).order("collages.position ASC")
-  erb :feed_edit
-end
-
-#------------------------------------------------------------------------------
-# GET /career
-#----------
-
-get "/career" do
-  erb :career
-end
-
 #------------------------------------------------------------------------------
 # GET /stickers
 #----------
@@ -228,31 +211,8 @@ get "/license" do
 end
 
 #------------------------------------------------------------------------------
-# GET /comic
-#----------
 
-get "/comic" do
-  @comic   = @current_user.comic_strips.order("created_at DESC").where(:finished_at => nil).limit(1).first
-
-  erb :comic
-end
-
-
-#------------------------------------------------------------------------------
-# GET /comic
-#----------
-
-get "/comics", :provides => :json do
-  @comics = @current_user.comic_strips.order("created_at DESC")
-
-  return @comics.to_json(:include => [:collages])
-end
-
-
-
-#------------------------------------------------------------------------------
-
-
+# TODO: Are we still using this?
 get "/selfie" do
   "users/#{request.cookies["pyuserid"]}/1_sticker.png"
 end
