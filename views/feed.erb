@@ -9,13 +9,17 @@
         Comic created by {{comic.user ? (comic.user.name ? comic.user.name : "a user") : "a user"}}
       </h1>
 
+      <table class="table table-bordered">
 
-      <div ng-repeat = "collage in comic.collages", ng-class-even = "'row'">
-        <div class="col-md-6">
-          <img ng-src="{{collage.file_path}}" style="width:600px;" />
-          <br></br>
-        </div>
-      </div>
+        <tr ng-repeat = "collage in comic.grouping">
+          <td style="width: 50%;">
+            <img ng-src="{{collage[0].file_path}}" style="width:600px;" />
+          </td>
+          <td style="width:50%;">
+            <img ng-src="{{collage[1].file_path}}" style="width:600px;" />
+          </td>
+        </tr>
+      </table>
 
 
 
