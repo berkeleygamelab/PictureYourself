@@ -35,6 +35,14 @@ Check out the [wiki](https://github.com/berkeleygamelab/PictureYourself/wiki) to
     - [slick.js](http://kenwheeler.github.io/slick/) for the background chooser carousel
     - [bootstrap](http://getbootstrap.com/) for modals and various other DOM elements
 
+## Environment variables
+You will find, littered throughout the code, reference to environment variables (e.g. `ENV["FEED_EDIT_TOKEN"]`). In order to avoid leaking private info, we use
+`dotenv` gem to store all our environment variables in `.env` file in root directory. Go ahead and create this file on your local machine, and contact
+dmitriskj@gmail.com to get all the environment variables.
+
+NOTE! If you're going to be deploying to a new server instance, you will need to
+copy these environment variables. I recommend creating `~/.profile` file on that
+server and entering `export FEED_EDIT_TOKEN='xyz'`.
 
 ## Troubleshooting
 - Occasionally, closing shotgun (Control-C) will hang, causing the port to be unusable in the future. To fix this, run `shotgun -p <port number> picture_yourself.rb`
