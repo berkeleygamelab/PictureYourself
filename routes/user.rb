@@ -49,8 +49,7 @@ end
 #------------
 
 get "/logout" do
-  @current_user        = nil
-  response.set_cookie("auth_token", "")
+  logout()
   flash[:success] = "You've successfully logged out"
   redirect to("/") and return
 end
@@ -79,7 +78,7 @@ post "/login" do
 
   # Let's make sure the password matches the stored password.
   if Base64.encode64(@user.password_digest) == Base64.encode64(params[:password_digest])
-    login_user(@user)
+    login(@user)
     flash[:success] = "You've successfully logged in!"
     redirect to("/profile") and return
   else
@@ -125,7 +124,7 @@ post "/users" do
     # Let's create an authentication token and log the user in.
     @user.update_column(:auth_token, SecureRandom.hex)
     @user.update_column(:uuid, request.cookies["pyuserid"]) if request.cookies["pyuserid"].present?
-    login_user(@user.reload)
+    login(@user.reload)
 
     flash[:success]      = "You've successfully created an account!"
     redirect to("/profile") and return

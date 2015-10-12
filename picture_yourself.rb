@@ -70,15 +70,11 @@ require "./routes/comic.rb"
 # Filters
 #--------
 before do
-  puts "request.cookies: #{request.cookies}"
-  puts "Attempting login"
-  puts "@current_user.blank? is #{@current_user.blank?}"
-  puts "request.cookies['auth_token'].present? is #{request.cookies["auth_token"].present?}"
-  if @current_user.blank? && request.cookies["auth_token"].present?
+  if request.cookies["auth_token"].present?
     @current_user = User.find_by_auth_token(request.cookies["auth_token"])
 
-    puts "Is @current_user present? #{@current_user.present?}"
-
+    # If we couldn't find the user for this auth token, then this token is no longer
+    # synced with database. Let's remove it.
     response.set_cookie("auth_token", "") if @current_user.blank?
   end
 end
@@ -87,9 +83,16 @@ end
 # Helper methods
 #---------------
 
-def login_user(user)
-  response.set_cookie( "auth_token", (user.auth_token || SecureRandom.hex) )
+
+def login(user)
+  user.update_column(:auth_token, SecureRandom.hex)  if user.auth_token.blank?
+  response.set_cookie( "auth_token", user.reload.auth_token)
   @current_user = user
+end
+
+def logout
+  @current_user = nil
+  response.set_cookie("auth_token", "")
 end
 
 def user_selfie_path(uuid)
@@ -162,22 +165,14 @@ end
 
 #------------------------------------------------------------------------------
 # GET /scenario
-#---------
+#--------------
 
 get "/scenario" do
-  puts "[/scenario] Inspecting @current_user: #{@current_user.inspect}"
-  puts "Here is request.cookies['pyuserid'] = #{request.cookies["pyuserid"]}"
   # NOTE: If we're at this point, then let's go ahead and create the user only
   # if we don't have an existing user with the pyuserid.
-  if @current_user.blank? && request.cookies["pyuserid"] && User.find_by_uuid(request.cookies["pyuserid"]).blank?
-    # It's important that we do not validate as we're missing name and email.
-    @user            = User.new
-    @user.created_at = Time.now
-    @user.uuid       = request.cookies["pyuserid"]
-    @user.auth_token = SecureRandom.hex
-    @user.save(:validate => false)
-    login_user(@user)
-  end
+  @user = User.find_by_uuid(request.cookies["pyuserid"])
+  @user = User.create_with_uuid(request.cookies["pyuserid"]) if @user.blank?
+  login(@user.reload)
 
   erb :scenario
 end
