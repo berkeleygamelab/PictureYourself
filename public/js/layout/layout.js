@@ -29,6 +29,10 @@ angular.module('PictureYourselfApp').controller('LayoutCtrl', function($scope, $
     $window.location.href = "/tos"
   }
 
+  $scope.profile = function() {
+    $window.location.href = "/profile"
+  }
+
   $scope.register = function() {
     $window.location.href = "/signup"
   }

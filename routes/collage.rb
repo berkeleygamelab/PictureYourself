@@ -27,7 +27,7 @@ post '/collages' do
   begin
     logger.info "Inside begin block (Beginning to parse /collages...)"
 
-    parsed   = JSON.parse request.body.read
+    parsed   = JSON.parse(request.body.read)
 
     if @current_user
       pyuserid = @current_user.uuid

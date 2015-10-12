@@ -55,7 +55,7 @@
           <div id="navright">
             <div class="login_div">
               <% if @current_user.present? %>
-                <input type='button' id='login' class='button' ng-click='logout()' value = "LOGOUT">
+                <input type='button' id='login' class='button' ng-click='profile()' value = "My Profile">
               <% else %>
                 <input type='button' id='login' class='button' ng-click="register()" value = "REGISTER">
               <% end %>

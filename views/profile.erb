@@ -20,6 +20,9 @@
         <h1>
           Your comic strips
         </h1>
+        <a href="#" ng-click="logout()" class="btn btn-danger btn-lg" style="margin-bottom: 20px;">
+          Logout
+        </a>
         <% if @comics.count == 0 %>
           <p>You have no comics!</p>
           <a href="/career" class="btn btn-success btn-lg">
