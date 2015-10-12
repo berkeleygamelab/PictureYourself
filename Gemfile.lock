@@ -67,6 +67,7 @@ GEM
       dm-core (~> 1.2.0)
     do_sqlite3 (0.10.13)
       data_objects (= 0.10.13)
+    dotenv (1.0.2)
     fastercsv (1.5.5)
     i18n (0.7.0)
     json (1.8.1)
@@ -120,6 +121,7 @@ DEPENDENCIES
   datamapper
   dm-sqlite-adapter
   dm-timestamps
+  dotenv
   mail
   rake
   shotgun

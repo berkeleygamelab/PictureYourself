@@ -12,3 +12,4 @@ documentation/*
 grabcut.backup
 
 picyourfuture.sqlite3
+.env

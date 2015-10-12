@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'datamapper'
 gem 'dm-timestamps'
 gem 'dm-sqlite-adapter'
+gem "dotenv"
 gem 'sinatra-contrib'
 gem 'mail'
 
