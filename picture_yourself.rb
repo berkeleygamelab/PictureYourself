@@ -29,13 +29,18 @@ set :lock, true
 set :server, 'thin'
 set :database_file, "database.yml"
 
+
+# Load environment variables specified in .env
+require 'dotenv'
+Dotenv.load
+
 #mail Settings
 domain = ENV["RAILS_HOST"] || 'py-bcnm.berkeley.edu'
 options = { :address              => "smtp.gmail.com",
             :port                 => 587,
             :domain               => domain,
-            :user_name            => 'picyourfuture',
-            :password             => 'Py12ab21yP',
+            :user_name            => ENV["GMAIL_USERNAME"],
+            :password             => ENV["GMAIL_PASSWORD"],
             :authentication       => 'plain',
             :enable_starttls_auto => true  }
 
