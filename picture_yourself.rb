@@ -46,11 +46,9 @@ options = { :address              => "smtp.gmail.com",
 
 enable :sessions
 
-
 Mail.defaults do
   delivery_method :smtp, options
 end
-
 
 #------------------------------------------------------------------------------
 # App-specific models
