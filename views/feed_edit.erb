@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/feed.css">
+
+<div class="feed">
+  <div class="well" style="color:red;">
+    <%= styled_flash %>
+  </div>
+
+  <% @comics.each do |comic| %>
+    <div class ="row">
+      <div class="col-md-3">
+        Comic by user:
+        <%= comic.user.inspect %>
+      </div>
+
+      <div class="col-md-6">
+        <% comic.collages.each do |collage| %>
+          <img src="/<%= collage.file_path %>" style="width:100px;" />
+        <% end %>
+      </div>
+
+      <div class ="col-md-3">
+        <a href="/comic/<%= comic.id%>?token=<%= params[:token]%>" class="btn btn-danger">
+          Delete this comic
+        </a>
+      </div>
+    </div>
+
+    <hr>
+
+  <% end %>
+
+
+</div>
